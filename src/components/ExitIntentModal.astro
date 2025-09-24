@@ -1,0 +1,110 @@
+---
+// Exit intent modal
+---
+
+<div id="exit-intent-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl max-w-md w-full p-8 relative">
+    <!-- Close button -->
+    <button
+      id="close-exit-modal"
+      class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+      aria-label="Close modal"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Content -->
+    <div class="text-center">
+      <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+
+      <h3 class="font-display text-2xl font-bold text-gray-900 mb-4">
+        Don't Leave Without Your Free Checklist!
+      </h3>
+
+      <p class="text-gray-600 mb-6 leading-relaxed">
+        Get our comprehensive Month-End Close Checklist (Texas Edition) with 25+ steps to ensure your books are audit-ready and tax-prepared.
+      </p>
+
+      <!-- Lead capture form -->
+      <form id="exit-modal-form" class="space-y-4">
+        <div>
+          <label for="exit-email" class="sr-only">Email address</label>
+          <input
+            type="email"
+            id="exit-email"
+            name="email"
+            placeholder="Enter your email address"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors duration-200"
+        >
+          Get My Free Checklist
+        </button>
+      </form>
+
+      <p class="text-xs text-gray-500 mt-4">
+        No spam, unsubscribe at any time. We respect your privacy.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Declare gtag function for TypeScript
+  declare function gtag(...args: any[]): void;
+
+  const modal = document.getElementById('exit-intent-modal');
+  const closeBtn = document.getElementById('close-exit-modal');
+  const form = document.getElementById('exit-modal-form');
+
+  let hasShown = false;
+
+  // Exit intent detection
+  document.addEventListener('mouseout', (e) => {
+    if (!hasShown && e.clientY < 0 && e.relatedTarget === null) {
+      modal?.classList.remove('hidden');
+      hasShown = true;
+    }
+  });
+
+  // Close modal
+  closeBtn?.addEventListener('click', () => {
+    modal?.classList.add('hidden');
+  });
+
+  // Click outside to close
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
+
+  // Form submission
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('exit-email') as HTMLInputElement)?.value;
+
+    // Track conversion
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'download_checklist', {
+        event_category: 'engagement',
+        event_label: 'exit_intent_modal'
+      });
+    }
+
+    // Here you would send the email to your CRM/lead system
+    alert(`Thank you! Your checklist will be sent to ${email}`);
+    modal?.classList.add('hidden');
+  });
+</script>

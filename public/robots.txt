@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Block access to admin areas
+Disallow: /admin/
+Disallow: /api/
+
+# Allow access to CSS, JS, and image files
+Allow: *.css
+Allow: *.js
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.gif
+Allow: *.svg
+Allow: *.ico
+
+# Sitemaps
+Sitemap: https://modernledger.com/sitemap.xml
+Sitemap: https://modernledger.com/sitemap-blog.xml
+Sitemap: https://modernledger.com/sitemap-locations.xml

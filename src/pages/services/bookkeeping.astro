@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const pageTitle = "Bookkeeping Services | Modern Ledger";
+const pageDescription = "Professional bookkeeping services for small businesses. Accurate financial records, monthly reconciliation, and tax-ready books.";
+const canonicalUrl = `${env.SITE_URL}/services/bookkeeping`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <main class="min-h-screen bg-white">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Professional <span class="text-blue-600">Bookkeeping</span> Services
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Keep your books accurate and up-to-date with our comprehensive bookkeeping services.
+            Focus on growing your business while we handle the numbers.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              Get Started Today
+            </a>
+            <a href="/pricing" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+              View Pricing
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            What We Include
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Comprehensive bookkeeping services tailored to your business needs
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Transaction Recording</h3>
+            <p class="text-gray-600">Accurate recording of all financial transactions including income, expenses, and transfers.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Monthly Reconciliation</h3>
+            <p class="text-gray-600">Bank and credit card reconciliation to ensure all transactions are properly recorded.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Financial Reports</h3>
+            <p class="text-gray-600">Profit & Loss statements, Balance Sheets, and Cash Flow reports prepared monthly.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Tax Preparation Support</h3>
+            <p class="text-gray-600">Year-end tax preparation assistance and tax-ready financial statements.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">QuickBooks Integration</h3>
+            <p class="text-gray-600">Seamless integration with QuickBooks Online and Desktop for real-time bookkeeping.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Compliance & Accuracy</h3>
+            <p class="text-gray-600">GAAP-compliant bookkeeping with 99.9% accuracy guarantee on all transactions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-blue-600 py-20">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Ready to Get Your Books in Order?
+        </h2>
+        <p class="text-xl text-blue-100 mb-8">
+          Join hundreds of businesses that trust Modern Ledger with their financial records.
+        </p>
+        <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+          Start Your Free Trial
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>

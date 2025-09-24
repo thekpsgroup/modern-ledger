@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const pageTitle = "Payroll Integration Services | Modern Ledger";
+const pageDescription = "Seamless payroll integration with your accounting system. Automated payroll processing and compliance.";
+const canonicalUrl = `${env.SITE_URL}/services/payroll-integration`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <main class="min-h-screen bg-white">
+    <section class="bg-gradient-to-br from-orange-50 to-red-100 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Payroll <span class="text-orange-600">Integration</span> Services
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Streamline your payroll process with seamless integration between payroll and accounting systems.
+          </p>
+          <a href="/contact" class="bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Coming Soon
+        </h2>
+        <p class="text-lg text-gray-600">
+          This service page is currently under development. Please check back soon or contact us for more information.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>

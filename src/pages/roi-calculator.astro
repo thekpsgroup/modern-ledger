@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEnv } from '../lib/env';
+
+const env = getEnv();
+const pageTitle = "ROI Calculator | Modern Ledger";
+const pageDescription = "Calculate the return on investment for professional bookkeeping services. See how much time and money you can save.";
+const canonicalUrl = `${env.SITE_URL}/roi-calculator`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <main class="min-h-screen bg-white">
+    <section class="bg-gradient-to-br from-green-50 to-emerald-100 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            ROI <span class="text-green-600">Calculator</span>
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Discover how much time and money professional bookkeeping services can save your business.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Coming Soon
+        </h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Our interactive ROI calculator is currently under development. It will help you calculate:
+        </p>
+        <ul class="text-left max-w-2xl mx-auto space-y-3 text-gray-600">
+          <li class="flex items-center">
+            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Time savings from outsourcing bookkeeping tasks
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Cost of errors and compliance issues avoided
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Tax deductions and savings from proper record-keeping
+          </li>
+          <li class="flex items-center">
+            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Business valuation impact from clean financials
+          </li>
+        </ul>
+        <div class="mt-8">
+          <a href="/contact" class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+            Contact Us for a Free ROI Assessment
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const pageTitle = "Cash vs Accrual Accounting | Modern Ledger";
+const pageDescription = "Understanding the differences between cash and accrual accounting methods for small businesses.";
+const canonicalUrl = `${env.SITE_URL}/blog/cash-vs-accrual`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <main class="min-h-screen bg-white">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <header class="mb-12">
+        <div class="text-sm text-purple-600 font-medium mb-4">Accounting • March 5, 2024</div>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Cash vs Accrual Accounting: Which Method is Right for Your Business?
+        </h1>
+        <p class="text-xl text-gray-600">
+          Understanding the differences between cash and accrual accounting methods.
+        </p>
+      </header>
+
+      <div class="prose prose-lg max-w-none">
+        <p>Coming soon - detailed comparison of accounting methods.</p>
+      </div>
+    </article>
+  </main>
+</Layout>

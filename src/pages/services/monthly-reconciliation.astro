@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const pageTitle = "Monthly Reconciliation Services | Modern Ledger";
+const pageDescription = "Professional monthly bank and credit card reconciliation services. Ensure your books are accurate and up-to-date.";
+const canonicalUrl = `${env.SITE_URL}/services/monthly-reconciliation`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <main class="min-h-screen bg-white">
+    <section class="bg-gradient-to-br from-green-50 to-emerald-100 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Monthly <span class="text-green-600">Reconciliation</span> Services
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Keep your financial records accurate with professional monthly reconciliation services.
+          </p>
+          <a href="/contact" class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+            Get Started Today
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Coming Soon
+        </h2>
+        <p class="text-lg text-gray-600">
+          This service page is currently under development. Please check back soon or contact us for more information.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>

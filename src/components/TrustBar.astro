@@ -1,0 +1,42 @@
+---
+// Trust partners data
+const partners = [
+  { name: 'QuickBooks', logo: '/logos/quickbooks.svg', alt: 'QuickBooks Certified ProAdvisor' },
+  { name: 'Plaid', logo: '/logos/plaid.svg', alt: 'Bank feed integration with Plaid' },
+  { name: 'Gusto', logo: '/logos/gusto.svg', alt: 'Payroll integration with Gusto' },
+  { name: 'Bench Accounting', logo: '/logos/bench.svg', alt: 'Bench Accounting partner' },
+  { name: 'CPA Network', logo: '/logos/cpa.svg', alt: 'Certified Public Accountant network' },
+  { name: 'Texas Society of CPAs', logo: '/logos/tscpa.svg', alt: 'Texas Society of Certified Public Accountants' },
+];
+---
+
+<section class="py-12 bg-white border-t border-gray-100">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-8">
+      <p class="text-gray-600 font-medium">Trusted by industry leaders and serving Texas businesses</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+      {partners.map(partner => (
+        <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+          <img
+            src={partner.logo}
+            alt={partner.alt}
+            class="h-8 md:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Additional trust indicators -->
+    <div class="mt-8 text-center">
+      <div class="inline-flex items-center px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        SOC 2 Type II Compliant • Bank-Level Security • 256-bit SSL Encryption
+      </div>
+    </div>
+  </div>
+</section>

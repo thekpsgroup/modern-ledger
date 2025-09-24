@@ -1,0 +1,264 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CTASection from '../../components/CTASection.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
+---
+
+<Layout
+  title="Bookkeeping Pricing | Modern Ledger - Royse City, TX"
+  description="Transparent bookkeeping pricing for Texas businesses. No hidden fees, no long-term contracts. Monthly reconciliation, clean books, and financial clarity starting from $X/month."
+  image="/og-pricing.jpg"
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Transparent Pricing, No Surprises
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            Professional bookkeeping services with clear pricing. No hidden fees, no long-term contracts.
+            Cancel anytime with 30 days notice.
+          </p>
+          <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 inline-block">
+            <p class="text-sm text-gray-600 mb-2">Starting from</p>
+            <p class="font-display text-3xl font-bold text-primary-600">$499<span class="text-lg font-normal">/month</span></p>
+            <p class="text-sm text-gray-500">Custom pricing based on your business needs</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Tiers -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Choose Your Plan
+            </h2>
+            <p class="text-xl text-gray-600">
+              All plans include monthly reconciliation, financial reporting, and unlimited support
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Starter Plan -->
+            <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div class="text-center mb-8">
+                <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Starter</h3>
+                <p class="text-gray-600 mb-4">Perfect for small businesses getting started</p>
+                <div class="mb-4">
+                  <span class="font-display text-3xl font-bold text-primary-600">$499</span>
+                  <span class="text-gray-600">/month</span>
+                </div>
+                <p class="text-sm text-gray-500">Up to 50 transactions/month</p>
+              </div>
+
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Monthly bank reconciliation
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Basic financial statements
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Email support
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  QuickBooks Online integration
+                </li>
+              </ul>
+
+              <a
+                href="/contact?plan=starter"
+                class="block w-full bg-primary-600 hover:bg-primary-700 text-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-200"
+                aria-label="Get started with Starter plan"
+              >
+                Book Consult
+              </a>
+            </div>
+
+            <!-- Growth Plan -->
+            <div class="bg-primary-50 border-2 border-primary-200 rounded-xl p-8 shadow-lg relative">
+              <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span class="bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
+              </div>
+
+              <div class="text-center mb-8">
+                <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Growth</h3>
+                <p class="text-gray-600 mb-4">Ideal for growing businesses with more complexity</p>
+                <div class="mb-4">
+                  <span class="font-display text-3xl font-bold text-primary-600">$899</span>
+                  <span class="text-gray-600">/month</span>
+                </div>
+                <p class="text-sm text-gray-500">Up to 200 transactions/month</p>
+              </div>
+
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Everything in Starter
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Accounts payable processing
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Monthly management reports
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Phone & chat support
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Budget vs actual analysis
+                </li>
+              </ul>
+
+              <a
+                href="/contact?plan=growth"
+                class="block w-full bg-primary-600 hover:bg-primary-700 text-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-200"
+                aria-label="Get started with Growth plan"
+              >
+                Book Consult
+              </a>
+            </div>
+
+            <!-- Pro Plan -->
+            <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div class="text-center mb-8">
+                <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Pro</h3>
+                <p class="text-gray-600 mb-4">For established businesses needing comprehensive support</p>
+                <div class="mb-4">
+                  <span class="font-display text-3xl font-bold text-primary-600">$1,499</span>
+                  <span class="text-gray-600">/month</span>
+                </div>
+                <p class="text-sm text-gray-500">Unlimited transactions</p>
+              </div>
+
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Everything in Growth
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Inventory accounting
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Multi-entity management
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Dedicated account manager
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Priority support (24/7)
+                </li>
+              </ul>
+
+              <a
+                href="/contact?plan=pro"
+                class="block w-full bg-primary-600 hover:bg-primary-700 text-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-200"
+                aria-label="Get started with Pro plan"
+              >
+                Book Consult
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add-ons Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Popular Add-ons
+            </h2>
+            <p class="text-xl text-gray-600">
+              Enhance your bookkeeping service with these specialized add-ons
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
+              <h3 class="font-display text-xl font-bold text-gray-900 mb-4">Clean Books Service</h3>
+              <p class="text-gray-600 mb-4">Comprehensive cleanup of disorganized financial records</p>
+              <div class="text-2xl font-bold text-primary-600 mb-4">$1,500 one-time</div>
+              <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                <li>• Historical data reconstruction</li>
+                <li>• Categorization cleanup</li>
+                <li>• Reconciliation of past periods</li>
+                <li>• Audit trail documentation</li>
+              </ul>
+              <a href="/contact?addon=clean-books" class="text-primary-600 hover:text-primary-700 font-medium">Learn More →</a>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
+              <h3 class="font-display text-xl font-bold text-gray-900 mb-4">Tax Season Support</h3>
+              <p class="text-gray-600 mb-4">Extra support during tax preparation and filing</p>
+              <div class="text-2xl font-bold text-primary-600 mb-4">$300/month (Jan-Apr)</div>
+              <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                <li>• CPA coordination</li>
+                <li>• Additional reporting</li>
+                <li>• Tax document preparation</li>
+                <li>• Priority support</li>
+              </ul>
+              <a href="/contact?addon=tax-season" class="text-primary-600 hover:text-primary-700 font-medium">Learn More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <FAQAccordion />
+    <CTASection />
+  </main>
+
+  <Footer />
+</Layout>

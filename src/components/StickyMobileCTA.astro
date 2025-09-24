@@ -1,0 +1,52 @@
+---
+// Mobile CTA component
+---
+
+<div id="sticky-mobile-cta" class="fixed bottom-0 left-0 right-0 bg-primary-600 text-white p-4 z-40 md:hidden transform translate-y-full transition-transform duration-300">
+  <div class="flex items-center justify-between">
+    <div class="flex-1">
+      <p class="font-semibold text-sm">Ready to get your books in order?</p>
+      <p class="text-xs opacity-90">Call (972) 555-1234</p>
+    </div>
+    <a
+      href="tel:+19725551234"
+      class="bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold text-sm hover:bg-gray-100 transition-colors duration-200"
+      aria-label="Book a free consultation"
+    >
+      Book Consult
+    </a>
+  </div>
+</div>
+
+<script>
+  // Show sticky CTA after scrolling
+  let lastScrollTop = 0;
+  const stickyCTA = document.getElementById('sticky-mobile-cta');
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Show CTA when scrolling down and past hero section
+    if (scrollTop > 600 && scrollTop > lastScrollTop) {
+      stickyCTA?.classList.remove('translate-y-full');
+    } else if (scrollTop < lastScrollTop) {
+      stickyCTA?.classList.add('translate-y-full');
+    }
+
+    lastScrollTop = scrollTop;
+  });
+
+  // Hide CTA when near footer
+  const footer = document.querySelector('footer');
+  if (footer && stickyCTA) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          stickyCTA.classList.add('translate-y-full');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(footer);
+  }
+</script>

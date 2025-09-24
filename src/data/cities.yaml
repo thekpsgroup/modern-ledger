@@ -1,0 +1,36 @@
+- slug: royse-city-tx
+  name: Royse City, TX
+  landmarks: ["City Hall","Downtown Royse City"]
+  notes: "10 minutes east of Rockwall"
+- slug: rockwall-tx
+  name: Rockwall, TX
+  landmarks: ["The Harbor Rockwall","Rockwall County Courthouse"]
+  notes: "County seat; major retail corridor"
+- slug: fate-tx
+  name: Fate, TX
+  landmarks: ["Robert Smith Family Park"]
+  notes: "Adjacent to Rockwall"
+- slug: caddo-mills-tx
+  name: Caddo Mills, TX
+  landmarks: []
+  notes: ""
+- slug: greenville-tx
+  name: Greenville, TX
+  landmarks: ["Downtown Greenville"]
+  notes: ""
+- slug: quinlan-tx
+  name: Quinlan, TX
+  landmarks: []
+  notes: ""
+- slug: rowlett-tx
+  name: Rowlett, TX
+  landmarks: ["Rowlett Creek Preserve"]
+  notes: ""
+- slug: wylie-tx
+  name: Wylie, TX
+  landmarks: ["Downtown Wylie"]
+  notes: ""
+- slug: heath-tx
+  name: Heath, TX
+  landmarks: ["Terry Park"]
+  notes: ""

@@ -1,0 +1,205 @@
+---
+import { BRAND_ASSETS } from '../data/brand-assets.generated';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  ogImage?: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+}
+
+const {
+  title,
+  description,
+  image = '/og-default.jpg',
+  ogImage,
+  canonical,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  author,
+  section,
+  tags = []
+} = Astro.props;
+
+// Get the OG image asset
+const ogAsset = BRAND_ASSETS['modern_ledger_1200x630.png'];
+const defaultOgImage = ogAsset ? ogAsset.path : '/og-default.jpg';
+const finalOgImage = ogImage || defaultOgImage;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Tag Manager -->
+  <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5PH8SRL5');</script>
+  <!-- End Google Tag Manager -->
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical || Astro.url.href}>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={new URL(finalOgImage, Astro.site).href}>
+  <meta property="og:image:width" content={ogAsset?.width.toString() || "1200"}>
+  <meta property="og:image:height" content={ogAsset?.height.toString() || "630"}>
+  <meta property="og:url" content={Astro.url.href}>
+  <meta property="og:type" content={type}>
+  <meta property="og:site_name" content="Modern Ledger">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={new URL(finalOgImage, Astro.site).href}>
+
+  <!-- Article specific -->
+  {type === 'article' && publishedTime && (
+    <meta property="article:published_time" content={publishedTime}>
+  )}
+  {type === 'article' && modifiedTime && (
+    <meta property="article:modified_time" content={modifiedTime}>
+  )}
+  {type === 'article' && author && (
+    <meta property="article:author" content={author}>
+  )}
+  {type === 'article' && section && (
+    <meta property="article:section" content={section}>
+  )}
+  {type === 'article' && tags.length > 0 && tags.map(tag => (
+    <meta property="article:tag" content={tag}>
+  ))}
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/modern_ledger_32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/modern_ledger_64x64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/modern_ledger_128x128.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="/modern_ledger_256x256.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/modern_ledger_512x512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/modern_ledger_256x256.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://modernledger.co/#localbusiness",
+    "name": "Modern Ledger",
+    "url": "https://modernledger.co/",
+    "telephone": "+1-469-534-3392",
+    "email": "sales@thekpsgroup.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Royse City",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "areaServed": ["Royse City TX","Rockwall TX","Fate TX","Caddo Mills TX","Greenville TX","Quinlan TX","Rowlett TX","Wylie TX","Heath TX"],
+    "priceRange": "$$",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "5" },
+    "review": [
+      { "@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"Bailey Motes"},"reviewBody":"Absolutely love this company! Karson has been the biggest help getting me on track for a great future in business. Flexible hours and cost to accommodate all business types and sizes! So very thankful for them." },
+      { "@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"Amy Nguyen"},"itemReviewed":{"@type":"Organization","name":"Modern Ledger"},"reviewBody":"The KPS Group was incredibly helpful! Karson took the time to understand our needs and helped modernize our tools, marketing, and accounting systems. Super knowledgeable, easy to work with, and genuinely cares about helping businesses grow. Highly recommend!" },
+      { "@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"Amber Smith"},"reviewBody":"Karson is professional and committed to his business!" },
+      { "@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"Adam Farmer"},"reviewBody":"Top notch consulting and bookkeeping services. Penny Joy Consulting was a game changer for my small business. Highly recommend." },
+      { "@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5"},"author":{"@type":"Person","name":"Brandon & Holly Gibson"},"reviewBody":"An amazing consultant for our growing business!" }
+    ]
+  }
+  </script>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PH8SRL5"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Skip to main content -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary-600 text-white px-4 py-2 rounded-md z-50">
+    Skip to main content
+  </a>
+
+  <slot />
+
+  <!-- Cookie Consent -->
+  <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 z-40 hidden">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+      <p class="text-sm mb-4 md:mb-0 md:mr-4">
+        We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
+        <a href="/privacy" class="underline hover:no-underline">Learn more</a>
+      </p>
+      <div class="flex space-x-2">
+        <button id="accept-cookies" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded text-sm">Accept All</button>
+        <button id="decline-cookies" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded text-sm">Essential Only</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .sr-only.focus:not-sr-only {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: initial;
+      margin: initial;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+    }
+  </style>
+
+  <script>
+    // Cookie consent
+    const consent = localStorage.getItem('cookie-consent');
+    if (!consent) {
+      document.getElementById('cookie-consent').classList.remove('hidden');
+    }
+
+    document.getElementById('accept-cookies')?.addEventListener('click', () => {
+      localStorage.setItem('cookie-consent', 'accepted');
+      document.getElementById('cookie-consent').classList.add('hidden');
+      // Load analytics here
+    });
+
+    document.getElementById('decline-cookies')?.addEventListener('click', () => {
+      localStorage.setItem('cookie-consent', 'declined');
+      document.getElementById('cookie-consent').classList.add('hidden');
+    });
+  </script>
+</body>
+</html>

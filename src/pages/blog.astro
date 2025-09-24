@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEnv } from '../lib/env';
+
+const env = getEnv();
+const pageTitle = "Blog | Modern Ledger Bookkeeping Tips & Insights";
+const pageDescription = "Stay updated with the latest bookkeeping tips, accounting insights, and business financial management advice from Modern Ledger.";
+const canonicalUrl = `${env.SITE_URL}/blog`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <main class="min-h-screen bg-white">
+    <section class="bg-gradient-to-br from-gray-50 to-blue-50 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Bookkeeping <span class="text-blue-600">Blog</span>
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Expert tips, insights, and advice to help you manage your business finances effectively.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Blog Post Cards -->
+          <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-6">
+              <div class="text-sm text-blue-600 font-medium mb-2">Month-End Close</div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                <a href="/blog/month-end-close-checklist" class="hover:text-blue-600 transition-colors">
+                  Month-End Close Checklist: Essential Steps for Small Businesses
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">
+                A comprehensive checklist to ensure your month-end close process is complete and accurate.
+              </p>
+              <div class="text-sm text-gray-500">March 15, 2024</div>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-6">
+              <div class="text-sm text-green-600 font-medium mb-2">QuickBooks</div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                <a href="/blog/quickbooks-cleanup" class="hover:text-green-600 transition-colors">
+                  QuickBooks Cleanup: How to Get Your Books Back on Track
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Step-by-step guide to cleaning up messy QuickBooks files and getting accurate financial reports.
+              </p>
+              <div class="text-sm text-gray-500">March 10, 2024</div>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-6">
+              <div class="text-sm text-purple-600 font-medium mb-2">Accounting</div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                <a href="/blog/cash-vs-accrual" class="hover:text-purple-600 transition-colors">
+                  Cash vs Accrual Accounting: Which Method is Right for Your Business?
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Understanding the differences between cash and accrual accounting methods.
+              </p>
+              <div class="text-sm text-gray-500">March 5, 2024</div>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-6">
+              <div class="text-sm text-orange-600 font-medium mb-2">Tax</div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                <a href="/blog/texas-sales-tax" class="hover:text-orange-600 transition-colors">
+                  Texas Sales Tax Compliance: What Small Businesses Need to Know
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Essential guide to Texas sales tax requirements and compliance for small businesses.
+              </p>
+              <div class="text-sm text-gray-500">February 28, 2024</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

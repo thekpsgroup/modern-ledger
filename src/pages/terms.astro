@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEnv } from '../lib/env';
+
+const env = getEnv();
+const pageTitle = "Terms of Service | Modern Ledger";
+const pageDescription = "Read our terms of service and conditions for using Modern Ledger's bookkeeping services and website.";
+const canonicalUrl = `${env.SITE_URL}/terms`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <main class="min-h-screen bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8">Terms of Service</h1>
+
+      <div class="prose prose-lg max-w-none">
+        <p class="text-gray-600 mb-8">Last updated: March 2024</p>
+
+        <h2>Acceptance of Terms</h2>
+        <p>By accessing and using Modern Ledger's services, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+        <h2>Services</h2>
+        <p>Modern Ledger provides professional bookkeeping and accounting services to small businesses. All services are provided in accordance with generally accepted accounting principles.</p>
+
+        <h2>User Responsibilities</h2>
+        <p>You agree to provide accurate and complete information necessary for us to perform our services. You are responsible for maintaining the confidentiality of any account information.</p>
+
+        <h2>Fees and Payment</h2>
+        <p>Fees for services are as agreed upon in writing. Payment terms are net 30 days unless otherwise specified. Late payments may incur additional charges.</p>
+
+        <h2>Limitation of Liability</h2>
+        <p>Modern Ledger's liability shall not exceed the amount paid for services in the preceding 12 months. We are not liable for indirect or consequential damages.</p>
+
+        <h2>Contact Information</h2>
+        <p>For questions about these Terms of Service, please contact us at {env.COMPANY_EMAIL}.</p>
+      </div>
+    </div>
+  </main>
+</Layout>

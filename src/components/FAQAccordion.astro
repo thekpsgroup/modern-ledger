@@ -1,0 +1,154 @@
+---
+// FAQ data
+const faqs = [
+  {
+    question: "How much does bookkeeping cost vs. hiring in-house?",
+    answer: "Our services typically cost 60-80% less than hiring a full-time bookkeeper ($45,000-$65,000 annually). You get professional expertise without the payroll taxes, benefits, training, or turnover costs. Most clients see ROI within 3-6 months through better financial decisions and tax savings."
+  },
+  {
+    question: "We already use QuickBooks - can you still help?",
+    answer: "Absolutely! We specialize in QuickBooks Online and Desktop. Many clients come to us because their current setup isn't being maintained properly. We'll review your current QuickBooks file, clean up any issues, and ensure it's set up for accurate tracking and reporting."
+  },
+  {
+    question: "Our books are a mess - can you fix them?",
+    answer: "Yes, this is one of our specialties. We offer comprehensive 'clean books' services that can restore order to disorganized financial records. We'll reconstruct missing transactions, fix categorization issues, and bring everything current. The process typically takes 2-4 weeks depending on complexity."
+  },
+  {
+    question: "Do you handle payroll tax filings and remittances?",
+    answer: "We can integrate with your existing payroll provider (Gusto, ADP, Paychex) to ensure payroll expenses are properly recorded and reconciled. However, we don't handle the actual tax filings or remittances - we recommend working with a CPA or payroll service for compliance. We ensure your books accurately reflect all payroll activity."
+  },
+  {
+    question: "How long does onboarding take?",
+    answer: "Most clients are up and running within 1-2 weeks. We'll need access to your bank accounts, credit cards, and accounting software. We'll also schedule a kickoff meeting to understand your specific needs and establish our processes."
+  },
+  {
+    question: "What if we need local Texas support?",
+    answer: "We're proud to be based in Rockwall County and understand Texas-specific requirements including sales tax, property tax, and local regulations. We work closely with Texas CPAs and can provide referrals if needed."
+  },
+  {
+    question: "Do you offer month-end close services?",
+    answer: "Yes! Our month-end close process includes bank reconciliation, adjusting entries, financial statement preparation, and variance analysis. We typically complete the close within 3-5 business days of month-end, much faster than most in-house bookkeepers."
+  },
+  {
+    question: "Can you help with sales tax in Texas?",
+    answer: "We can track and calculate sales tax accruals, but we don't file sales tax returns. We recommend working with a Texas-licensed tax professional or service like Taxfyle for filings. We ensure your sales tax tracking is accurate and audit-ready."
+  },
+  {
+    question: "What happens if we get audited?",
+    answer: "Our books are always audit-ready with complete documentation, source records, and audit trails. We maintain organized records for 7+ years as required. In the unlikely event of an audit, we'll provide all necessary documentation and can testify to the accuracy of our work."
+  },
+  {
+    question: "Do you work with contractors and freelancers?",
+    answer: "Yes, we have extensive experience with 1099 contractors, freelancer payments, and complex vendor relationships. We ensure proper classification, accurate 1099 reporting, and compliance with Texas withholding requirements."
+  },
+  {
+    question: "How do you handle inventory accounting?",
+    answer: "We specialize in inventory tracking for retail, wholesale, and manufacturing businesses. This includes cost of goods sold calculations, inventory valuation methods (FIFO, LIFO, average cost), shrinkage tracking, and integration with point-of-sale systems."
+  },
+  {
+    question: "What's your response time for urgent issues?",
+    answer: "We respond to all client inquiries within 24 hours and prioritize urgent accounting issues. For critical matters requiring immediate attention, we offer expedited service with same-day response during business hours."
+  }
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-xl text-gray-600">
+          Everything you need to know about working with Modern Ledger
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq, index) => (
+          <div class="bg-white rounded-lg shadow-sm border border-gray-100">
+            <button
+              class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset"
+              aria-expanded="false"
+              data-accordion-button={index}
+              aria-controls={`faq-content-${index}`}
+            >
+              <span class="font-semibold text-gray-900 pr-4">{faq.question}</span>
+              <svg
+                class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                data-accordion-icon={index}
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div
+              id={`faq-content-${index}`}
+              class="px-6 pb-4 hidden"
+              aria-labelledby={`faq-button-${index}`}
+            >
+              <p class="text-gray-600 leading-relaxed pt-2">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <p class="text-gray-600 mb-6">
+          Still have questions? We'd love to chat about your specific situation.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          aria-label="Book a consultation to get your questions answered"
+        >
+          Book a Free Consultation
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // FAQ Accordion functionality
+  document.querySelectorAll('[data-accordion-button]').forEach((button, index) => {
+    const content = document.getElementById(`faq-content-${index}`);
+    const icon = document.querySelector(`[data-accordion-icon="${index}"]`) as HTMLElement;
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Toggle content visibility
+      content?.classList.toggle('hidden');
+
+      // Update aria-expanded
+      button.setAttribute('aria-expanded', (!isExpanded).toString());
+
+      // Rotate icon
+      if (icon) {
+        icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+      }
+    });
+  });
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+})}></script>

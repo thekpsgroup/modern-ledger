@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const pageTitle = "QuickBooks Cleanup Guide | Modern Ledger";
+const pageDescription = "Step-by-step guide to cleaning up messy QuickBooks files and getting your books back on track.";
+const canonicalUrl = `${env.SITE_URL}/blog/quickbooks-cleanup`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <main class="min-h-screen bg-white">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <header class="mb-12">
+        <div class="text-sm text-green-600 font-medium mb-4">QuickBooks • March 10, 2024</div>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          QuickBooks Cleanup: How to Get Your Books Back on Track
+        </h1>
+        <p class="text-xl text-gray-600">
+          Step-by-step guide to cleaning up messy QuickBooks files and getting accurate financial reports.
+        </p>
+      </header>
+
+      <div class="prose prose-lg max-w-none">
+        <p>Coming soon - comprehensive QuickBooks cleanup guide.</p>
+      </div>
+    </article>
+  </main>
+</Layout>
