@@ -19,7 +19,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm run setup
+        run: npm ci
 
       - name: Cache node modules
         uses: actions/cache@v3
@@ -51,10 +51,10 @@ jobs:
         run: npm ci
 
       - name: Generate cities
-        run: npm run gen:cities
+        run: npm run gen:city-pages
 
       - name: Generate content plan
-        run: npm run gen:content
+        run: npm run gen:content-plan
 
       - name: Build pixels
         run: npm run pixels:build
@@ -171,7 +171,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
 
