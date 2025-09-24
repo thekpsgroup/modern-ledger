@@ -52,12 +52,27 @@ jobs:
 
       - name: Generate cities
         run: npm run gen:city-pages
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
 
       - name: Generate content plan
         run: npm run gen:content-plan
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
 
       - name: Build pixels
         run: npm run pixels:build
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
 
       - name: Check for changes
         id: verify-changed-files
