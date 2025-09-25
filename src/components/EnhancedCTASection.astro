@@ -211,7 +211,7 @@ const trustSignals = [
         <div class="mt-6 flex flex-wrap justify-center gap-6 text-sm opacity-80">
           {trustSignals.map(signal => (
             <div class="flex items-center gap-2">
-              <span>{signal.icon}</span>
+              <span class="text-base">{signal.icon}</span>
               <span>{signal.text}</span>
             </div>
           ))}
@@ -222,7 +222,7 @@ const trustSignals = [
       <div class="mb-12 grid gap-6 md:grid-cols-3">
         {objections.map(objection => (
           <div class="surface bg-white/10 p-6 text-center shadow-none backdrop-blur-sm border border-white/10 hover:bg-white/15 transition-colors duration-300">
-            <div class="mb-3 text-4xl">{objection.icon}</div>
+            <div class="mb-3 text-3xl">{objection.icon}</div>
             <h3 class="font-semibold text-lg text-white mb-2">
               {objection.title}
             </h3>
