@@ -1,0 +1,564 @@
+---
+interface LandingPageConfig {
+  variant: 'default' | 'urgency' | 'social-proof' | 'value-focused' | 'problem-focused';
+  headline: {
+    primary: string;
+    secondary?: string;
+    urgent?: string;
+  };
+  subheadline: string;
+  cta: {
+    primary: string;
+    secondary?: string;
+    href: string;
+  };
+  heroImage?: string;
+  videoUrl?: string;
+  socialProof?: {
+    clientCount: number;
+    rating: number;
+    testimonialSnippet: string;
+  };
+  urgencyMessage?: string;
+  valueProposition: string[];
+  problemStatement?: string;
+}
+
+interface Props {
+  config: LandingPageConfig;
+  showVideo?: boolean;
+  showSocialProof?: boolean;
+  enableExitIntent?: boolean;
+  enableHeatTracking?: boolean;
+}
+
+const {
+  config,
+  showVideo = false,
+  showSocialProof = true,
+  enableExitIntent = true,
+  enableHeatTracking = true
+} = Astro.props;
+
+const variantClasses = {
+  'default': 'bg-gradient-to-br from-brand-navy to-brand-navy-light',
+  'urgency': 'bg-gradient-to-br from-red-900 to-red-700',
+  'social-proof': 'bg-gradient-to-br from-green-900 to-green-700',
+  'value-focused': 'bg-gradient-to-br from-blue-900 to-blue-700',
+  'problem-focused': 'bg-gradient-to-br from-purple-900 to-purple-700'
+};
+
+const getHeadline = () => {
+  if (config.variant === 'urgency' && config.headline.urgent) {
+    return config.headline.urgent;
+  }
+  return config.headline.primary;
+};
+---
+
+<section class={`hero-section relative overflow-hidden ${variantClasses[config.variant]} text-white`} data-variant={config.variant}>
+  
+  <!-- Background pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent"></div>
+    <div class="hero-pattern"></div>
+  </div>
+
+  <!-- Urgency banner for urgency variant -->
+  {config.variant === 'urgency' && config.urgencyMessage && (
+    <div class="urgency-banner bg-red-600 text-white py-2 text-center relative z-10">
+      <div class="container">
+        <div class="flex items-center justify-center gap-2 text-sm font-semibold">
+          <svg class="w-4 h-4 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+          </svg>
+          {config.urgencyMessage}
+          <div class="countdown ml-2 font-mono" data-target="2024-12-31">--:--:--</div>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <div class="container relative z-10">
+    <div class="hero-content py-20 lg:py-32">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Content Column -->
+        <div class="hero-text space-y-8">
+          
+          <!-- Problem statement for problem-focused variant -->
+          {config.variant === 'problem-focused' && config.problemStatement && (
+            <div class="problem-highlight bg-red-100 border-l-4 border-red-500 p-4 rounded-r-lg mb-6 text-red-800">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                <div>
+                  <div class="font-semibold mb-1">Are you struggling with this?</div>
+                  <div class="text-sm">{config.problemStatement}</div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <!-- Social proof banner -->
+          {config.variant === 'social-proof' && showSocialProof && config.socialProof && (
+            <div class="social-proof-banner bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <div class="flex items-center gap-4 text-sm">
+                <div class="flex items-center gap-1">
+                  <div class="flex text-yellow-300">
+                    {Array(5).fill(0).map((_) => (
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                    ))}
+                  </div>
+                  <span class="text-white/90">{config.socialProof.rating}/5</span>
+                </div>
+                <div class="text-white/90">
+                  Trusted by {config.socialProof.clientCount}+ businesses
+                </div>
+                <div class="text-white/80 italic">
+                  "{config.socialProof.testimonialSnippet}"
+                </div>
+              </div>
+            </div>
+          )}
+
+          <!-- Headlines -->
+          <div class="headline-section">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 headline-primary">
+              {getHeadline()}
+            </h1>
+            {config.headline.secondary && (
+              <h2 class="text-xl md:text-2xl text-white/90 font-medium headline-secondary">
+                {config.headline.secondary}
+              </h2>
+            )}
+          </div>
+
+          <!-- Subheadline -->
+          <p class="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl subheadline">
+            {config.subheadline}
+          </p>
+
+          <!-- Value propositions -->
+          {config.variant === 'value-focused' && (
+            <div class="value-props space-y-3">
+              {config.valueProposition.map((value) => (
+                <div class="flex items-center gap-3 text-white/90">
+                  <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>{value}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <!-- CTA Buttons -->
+          <div class="cta-section space-y-4">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href={config.cta.href}
+                class="btn btn-primary btn-lg btn-cta-primary group px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                data-cta="primary"
+              >
+                {config.cta.primary}
+                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </a>
+              
+              {config.cta.secondary && (
+                <button
+                  class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-brand-navy px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300"
+                  data-cta="secondary"
+                  onclick="scrollToSection('how-it-works')"
+                >
+                  {config.cta.secondary}
+                </button>
+              )}
+            </div>
+
+            <!-- Trust indicators -->
+            <div class="trust-indicators flex flex-wrap items-center gap-6 text-sm text-white/80 pt-4">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                No contracts required
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Free consultation
+              </div>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                </svg>
+                Response within 24 hours
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Media Column -->
+        <div class="hero-media relative">
+          {showVideo && config.videoUrl ? (
+            <div class="video-container relative rounded-2xl overflow-hidden shadow-2xl">
+              <div class="aspect-video bg-black">
+                <video
+                  class="w-full h-full object-cover"
+                  poster={config.heroImage}
+                  controls
+                  preload="metadata"
+                >
+                  <source src={config.videoUrl} type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              
+              <!-- Play overlay -->
+              <div class="video-overlay absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors">
+                <button class="play-btn bg-white/90 hover:bg-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110">
+                  <svg class="w-8 h-8 text-brand-navy ml-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          ) : config.heroImage && (
+            <div class="image-container relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src={config.heroImage}
+                alt="Hero illustration"
+                class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+          )}
+
+          <!-- Floating elements for visual interest -->
+          <div class="floating-elements absolute inset-0 pointer-events-none">
+            <div class="floating-card absolute top-4 right-4 bg-white/10 backdrop-blur-sm rounded-lg p-3 animate-float">
+              <div class="text-sm font-semibold">📈 Average ROI</div>
+              <div class="text-2xl font-bold text-brand-gold">245%</div>
+            </div>
+            
+            <div class="floating-card absolute bottom-8 left-4 bg-white/10 backdrop-blur-sm rounded-lg p-3 animate-float-delayed">
+              <div class="text-sm font-semibold">⚡ Setup Time</div>
+              <div class="text-2xl font-bold text-green-400">&lt; 2 Hours</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
+
+<script is:inline define:vars={{ config, enableExitIntent, enableHeatTracking }}>
+  (() => {
+    if (typeof window === 'undefined') return;
+
+    // A/B Test tracking
+    const variant = config.variant;
+    const startTime = Date.now();
+
+    // Track page view with variant
+    const trackEvent = (eventName, properties = {}) => {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, {
+          event_category: 'landing_page',
+          event_label: variant,
+          custom_map: { 'custom_parameter_1': variant },
+          ...properties
+        });
+      }
+    };
+
+    // Initial page view
+    trackEvent('landing_page_view', {
+      variant: variant,
+      timestamp: new Date().toISOString()
+    });
+
+    // CTA tracking
+    const ctaButtons = document.querySelectorAll('[data-cta]');
+    ctaButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const ctaType = button.dataset.cta;
+        trackEvent('cta_click', {
+          cta_type: ctaType,
+          cta_text: button.textContent.trim(),
+          time_on_page: (Date.now() - startTime) / 1000
+        });
+      });
+    });
+
+    // Scroll depth tracking
+    let maxScroll = 0;
+    const trackScrollDepth = () => {
+      const scrolled = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      if (scrolled > maxScroll) {
+        maxScroll = scrolled;
+        
+        // Track at certain milestones
+        if (maxScroll >= 25 && maxScroll < 50 && !window.scrollTracked25) {
+          trackEvent('scroll_depth', { depth: 25 });
+          window.scrollTracked25 = true;
+        } else if (maxScroll >= 50 && maxScroll < 75 && !window.scrollTracked50) {
+          trackEvent('scroll_depth', { depth: 50 });
+          window.scrollTracked50 = true;
+        } else if (maxScroll >= 75 && !window.scrollTracked75) {
+          trackEvent('scroll_depth', { depth: 75 });
+          window.scrollTracked75 = true;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', trackScrollDepth);
+
+    // Time on page tracking
+    const timeIntervals = [30, 60, 120, 300]; // seconds
+    timeIntervals.forEach(interval => {
+      setTimeout(() => {
+        trackEvent('time_on_page', { 
+          interval: interval,
+          variant: variant 
+        });
+      }, interval * 1000);
+    });
+
+    // Exit intent (for desktop)
+    if (enableExitIntent && !window.innerWidth <= 768) {
+      let exitIntentShown = false;
+      document.addEventListener('mouseleave', (e) => {
+        if (e.clientY <= 0 && !exitIntentShown) {
+          exitIntentShown = true;
+          trackEvent('exit_intent_triggered', {
+            time_on_page: (Date.now() - startTime) / 1000
+          });
+          
+          // Show exit intent modal if available
+          const exitModal = document.querySelector('.exit-intent-modal');
+          if (exitModal) {
+            exitModal.classList.remove('hidden');
+          }
+        }
+      });
+    }
+
+    // Heat tracking (simplified)
+    if (enableHeatTracking) {
+      let clicks = [];
+      document.addEventListener('click', (e) => {
+        clicks.push({
+          x: e.clientX,
+          y: e.clientY,
+          element: e.target.tagName,
+          timestamp: Date.now()
+        });
+        
+        // Send batch of clicks periodically
+        if (clicks.length >= 10) {
+          trackEvent('click_heatmap', {
+            clicks: JSON.stringify(clicks),
+            variant: variant
+          });
+          clicks = [];
+        }
+      });
+    }
+
+    // Countdown timer for urgency variant
+    if (variant === 'urgency') {
+      const countdown = document.querySelector('.countdown');
+      if (countdown) {
+        const target = new Date(countdown.dataset.target);
+        
+        const updateCountdown = () => {
+          const now = new Date();
+          const diff = target - now;
+          
+          if (diff > 0) {
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            countdown.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          } else {
+            countdown.textContent = 'EXPIRED';
+          }
+        };
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+    }
+
+    // Video interaction tracking
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+      video.addEventListener('play', () => {
+        trackEvent('video_play', { video_duration: video.duration });
+      });
+      
+      video.addEventListener('pause', () => {
+        trackEvent('video_pause', { current_time: video.currentTime });
+      });
+      
+      video.addEventListener('ended', () => {
+        trackEvent('video_complete', { video_duration: video.duration });
+      });
+    });
+
+    // Utility function for smooth scrolling
+    window.scrollToSection = (sectionId) => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        trackEvent('scroll_to_section', { section: sectionId });
+      }
+    };
+
+    // Form abandonment tracking (if forms exist)
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+      let formStarted = false;
+      const inputs = form.querySelectorAll('input, textarea, select');
+      
+      inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+          if (!formStarted) {
+            formStarted = true;
+            trackEvent('form_start', { form_id: form.id || 'unnamed' });
+          }
+        });
+      });
+      
+      // Track abandonment on page unload
+      window.addEventListener('beforeunload', () => {
+        if (formStarted && !form.dataset.submitted) {
+          trackEvent('form_abandon', { 
+            form_id: form.id || 'unnamed',
+            time_on_page: (Date.now() - startTime) / 1000
+          });
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .hero-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px),
+      radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 2px, transparent 2px);
+    background-size: 50px 50px;
+  }
+
+  .btn-cta-primary {
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #1B365D;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-cta-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-cta-primary:hover::before {
+    left: 100%;
+  }
+
+  .floating-card {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 3s ease-in-out infinite 1.5s;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+    50% { 
+      box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero-content {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+    
+    .headline-primary {
+      font-size: 2.5rem;
+      line-height: 1.2;
+    }
+    
+    .floating-elements {
+      display: none;
+    }
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-float-delayed,
+    .animate-bounce,
+    .animate-pulse-glow {
+      animation: none;
+    }
+    
+    .btn-cta-primary:hover {
+      transform: none;
+    }
+  }
+</style>

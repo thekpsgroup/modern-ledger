@@ -1,4 +1,6 @@
 ---
+import { getEnv } from '../lib/env';
+
 // Hero props
 export interface Props {
   title?: string;
@@ -8,112 +10,168 @@ export interface Props {
   backgroundImage?: string;
 }
 
+const env = getEnv();
+const rawPhone = env.COMPANY_PHONE ?? '469-534-3392';
+const phoneDigits = rawPhone.replace(/[^0-9]/g, '') || '4695343392';
+const phoneDisplay = phoneDigits.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+const phoneHref = `tel:+1${phoneDigits}`;
+
 const {
-  title = "Bookkeeping without the payroll baggage",
-  subtitle = "Monthly reconciliation, sharp reporting, and CFO-caliber clarity—without hiring in-house. Your modern, scalable alternative for clean books and proactive financial clarity.",
-  ctaText = "Book a 15-min Consult",
-  ctaLink = "/contact",
+  title = 'Audit-ready bookkeeping for Texas operators in 30 days',
+  subtitle = 'Plug a Texas-based bookkeeping squad into your QuickBooks, reconcile monthly, and turn messy numbers into CFO-level reporting—without adding payroll.',
+  ctaText = 'Build my bookkeeping plan',
+  ctaLink = '/contact',
   backgroundImage
 } = Astro.props;
 
-// Hero data
 const stats = [
-  { number: '500+', label: 'Businesses Served' },
-  { number: '98%', label: 'Client Retention' },
-  { number: '24hrs', label: 'Average Response' },
-  { number: '15+', label: 'Years Experience' },
+  { number: '51', suffix: 'hrs', label: 'Average time saved each month' },
+  { number: '5.2×', label: 'ROI inside the first 6 months' },
+  { number: '24', suffix: 'hrs', label: 'Response time for new requests' },
+  { number: '98%', label: 'Client retention across Texas' }
+];
+
+const heroIndustries = ['Construction crews', 'Medical practices', 'Professional services', 'Ecommerce brands'];
+
+const heroLogos = [
+  { name: 'QuickBooks Elite', logo: '/logos/quickbooks.svg', alt: 'QuickBooks Elite ProAdvisor badge' },
+  { name: 'Gusto Partner', logo: '/logos/gusto.svg', alt: 'Gusto payroll partner badge' },
+  { name: 'Texas Society of CPAs', logo: '/logos/tscpa.svg', alt: 'Texas Society of CPAs member badge' }
 ];
 ---
 
-<section class="section relative overflow-hidden" style={backgroundImage ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;` : 'background: linear-gradient(135deg, rgba(0,43,84,0.04), rgba(202,176,104,0.08))'}>
-  <!-- Background Pattern (only if no background image) -->
+<section
+  class="section relative overflow-hidden"
+  style={backgroundImage
+    ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;`
+    : 'background: linear-gradient(135deg, rgba(0,43,84,0.04), rgba(202,176,104,0.08))'}
+>
   {!backgroundImage && (
     <div class="pointer-events-none absolute inset-0 opacity-40">
-      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(0, 43, 84, 0.2) 1px, transparent 0); background-size: 28px 28px;"></div>
+      <div
+        class="absolute inset-0"
+        style="background-image: radial-gradient(circle at 1px 1px, rgba(0, 43, 84, 0.16) 1px, transparent 0); background-size: 28px 28px;"
+      ></div>
     </div>
   )}
 
-  <!-- Overlay for background images -->
-  {backgroundImage && (
-    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-  )}
+  {backgroundImage && <div class="absolute inset-0 bg-brand-navy/60"></div>}
 
   <div class="container relative">
-    <div class="mx-auto max-w-content-lg text-center">
-      <!-- Badge -->
-      <div class="badge mx-auto mb-8 w-fit bg-white/80 text-brand-navy">
-        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg>
-        Trusted by 500+ Texas Businesses
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-center">
+      <div class="space-y-8 text-left">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-brand-navy/10 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-brand-navy"
+          class:list={[{ 'bg-white/20 text-white': Boolean(backgroundImage) }]}
+        >
+          Texas-based bookkeeping team • Est. 2010
+        </div>
+
+        <h1
+          class="max-w-3xl text-balance text-4xl font-semibold leading-tight md:text-5xl"
+          class:list={[{ 'text-white': Boolean(backgroundImage), 'text-brand-navy': !backgroundImage }]}
+        >
+          {title}
+        </h1>
+
+        <p
+          class="max-w-2xl text-lg text-neutral-600 md:text-xl"
+          class:list={[{ 'text-white/85': Boolean(backgroundImage) }]}
+        >
+          {subtitle}
+        </p>
+
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div class="inline-flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a href={ctaLink} class="btn btn-primary px-8 text-base" aria-label="Start the Modern Ledger intake">
+              {ctaText}
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </a>
+            <a
+              href={phoneHref}
+              class="btn btn-outline px-6 text-base"
+              aria-label={`Call Modern Ledger at ${phoneDisplay}`}
+            >
+              Call {phoneDisplay}
+            </a>
+          </div>
+          <a
+            href="#testimonials"
+            class="inline-flex items-center gap-3 text-sm font-semibold text-brand-navy underline-offset-4 transition hover:text-brand-navy/80"
+          >
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-gold/20 text-brand-gold">
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+            </span>
+            See how Texas contractors save 51+ hours each month
+          </a>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-neutral-400">
+          {heroIndustries.map((industry) => (
+            <span class="rounded-full border border-neutral-100 bg-white px-3 py-2 text-[0.65rem] text-neutral-500">
+              {industry}
+            </span>
+          ))}
+        </div>
+
+        <div class="grid gap-5 text-sm text-neutral-500 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat) => (
+            <div class="flex items-start gap-3 rounded-2xl border border-white/60 bg-white/85 p-4 shadow-sm" class:list={[{ 'bg-white/15 text-white': Boolean(backgroundImage) }]}>
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-gold/20 text-brand-gold">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="text-2xl font-semibold text-brand-navy" class:list={[{ 'text-white': Boolean(backgroundImage) }]}>
+                  {stat.number}
+                  {stat.suffix && <span class="text-base font-medium">{stat.suffix}</span>}
+                </div>
+                <p class="m-0 text-xs text-neutral-400" class:list={[{ 'text-white/70': Boolean(backgroundImage) }]}>
+                  {stat.label}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <!-- Headline -->
-      <h1 class="text-balance" class:list={["text-brand-navy", { "text-white": backgroundImage }]}>
-        {title}
-      </h1>
-
-      <!-- Subheadline -->
-      <p class="text-balance text-body-lg mx-auto mb-10 max-w-content-md" class:list={["text-neutral-500", { "text-white/90": backgroundImage }]}>
-        {subtitle}
-      </p>
-
-      <!-- CTAs -->
-      <div class="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a
-          href={ctaLink}
-          class="btn btn-primary text-lg px-8"
-          aria-label={`Book a 15-minute consultation`}
-        >
-          {ctaText}
-          <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-        <a
-          href="/pricing"
-          class="btn btn-outline text-lg px-8"
-          aria-label="View pricing options"
-        >
-          See Pricing
-        </a>
-      </div>
-
-      <!-- Trust Indicators -->
-      <div class="flex flex-col items-center justify-center gap-6 text-sm sm:flex-row" class:list={["text-neutral-500", { "text-white/80": backgroundImage }]}>
-        <div class="flex items-center">
-          <svg class="mr-2 h-5 w-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-          </svg>
-          No long-term contracts
+      <div class="relative">
+        <div class="relative overflow-hidden rounded-[32px] border border-white/60 bg-white/80 p-3 shadow-soft backdrop-blur">
+          <img
+            src="/modern_ledger_1920x1080.png"
+            alt="Modern Ledger month-end close dashboard"
+            class="h-full w-full rounded-[28px] object-cover"
+            loading="lazy"
+          />
         </div>
-        <div class="flex items-center">
-          <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-          </svg>
-          QuickBooks certified
-        </div>
-        <div class="flex items-center">
-          <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-          </svg>
-          Serving Rockwall County since 2010
+        <div class="absolute -bottom-8 left-6 right-6 hidden rounded-2xl border border-brand-navy/10 bg-white p-4 shadow-soft md:flex">
+          <div class="flex gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-sky text-brand-navy">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v9a2 2 0 01-2 2h-2M7 8H5a2 2 0 00-2 2v9a2 2 0 002 2h2m10-13V5a5 5 0 00-10 0v3m10 0H7"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="m-0 text-sm font-semibold text-brand-navy">"Modern Ledger cleaned 18 months of backlog and gave us investor-ready financials in six weeks."</p>
+              <p class="m-0 text-xs text-neutral-500">Amber L., COO • Rockwall commercial contractor</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Stats -->
-    <div class="mx-auto mt-16 max-w-content-xl">
-      <div class="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
-        {stats.map(stat => (
-          <div class="text-center">
-            <div class="font-display text-3xl font-semibold md:text-heading-4" class:list={["text-brand-navy", { "text-white": backgroundImage }]}>
-              {stat.number}
-            </div>
-            <div class="text-sm font-medium uppercase tracking-wider text-neutral-500" class:list={[{ "text-white/80": backgroundImage }]}>
-              {stat.label}
-            </div>
-          </div>
+    <div class="mt-16 flex flex-wrap items-center gap-6 rounded-3xl border border-white/60 bg-white/90 px-6 py-4 shadow-soft" class:list={[{ 'bg-white/15 text-white': Boolean(backgroundImage) }]}>
+      <span class="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-400" class:list={[{ 'text-white/70': Boolean(backgroundImage) }]}>
+        Trusted by teams running on
+      </span>
+      <div class="flex flex-wrap items-center gap-6">
+        {heroLogos.map((logo) => (
+          <img src={logo.logo} alt={logo.alt} class="h-8 w-auto opacity-70" loading="lazy" />
         ))}
       </div>
     </div>

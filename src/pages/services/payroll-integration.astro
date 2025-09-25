@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getEnv } from '../../lib/env';
+import LeadForm from '../../components/LeadForm.astro';
 
 const env = getEnv();
 const pageTitle = "Payroll Integration Services | Modern Ledger";
@@ -34,6 +35,50 @@ const canonicalUrl = `${env.SITE_URL}/services/payroll-integration`;
         <p class="text-lg text-gray-600">
           This service page is currently under development. Please check back soon or contact us for more information.
         </p>
+      </div>
+    </section>
+
+    <section class="bg-neutral-25 py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_0.95fr] lg:items-start">
+          <div class="space-y-6">
+            <span class="eyebrow">Payroll integration intake</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Sync payroll and accounting without the chaos</h2>
+            <p class="text-lg text-gray-600">
+              Let us know which payroll platform you’re running, where liabilities are tracked, and how you want payroll data to flow into your GL. We’ll map out the integrations, journal entries, and monthly checks Modern Ledger will own.
+            </p>
+            <ul class="space-y-3 text-sm text-gray-600">
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Integration blueprint covering payroll runs, liabilities, and GL sync.
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Compliance checklist for taxes, garnishments, and quarterly filings.
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Timeline for launching automation and retiring manual spreadsheets.
+              </li>
+            </ul>
+          </div>
+
+          <LeadForm
+            class="h-full"
+            eyebrow="Payroll integration consult"
+            heading="Tell us about your payroll stack"
+            subheading="Share the payroll platform, employee count, and where integrations break down today."
+            ctaLabel="Design my payroll integration"
+            successMessage="Thanks! A payroll integration specialist will review your submission and respond with an implementation plan within one business day."
+            source="service-payroll-integration"
+          />
+        </div>
       </div>
     </section>
   </div>

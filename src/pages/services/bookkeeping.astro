@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getEnv } from '../../lib/env';
+import LeadForm from '../../components/LeadForm.astro';
 
 const env = getEnv();
 const pageTitle = "Bookkeeping Services | Modern Ledger";
@@ -105,6 +106,51 @@ const canonicalUrl = `${env.SITE_URL}/services/bookkeeping`;
             <h3 class="text-xl font-semibold text-gray-900 mb-2">Compliance & Accuracy</h3>
             <p class="text-gray-600">GAAP-compliant bookkeeping with 99.9% accuracy guarantee on all transactions.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lead Form Section -->
+    <section class="bg-neutral-25 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-start">
+          <div class="space-y-6">
+            <span class="eyebrow">Bookkeeping partnership</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Ready for clean, audit-ready books?</h2>
+            <p class="text-lg text-gray-600">
+              Tell us how many hours your team is spending on reconciliation, where the messes live, and which systems we should plug into. We’ll pair you with a dedicated Modern Ledger pod and outline the first 30 days of cleanup and monthly cadence.
+            </p>
+            <ul class="space-y-3 text-sm text-gray-600">
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Get a transaction volume review and pricing confirmation within one business day.
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Receive a cleanup scope detailing deliverables, timelines, and data hand-off.
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Walk away with a documented weekly and monthly reporting cadence.
+              </li>
+            </ul>
+          </div>
+
+          <LeadForm
+            class="h-full"
+            eyebrow="Bookkeeping intake"
+            heading="Tell us about your books"
+            subheading="Share the accounting tools you use, how often you reconcile, and where you need relief."
+            ctaLabel="Plan my bookkeeping support"
+            successMessage="Thanks! A Modern Ledger team lead will review your bookkeeping intake and respond with a tailored proposal within one business day."
+            source="service-bookkeeping"
+          />
         </div>
       </div>
     </section>

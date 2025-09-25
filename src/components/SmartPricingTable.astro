@@ -1,0 +1,313 @@
+---
+interface PricingTier {
+  name: string;
+  description: string;
+  price: number;
+  originalPrice?: number;
+  period: string;
+  popular?: boolean;
+  urgent?: boolean;
+  features: string[];
+  limitations?: string[];
+  cta: {
+    text: string;
+    href: string;
+    variant?: 'primary' | 'secondary' | 'outline';
+  };
+  badge?: {
+    text: string;
+    type: 'popular' | 'savings' | 'limited' | 'new';
+  };
+}
+
+interface Props {
+  tiers: PricingTier[];
+  variant?: 'default' | 'comparison' | 'urgency';
+  showAnnualSavings?: boolean;
+}
+
+const {
+  tiers,
+  variant = 'default',
+  showAnnualSavings = true
+} = Astro.props;
+
+const badgeStyles = {
+  popular: 'bg-blue-600 text-white',
+  savings: 'bg-green-600 text-white',
+  limited: 'bg-red-600 text-white animate-pulse',
+  new: 'bg-purple-600 text-white'
+};
+
+const calculateSavings = (price: number, originalPrice?: number) => {
+  if (!originalPrice) return null;
+  const savings = originalPrice - price;
+  const percentage = Math.round((savings / originalPrice) * 100);
+  return { amount: savings, percentage };
+};
+---
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="mx-auto max-w-content-xl">
+      
+      {variant === 'urgency' && (
+        <div class="mb-8 text-center">
+          <div class="inline-flex items-center gap-2 rounded-full bg-red-100 border border-red-200 px-4 py-2 text-sm font-semibold text-red-800">
+            🔥 Limited Time: Save up to 40% - Offer expires in <span class="countdown-timer font-mono">23:45:12</span>
+          </div>
+        </div>
+      )}
+
+      <div class={`grid gap-8 ${tiers.length === 2 ? 'md:grid-cols-2' : tiers.length === 3 ? 'lg:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-4'} max-w-7xl mx-auto`}>
+        {tiers.map((tier) => {
+          const savings = calculateSavings(tier.price, tier.originalPrice);
+          const isPopular = tier.popular;
+          const hasUrgency = tier.urgent || variant === 'urgency';
+          
+          return (
+            <div 
+              class={`pricing-tier surface relative p-8 ${isPopular ? 'ring-2 ring-brand-gold scale-105 shadow-glow' : ''} ${hasUrgency ? 'animate-pulse-glow' : ''}`}
+              data-tier={tier.name.toLowerCase()}
+            >
+              {/* Badge */}
+              {tier.badge && (
+                <div class={`absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold ${badgeStyles[tier.badge.type]}`}>
+                  {tier.badge.text}
+                </div>
+              )}
+
+              {/* Popular indicator */}
+              {isPopular && (
+                <div class="absolute -top-3 right-4 bg-brand-gold text-brand-navy px-3 py-1 rounded-full text-xs font-bold">
+                  Most Popular
+                </div>
+              )}
+
+              <div class="text-center">
+                <h3 class="text-xl font-bold text-brand-navy mb-2">{tier.name}</h3>
+                <p class="text-sm text-neutral-600 mb-6">{tier.description}</p>
+
+                {/* Pricing */}
+                <div class="mb-6">
+                  {savings && (
+                    <div class="flex items-center justify-center gap-2 mb-2">
+                      <span class="text-lg text-neutral-400 line-through">
+                        ${tier.originalPrice?.toLocaleString()}
+                      </span>
+                      <div class="inline-flex items-center bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
+                        Save {savings.percentage}%
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div class="flex items-baseline justify-center gap-1">
+                    <span class="text-4xl font-bold text-brand-navy">
+                      ${tier.price.toLocaleString()}
+                    </span>
+                    <span class="text-neutral-500">/{tier.period}</span>
+                  </div>
+
+                  {showAnnualSavings && savings && (
+                    <p class="text-sm text-green-600 font-medium mt-2">
+                      💰 Save ${(savings.amount * 12).toLocaleString()}/year
+                    </p>
+                  )}
+                </div>
+
+                {/* CTA Button */}
+                <a
+                  href={tier.cta.href}
+                  class={`btn ${tier.cta.variant === 'secondary' ? 'btn-secondary' : tier.cta.variant === 'outline' ? 'btn-outline' : 'btn-primary'} w-full justify-center mb-6 btn-enhanced`}
+                  data-pricing-cta={tier.name}
+                >
+                  {tier.cta.text}
+                </a>
+              </div>
+
+              {/* Features */}
+              <div class="space-y-4">
+                <h4 class="font-semibold text-brand-navy">What's included:</h4>
+                <ul class="space-y-3">
+                  {tier.features.map((feature) => (
+                    <li class="flex items-start gap-3 text-sm">
+                      <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                      </svg>
+                      <span class="text-neutral-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Limitations */}
+                {tier.limitations && tier.limitations.length > 0 && (
+                  <div class="mt-6 pt-4 border-t border-neutral-200">
+                    <h5 class="font-medium text-neutral-600 mb-3">Not included:</h5>
+                    <ul class="space-y-2">
+                      {tier.limitations.map((limitation) => (
+                        <li class="flex items-start gap-3 text-sm">
+                          <svg class="w-4 h-4 text-neutral-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                          </svg>
+                          <span class="text-neutral-500">{limitation}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Urgency indicator */}
+              {hasUrgency && (
+                <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold animate-bounce">
+                  ⏰ Limited Time
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Comparison table for complex pricing */}
+      {variant === 'comparison' && (
+        <div class="mt-16">
+          <h3 class="text-2xl font-bold text-center text-brand-navy mb-8">
+            Detailed Feature Comparison
+          </h3>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full border border-neutral-200 rounded-lg overflow-hidden">
+              <thead class="bg-neutral-50">
+                <tr>
+                  <th class="text-left p-4 font-semibold text-brand-navy">Features</th>
+                  {tiers.map((tier) => (
+                    <th class="text-center p-4 font-semibold text-brand-navy">
+                      {tier.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-neutral-200">
+                {/* Create comparison rows dynamically based on all features */}
+                {Array.from(new Set(tiers.flatMap(tier => tier.features))).map((feature) => (
+                  <tr class="hover:bg-neutral-25">
+                    <td class="p-4 text-sm text-neutral-700">{feature}</td>
+                    {tiers.map((tier) => (
+                      <td class="p-4 text-center">
+                        {tier.features.includes(feature) ? (
+                          <svg class="w-5 h-5 text-green-600 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                        ) : (
+                          <svg class="w-5 h-5 text-neutral-300 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                          </svg>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      <!-- Trust indicators -->
+      <div class="mt-12 text-center">
+        <div class="flex flex-wrap justify-center gap-6 text-sm text-neutral-600">
+          <div class="trust-signal">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            30-day money-back guarantee
+          </div>
+          <div class="trust-signal">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            No setup fees or hidden costs
+          </div>
+          <div class="trust-signal">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+            </svg>
+            Cancel anytime with 30 days notice
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ variant }}>
+  (() => {
+    if (typeof window === 'undefined') return;
+
+    // Track pricing interactions
+    const ctaButtons = document.querySelectorAll('[data-pricing-cta]');
+    ctaButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tierName = button.getAttribute('data-pricing-cta');
+        
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'pricing_cta_click', {
+            event_category: 'conversion',
+            event_label: tierName,
+            value: 1
+          });
+        }
+      });
+    });
+
+    // Countdown timer for urgency variant
+    if (variant === 'urgency') {
+      const timer = document.querySelector('.countdown-timer');
+      if (timer) {
+        let timeLeft = 24 * 60 * 60; // 24 hours
+        
+        const updateTimer = () => {
+          const hours = Math.floor(timeLeft / 3600);
+          const minutes = Math.floor((timeLeft % 3600) / 60);
+          const seconds = timeLeft % 60;
+          
+          timer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          
+          if (timeLeft > 0) {
+            timeLeft--;
+          } else {
+            timeLeft = 24 * 60 * 60; // Reset
+          }
+        };
+        
+        updateTimer();
+        setInterval(updateTimer, 1000);
+      }
+    }
+
+    // A/B test tracking
+    const variant_name = variant || 'default';
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'pricing_table_view', {
+        event_category: 'engagement',
+        event_label: variant_name,
+        custom_map: {'custom_parameter_1': variant_name}
+      });
+    }
+
+    // Scroll-triggered animations
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.pricing-tier').forEach(tier => {
+        observer.observe(tier);
+      });
+    }
+  })();
+</script>

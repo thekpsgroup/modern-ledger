@@ -87,7 +87,7 @@ async function checkInternalLink(distDir, sourceFile, href) {
 	}
 }
 
-async function checkRelativeLink(distDir, sourceFile, href) {
+async function checkRelativeLink(sourceFile, href) {
 	const candidate = resolveRelativeHref(sourceFile, href);
 	if (!candidate) return null;
 
@@ -175,7 +175,7 @@ async function main() {
 				continue;
 			}
 
-			const result = await checkRelativeLink(distDir, filePath, href);
+			const result = await checkRelativeLink(filePath, href);
 			if (result) issues.push(result);
 		}
 	}

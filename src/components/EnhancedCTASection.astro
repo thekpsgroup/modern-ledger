@@ -1,0 +1,335 @@
+---
+interface Props {
+  variant?: 'default' | 'urgent' | 'social-proof' | 'risk-reversal';
+  headline?: string;
+  subheadline?: string;
+  primaryCTA?: {
+    text: string;
+    href: string;
+    variant?: 'primary' | 'secondary';
+  };
+  secondaryCTA?: {
+    text: string;
+    href: string;
+    variant?: 'outline' | 'ghost';
+  };
+  showUrgency?: boolean;
+  includeTestimonial?: boolean;
+  showRiskReversal?: boolean;
+}
+
+const {
+  variant = 'default',
+  headline,
+  subheadline,
+  primaryCTA,
+  secondaryCTA
+} = Astro.props;
+
+// Dynamic content based on variant
+const variants = {
+  default: {
+    headline: "Ready to Get Your Books in Order?",
+    subheadline: "Join 150+ Texas businesses who've eliminated bookkeeping stress and gained financial clarity.",
+    urgencyBadge: null,
+    primary: { text: "Book Your Free 15-Minute Consult", href: "/contact", variant: "secondary" as const },
+    secondary: { text: "Calculate My ROI First", href: "/roi-calculator", variant: "outline" as const }
+  },
+  urgent: {
+    headline: "Don't Let Another Month Slip By With Messy Books",
+    subheadline: "Every day you wait costs you money in errors, missed deductions, and lost time. Take action now.",
+    urgencyBadge: "⚡ Only 3 client spots left this month",
+    primary: { text: "🚀 Get Started Today", href: "/contact", variant: "primary" as const },
+    secondary: { text: "See Our Pricing", href: "/pricing", variant: "outline" as const }
+  },
+  'social-proof': {
+    headline: "Join 150+ Texas Businesses Saving $3,200+ Annually",
+    subheadline: "See why business owners choose Modern Ledger over hiring in-house or struggling alone.",
+    urgencyBadge: "🏆 Rated #1 Bookkeeping Service in Rockwall County",
+    primary: { text: "Get My Free Assessment", href: "/contact", variant: "secondary" as const },
+    secondary: { text: "Read Success Stories", href: "/case-studies", variant: "ghost" as const }
+  },
+  'risk-reversal': {
+    headline: "Try Our Bookkeeping Service Risk-FREE",
+    subheadline: "30-day satisfaction guarantee. If you're not completely happy, we'll refund every penny.",
+    urgencyBadge: "💰 100% Money-Back Guarantee",
+    primary: { text: "Start Risk-Free Trial", href: "/contact?trial=true", variant: "primary" as const },
+    secondary: { text: "Learn About Our Guarantee", href: "/about", variant: "outline" as const }
+  }
+};
+
+const content = variants[variant];
+const finalHeadline = headline || content.headline;
+const finalSubheadline = subheadline || content.subheadline;
+const finalPrimary = primaryCTA || content.primary;
+const finalSecondary = secondaryCTA || content.secondary;
+
+// Objection handling based on variant
+const objectionSets = {
+  default: [
+    {
+      icon: '⏰',
+      title: 'Tired of monthly bookkeeping headaches?',
+      description: 'Let us handle the reconciliation, reporting, and cleanup while you focus on growing your business.'
+    },
+    {
+      icon: '💰',
+      title: 'Paying too much for in-house accounting?',
+      description: 'Get professional bookkeeping at a fraction of the cost of a full-time hire. No benefits, training, or turnover.'
+    },
+    {
+      icon: '📊',
+      title: 'Books not ready for tax season?',
+      description: 'Our audit-ready books and CPA handoffs ensure you\'re always prepared for tax time and business decisions.'
+    }
+  ],
+  urgent: [
+    {
+      icon: '🚨',
+      title: 'Missing critical tax deductions?',
+      description: 'Every month without proper bookkeeping could mean thousands in lost tax savings and penalties.'
+    },
+    {
+      icon: '📈',
+      title: 'Can\'t make data-driven decisions?',
+      description: 'Without accurate books, you\'re flying blind. Get the financial clarity you need to scale profitably.'
+    },
+    {
+      icon: '⚖️',
+      title: 'Worried about compliance issues?',
+      description: 'Stay ahead of audits, tax deadlines, and regulatory requirements with professional-grade record keeping.'
+    }
+  ],
+  'social-proof': [
+    {
+      icon: '🎯',
+      title: '"Saved us 15 hours per month"',
+      description: 'Sarah M., Retail Business Owner - "Now I can focus on customers instead of spreadsheets."'
+    },
+    {
+      icon: '💸',
+      title: '"Found $8,000 in missed deductions"',
+      description: 'Mike R., Manufacturing - "Modern Ledger paid for itself in the first quarter."'
+    },
+    {
+      icon: '📈',
+      title: '"Our cash flow improved 40%"',
+      description: 'Lisa K., Service Business - "Finally understand where our money goes and how to optimize it."'
+    }
+  ],
+  'risk-reversal': [
+    {
+      icon: '🛡️',
+      title: '30-Day Money-Back Guarantee',
+      description: 'Not satisfied? Get a full refund, no questions asked. We\'re that confident in our service.'
+    },
+    {
+      icon: '🔒',
+      title: 'Bank-Level Security',
+      description: 'Your financial data is protected with 256-bit encryption and SOC 2 compliance standards.'
+    },
+    {
+      icon: '📞',
+      title: 'Dedicated Support Team',
+      description: 'Direct access to your bookkeeping team with 24-hour response guarantee on all inquiries.'
+    }
+  ]
+};
+
+const objections = objectionSets[variant] || objectionSets.default;
+
+// Trust signals
+const trustSignals = [
+  { icon: '🔒', text: 'Bank-level security' },
+  { icon: '📊', text: 'CPA-reviewed processes' },
+  { icon: '⚡', text: '24hr response time' },
+  { icon: '🎯', text: '98% client retention' }
+];
+---
+
+<section class="section bg-brand-navy text-white overflow-hidden relative">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-5">
+    <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+      <defs>
+        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100" height="100" fill="url(#grid)" />
+    </svg>
+  </div>
+
+  <div class="container relative">
+    <div class="mx-auto max-w-content-lg text-center">
+      
+      <!-- Urgency Badge -->
+      {content.urgencyBadge && (
+        <div class="mb-6">
+          <div class="inline-flex items-center gap-2 rounded-full bg-brand-gold px-4 py-2 text-sm font-semibold text-brand-navy">
+            {content.urgencyBadge}
+          </div>
+        </div>
+      )}
+
+      <!-- Main Headline -->
+      <h2 class="text-balance mb-6 text-3xl md:text-4xl lg:text-5xl font-bold">
+        {finalHeadline}
+      </h2>
+      
+      <!-- Subheadline -->
+      <p class="text-body-lg mx-auto mb-8 max-w-content-md opacity-90 text-lg">
+        {finalSubheadline}
+      </p>
+
+      <!-- Primary CTA -->
+      <div class="mb-8">
+        <a
+          href={finalPrimary.href}
+          class={`btn btn-${finalPrimary.variant} text-lg px-10 py-4 inline-flex items-center gap-3 group`}
+          aria-label={finalPrimary.text}
+        >
+          {finalPrimary.text}
+          <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+        
+        {finalSecondary && (
+          <div class="mt-4">
+            <a
+              href={finalSecondary.href}
+              class={`btn btn-${finalSecondary.variant} border border-white/20 px-8 text-white hover:border-white hover:bg-white/10`}
+              aria-label={finalSecondary.text}
+            >
+              {finalSecondary.text}
+            </a>
+          </div>
+        )}
+
+        <!-- Trust Signals -->
+        <div class="mt-6 flex flex-wrap justify-center gap-6 text-sm opacity-80">
+          {trustSignals.map(signal => (
+            <div class="flex items-center gap-2">
+              <span>{signal.icon}</span>
+              <span>{signal.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Objection Handling -->
+      <div class="mb-12 grid gap-6 md:grid-cols-3">
+        {objections.map(objection => (
+          <div class="surface bg-white/10 p-6 text-center shadow-none backdrop-blur-sm border border-white/10 hover:bg-white/15 transition-colors duration-300">
+            <div class="mb-3 text-4xl">{objection.icon}</div>
+            <h3 class="font-semibold text-lg text-white mb-2">
+              {objection.title}
+            </h3>
+            <p class="text-sm opacity-80">
+              {objection.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Secondary Actions -->
+      <div class="border-t border-white/20 pt-8">
+        <p class="mb-6 text-lg opacity-90">
+          Need more information first?
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/roi-calculator"
+            class="btn btn-ghost border border-white/20 px-6 text-white hover:border-white hover:bg-white/10 inline-flex items-center gap-2"
+            aria-label="Calculate your potential savings"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+            Calculate My Savings
+          </a>
+          
+          <a
+            href="/pricing"
+            class="btn btn-ghost border border-white/20 px-6 text-white hover:border-white hover:bg-white/10 inline-flex items-center gap-2"
+            aria-label="View transparent pricing"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+            View Pricing
+          </a>
+          
+          <a
+            href="/case-studies"
+            class="btn btn-ghost border border-white/20 px-6 text-white hover:border-white hover:bg-white/10 inline-flex items-center gap-2"
+            aria-label="Read client success stories"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Success Stories
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    if (typeof window === 'undefined') return;
+
+    // Track CTA interactions
+    const ctaButtons = document.querySelectorAll('a[class*="btn"]');
+    
+    ctaButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const href = button.getAttribute('href');
+        const text = button.textContent?.trim() || 'CTA Click';
+        
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'cta_click', {
+            event_category: 'conversion',
+            event_label: text,
+            event_url: href
+          });
+        }
+      });
+    });
+
+    // Add scroll-triggered animations
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.surface').forEach(el => {
+        observer.observe(el);
+      });
+    }
+  })();
+</script>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+</style>

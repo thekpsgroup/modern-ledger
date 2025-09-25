@@ -1,0 +1,77 @@
+---
+// Simple testimonial highlight without video
+const testimonialHighlight = {
+  quote: "Modern Ledger cleaned 18 months of backlog and gave us investor-ready financials in six weeks. Our month-end close went from 12 days to 3 days.",
+  clientName: "Amber L.",
+  clientRole: "COO",
+  company: "Rockwall Commercial Contractor",
+  metrics: [
+    { label: "Time saved per month", value: "51 hours" },
+    { label: "Backlog cleared", value: "18 months" },
+    { label: "Close time reduced", value: "12 → 3 days" }
+  ]
+};
+---
+
+<section class="section-sm bg-white">
+  <div class="container">
+    <div class="surface grid gap-10 overflow-hidden border border-brand-navy/10 bg-gradient-to-br from-brand-sky/30 to-white px-6 py-10 shadow-soft md:grid-cols-[minmax(0,1fr)_minmax(0,380px)] md:px-12">
+      <div class="space-y-6">
+        <span class="eyebrow">Client success story</span>
+        <blockquote class="text-2xl font-medium leading-relaxed text-brand-navy md:text-3xl">
+          "{testimonialHighlight.quote}"
+        </blockquote>
+        <div class="flex items-center gap-4">
+          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-gold text-brand-navy">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="m-0 font-semibold text-brand-navy">
+              {testimonialHighlight.clientName}
+            </p>
+            <p class="m-0 text-sm text-neutral-500">
+              {testimonialHighlight.clientRole} • {testimonialHighlight.company}
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 sm:flex-row">
+          <a href="/contact" class="btn btn-primary px-6">
+            Get similar results
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+          <a href="/case-studies" class="btn btn-outline px-6">
+            Read full case study
+          </a>
+        </div>
+      </div>
+      
+      <div class="space-y-4">
+        <h3 class="text-lg font-semibold text-brand-navy">Results achieved</h3>
+        <div class="grid gap-4">
+          {testimonialHighlight.metrics.map((metric) => (
+            <div class="flex items-start gap-3 rounded-2xl border border-white/80 bg-white/60 p-4">
+              <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-gold/20 text-brand-gold">
+                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="text-xl font-semibold text-brand-navy">{metric.value}</div>
+                <p class="m-0 text-sm text-neutral-500">{metric.label}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="rounded-2xl border border-brand-navy/10 bg-white/80 p-4 text-center">
+          <div class="text-2xl font-semibold text-brand-navy">5.2×</div>
+          <p class="m-0 text-sm text-neutral-500">ROI within 6 months</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

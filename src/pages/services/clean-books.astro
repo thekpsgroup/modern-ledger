@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getEnv } from '../../lib/env';
+import LeadForm from '../../components/LeadForm.astro';
 
 const env = getEnv();
 const pageTitle = "Clean Books Service | Modern Ledger";
@@ -34,6 +35,50 @@ const canonicalUrl = `${env.SITE_URL}/services/clean-books`;
         <p class="text-lg text-gray-600">
           This service page is currently under development. Please check back soon or contact us for more information.
         </p>
+      </div>
+    </section>
+
+    <section class="bg-neutral-25 py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_0.95fr] lg:items-start">
+          <div class="space-y-6">
+            <span class="eyebrow">Cleanup intake</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Get a step-by-step clean books plan</h2>
+            <p class="text-lg text-gray-600">
+              Let us know how many months are backlogged, which systems your data lives in, and any deadlines you’re up against. We’ll send a cleanup scope with delivery cadence, investment, and the first milestones.
+            </p>
+            <ul class="space-y-3 text-sm text-gray-600">
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Detailed backlog review and data gathering checklist.
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Transparent pricing aligned to months of cleanup and complexity.
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Allocation of a dedicated cleanup squad with weekly updates.
+              </li>
+            </ul>
+          </div>
+
+          <LeadForm
+            class="h-full"
+            eyebrow="Clean books intake"
+            heading="Tell us about your backlog"
+            subheading="Share how far behind your books are, where data is stored, and any compliance deadlines."
+            ctaLabel="Plan my clean up"
+            successMessage="Thanks! A cleanup lead will audit your submission and follow up with a bespoke clean books proposal within one business day."
+            source="service-clean-books"
+          />
+        </div>
       </div>
     </section>
   </div>

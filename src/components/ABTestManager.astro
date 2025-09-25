@@ -1,0 +1,399 @@
+---
+interface ABTest {
+  id: string;
+  name: string;
+  description: string;
+  status: 'draft' | 'running' | 'paused' | 'completed';
+  variants: ABVariant[];
+  trafficSplit: number[]; // Percentage for each variant
+  startDate?: Date;
+  endDate?: Date;
+  goals: ABGoal[];
+  targeting?: ABTargeting;
+}
+
+interface ABVariant {
+  id: string;
+  name: string;
+  description: string;
+  config: Record<string, any>; // Component configuration
+  trafficPercentage?: number;
+}
+
+interface ABGoal {
+  id: string;
+  name: string;
+  type: 'conversion' | 'engagement' | 'revenue';
+  event: string; // GA4 event name
+  target?: number;
+  isPrimary?: boolean;
+}
+
+interface ABTargeting {
+  geoLocation?: string[];
+  deviceType?: ('desktop' | 'mobile' | 'tablet')[];
+  trafficSource?: string[];
+  newVisitors?: boolean;
+  returningVisitors?: boolean;
+}
+
+interface Props {
+  tests: ABTest[];
+  userId?: string;
+  sessionId?: string;
+  enableAnalytics?: boolean;
+  debugMode?: boolean;
+}
+
+const {
+  tests,
+  userId,
+  sessionId,
+  enableAnalytics = true,
+  debugMode = false
+} = Astro.props;
+
+// Get active tests
+const activeTests = tests.filter(test => test.status === 'running');
+
+// Function to get user's variant for a test
+const getUserVariant = (test: ABTest, identifier: string) => {
+  const hash = simpleHash(identifier + test.id);
+  const bucket = hash % 100;
+  
+  let cumulative = 0;
+  for (let i = 0; i < test.variants.length; i++) {
+    cumulative += test.trafficSplit[i];
+    if (bucket < cumulative) {
+      return test.variants[i];
+    }
+  }
+  return test.variants[0]; // fallback
+};
+
+// Simple hash function
+const simpleHash = (str: string) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash);
+};
+
+// Generate user identifier if not provided
+const userIdentifier = userId || sessionId || `visitor_${Date.now()}_${Math.random()}`;
+
+// Get variants for all active tests
+const userVariants = activeTests.reduce((acc, test) => {
+  acc[test.id] = getUserVariant(test, userIdentifier);
+  return acc;
+}, {} as Record<string, ABVariant>);
+---
+
+<!-- A/B Test Configuration -->
+<script is:inline define:vars={{ activeTests, userVariants, enableAnalytics, debugMode, userIdentifier }}>
+  (() => {
+    if (typeof window === 'undefined') return;
+
+    // Store A/B test data globally
+    window.abTests = {
+      activeTests,
+      userVariants,
+      userIdentifier,
+      debugMode
+    };
+
+    // Debug logging
+    if (debugMode) {
+      console.group('🧪 A/B Testing Debug');
+      console.log('Active Tests:', activeTests.length);
+      console.log('User Identifier:', userIdentifier);
+      console.log('User Variants:', userVariants);
+      console.groupEnd();
+    }
+
+    // Initialize analytics tracking
+    if (enableAnalytics && typeof window.gtag === 'function') {
+      // Track test participation
+      Object.entries(userVariants).forEach(([testId, variant]) => {
+        const test = activeTests.find(t => t.id === testId);
+        if (test) {
+          window.gtag('event', 'ab_test_participate', {
+            event_category: 'ab_testing',
+            event_label: test.name,
+            custom_map: {
+              'custom_parameter_1': testId,
+              'custom_parameter_2': variant.id,
+              'custom_parameter_3': variant.name
+            }
+          });
+
+          // Store in session for consistent tracking
+          sessionStorage.setItem(`ab_test_${testId}`, JSON.stringify({
+            testId,
+            variantId: variant.id,
+            variantName: variant.name,
+            timestamp: Date.now()
+          }));
+        }
+      });
+    }
+
+    // A/B Test Event Tracking Functions
+    window.abTrackEvent = (eventName, properties = {}) => {
+      if (!enableAnalytics || typeof window.gtag !== 'function') return;
+
+      // Get current test participation
+      const testData = Object.entries(userVariants).map(([testId, variant]) => ({
+        testId,
+        variantId: variant.id,
+        variantName: variant.name
+      }));
+
+      window.gtag('event', eventName, {
+        event_category: 'conversion',
+        ...properties,
+        ab_tests: JSON.stringify(testData)
+      });
+
+      if (debugMode) {
+        console.log('🎯 A/B Event Tracked:', eventName, properties, testData);
+      }
+    };
+
+    // Goal conversion tracking
+    window.abTrackGoal = (goalId, value = 1) => {
+      if (!enableAnalytics) return;
+
+      // Find which tests have this goal
+      const relevantTests = activeTests.filter(test => 
+        test.goals.some(goal => goal.id === goalId)
+      );
+
+      relevantTests.forEach(test => {
+        const variant = userVariants[test.id];
+        const goal = test.goals.find(g => g.id === goalId);
+        
+        if (variant && goal && typeof window.gtag === 'function') {
+          window.gtag('event', 'ab_goal_conversion', {
+            event_category: 'ab_testing',
+            event_label: goal.name,
+            value: value,
+            custom_map: {
+              'custom_parameter_1': test.id,
+              'custom_parameter_2': variant.id,
+              'custom_parameter_3': goal.type
+            }
+          });
+        }
+      });
+
+      if (debugMode) {
+        console.log('🎯 Goal Tracked:', goalId, value, relevantTests.length, 'tests');
+      }
+    };
+
+    // Component variant helper
+    window.abGetVariant = (testId) => {
+      return userVariants[testId] || null;
+    };
+
+    // Check if user is in specific variant
+    window.abIsVariant = (testId, variantId) => {
+      const variant = userVariants[testId];
+      return variant && variant.id === variantId;
+    };
+
+    // Force variant (for testing purposes)
+    window.abForceVariant = (testId, variantId) => {
+      if (!debugMode) {
+        console.warn('abForceVariant only works in debug mode');
+        return;
+      }
+
+      const test = activeTests.find(t => t.id === testId);
+      const variant = test?.variants.find(v => v.id === variantId);
+      
+      if (test && variant) {
+        userVariants[testId] = variant;
+        console.log(`Forced variant ${variantId} for test ${testId}`);
+        
+        // Trigger page reload to apply changes
+        if (confirm('Reload page to apply variant change?')) {
+          location.reload();
+        }
+      }
+    };
+
+    // Mark as returning visitor
+    localStorage.setItem('returning_visitor', 'true');
+
+    // Revenue tracking helper
+    window.abTrackRevenue = (amount, currency = 'USD', orderId = null) => {
+      window.abTrackEvent('purchase', {
+        value: amount,
+        currency: currency,
+        transaction_id: orderId
+      });
+    };
+
+    // Engagement tracking
+    const trackEngagement = () => {
+      let scrollDepth = 0;
+      let timeOnPage = 0;
+      const startTime = Date.now();
+
+      // Scroll depth tracking
+      const trackScroll = () => {
+        const currentScroll = Math.round(
+          (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+        );
+        
+        if (currentScroll > scrollDepth) {
+          scrollDepth = currentScroll;
+          
+          // Track milestone achievements
+          if (scrollDepth >= 25 && !window.scroll25Tracked) {
+            window.abTrackEvent('scroll_depth_25');
+            window.scroll25Tracked = true;
+          }
+          if (scrollDepth >= 50 && !window.scroll50Tracked) {
+            window.abTrackEvent('scroll_depth_50');
+            window.scroll50Tracked = true;
+          }
+          if (scrollDepth >= 75 && !window.scroll75Tracked) {
+            window.abTrackEvent('scroll_depth_75');
+            window.scroll75Tracked = true;
+          }
+        }
+      };
+
+      // Time on page tracking
+      const trackTimeOnPage = () => {
+        timeOnPage = Math.round((Date.now() - startTime) / 1000);
+        
+        // Track time milestones
+        if (timeOnPage === 30 && !window.time30Tracked) {
+          window.abTrackEvent('time_on_page_30s');
+          window.time30Tracked = true;
+        }
+        if (timeOnPage === 60 && !window.time60Tracked) {
+          window.abTrackEvent('time_on_page_1m');
+          window.time60Tracked = true;
+        }
+        if (timeOnPage === 180 && !window.time180Tracked) {
+          window.abTrackEvent('time_on_page_3m');
+          window.time180Tracked = true;
+        }
+      };
+
+      window.addEventListener('scroll', trackScroll);
+      setInterval(trackTimeOnPage, 1000);
+    };
+
+    // Initialize engagement tracking
+    trackEngagement();
+
+    // Export variant configurations for components
+    window.abConfigs = Object.entries(userVariants).reduce((acc, [testId, variant]) => {
+      acc[testId] = variant.config;
+      return acc;
+    }, {});
+
+    // Page visibility change tracking
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        window.abTrackEvent('page_hidden');
+      } else if (document.visibilityState === 'visible') {
+        window.abTrackEvent('page_visible');
+      }
+    });
+
+    // Form interaction tracking
+    const trackFormInteractions = () => {
+      const forms = document.querySelectorAll('form');
+      forms.forEach((form, index) => {
+        const formId = form.id || `form_${index}`;
+        let formStarted = false;
+
+        form.addEventListener('focusin', () => {
+          if (!formStarted) {
+            formStarted = true;
+            window.abTrackEvent('form_start', { form_id: formId });
+          }
+        });
+
+        form.addEventListener('submit', () => {
+          window.abTrackEvent('form_submit', { form_id: formId });
+          window.abTrackGoal('form_conversion');
+        });
+      });
+    };
+
+    // Initialize form tracking when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', trackFormInteractions);
+    } else {
+      trackFormInteractions();
+    }
+
+    // CTA click tracking
+    const trackCTAClicks = () => {
+      const ctaButtons = document.querySelectorAll('[href*="contact"], [href*="signup"], [href*="demo"], .btn-primary');
+      ctaButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          window.abTrackEvent('cta_click', {
+            cta_text: button.textContent.trim(),
+            cta_href: button.href || button.dataset.href
+          });
+          window.abTrackGoal('cta_conversion');
+        });
+      });
+    };
+
+    // Initialize CTA tracking
+    setTimeout(trackCTAClicks, 1000); // Delay to ensure all components are loaded
+
+    if (debugMode) {
+      console.log('🧪 A/B Testing initialized successfully');
+      
+      // Add debug panel
+      const debugPanel = document.createElement('div');
+      debugPanel.innerHTML = `
+        <div style="position: fixed; top: 10px; right: 10px; background: #000; color: #fff; padding: 10px; border-radius: 5px; font-size: 12px; z-index: 10000; font-family: monospace;">
+          <strong>A/B Test Debug</strong><br>
+          User: ${userIdentifier.substring(0, 8)}...<br>
+          Tests: ${activeTests.length}<br>
+          ${Object.entries(userVariants).map(([testId, variant]) => 
+            `${testId}: ${variant.name}`
+          ).join('<br>')}
+        </div>
+      `;
+      document.body.appendChild(debugPanel);
+    }
+  })();
+</script>
+
+<!-- Test-specific styles and configurations will be injected by individual components -->
+<div class="ab-test-container" data-ab-user={userIdentifier}>
+  {Object.entries(userVariants).map(([testId, variant]) => (
+    <div 
+      class="ab-test-config hidden"
+      data-test-id={testId}
+      data-variant-id={variant.id}
+      data-variant-config={JSON.stringify(variant.config)}
+    ></div>
+  ))}
+</div>
+
+<style>
+  .ab-test-container {
+    display: none;
+  }
+  
+  .ab-test-config {
+    display: none !important;
+  }
+</style>

@@ -1,0 +1,417 @@
+---
+interface FAQ {
+  question: string;
+  answer: string;
+  category?: string;
+  keywords?: string[];
+}
+
+// Enhanced FAQ data with categories and keywords
+const faqs: FAQ[] = [
+  {
+    question: "How much does bookkeeping cost vs. hiring in-house?",
+    answer: "Our services typically cost 60-80% less than hiring a full-time bookkeeper ($45,000-$65,000 annually). You get professional expertise without the payroll taxes, benefits, training, or turnover costs. Most clients see ROI within 3-6 months through better financial decisions and tax savings.",
+    category: "pricing",
+    keywords: ["cost", "price", "hire", "employee", "salary", "roi", "savings"]
+  },
+  {
+    question: "We already use QuickBooks - can you still help?",
+    answer: "Absolutely! We specialize in QuickBooks Online and Desktop. Many clients come to us because their current setup isn't being maintained properly. We'll review your current QuickBooks file, clean up any issues, and ensure it's set up for accurate tracking and reporting.",
+    category: "services",
+    keywords: ["quickbooks", "software", "setup", "existing", "cleanup", "review"]
+  },
+  {
+    question: "Our books are a mess - can you fix them?",
+    answer: "Yes, this is one of our specialties. We offer comprehensive 'clean books' services that can restore order to disorganized financial records. We'll reconstruct missing transactions, fix categorization issues, and bring everything current. The process typically takes 2-4 weeks depending on complexity.",
+    category: "services",
+    keywords: ["messy", "cleanup", "fix", "disorganized", "catch-up", "reconstruct"]
+  },
+  {
+    question: "Do you handle payroll tax filings and remittances?",
+    answer: "We can integrate with your existing payroll provider (Gusto, ADP, Paychex) to ensure payroll expenses are properly recorded and reconciled. However, we don't handle the actual tax filings or remittances - we recommend working with a CPA or payroll service for compliance. We ensure your books accurately reflect all payroll activity.",
+    category: "services",
+    keywords: ["payroll", "taxes", "gusto", "adp", "paychex", "filing", "compliance"]
+  },
+  {
+    question: "How long does onboarding take?",
+    answer: "Most clients are up and running within 1-2 weeks. We'll need access to your bank accounts, credit cards, and accounting software. We'll also schedule a kickoff meeting to understand your specific needs and establish our processes.",
+    category: "process",
+    keywords: ["onboarding", "setup", "timeline", "getting started", "kickoff"]
+  },
+  {
+    question: "What if we need local Texas support?",
+    answer: "We're proud to be based in Rockwall County and understand Texas-specific requirements including sales tax, property tax, and local regulations. We work closely with Texas CPAs and can provide referrals if needed.",
+    category: "location",
+    keywords: ["texas", "local", "rockwall", "sales tax", "property tax", "cpa"]
+  },
+  {
+    question: "Do you offer month-end close services?",
+    answer: "Yes! Our month-end close process includes bank reconciliation, adjusting entries, financial statement preparation, and variance analysis. We typically complete the close within 3-5 business days of month-end, much faster than most in-house bookkeepers.",
+    category: "services",
+    keywords: ["month-end", "close", "reconciliation", "financial statements", "variance"]
+  },
+  {
+    question: "Can you help with sales tax in Texas?",
+    answer: "We can track and calculate sales tax accruals, but we don't file sales tax returns. We recommend working with a Texas-licensed tax professional or service like Taxfyle for filings. We ensure your sales tax tracking is accurate and audit-ready.",
+    category: "taxes",
+    keywords: ["sales tax", "texas", "filing", "tracking", "taxfyle", "audit"]
+  },
+  {
+    question: "What happens if we get audited?",
+    answer: "Our books are always audit-ready with complete documentation, source records, and audit trails. We maintain organized records for 7+ years as required. In the unlikely event of an audit, we'll provide all necessary documentation and can testify to the accuracy of our work.",
+    category: "compliance",
+    keywords: ["audit", "documentation", "records", "compliance", "irs", "support"]
+  },
+  {
+    question: "Do you work with contractors and freelancers?",
+    answer: "Yes, we have extensive experience with 1099 contractors, freelancer payments, and complex vendor relationships. We ensure proper classification, accurate 1099 reporting, and compliance with Texas withholding requirements.",
+    category: "services",
+    keywords: ["contractors", "1099", "freelancers", "vendors", "classification"]
+  },
+  {
+    question: "How do you handle inventory accounting?",
+    answer: "We specialize in inventory tracking for retail, wholesale, and manufacturing businesses. This includes cost of goods sold calculations, inventory valuation methods (FIFO, LIFO, average cost), shrinkage tracking, and integration with point-of-sale systems.",
+    category: "services",
+    keywords: ["inventory", "cogs", "fifo", "lifo", "retail", "manufacturing", "pos"]
+  },
+  {
+    question: "What's your response time for urgent issues?",
+    answer: "We respond to all client inquiries within 24 hours and prioritize urgent accounting issues. For critical matters requiring immediate attention, we offer expedited service with same-day response during business hours.",
+    category: "support",
+    keywords: ["response time", "urgent", "support", "24 hours", "same-day"]
+  }
+];
+
+const categories = [
+  { id: 'all', label: 'All Questions', count: faqs.length },
+  { id: 'pricing', label: 'Pricing & Cost', count: faqs.filter(f => f.category === 'pricing').length },
+  { id: 'services', label: 'Services', count: faqs.filter(f => f.category === 'services').length },
+  { id: 'process', label: 'Process', count: faqs.filter(f => f.category === 'process').length },
+  { id: 'taxes', label: 'Taxes', count: faqs.filter(f => f.category === 'taxes').length },
+  { id: 'support', label: 'Support', count: faqs.filter(f => f.category === 'support').length }
+];
+---
+
+<section class="section bg-neutral-25">
+  <div class="container">
+    <div class="mx-auto max-w-content-lg">
+      <div class="stack-sm text-center">
+        <span class="eyebrow mx-auto">FAQ</span>
+        <h2 class="text-balance">Frequently Asked Questions</h2>
+        <p class="text-body-lg text-neutral-500">
+          Find answers to common questions about our bookkeeping services.
+        </p>
+      </div>
+
+      <!-- Search and Filters -->
+      <div class="mt-8 space-y-4">
+        <!-- Search Bar -->
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg class="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <input
+            type="search"
+            id="faq-search"
+            placeholder="Search FAQs... (e.g., 'QuickBooks setup', 'pricing', 'Texas sales tax')"
+            class="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg text-sm text-brand-navy placeholder-neutral-400 focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
+          />
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+            <kbd class="hidden sm:inline-block bg-neutral-100 text-neutral-500 text-xs px-2 py-1 rounded">⌘K</kbd>
+          </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap gap-2 justify-center">
+          {categories.map((category) => (
+            <button
+              type="button"
+              class="category-filter px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 hover:bg-brand-sky focus:outline-none focus:ring-2 focus:ring-brand-gold"
+              data-category={category.id}
+              data-active={category.id === 'all' ? 'true' : 'false'}
+            >
+              {category.label}
+              <span class="ml-1 text-xs opacity-75">({category.count})</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ Results Counter -->
+      <div class="mt-6 text-center">
+        <p id="faq-results" class="text-sm text-neutral-500">
+          Showing {faqs.length} questions
+        </p>
+      </div>
+
+      <!-- FAQ Items -->
+      <div class="mt-8 space-y-4" id="faq-container">
+        {faqs.map((faq, index) => (
+          <div 
+            class="faq-item surface"
+            data-category={faq.category}
+            data-keywords={faq.keywords?.join(' ')}
+            data-question={faq.question.toLowerCase()}
+            data-answer={faq.answer.toLowerCase()}
+          >
+            <button
+              type="button"
+              class="flex w-full items-center justify-between gap-6 rounded-[inherit] px-6 py-5 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold hover:bg-brand-sky/60"
+              aria-expanded="false"
+              data-accordion-button={index}
+              aria-controls={`faq-content-${index}`}
+            >
+              <span class="pr-6 text-base font-semibold text-brand-navy">{faq.question}</span>
+              <svg
+                class="h-5 w-5 flex-shrink-0 text-brand-gold transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                data-accordion-icon={index}
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div
+              id={`faq-content-${index}`}
+              class="hidden px-6 pb-6"
+              aria-labelledby={`faq-button-${index}`}
+            >
+              <p class="text-body-sm text-neutral-500">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- No Results Message -->
+      <div id="no-results" class="hidden mt-12 text-center">
+        <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-neutral-100">
+          <svg class="h-8 w-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-brand-navy mb-2">No questions found</h3>
+        <p class="text-neutral-500 mb-4">Try a different search term or browse all categories.</p>
+        <button
+          type="button"
+          id="clear-search"
+          class="btn btn-outline"
+        >
+          Clear Search
+        </button>
+      </div>
+
+      <!-- Contact CTA -->
+      <div class="mt-12 text-center">
+        <div class="surface p-8 bg-gradient-to-br from-brand-sky to-white">
+          <h3 class="text-xl font-semibold text-brand-navy mb-3">
+            Still have questions?
+          </h3>
+          <p class="text-body-sm text-neutral-500 mb-6">
+            Book a free 15-minute consultation and we'll answer everything specific to your business.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/contact"
+              class="btn btn-primary"
+              aria-label="Book a free consultation to get your questions answered"
+            >
+              📞 Book Free Consultation
+            </a>
+            <a
+              href="/roi-calculator"
+              class="btn btn-outline"
+              aria-label="Calculate your potential ROI"
+            >
+              📊 Calculate My Savings
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    if (typeof document === 'undefined') return;
+
+    const searchInput = document.getElementById('faq-search');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const faqContainer = document.getElementById('faq-container');
+    const noResults = document.getElementById('no-results');
+    const resultsCounter = document.getElementById('faq-results');
+    const clearSearchBtn = document.getElementById('clear-search');
+
+    let currentCategory = 'all';
+    let currentSearch = '';
+
+    // Accordion functionality
+    const buttons = document.querySelectorAll('[data-accordion-button]');
+    buttons.forEach((button) => {
+      if (!(button instanceof HTMLElement)) return;
+
+      const key = button.dataset.accordionButton;
+      if (!key) return;
+
+      const content = document.getElementById(`faq-content-${key}`);
+      const icon = document.querySelector(`[data-accordion-icon="${key}"]`);
+
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+        button.setAttribute('aria-expanded', String(!isExpanded));
+
+        if (content) {
+          content.classList.toggle('hidden');
+        }
+
+        if (icon instanceof HTMLElement) {
+          icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        // Track FAQ interactions
+        if (typeof window.gtag === 'function' && !isExpanded) {
+          window.gtag('event', 'faq_expand', {
+            event_category: 'engagement',
+            event_label: button.textContent?.trim() || `faq_${key}`
+          });
+        }
+      });
+    });
+
+    const updateCategoryStyles = () => {
+      categoryFilters.forEach(filter => {
+        const isActive = filter.dataset.category === currentCategory;
+        filter.dataset.active = isActive.toString();
+        
+        if (isActive) {
+          filter.classList.add('bg-brand-navy', 'text-white');
+          filter.classList.remove('bg-neutral-100', 'text-neutral-600');
+        } else {
+          filter.classList.remove('bg-brand-navy', 'text-white');
+          filter.classList.add('bg-neutral-100', 'text-neutral-600');
+        }
+      });
+    };
+
+    const filterFAQs = () => {
+      const faqItems = document.querySelectorAll('.faq-item');
+      let visibleCount = 0;
+
+      faqItems.forEach(item => {
+        const category = item.dataset.category;
+        const keywords = item.dataset.keywords || '';
+        const question = item.dataset.question || '';
+        const answer = item.dataset.answer || '';
+        
+        const matchesCategory = currentCategory === 'all' || category === currentCategory;
+        const matchesSearch = !currentSearch || 
+          question.includes(currentSearch.toLowerCase()) ||
+          answer.includes(currentSearch.toLowerCase()) ||
+          keywords.includes(currentSearch.toLowerCase());
+
+        const shouldShow = matchesCategory && matchesSearch;
+        
+        if (shouldShow) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      // Update results counter
+      if (resultsCounter) {
+        const searchText = currentSearch ? ` matching "${currentSearch}"` : '';
+        const categoryText = currentCategory !== 'all' ? ` in ${currentCategory}` : '';
+        resultsCounter.textContent = `Showing ${visibleCount} question${visibleCount !== 1 ? 's' : ''}${searchText}${categoryText}`;
+      }
+
+      // Show/hide no results message
+      if (noResults && faqContainer) {
+        if (visibleCount === 0) {
+          faqContainer.classList.add('hidden');
+          noResults.classList.remove('hidden');
+        } else {
+          faqContainer.classList.remove('hidden');
+          noResults.classList.add('hidden');
+        }
+      }
+    };
+
+    // Search functionality
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value.trim();
+        filterFAQs();
+
+        // Track search queries
+        if (currentSearch && typeof window.gtag === 'function') {
+          window.gtag('event', 'search', {
+            search_term: currentSearch,
+            event_category: 'faq'
+          });
+        }
+      });
+
+      // Keyboard shortcut (Cmd/Ctrl + K)
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
+    }
+
+    // Category filtering
+    categoryFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        currentCategory = filter.dataset.category || 'all';
+        updateCategoryStyles();
+        filterFAQs();
+
+        // Track category filtering
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'faq_filter', {
+            event_category: 'engagement',
+            event_label: currentCategory
+          });
+        }
+      });
+    });
+
+    // Clear search
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        currentSearch = '';
+        currentCategory = 'all';
+        if (searchInput) searchInput.value = '';
+        updateCategoryStyles();
+        filterFAQs();
+      });
+    }
+
+    // Initialize
+    updateCategoryStyles();
+    filterFAQs();
+  })();
+</script>
+
+<!-- Enhanced FAQ Schema -->
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+})}></script>

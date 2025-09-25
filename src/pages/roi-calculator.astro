@@ -1,66 +1,189 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getEnv } from '../lib/env';
+import ROICalculator from '../components/ROICalculator.astro';
+import LeadForm from '../components/LeadForm.astro';
 
 const env = getEnv();
-const pageTitle = "ROI Calculator | Modern Ledger";
-const pageDescription = "Calculate the return on investment for professional bookkeeping services and discover how much time and money your business saves by outsourcing the books.";
+const pageTitle = 'ROI Calculator | Modern Ledger';
+const pageDescription = 'Calculate the return on investment for professional bookkeeping services and discover how much time and money your business saves by outsourcing the books.';
 const canonicalUrl = `${env.SITE_URL}/roi-calculator`;
+
+const phoneDigits = env.COMPANY_PHONE;
+const phoneDisplay = phoneDigits.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+const phoneHref = `tel:+1${phoneDigits}`;
+
+const metrics = [
+  {
+    label: 'Hours Returned to Your Team',
+    value: '18+',
+    description: 'Average monthly hours reclaimed after onboarding Modern Ledger.'
+  },
+  {
+    label: 'Average ROI Within 6 Months',
+    value: '5.2×',
+    description: 'Clients reinvest saved time into sales, hiring, and growth.'
+  },
+  {
+    label: 'Compliance Costs Avoided',
+    value: '$8,500',
+    description: 'Typical annual penalties prevented by clean books and reconciliations.'
+  }
+];
+
+const benefits = [
+  {
+    title: 'Benchmark Your True Accounting Costs',
+    copy: 'Plug in your current hours and hourly value to see the real monthly cost of DIY bookkeeping compared to a professional team.'
+  },
+  {
+    title: 'Quantify Risk Reduction',
+    copy: 'Estimate how much you save by catching errors earlier, staying audit-ready, and filing taxes accurately the first time.'
+  },
+  {
+    title: 'Forecast Growth Impact',
+    copy: 'Translate hours saved into billable capacity, projects completed, or sales calls booked so you can plan your next hire with confidence.'
+  }
+];
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <div class="min-h-screen bg-white">
-    <section class="bg-gradient-to-br from-green-50 to-emerald-100 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            ROI <span class="text-green-600">Calculator</span>
-          </h1>
-          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Discover how much time and money professional bookkeeping services can save your business.
-          </p>
+  <div class="min-h-screen bg-neutral-25">
+    <section class="bg-gradient-to-br from-brand-sky/60 via-white to-brand-sky/40 py-20">
+      <div class="container">
+        <div class="grid gap-12 lg:grid-cols-[1fr_minmax(0,420px)] lg:items-center">
+          <div class="space-y-6 text-brand-navy">
+            <span class="eyebrow">Bookkeeping ROI Calculator</span>
+            <h1 class="text-4xl font-semibold leading-tight md:text-5xl">
+              See how quickly Modern Ledger pays for itself.
+            </h1>
+            <p class="text-lg text-neutral-600 md:text-xl">
+              Input the time you spend chasing receipts and reconciling accounts to reveal the hours, payroll, and penalty costs you can reclaim by outsourcing your books.
+            </p>
+
+            <div class="flex flex-col gap-4 sm:flex-row">
+              <a
+                href="/contact"
+                class="btn btn-primary justify-center sm:w-auto"
+              >
+                Book a Strategy Call
+              </a>
+              <a
+                href={phoneHref}
+                class="btn btn-secondary justify-center sm:w-auto"
+                aria-label={`Call Modern Ledger at ${phoneDisplay}`}
+              >
+                Call {phoneDisplay}
+              </a>
+            </div>
+
+            <dl class="grid gap-4 rounded-2xl border border-brand-sky bg-white/90 p-6 shadow-soft sm:grid-cols-3">
+              {metrics.map((metric) => (
+                <div class="space-y-2">
+                  <dt class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">{metric.label}</dt>
+                  <dd class="text-2xl font-semibold text-brand-navy">{metric.value}</dd>
+                  <p class="text-xs text-neutral-500">{metric.description}</p>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div class="surface space-y-4 p-6 shadow-lg">
+            <h2 class="text-xl font-semibold text-brand-navy">What this calculator reveals</h2>
+            <ul class="space-y-3 text-sm text-neutral-600">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-gold/20 text-brand-gold">1</span>
+                <span>Monthly labor cost of DIY bookkeeping, including leadership and admin time.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-gold/20 text-brand-gold">2</span>
+                <span>Annual impact of errors, late filings, and compliance risks on your profit.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-gold/20 text-brand-gold">3</span>
+                <span>Total ROI when Modern Ledger replaces an in-house or DIY process.</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="py-20">
-      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Coming Soon
-        </h2>
-        <p class="text-lg text-gray-600 mb-8">
-          Our interactive ROI calculator is currently under development. It will help you calculate:
-        </p>
-        <ul class="text-left max-w-2xl mx-auto space-y-3 text-gray-600">
-          <li class="flex items-center">
-            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
-            Time savings from outsourcing bookkeeping tasks
-          </li>
-          <li class="flex items-center">
-            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
-            Cost of errors and compliance issues avoided
-          </li>
-          <li class="flex items-center">
-            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
-            Tax deductions and savings from proper record-keeping
-          </li>
-          <li class="flex items-center">
-            <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
-            Business valuation impact from clean financials
-          </li>
-        </ul>
-        <div class="mt-8">
-          <a href="/contact" class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
-            Contact Us for a Free ROI Assessment
-          </a>
+    <section id="roi-calculator-tool" class="py-20">
+      <ROICalculator />
+    </section>
+
+    <section class="pb-12">
+      <div class="container">
+        <div class="stack-sm mx-auto max-w-content-lg text-center">
+          <h2 class="text-balance text-3xl font-semibold text-brand-navy md:text-4xl">
+            Turn insights into an action plan
+          </h2>
+          <p class="text-body-lg text-neutral-500">
+            Bring your ROI results to a consultation and we’ll map out the exact deliverables, pricing, and implementation timeline for your business.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {benefits.map((benefit) => (
+            <div class="surface h-full space-y-3 p-6 text-left">
+              <h3 class="text-lg font-semibold text-brand-navy">{benefit.title}</h3>
+              <p class="text-sm text-neutral-500">{benefit.copy}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-16 grid gap-10 lg:grid-cols-[0.85fr_0.95fr] lg:items-start">
+          <div class="space-y-6">
+            <span class="eyebrow">Share your numbers</span>
+            <h3 class="text-3xl font-semibold text-brand-navy md:text-4xl">Bring your ROI summary to a strategist</h3>
+            <p class="text-body-lg text-neutral-600">
+              Upload your calculator results, break down the hours your team spends on DIY bookkeeping, and highlight the systems we should plug into. We’ll translate that into a clear Modern Ledger roadmap with pricing, clean-up effort, and the first 30 days of deliverables.
+            </p>
+            <ul class="space-y-3 text-sm text-neutral-500">
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                ROI validation with transaction and penalty assumptions sanity checked.
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                A revenue-backed roadmap tailored to your growth and compliance goals.
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Implementation timeline so you know exactly when reconciliations catch up.
+              </li>
+            </ul>
+          </div>
+
+          <LeadForm
+            class="h-full"
+            eyebrow="ROI review"
+            heading="Share your calculator results"
+            subheading="Attach the assumptions you used, how many hours bookkeeping takes today, and where you need relief. We’ll respond with a custom ROI playbook."
+            ctaLabel="Schedule my ROI consult"
+            successMessage="Thanks! A Modern Ledger strategist will review your ROI inputs and follow up with a tailored plan within one business day."
+            source="roi-calculator"
+          />
+        </div>
+
+        <div class="mt-16 flex flex-col items-center gap-6 rounded-3xl border border-brand-sky bg-white/80 p-8 text-center shadow-soft md:flex-row md:justify-between md:text-left">
+          <div class="space-y-2">
+            <h3 class="text-2xl font-semibold text-brand-navy">Ready to see your numbers in black and white?</h3>
+            <p class="text-sm text-neutral-500 md:max-w-xl">
+              Share your calculator summary with our team and we’ll translate it into a step-by-step Modern Ledger plan – no guesswork, just clarity.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4 md:flex-row">
+            <a href="/contact" class="btn btn-primary justify-center md:w-auto">Share my ROI results</a>
+            <a href={phoneHref} class="btn btn-secondary justify-center md:w-auto">Talk to an advisor</a>
+          </div>
         </div>
       </div>
     </section>

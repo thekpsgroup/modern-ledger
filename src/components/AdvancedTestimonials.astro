@@ -1,0 +1,493 @@
+---
+interface Testimonial {
+  id: string;
+  name: string;
+  title: string;
+  company: string;
+  avatar?: string;
+  rating: number;
+  quote: string;
+  results?: {
+    metric: string;
+    improvement: string;
+    timeframe: string;
+  };
+  industry?: string;
+  companySize?: string;
+  location?: string;
+  featured?: boolean;
+  videoUrl?: string;
+  logoUrl?: string;
+}
+
+interface Props {
+  testimonials: Testimonial[];
+  variant?: 'carousel' | 'grid' | 'featured' | 'video-wall';
+  showFilters?: boolean;
+  autoRotate?: boolean;
+  showResults?: boolean;
+  maxDisplay?: number;
+}
+
+const {
+  testimonials,
+  variant = 'carousel',
+  showFilters = false,
+  autoRotate = true,
+  showResults = true,
+  maxDisplay = 6
+} = Astro.props;
+
+const displayTestimonials = maxDisplay ? testimonials.slice(0, maxDisplay) : testimonials;
+const industries = [...new Set(testimonials.map(t => t.industry).filter(Boolean))];
+
+const generateStars = (rating: number) => {
+  return Array(5).fill(0).map((_, i) => i < rating);
+};
+---
+
+<section class="section bg-neutral-25">
+  <div class="container">
+    <div class="mx-auto max-w-content-xl">
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+          What Our Clients Say
+        </h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+          Don't just take our word for it. See how we've helped businesses like yours achieve real results.
+        </p>
+        
+        <!-- Social proof stats -->
+        <div class="flex flex-wrap justify-center gap-8 mt-8 text-center">
+          <div class="stat-item">
+            <div class="text-2xl font-bold text-brand-gold">4.9/5</div>
+            <div class="text-sm text-neutral-600">Average Rating</div>
+          </div>
+          <div class="stat-item">
+            <div class="text-2xl font-bold text-brand-gold">200+</div>
+            <div class="text-sm text-neutral-600">Happy Clients</div>
+          </div>
+          <div class="stat-item">
+            <div class="text-2xl font-bold text-brand-gold">98%</div>
+            <div class="text-sm text-neutral-600">Would Recommend</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      {showFilters && (
+        <div class="mb-8">
+          <div class="flex flex-wrap justify-center gap-4">
+            <button class="filter-btn active" data-filter="all">All</button>
+            {industries.map(industry => (
+              <button class="filter-btn" data-filter={industry}>
+                {industry}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Testimonials Display -->
+      {variant === 'carousel' && (
+        <div class="testimonial-carousel relative">
+          <div class="testimonial-track" style="transform: translateX(0%)">
+            {displayTestimonials.map((testimonial) => (
+              <div class="testimonial-slide" data-industry={testimonial.industry} data-size={testimonial.companySize}>
+                <div class="testimonial-card surface p-8 h-full">
+                  
+                  <!-- Rating -->
+                  <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400 mr-2">
+                      {generateStars(testimonial.rating).map((filled) => (
+                        <svg class={`w-5 h-5 ${filled ? 'text-yellow-400' : 'text-neutral-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                      ))}
+                    </div>
+                    <span class="text-sm text-neutral-600">{testimonial.rating}.0</span>
+                  </div>
+
+                  <!-- Quote -->
+                  <blockquote class="text-lg text-neutral-700 mb-6 italic leading-relaxed">
+                    "{testimonial.quote}"
+                  </blockquote>
+
+                  <!-- Results -->
+                  {showResults && testimonial.results && (
+                    <div class="results-highlight bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                      <div class="flex items-center gap-2 text-green-800 font-semibold mb-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        Key Result
+                      </div>
+                      <div class="text-sm text-green-700">
+                        <strong>{testimonial.results.improvement}</strong> improvement in {testimonial.results.metric} within {testimonial.results.timeframe}
+                      </div>
+                    </div>
+                  )}
+
+                  <!-- Author -->
+                  <div class="flex items-center gap-4">
+                    {testimonial.avatar && (
+                      <img 
+                        src={testimonial.avatar} 
+                        alt={testimonial.name}
+                        class="w-12 h-12 rounded-full object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    <div class="flex-1">
+                      <div class="font-semibold text-brand-navy">{testimonial.name}</div>
+                      <div class="text-sm text-neutral-600">{testimonial.title}</div>
+                      <div class="text-sm text-brand-gold font-medium">{testimonial.company}</div>
+                      {testimonial.location && (
+                        <div class="text-xs text-neutral-500">{testimonial.location}</div>
+                      )}
+                    </div>
+                    {testimonial.logoUrl && (
+                      <img 
+                        src={testimonial.logoUrl} 
+                        alt={`${testimonial.company} logo`}
+                        class="h-8 opacity-60"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+
+                  <!-- Video testimonial -->
+                  {testimonial.videoUrl && (
+                    <div class="mt-4">
+                      <button 
+                        class="video-play-btn flex items-center gap-2 text-brand-gold hover:text-brand-gold-dark transition-colors"
+                        data-video={testimonial.videoUrl}
+                      >
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                        </svg>
+                        Watch Video Testimonial
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Navigation -->
+          <button class="carousel-btn carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-neutral-50 transition-colors">
+            <svg class="w-6 h-6 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button class="carousel-btn carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-neutral-50 transition-colors">
+            <svg class="w-6 h-6 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+
+          <!-- Indicators -->
+          <div class="carousel-indicators flex justify-center gap-2 mt-8">
+            {displayTestimonials.map((_, index) => (
+              <button 
+                class={`indicator w-3 h-3 rounded-full transition-colors ${index === 0 ? 'bg-brand-gold' : 'bg-neutral-300'}`}
+                data-slide={index}
+              ></button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {variant === 'grid' && (
+        <div class="testimonial-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {displayTestimonials.map((testimonial) => (
+            <div class="testimonial-card surface p-6" data-industry={testimonial.industry}>
+              <!-- Rating -->
+              <div class="flex items-center mb-4">
+                <div class="flex text-yellow-400 mr-2">
+                  {generateStars(testimonial.rating).map((filled) => (
+                    <svg class={`w-4 h-4 ${filled ? 'text-yellow-400' : 'text-neutral-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Quote -->
+              <blockquote class="text-neutral-700 mb-4 italic leading-relaxed">
+                "{testimonial.quote}"
+              </blockquote>
+
+              <!-- Results -->
+              {showResults && testimonial.results && (
+                <div class="results-badge bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full inline-block mb-4">
+                  {testimonial.results.improvement} in {testimonial.results.timeframe}
+                </div>
+              )}
+
+              <!-- Author -->
+              <div class="flex items-center gap-3">
+                {testimonial.avatar && (
+                  <img 
+                    src={testimonial.avatar} 
+                    alt={testimonial.name}
+                    class="w-10 h-10 rounded-full object-cover"
+                    loading="lazy"
+                  />
+                )}
+                <div>
+                  <div class="font-semibold text-brand-navy text-sm">{testimonial.name}</div>
+                  <div class="text-xs text-neutral-600">{testimonial.title}</div>
+                  <div class="text-xs text-brand-gold">{testimonial.company}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <!-- Call to action -->
+      <div class="text-center mt-12">
+        <p class="text-neutral-600 mb-6">Ready to join our satisfied clients?</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/contact" class="btn btn-primary">
+            Get Your Free Consultation
+          </a>
+          <a href="/case-studies" class="btn btn-outline">
+            View More Success Stories
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Modal -->
+<div id="video-modal" class="video-modal fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4">
+  <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h3 class="text-lg font-semibold">Customer Testimonial</h3>
+      <button id="close-video" class="text-neutral-500 hover:text-neutral-700">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="aspect-video">
+      <iframe id="video-frame" class="w-full h-full border-0" allow="autoplay; encrypted-media"></iframe>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ autoRotate, variant }}>
+  (() => {
+    if (typeof window === 'undefined') return;
+
+    // Carousel functionality
+    if (variant === 'carousel') {
+      const track = document.querySelector('.testimonial-track');
+      const slides = document.querySelectorAll('.testimonial-slide');
+      const indicators = document.querySelectorAll('.indicator');
+      const prevBtn = document.querySelector('.carousel-prev');
+      const nextBtn = document.querySelector('.carousel-next');
+      
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+
+      const updateCarousel = (slideIndex) => {
+        if (!track) return;
+        
+        currentSlide = slideIndex;
+        const translateX = -slideIndex * 100;
+        track.style.transform = `translateX(${translateX}%)`;
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+          indicator.classList.toggle('bg-brand-gold', index === slideIndex);
+          indicator.classList.toggle('bg-neutral-300', index !== slideIndex);
+        });
+      };
+
+      // Navigation buttons
+      prevBtn?.addEventListener('click', () => {
+        const prevSlide = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
+        updateCarousel(prevSlide);
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        const nextSlide = currentSlide === totalSlides - 1 ? 0 : currentSlide + 1;
+        updateCarousel(nextSlide);
+      });
+
+      // Indicator clicks
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          updateCarousel(index);
+        });
+      });
+
+      // Auto-rotate
+      if (autoRotate && totalSlides > 1) {
+        setInterval(() => {
+          const nextSlide = currentSlide === totalSlides - 1 ? 0 : currentSlide + 1;
+          updateCarousel(nextSlide);
+        }, 5000);
+      }
+    }
+
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const testimonialCards = document.querySelectorAll('[data-industry]');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Filter testimonials
+        testimonialCards.forEach(card => {
+          const industry = card.dataset.industry;
+          const show = filter === 'all' || industry === filter;
+          card.style.display = show ? 'block' : 'none';
+        });
+
+        // Track filter usage
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'testimonial_filter', {
+            event_category: 'engagement',
+            event_label: filter
+          });
+        }
+      });
+    });
+
+    // Video modal functionality
+    const videoModal = document.getElementById('video-modal');
+    const videoFrame = document.getElementById('video-frame');
+    const closeVideo = document.getElementById('close-video');
+    const videoPlayBtns = document.querySelectorAll('.video-play-btn');
+
+    videoPlayBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const videoUrl = btn.dataset.video;
+        if (videoUrl && videoFrame && videoModal) {
+          videoFrame.src = videoUrl;
+          videoModal.classList.remove('hidden');
+          videoModal.classList.add('flex');
+          
+          // Track video play
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'testimonial_video_play', {
+              event_category: 'engagement',
+              event_label: videoUrl
+            });
+          }
+        }
+      });
+    });
+
+    closeVideo?.addEventListener('click', () => {
+      if (videoModal && videoFrame) {
+        videoModal.classList.add('hidden');
+        videoModal.classList.remove('flex');
+        videoFrame.src = '';
+      }
+    });
+
+    // Close modal on outside click
+    videoModal?.addEventListener('click', (e) => {
+      if (e.target === videoModal) {
+        videoModal.classList.add('hidden');
+        videoModal.classList.remove('flex');
+        if (videoFrame) videoFrame.src = '';
+      }
+    });
+
+    // Track testimonial section view
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'testimonials_view', {
+        event_category: 'engagement',
+        event_label: variant,
+        value: testimonialCards.length
+      });
+    }
+
+    // Intersection Observer for animations
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      testimonialCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    }
+  })();
+</script>
+
+<style>
+  .testimonial-carousel {
+    overflow: hidden;
+  }
+
+  .testimonial-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .testimonial-slide {
+    min-width: 100%;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .testimonial-slide {
+      min-width: 50%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .testimonial-slide {
+      min-width: 33.333%;
+    }
+  }
+
+  .filter-btn {
+    @apply px-4 py-2 rounded-full border border-neutral-300 text-neutral-600 hover:border-brand-gold hover:text-brand-gold transition-colors;
+  }
+
+  .filter-btn.active {
+    @apply bg-brand-gold text-white border-brand-gold;
+  }
+
+  .stat-item {
+    @apply min-w-[120px];
+  }
+
+  .trust-signal {
+    @apply flex items-center gap-2;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(212 175 55 / 0.4); }
+    50% { box-shadow: 0 0 0 8px rgb(212 175 55 / 0); }
+  }
+
+  .results-highlight {
+    animation: pulse-glow 2s infinite;
+  }
+</style>

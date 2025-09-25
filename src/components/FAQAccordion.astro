@@ -67,6 +67,7 @@ const faqs = [
         {faqs.map((faq, index) => (
           <div class="surface">
             <button
+              type="button"
               class="flex w-full items-center justify-between gap-6 rounded-[inherit] px-6 py-5 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold hover:bg-brand-sky/60"
               aria-expanded="false"
               data-accordion-button={index}
@@ -115,31 +116,40 @@ const faqs = [
   </div>
 </section>
 
-<script>
-  // FAQ Accordion functionality
-  document.querySelectorAll('[data-accordion-button]').forEach((button, index) => {
-    const content = document.getElementById(`faq-content-${index}`);
-    const icon = document.querySelector(`[data-accordion-icon="${index}"]`) as HTMLElement;
+<script is:inline>
+  (() => {
+    if (typeof document === 'undefined') return;
 
-    button.addEventListener('click', () => {
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    const buttons = document.querySelectorAll('[data-accordion-button]');
 
-      // Toggle content visibility
-      content?.classList.toggle('hidden');
+    buttons.forEach((button) => {
+      if (!(button instanceof HTMLElement)) return;
 
-      // Update aria-expanded
-      button.setAttribute('aria-expanded', (!isExpanded).toString());
+      const key = button.dataset.accordionButton;
+      if (!key) return;
 
-      // Rotate icon
-      if (icon) {
-        icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-      }
+      const content = document.getElementById(`faq-content-${key}`);
+      const icon = document.querySelector(`[data-accordion-icon="${key}"]`);
+
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+        button.setAttribute('aria-expanded', String(!isExpanded));
+
+        if (content) {
+          content.classList.toggle('hidden');
+        }
+
+        if (icon instanceof HTMLElement) {
+          icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      });
     });
-  });
+  })();
 </script>
 
 <!-- FAQ Schema -->
-<script type="application/ld+json" set:html={JSON.stringify({
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": faqs.map(faq => ({

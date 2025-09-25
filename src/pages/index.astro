@@ -3,10 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
+import TestimonialHighlight from '../components/TestimonialHighlight.astro';
 import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import ROICalculator from '../components/ROICalculator.astro';
-import FAQAccordion from '../components/FAQAccordion.astro';
-import CTASection from '../components/CTASection.astro';
+import EnhancedFAQAccordion from '../components/EnhancedFAQAccordion.astro';
+import EnhancedCTASection from '../components/EnhancedCTASection.astro';
+import ProgressiveLeadForm from '../components/ProgressiveLeadForm.astro';
 import StickyMobileCTA from '../components/StickyMobileCTA.astro';
 import ExitIntentModal from '../components/ExitIntentModal.astro';
 ---
@@ -23,9 +25,11 @@ import ExitIntentModal from '../components/ExitIntentModal.astro';
     <Hero />
     <TrustBar />
     <ServicesGrid />
+    <TestimonialHighlight />
     <TestimonialCarousel />
     <ROICalculator />
-    <FAQAccordion />
-    <CTASection />
+    <ProgressiveLeadForm />
+    <EnhancedFAQAccordion />
+    <EnhancedCTASection variant="social-proof" />
   </div>
 </Layout>

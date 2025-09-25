@@ -1,0 +1,410 @@
+---
+import { getEnv } from '../lib/env';
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  subheading?: string;
+  ctaLabel?: string;
+  successMessage?: string;
+  source?: string;
+  class?: string;
+  disclaimer?: string;
+  formId?: string;
+}
+
+const {
+  eyebrow = 'Quick Consult',
+  heading = 'Tell us about your bookkeeping needs',
+  subheading = "Share a few details and we'll craft a bookkeeping plan tailored to your numbers.",
+  ctaLabel = 'Send my details',
+  successMessage = "Thank you! We'll reach out within one business day.",
+  source = 'website',
+  class: className = '',
+  disclaimer = 'We respond within one business day. No pressure, no spam.',
+  formId: providedFormId
+} = Astro.props;
+
+const env = getEnv();
+const supportEmail = env.COMPANY_EMAIL;
+
+const transactionVolumes = [
+  'Under 75 transactions / month',
+  '75 - 250 transactions / month',
+  '250 - 500 transactions / month',
+  '500+ transactions / month'
+];
+
+const revenueRanges = [
+  'Under $250K annual revenue',
+  '$250K - $750K annual revenue',
+  '$750K - $1.5M annual revenue',
+  '$1.5M+ annual revenue'
+];
+
+const teamSizes = [
+  'Just me',
+  '2 - 5 employees',
+  '6 - 25 employees',
+  '26+ employees'
+];
+
+const timelines = [
+  'Immediately',
+  'In the next 30 days',
+  '60 - 90 days out',
+  'Exploring options'
+];
+
+const toolingOptions = [
+  'QuickBooks Online',
+  'QuickBooks Desktop',
+  'Xero',
+  'FreshBooks',
+  'Excel / Google Sheets',
+  'Not sure yet'
+];
+
+const services = [
+  { value: '', label: 'Select a focus area…' },
+  { value: 'bookkeeping', label: 'Bookkeeping & Monthly Close' },
+  { value: 'reconciliation', label: 'Monthly Reconciliation' },
+  { value: 'clean-books', label: 'Clean Books / Catch-up' },
+  { value: 'payroll', label: 'Payroll Integration' },
+  { value: 'tax-support', label: 'Tax Season Support' },
+  { value: 'advisory', label: 'Fractional Finance Advisory' },
+  { value: 'pricing', label: 'Pricing Consultation' },
+  { value: 'roi-review', label: 'ROI Calculator Review' },
+  { value: 'custom', label: 'Something else' }
+];
+
+// Generate a deterministic form id so multiple instances can coexist without conflicts
+const generatedFormId = providedFormId ?? `lead-form-${Math.random().toString(36).slice(2, 11)}`;
+---
+
+<div class={`surface space-y-6 rounded-3xl border border-neutral-100 bg-white/90 p-8 shadow-soft ${className}`.trim()} data-lead-form-root={generatedFormId}>
+  <div class="space-y-2">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h3 class="text-2xl font-semibold text-brand-navy md:text-3xl">{heading}</h3>
+    <p class="text-sm text-neutral-600 md:text-base">{subheading}</p>
+  </div>
+
+  <form data-lead-form={generatedFormId} class="grid gap-6" autocomplete="on" novalidate>
+    <div class="hidden" aria-hidden="true">
+      <label for={`${generatedFormId}-companyWebsite`}>Leave this field blank</label>
+      <input type="text" id={`${generatedFormId}-companyWebsite`} name="companyWebsite" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <input type="hidden" name="sourcePage" value={source} />
+    <input type="hidden" name="pageUrl" value="" />
+    <input type="hidden" name="referrer" value="" />
+    <input type="hidden" name="utmSource" value="" />
+    <input type="hidden" name="utmMedium" value="" />
+    <input type="hidden" name="utmCampaign" value="" />
+    <input type="hidden" name="utmTerm" value="" />
+    <input type="hidden" name="utmContent" value="" />
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div>
+        <label for={`${generatedFormId}-firstName`} class="form-label">First Name *</label>
+        <input type="text" id={`${generatedFormId}-firstName`} name="firstName" class="form-field" required />
+      </div>
+      <div>
+        <label for={`${generatedFormId}-lastName`} class="form-label">Last Name *</label>
+        <input type="text" id={`${generatedFormId}-lastName`} name="lastName" class="form-field" required />
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div>
+        <label for={`${generatedFormId}-email`} class="form-label">Work Email *</label>
+        <input type="email" id={`${generatedFormId}-email`} name="email" class="form-field" required />
+      </div>
+      <div>
+        <label for={`${generatedFormId}-phone`} class="form-label">Mobile or Direct Line</label>
+        <input type="tel" id={`${generatedFormId}-phone`} name="phone" class="form-field" placeholder="555-123-4567" />
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div>
+        <label for={`${generatedFormId}-company`} class="form-label">Company</label>
+        <input type="text" id={`${generatedFormId}-company`} name="company" class="form-field" />
+      </div>
+      <div>
+        <label for={`${generatedFormId}-teamSize`} class="form-label">Team Size</label>
+        <select id={`${generatedFormId}-teamSize`} name="teamSize" class="form-field">
+          <option value="">Select team size…</option>
+          {teamSizes.map((size) => (
+            <option value={size}>{size}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div>
+        <label for={`${generatedFormId}-transactions`} class="form-label">Monthly Transactions</label>
+        <select id={`${generatedFormId}-transactions`} name="monthlyTransactions" class="form-field">
+          <option value="">Choose a range…</option>
+          {transactionVolumes.map((volume) => (
+            <option value={volume}>{volume}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label for={`${generatedFormId}-revenue`} class="form-label">Annual Revenue</label>
+        <select id={`${generatedFormId}-revenue`} name="annualRevenue" class="form-field">
+          <option value="">Choose a range…</option>
+          {revenueRanges.map((range) => (
+            <option value={range}>{range}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div>
+        <label for={`${generatedFormId}-tooling`} class="form-label">Current Bookkeeping Tool</label>
+        <select id={`${generatedFormId}-tooling`} name="bookkeepingTools" class="form-field">
+          <option value="">Select your current setup…</option>
+          {toolingOptions.map((tool) => (
+            <option value={tool}>{tool}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label for={`${generatedFormId}-timeline`} class="form-label">Ideal Start Date</label>
+        <select id={`${generatedFormId}-timeline`} name="timeline" class="form-field">
+          <option value="">Pick a timeline…</option>
+          {timelines.map((option) => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label for={`${generatedFormId}-service`} class="form-label">Primary Focus</label>
+      <select id={`${generatedFormId}-service`} name="service" class="form-field">
+        {services.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+    </div>
+
+    <div>
+      <label for={`${generatedFormId}-message`} class="form-label">What prompted the outreach? *</label>
+      <textarea
+        id={`${generatedFormId}-message`}
+        name="message"
+        class="form-field"
+        placeholder="Share a sentence or two about your bookkeeping challenges, time investment, or compliance goals."
+        rows={4}
+        required
+        minlength={10}
+      ></textarea>
+    </div>
+
+    <div class="space-y-2 text-xs text-neutral-500">
+      <p>{disclaimer}</p>
+      <p>
+        Prefer to talk now? Email
+        <a href={`mailto:${supportEmail}`} class="font-semibold text-brand-navy underline-offset-2 hover:underline">
+          {supportEmail}
+        </a>.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <button type="submit" class="btn btn-primary w-full justify-center" data-submit>
+        <span data-submit-label>{ctaLabel}</span>
+        <span class="hidden" data-submit-loading>Sending…</span>
+      </button>
+      <p data-feedback class="hidden text-center text-sm" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+</div>
+
+<script is:inline define:vars={{ formId: generatedFormId, successMessage }}>
+  (() => {
+  const formId = {generatedFormId};
+    if (typeof window === 'undefined') return;
+
+    const form = document.querySelector(`[data-lead-form="${formId}"]`);
+    if (!(form instanceof HTMLFormElement)) {
+      return;
+    }
+
+    const submitButton = form.querySelector('[data-submit]');
+    const submitLabel = form.querySelector('[data-submit-label]');
+    const submitLoading = form.querySelector('[data-submit-loading]');
+    const feedback = form.querySelector('[data-feedback]');
+    const STORAGE_KEY = 'ml_lead_utms';
+
+    const setHiddenValue = (name, value) => {
+      const field = form.querySelector(`[name="${name}"]`);
+      if (field instanceof HTMLInputElement) {
+        field.value = value ?? '';
+      }
+    };
+
+    const toggleLoading = (isLoading) => {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = isLoading;
+      }
+
+      if (submitLabel instanceof HTMLElement) {
+        submitLabel.classList.toggle('hidden', isLoading);
+      }
+
+      if (submitLoading instanceof HTMLElement) {
+        submitLoading.classList.toggle('hidden', !isLoading);
+      }
+    };
+
+    const setFeedback = (message, type = 'success') => {
+      if (!(feedback instanceof HTMLElement)) return;
+      feedback.textContent = message;
+      feedback.classList.remove('hidden', 'text-brand-navy', 'text-red-600');
+      feedback.classList.add(type === 'error' ? 'text-red-600' : 'text-brand-navy');
+    };
+
+    const resetFeedback = () => {
+      if (!(feedback instanceof HTMLElement)) return;
+      feedback.classList.add('hidden');
+      feedback.classList.remove('text-brand-navy', 'text-red-600');
+      feedback.textContent = '';
+    };
+
+    const captureUtms = () => {
+      const params = new URLSearchParams(window.location.search);
+      const existing = (() => {
+        try {
+          const stored = window.sessionStorage.getItem(STORAGE_KEY);
+          return stored ? JSON.parse(stored) : {};
+        } catch (error) {
+          console.warn('Unable to access sessionStorage for UTM capture', error);
+          return {};
+        }
+      })();
+
+      const current = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].reduce((acc, key) => {
+        const value = params.get(key);
+        if (value) acc[key] = value;
+        return acc;
+      }, existing);
+
+      try {
+        window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(current));
+      } catch (error) {
+        console.warn('Unable to persist UTM data', error);
+      }
+
+      return current;
+    };
+
+    const assignTracking = () => {
+      const utmData = captureUtms();
+      setHiddenValue('pageUrl', window.location.href);
+      setHiddenValue('referrer', document.referrer || '');
+      setHiddenValue('utmSource', utmData.utm_source || '');
+      setHiddenValue('utmMedium', utmData.utm_medium || '');
+      setHiddenValue('utmCampaign', utmData.utm_campaign || '');
+      setHiddenValue('utmTerm', utmData.utm_term || '');
+      setHiddenValue('utmContent', utmData.utm_content || '');
+    };
+
+    const prefillFromQuery = () => {
+      const params = new URLSearchParams(window.location.search);
+      const service = params.get('plan') || params.get('service') || params.get('addon');
+      if (service) {
+        const serviceField = form.querySelector('[name="service"]');
+        if (serviceField instanceof HTMLSelectElement) {
+          serviceField.value = service;
+        }
+      }
+
+      const timeline = params.get('timeline');
+      if (timeline) {
+        const timelineField = form.querySelector('[name="timeline"]');
+        if (timelineField instanceof HTMLSelectElement) {
+          timelineField.value = timeline;
+        }
+      }
+    };
+
+    assignTracking();
+    prefillFromQuery();
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      resetFeedback();
+      toggleLoading(true);
+
+      const formData = new FormData(form);
+      const payload = {
+        name: `${(formData.get('firstName') || '').toString().trim()} ${(formData.get('lastName') || '').toString().trim()}`.trim(),
+        email: (formData.get('email') || '').toString().trim(),
+        phone: (formData.get('phone') || '').toString().trim() || undefined,
+        company: (formData.get('company') || '').toString().trim() || undefined,
+        teamSize: (formData.get('teamSize') || '').toString().trim() || undefined,
+        monthlyTransactions: (formData.get('monthlyTransactions') || '').toString().trim() || undefined,
+        annualRevenue: (formData.get('annualRevenue') || '').toString().trim() || undefined,
+        bookkeepingTools: (formData.get('bookkeepingTools') || '').toString().trim() || undefined,
+        timeline: (formData.get('timeline') || '').toString().trim() || undefined,
+        service: (formData.get('service') || '').toString().trim() || undefined,
+        message: (formData.get('message') || '').toString().trim(),
+        honeypot: (formData.get('companyWebsite') || '').toString().trim(),
+        sourcePage: (formData.get('sourcePage') || '').toString().trim() || undefined,
+        pageUrl: (formData.get('pageUrl') || '').toString().trim() || undefined,
+        referrer: (formData.get('referrer') || '').toString().trim() || undefined,
+        utmSource: (formData.get('utmSource') || '').toString().trim() || undefined,
+        utmMedium: (formData.get('utmMedium') || '').toString().trim() || undefined,
+        utmCampaign: (formData.get('utmCampaign') || '').toString().trim() || undefined,
+        utmTerm: (formData.get('utmTerm') || '').toString().trim() || undefined,
+        utmContent: (formData.get('utmContent') || '').toString().trim() || undefined
+      };
+
+      if (!payload.name || !payload.email || !payload.message) {
+        setFeedback('Please complete the required fields before submitting.', 'error');
+        toggleLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/forms/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(result?.error || 'Unable to send your message right now.');
+        }
+
+          setFeedback(result?.message || successMessage);
+        form.reset();
+        assignTracking();
+        prefillFromQuery();
+
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'form_submit', {
+            event_category: 'lead',
+            event_label: `lead_form_${formId}`
+          });
+        }
+      } catch (error) {
+        console.error('Lead form submission error:', error);
+        setFeedback(
+          error instanceof Error ? error.message : 'Something went wrong. Please try again shortly.',
+          'error'
+        );
+      } finally {
+        toggleLoading(false);
+      }
+    });
+  })();
+</script>

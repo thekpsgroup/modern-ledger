@@ -8,7 +8,6 @@ export interface Props {
 
 const { testimonials = TESTIMONIALS } = Astro.props;
 ---
----
 
 <section class="section bg-white">
   <div class="container">
@@ -69,6 +68,7 @@ const { testimonials = TESTIMONIALS } = Astro.props;
         id="prev-testimonial"
         class="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white p-3 text-neutral-400 shadow-soft transition-transform duration-200 hover:-translate-y-0.5 hover:text-brand-navy"
         aria-label="Previous testimonial"
+        type="button"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -79,6 +79,7 @@ const { testimonials = TESTIMONIALS } = Astro.props;
         id="next-testimonial"
         class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white p-3 text-neutral-400 shadow-soft transition-transform duration-200 hover:-translate-y-0.5 hover:text-brand-navy"
         aria-label="Next testimonial"
+        type="button"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -99,50 +100,104 @@ const { testimonials = TESTIMONIALS } = Astro.props;
   </div>
 </section>
 
-<script define:vars={{ testimonials }}>
-  let currentSlide = 0;
-  const dots = document.querySelectorAll('[data-slide]');
-  const totalSlides = testimonials.length;
+<script define:vars={{ testimonials }} is:inline>
+  (() => {
+    if (typeof window === 'undefined') return;
 
-  function updateCarousel() {
+    let currentSlide = 0;
+    const dots = Array.from(document.querySelectorAll('[data-slide]'));
+    const totalSlides = Array.isArray(testimonials) ? testimonials.length : 0;
     const track = document.getElementById('testimonial-track');
-    if (track) {
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    const nextButton = document.getElementById('next-testimonial');
+    const prevButton = document.getElementById('prev-testimonial');
+
+    if (!track || totalSlides === 0) {
+      return;
     }
 
-    // Update dots
+    const updateDots = () => {
+      dots.forEach((dot, index) => {
+        if (!(dot instanceof HTMLElement)) return;
+        const isActive = index === currentSlide;
+        dot.classList.toggle('bg-brand-navy', isActive);
+        dot.classList.toggle('bg-neutral-200', !isActive);
+        dot.classList.toggle('w-8', isActive);
+        dot.classList.toggle('w-2', !isActive);
+        dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+      });
+    };
+
+    const updateCarousel = () => {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      updateDots();
+    };
+
+    const goToSlide = (index) => {
+      if (!Number.isFinite(index)) return;
+      currentSlide = (index + totalSlides) % totalSlides;
+      updateCarousel();
+    };
+
+    const nextSlide = () => {
+      goToSlide(currentSlide + 1);
+    };
+
+    const prevSlide = () => {
+      goToSlide(currentSlide - 1);
+    };
+
+    nextButton?.addEventListener('click', nextSlide);
+    prevButton?.addEventListener('click', prevSlide);
+
     dots.forEach((dot, index) => {
-      const isActive = index === currentSlide;
-      dot.classList.toggle('bg-brand-navy', isActive);
-      dot.classList.toggle('bg-neutral-200', !isActive);
-      dot.classList.toggle('w-8', isActive);
-      dot.classList.toggle('w-2', !isActive);
+      if (dot instanceof HTMLElement) {
+        dot.addEventListener('click', () => goToSlide(index));
+      }
     });
-  }
 
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
+    if (prevButton instanceof HTMLButtonElement && nextButton instanceof HTMLButtonElement) {
+      const disableNavigation = totalSlides <= 1;
+      prevButton.disabled = disableNavigation;
+      nextButton.disabled = disableNavigation;
+      prevButton.setAttribute('aria-hidden', disableNavigation ? 'true' : 'false');
+      nextButton.setAttribute('aria-hidden', disableNavigation ? 'true' : 'false');
+    }
+
     updateCarousel();
-  }
 
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateCarousel();
-  }
+    let autoplayId;
 
-  function goToSlide(slideIndex) {
-    currentSlide = slideIndex;
-    updateCarousel();
-  }
+    const stopAutoplay = () => {
+      if (autoplayId) {
+        window.clearInterval(autoplayId);
+        autoplayId = undefined;
+      }
+    };
 
-  // Event listeners
-  document.getElementById('next-testimonial')?.addEventListener('click', nextSlide);
-  document.getElementById('prev-testimonial')?.addEventListener('click', prevSlide);
+    const startAutoplay = () => {
+      if (totalSlides <= 1) {
+        stopAutoplay();
+        return;
+      }
 
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => goToSlide(index));
-  });
+      stopAutoplay();
+      autoplayId = window.setInterval(nextSlide, 5000);
+    };
 
-  // Auto-play
-  setInterval(nextSlide, 5000);
+    startAutoplay();
+
+    const carouselRoot = document.getElementById('testimonial-carousel');
+    if (carouselRoot) {
+      carouselRoot.addEventListener('mouseenter', stopAutoplay);
+      carouselRoot.addEventListener('mouseleave', startAutoplay);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+  })();
 </script>

@@ -93,6 +93,188 @@
                 class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
               />
             </div>
+
+          </div>
+
+          <!-- Results -->
+          <div class="space-y-6">
+            <h3 class="card-title">Your Potential Savings</h3>
+
+            <!-- Monthly Savings -->
+            <div class="rounded-xl border border-brand-sky bg-white/60 p-6">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">Monthly Time Savings</span>
+                <span id="monthly-time-savings" class="text-2xl font-semibold text-brand-navy">$0</span>
+              </div>
+              <p class="text-sm text-neutral-500">Hours you can reinvest in growth.</p>
+            </div>
+
+            <!-- Annual Savings -->
+            <div class="rounded-xl border border-brand-sky bg-white/60 p-6">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">Annual Cost Savings</span>
+                <span id="annual-savings" class="text-2xl font-semibold text-brand-navy">$0</span>
+              </div>
+              <p class="text-sm text-neutral-500">Avoid the payroll burden of an in-house hire.</p>
+            </div>
+
+            <!-- Error Prevention -->
+            <div class="rounded-xl border border-brand-sky bg-white/60 p-6">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">Error Prevention Value</span>
+                <span id="error-prevention" class="text-2xl font-semibold text-brand-navy">$0</span>
+              </div>
+              <p class="text-sm text-neutral-500">Savings from catching costly mistakes early.</p>
+            </div>
+
+            <!-- Total ROI -->
+            <div class="rounded-xl border border-brand-gold bg-brand-sky/40 p-6">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">Total Annual ROI</span>
+                <span id="total-roi" class="text-3xl font-semibold text-brand-navy">$0</span>
+              </div>
+              <p class="text-sm text-neutral-500">Complete financial impact of outsourcing.</p>
+            </div>
+
+            <!-- Enhanced CTA with Lead Capture -->
+            <div class="rounded-xl border border-brand-gold bg-gradient-to-br from-brand-sky to-white p-6">
+              <div class="mb-4 flex items-center gap-2">
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-gold/20">
+                  <svg class="h-4 w-4 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                  </svg>
+                </div>
+                <p class="text-sm font-semibold text-brand-navy">
+                  📧 Get a custom savings report based on your numbers
+                </p>
+              </div>
+              
+              <form id="roi-lead-capture" class="space-y-3">
+                <div class="grid gap-3 sm:grid-cols-2">
+                  <input
+                    type="text"
+                    id="roi-first-name"
+                    name="firstName"
+                    placeholder="First name"
+                    class="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-1 focus:ring-brand-gold"
+                    required
+                  />
+                  <input
+                    type="email"
+                    id="roi-email"
+                    name="email"
+                    placeholder="Work email"
+                    class="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-1 focus:ring-brand-gold"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  id="roi-submit-btn"
+                  class="btn btn-primary w-full justify-center text-sm"
+                >
+                  <span id="roi-submit-text">📊 Email My Custom ROI Report</span>
+                  <span id="roi-submit-loading" class="hidden">Generating report...</span>
+                </button>
+                <p id="roi-feedback" class="hidden text-center text-xs" role="status" aria-live="polite"></p>
+              </form>
+              
+              <p class="mt-3 text-xs text-neutral-500 text-center">
+                💡 <strong>Instant delivery</strong> • No sales calls • Includes 3 cost-saving strategies
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>">
+      <div class="stack-sm text-center">
+        <span class="eyebrow mx-auto">ROI Calculator</span>
+        <h2 class="text-balance">Calculate Your Bookkeeping ROI</h2>
+        <p class="text-body-lg text-neutral-500">
+          Estimate the time and dollars you can reclaim by partnering with Modern Ledger.
+        </p>
+      </div>
+
+      <div class="mt-12 surface p-8 md:p-12">
+        <div class="grid gap-10 md:grid-cols-2">
+          <!-- Calculator Inputs -->
+          <div class="space-y-6">
+            <h3 class="card-title">Your Current Situation</h3>
+
+            <!-- Hours per month -->
+            <div>
+              <label for="hours-per-month" class="mb-2 block text-sm font-semibold text-brand-navy">
+                Hours spent on bookkeeping per month
+              </label>
+              <input
+                type="number"
+                id="hours-per-month"
+                min="1"
+                max="160"
+                value="20"
+                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
+              />
+            </div>
+
+            <!-- Hourly rate -->
+            <div>
+              <label for="hourly-rate" class="mb-2 block text-sm font-semibold text-brand-navy">
+                Your hourly rate or cost per hour ($)
+              </label>
+              <input
+                type="number"
+                id="hourly-rate"
+                min="15"
+                max="200"
+                value="50"
+                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
+              />
+            </div>
+
+            <!-- Errors per month -->
+            <div>
+              <label for="errors-per-month" class="mb-2 block text-sm font-semibold text-brand-navy">
+                Bookkeeping errors caught per month
+              </label>
+              <input
+                type="number"
+                id="errors-per-month"
+                min="0"
+                max="50"
+                value="3"
+                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
+              />
+            </div>
+
+            <!-- Cost per error -->
+            <div>
+              <label for="cost-per-error" class="mb-2 block text-sm font-semibold text-brand-navy">
+                Average cost per bookkeeping error ($)
+              </label>
+              <input
+                type="number"
+                id="cost-per-error"
+                min="50"
+                max="5000"
+                value="500"
+                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
+              />
+            </div>
+
+            <!-- Tax penalties -->
+            <div>
+              <label for="tax-penalties" class="mb-2 block text-sm font-semibold text-brand-navy">
+                Annual tax penalty risk ($)
+              </label>
+              <input
+                type="number"
+                id="tax-penalties"
+                min="0"
+                max="10000"
+                value="2000"
+                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
+              />
+            </div>
           </div>
 
           <!-- Results -->
@@ -154,60 +336,154 @@
   </div>
 </section>
 
-<script>
-  // Declare gtag function for TypeScript
-  declare function gtag(...args: any[]): void;
+<script is:inline>
+  (() => {
+    if (typeof window === 'undefined') return;
 
-  // Calculator logic
-  function calculateROI() {
-    const hoursPerMonth = parseFloat((document.getElementById('hours-per-month') as HTMLInputElement)?.value) || 0;
-    const hourlyRate = parseFloat((document.getElementById('hourly-rate') as HTMLInputElement)?.value) || 0;
-    const errorsPerMonth = parseFloat((document.getElementById('errors-per-month') as HTMLInputElement)?.value) || 0;
-    const costPerError = parseFloat((document.getElementById('cost-per-error') as HTMLInputElement)?.value) || 0;
-    const taxPenalties = parseFloat((document.getElementById('tax-penalties') as HTMLInputElement)?.value) || 0;
+    const currencyFormatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0
+    });
 
-    // Monthly time savings (hours saved)
-    const monthlyTimeSavings = hoursPerMonth;
+    const getNumericInputValue = (id) => {
+      const element = document.getElementById(id);
+      if (element instanceof HTMLInputElement) {
+        const value = parseFloat(element.value.replace(/,/g, ''));
+        return Number.isFinite(value) ? value : 0;
+      }
+      return 0;
+    };
 
-    // Annual cost savings (opportunity cost of time)
-    const annualCostSavings = hoursPerMonth * hourlyRate * 12;
+    const updateText = (id, text) => {
+      const node = document.getElementById(id);
+      if (node) {
+        node.textContent = text;
+      }
+    };
 
-    // Error prevention value
-    const errorPreventionValue = errorsPerMonth * costPerError * 12;
+    const formatCurrency = (value) => currencyFormatter.format(Math.max(0, Math.round(value)));
 
-    // Total annual ROI
-    const totalROI = annualCostSavings + errorPreventionValue + taxPenalties;
+    const calculateROI = () => {
+      const hoursPerMonth = getNumericInputValue('hours-per-month');
+      const hourlyRate = getNumericInputValue('hourly-rate');
+      const errorsPerMonth = getNumericInputValue('errors-per-month');
+      const costPerError = getNumericInputValue('cost-per-error');
+      const taxPenalties = getNumericInputValue('tax-penalties');
 
-    // Update display
-    document.getElementById('monthly-time-savings')!.textContent = `${monthlyTimeSavings} hours`;
-    document.getElementById('annual-savings')!.textContent = `$${annualCostSavings.toLocaleString()}`;
-    document.getElementById('error-prevention')!.textContent = `$${errorPreventionValue.toLocaleString()}`;
-    document.getElementById('total-roi')!.textContent = `$${totalROI.toLocaleString()}`;
-  }
+      const monthlyTimeSavings = Math.max(0, hoursPerMonth);
+      const annualCostSavings = Math.max(0, hoursPerMonth * hourlyRate * 12);
+      const errorPreventionValue = Math.max(0, errorsPerMonth * costPerError * 12);
+      const totalROI = annualCostSavings + errorPreventionValue + Math.max(0, taxPenalties);
 
-  // Event listeners
-  const inputs = ['hours-per-month', 'hourly-rate', 'errors-per-month', 'cost-per-error', 'tax-penalties'];
-  inputs.forEach(id => {
-    document.getElementById(id)?.addEventListener('input', calculateROI);
-  });
+      updateText('monthly-time-savings', `${Math.round(monthlyTimeSavings).toLocaleString()} hours`);
+      updateText('annual-savings', formatCurrency(annualCostSavings));
+      updateText('error-prevention', formatCurrency(errorPreventionValue));
+      updateText('total-roi', formatCurrency(totalROI));
+    };
 
-  // Initial calculation
-  calculateROI();
+    const inputIds = ['hours-per-month', 'hourly-rate', 'errors-per-month', 'cost-per-error', 'tax-penalties'];
+    inputIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element instanceof HTMLInputElement) {
+        element.addEventListener('input', calculateROI);
+      }
+    });
 
-  // Get quote button
-  document.getElementById('get-quote-btn')?.addEventListener('click', () => {
-    // Track conversion
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'roi_calculator_quote', {
-        event_category: 'engagement',
-        event_label: 'roi_calculator'
+    calculateROI();
+
+    // Enhanced ROI Lead Capture Form
+    const roiForm = document.getElementById('roi-lead-capture');
+    const roiSubmitBtn = document.getElementById('roi-submit-btn');
+    const roiSubmitText = document.getElementById('roi-submit-text');
+    const roiSubmitLoading = document.getElementById('roi-submit-loading');
+    const roiFeedback = document.getElementById('roi-feedback');
+
+    const setRoiFeedback = (message, isError = false) => {
+      if (!(roiFeedback instanceof HTMLElement)) return;
+      roiFeedback.textContent = message;
+      roiFeedback.classList.remove('hidden', 'text-brand-navy', 'text-red-600');
+      roiFeedback.classList.add(isError ? 'text-red-600' : 'text-brand-navy');
+    };
+
+    const toggleRoiLoading = (isLoading) => {
+      if (roiSubmitBtn instanceof HTMLButtonElement) {
+        roiSubmitBtn.disabled = isLoading;
+      }
+      if (roiSubmitText instanceof HTMLElement) {
+        roiSubmitText.classList.toggle('hidden', isLoading);
+      }
+      if (roiSubmitLoading instanceof HTMLElement) {
+        roiSubmitLoading.classList.toggle('hidden', !isLoading);
+      }
+    };
+
+    if (roiForm instanceof HTMLFormElement) {
+      roiForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        const formData = new FormData(roiForm);
+        const firstName = formData.get('firstName')?.toString().trim() || '';
+        const email = formData.get('email')?.toString().trim() || '';
+
+        if (!firstName || !email) {
+          setRoiFeedback('Please fill in both fields.', true);
+          return;
+        }
+
+        toggleRoiLoading(true);
+
+        // Get current ROI calculations
+        const roiData = {
+          monthlyTimeSavings: getNumericInputValue('hours-per-month'),
+          annualCostSavings: getNumericInputValue('hours-per-month') * getNumericInputValue('hourly-rate') * 12,
+          errorPreventionValue: getNumericInputValue('errors-per-month') * getNumericInputValue('cost-per-error') * 12,
+          taxPenaltyRisk: getNumericInputValue('tax-penalties'),
+          totalROI: 0
+        };
+        
+        roiData.totalROI = roiData.annualCostSavings + roiData.errorPreventionValue + roiData.taxPenaltyRisk;
+
+        try {
+          const response = await fetch('/api/forms/roi-report', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              firstName,
+              email,
+              roiData,
+              pageUrl: window.location.href,
+              source: 'roi_calculator'
+            })
+          });
+
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(result?.error || 'Unable to send your report right now.');
+          }
+
+          setRoiFeedback('📧 Check your inbox! Your custom ROI report is on the way.');
+          roiForm.reset();
+
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'roi_report_request', {
+              event_category: 'lead',
+              event_label: 'roi_calculator',
+              value: Math.round(roiData.totalROI / 1000)
+            });
+          }
+
+        } catch (error) {
+          console.error('ROI form submission error:', error);
+          setRoiFeedback(
+            error instanceof Error ? error.message : 'Something went wrong. Please try again.',
+            true
+          );
+        } finally {
+          toggleRoiLoading(false);
+        }
       });
     }
-
-    // Scroll to contact section or open modal
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
+  })();
 </script>

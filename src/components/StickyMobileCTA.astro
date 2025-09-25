@@ -1,5 +1,11 @@
 ---
 // Mobile CTA component
+import { getEnv } from '../lib/env';
+
+const env = getEnv();
+const phoneDigits = env.COMPANY_PHONE || '0000000000';
+const phoneDisplay = phoneDigits.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+const phoneHref = `tel:+1${phoneDigits}`;
 ---
 
 <div
@@ -9,10 +15,10 @@
   <div class="flex items-center justify-between gap-4">
     <div class="flex-1">
       <p class="text-sm font-semibold text-white">Ready to get your books in order?</p>
-      <p class="text-xs text-brand-gold opacity-90">Call (972) 555-1234</p>
+      <p class="text-xs text-brand-gold opacity-90">Call {phoneDisplay}</p>
     </div>
     <a
-      href="tel:+19725551234"
+      href={phoneHref}
       class="btn btn-secondary whitespace-nowrap"
       aria-label="Book a free consultation"
     >
@@ -21,35 +27,38 @@
   </div>
 </div>
 
-<script>
-  // Show sticky CTA after scrolling
-  let lastScrollTop = 0;
-  const stickyCTA = document.getElementById('sticky-mobile-cta');
+<script is:inline>
+  (() => {
+    if (typeof window === 'undefined') return;
 
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let lastScrollTop = 0;
+    const stickyCTA = document.getElementById('sticky-mobile-cta');
 
-    // Show CTA when scrolling down and past hero section
-    if (scrollTop > 600 && scrollTop > lastScrollTop) {
-      stickyCTA?.classList.remove('translate-y-full');
-    } else if (scrollTop < lastScrollTop) {
-      stickyCTA?.classList.add('translate-y-full');
+    if (!stickyCTA) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > 600 && scrollTop > lastScrollTop) {
+        stickyCTA.classList.remove('translate-y-full');
+      } else if (scrollTop < lastScrollTop) {
+        stickyCTA.classList.add('translate-y-full');
+      }
+
+      lastScrollTop = scrollTop;
+    }, { passive: true });
+
+    const footer = document.querySelector('footer');
+    if (footer && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            stickyCTA.classList.add('translate-y-full');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(footer);
     }
-
-    lastScrollTop = scrollTop;
-  });
-
-  // Hide CTA when near footer
-  const footer = document.querySelector('footer');
-  if (footer && stickyCTA) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          stickyCTA.classList.add('translate-y-full');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    observer.observe(footer);
-  }
+  })();
 </script>

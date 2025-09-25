@@ -1,0 +1,181 @@
+---
+interface Props {
+  type?: 'urgency' | 'scarcity' | 'social-proof' | 'risk-reversal';
+  message?: string;
+  className?: string;
+  showCountdown?: boolean;
+  targetDate?: string;
+}
+
+const { 
+  type = 'urgency',
+  message,
+  className = ''
+} = Astro.props;
+
+const messages = {
+  urgency: [
+    "⚡ Book this week and save $200 on setup fees",
+    "🚨 Tax season is 90 days away - get prepared now",
+    "⏰ Only 3 client spots remaining this month",
+    "🔥 Double your ROI by starting before month-end"
+  ],
+  scarcity: [
+    "📊 Only 5 spots left for new clients this quarter",
+    "🎯 Limited capacity: We only take 2 new clients per month",
+    "⭐ Premium onboarding slots filling fast",
+    "💼 Executive service tier nearly at capacity"
+  ],
+  'social-proof': [
+    "👥 Join 150+ Texas businesses already saving time",
+    "🏆 #1 rated bookkeeping service in Rockwall County",
+    "💰 Our clients save an average of $3,200 annually",
+    "📈 98% of clients see ROI within 90 days"
+  ],
+  'risk-reversal': [
+    "💰 100% money-back guarantee - no questions asked",
+    "🛡️ Try risk-free for 30 days",
+    "🔒 Your satisfaction is guaranteed or get a full refund",
+    "✅ No long-term contracts - cancel anytime"
+  ]
+};
+
+const icons = {
+  urgency: '⚡',
+  scarcity: '🎯', 
+  'social-proof': '👥',
+  'risk-reversal': '🛡️'
+};
+
+const styles = {
+  urgency: 'bg-red-50 border-red-200 text-red-800',
+  scarcity: 'bg-orange-50 border-orange-200 text-orange-800',
+  'social-proof': 'bg-green-50 border-green-200 text-green-800',
+  'risk-reversal': 'bg-blue-50 border-blue-200 text-blue-800'
+};
+
+const finalMessage = message || messages[type][Math.floor(Math.random() * messages[type].length)];
+const icon = icons[type];
+const style = styles[type];
+---
+
+<div 
+  class={`urgency-trigger border rounded-lg px-4 py-3 font-medium ${style} ${className}`}
+  data-urgency-type={type}
+  role="alert"
+  aria-live="polite"
+>
+  <div class="flex items-center gap-2">
+    <span class="text-lg">{icon}</span>
+    <span class="text-sm">{finalMessage}</span>
+    
+    {type === 'urgency' && (
+      <div class="ml-auto">
+        <span class="countdown-timer text-xs font-mono bg-black/10 rounded px-2 py-1" data-expires="24">
+          23:45:12
+        </span>
+      </div>
+    )}
+    
+    {type === 'scarcity' && (
+      <div class="ml-auto">
+        <div class="flex items-center gap-1">
+          <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+          <span class="text-xs">High demand</span>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+
+<script is:inline define:vars={{ type }}>
+  (() => {
+    if (typeof window === 'undefined') return;
+
+    // Countdown timer for urgency
+    if (type === 'urgency') {
+      const timer = document.querySelector('.countdown-timer');
+      if (timer) {
+        let timeLeft = 24 * 60 * 60; // 24 hours in seconds
+        
+        const updateTimer = () => {
+          const hours = Math.floor(timeLeft / 3600);
+          const minutes = Math.floor((timeLeft % 3600) / 60);
+          const seconds = timeLeft % 60;
+          
+          timer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          
+          if (timeLeft > 0) {
+            timeLeft--;
+          } else {
+            // Reset to 24 hours
+            timeLeft = 24 * 60 * 60;
+          }
+        };
+        
+        updateTimer();
+        setInterval(updateTimer, 1000);
+      }
+    }
+
+    // Track visibility and interactions
+    const trigger = document.querySelector('[data-urgency-type]');
+    if (trigger && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (typeof window.gtag === 'function') {
+              window.gtag('event', 'urgency_trigger_view', {
+                event_category: 'engagement',
+                event_label: type,
+                value: 1
+              });
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(trigger);
+    }
+
+    // Click tracking
+    trigger?.addEventListener('click', () => {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'urgency_trigger_click', {
+          event_category: 'engagement', 
+          event_label: type
+        });
+      }
+    });
+  })();
+</script>
+
+<style>
+  .urgency-trigger {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  @keyframes pulse-border {
+    0%, 100% { border-color: rgba(239, 68, 68, 0.3); }
+    50% { border-color: rgba(239, 68, 68, 0.8); }
+  }
+
+  .urgency-trigger[data-urgency-type="urgency"] {
+    animation: pulse-border 2s infinite;
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.5s ease-out;
+  }
+</style>

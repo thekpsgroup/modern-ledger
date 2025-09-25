@@ -1,0 +1,472 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LandingPageOptimizer from '../../components/LandingPageOptimizer.astro';
+import SmartPricingTable from '../../components/SmartPricingTable.astro';
+import AdvancedTestimonials from '../../components/AdvancedTestimonials.astro';
+import EnhancedCTASection from '../../components/EnhancedCTASection.astro';
+import EnhancedFAQAccordion from '../../components/EnhancedFAQAccordion.astro';
+import ROICalculator from '../../components/ROICalculator.astro';
+import ABTestManager from '../../components/ABTestManager.astro';
+import UrgencyTrigger from '../../components/UrgencyTrigger.astro';
+
+// Type definitions
+interface PricingTier {
+  name: string;
+  description: string;
+  price: number;
+  originalPrice?: number;
+  period: string;
+  popular?: boolean;
+  urgent?: boolean;
+  features: string[];
+  limitations?: string[];
+  cta: {
+    text: string;
+    href: string;
+    variant?: 'primary' | 'secondary' | 'outline';
+  };
+  badge?: {
+    text: string;
+    type: 'popular' | 'savings' | 'limited' | 'new';
+  };
+}
+
+interface ABTest {
+  id: string;
+  name: string;
+  description: string;
+  status: 'draft' | 'running' | 'paused' | 'completed';
+  variants: ABVariant[];
+  trafficSplit: number[];
+  startDate?: Date;
+  endDate?: Date;
+  goals: ABGoal[];
+  targeting?: ABTargeting;
+}
+
+interface ABVariant {
+  id: string;
+  name: string;
+  description: string;
+  config: Record<string, any>;
+  trafficPercentage?: number;
+}
+
+interface ABGoal {
+  id: string;
+  name: string;
+  type: 'conversion' | 'engagement' | 'revenue';
+  event: string;
+  target?: number;
+  isPrimary?: boolean;
+}
+
+interface ABTargeting {
+  geoLocation?: string[];
+  deviceType?: ('desktop' | 'mobile' | 'tablet')[];
+  trafficSource?: string[];
+  newVisitors?: boolean;
+  returningVisitors?: boolean;
+}
+
+// A/B Test Configuration
+const abTests = [
+  {
+    id: 'pricing_page_hero',
+    name: 'Pricing Page Hero Test',
+    description: 'Testing different hero variants for pricing page conversion',
+    status: 'running',
+    variants: [
+      {
+        id: 'default',
+        name: 'Default Value-Focused',
+        description: 'Standard value proposition',
+        trafficPercentage: 40,
+        config: {
+          variant: 'value-focused',
+          headline: {
+            primary: 'Simple, Transparent Pricing That Delivers Results',
+            secondary: 'No Hidden Fees. No Surprises. Just ROI.'
+          },
+          subheadline: 'Choose the perfect plan for your business and start seeing results within 30 days. Our proven system has helped 200+ businesses increase their profitability.',
+          cta: {
+            primary: 'Get Your Free ROI Analysis',
+            secondary: 'View Pricing Details',
+            href: '/contact'
+          },
+          valueProposition: [
+            'Average 245% ROI within first year',
+            'Setup completed in under 2 hours',
+            '30-day money-back guarantee',
+            'Dedicated account manager included'
+          ]
+        }
+      },
+      {
+        id: 'urgency',
+        name: 'Urgency-Focused',
+        description: 'Urgency and scarcity messaging',
+        trafficPercentage: 30,
+        config: {
+          variant: 'urgency',
+          headline: {
+            primary: 'Limited Time: Save Up to 40% on All Plans',
+            urgent: '🔥 Flash Sale: 40% Off All Plans - Ends Soon!'
+          },
+          subheadline: 'Don\'t miss out! This exclusive pricing expires December 31st. Join the 200+ businesses already saving thousands with Modern Ledger.',
+          urgencyMessage: '⚡ Limited Time Offer - Only 12 spots left at this price!',
+          cta: {
+            primary: 'Claim Your Discount Now',
+            secondary: 'See All Benefits',
+            href: '/contact'
+          }
+        }
+      },
+      {
+        id: 'social_proof',
+        name: 'Social Proof Heavy',
+        description: 'Heavy emphasis on testimonials and reviews',
+        trafficPercentage: 30,
+        config: {
+          variant: 'social-proof',
+          headline: {
+            primary: 'Join 200+ Successful Businesses',
+            secondary: 'See Why We\'re the #1 Choice for Small Business Accounting'
+          },
+          subheadline: 'Don\'t just take our word for it. See why businesses like yours choose Modern Ledger for their financial success.',
+          socialProof: {
+            clientCount: 200,
+            rating: 4.9,
+            testimonialSnippet: 'Increased our profit margin by 30% in just 6 months'
+          },
+          cta: {
+            primary: 'See Success Stories',
+            secondary: 'Get Started Today',
+            href: '/case-studies'
+          }
+        }
+      }
+    ],
+    trafficSplit: [40, 30, 30],
+    goals: [
+      {
+        id: 'pricing_conversion',
+        name: 'Pricing Page Conversion',
+        type: 'conversion',
+        event: 'contact_form_submit',
+        isPrimary: true
+      },
+      {
+        id: 'engagement',
+        name: 'Page Engagement',
+        type: 'engagement',
+        event: 'scroll_depth_75'
+      }
+    ]
+  }
+] as ABTest[];
+
+// Pricing tiers configuration
+const pricingTiers = [
+  {
+    name: 'Starter',
+    description: 'Perfect for small businesses getting started',
+    price: 225,
+    originalPrice: 299,
+    period: 'month',
+    features: [
+      'Monthly bookkeeping & reconciliation',
+      'Financial statements (P&L, Balance Sheet)',
+      'Sales tax preparation & filing',
+      'Basic financial analysis',
+      'Email support (48hr response)',
+      'QuickBooks setup & training'
+    ],
+    limitations: [
+      'Advanced reporting',
+      'Cash flow forecasting',
+      'Priority support'
+    ],
+    cta: {
+      text: 'Start Free Trial',
+      href: '/contact',
+      variant: 'outline'
+    },
+    badge: {
+      text: 'Save 25%',
+      type: 'savings'
+    }
+  },
+  {
+    name: 'Professional',
+    description: 'Comprehensive solution for growing businesses',
+    price: 349,
+    originalPrice: 499,
+    period: 'month',
+    popular: true,
+    features: [
+      'Everything in Starter',
+      'Weekly financial check-ins',
+      'Advanced financial analysis & insights',
+      'Cash flow forecasting',
+      'Budget creation & monitoring',
+      'Priority support (24hr response)',
+      'Monthly strategy calls',
+      'Custom financial dashboards'
+    ],
+    cta: {
+      text: 'Get Started Today',
+      href: '/contact',
+      variant: 'primary'
+    },
+    badge: {
+      text: 'Most Popular',
+      type: 'popular'
+    }
+  },
+  {
+    name: 'Enterprise',
+    description: 'Full-service solution for established businesses',
+    price: 585,
+    originalPrice: 899,
+    period: 'month',
+    features: [
+      'Everything in Professional',
+      'Dedicated account manager',
+      'Real-time financial dashboards',
+      'Custom financial reporting',
+      'Tax planning & consultation',
+      '24/7 priority support',
+      'Bi-weekly strategy sessions',
+      'Multi-entity support',
+      'API integrations available'
+    ],
+    cta: {
+      text: 'Contact Sales',
+      href: '/contact',
+      variant: 'secondary'
+    },
+    badge: {
+      text: 'Save 35%',
+      type: 'savings'
+    }
+  }
+] as PricingTier[];
+
+// Testimonials data
+const testimonials = [
+  {
+    id: 'testimonial_1',
+    name: 'Sarah Johnson',
+    title: 'CEO',
+    company: 'GreenTech Solutions',
+    avatar: '/avatars/sarah.jpg',
+    rating: 5,
+    quote: 'Modern Ledger transformed our financial management. The ROI calculator alone paid for itself in the first month.',
+    results: {
+      metric: 'profit margin',
+      improvement: '30%',
+      timeframe: '6 months'
+    },
+    industry: 'Technology',
+    companySize: 'Small',
+    location: 'Dallas, TX',
+    featured: true
+  },
+  {
+    id: 'testimonial_2',
+    name: 'Mike Rodriguez',
+    title: 'Founder',
+    company: 'Local Eats Catering',
+    avatar: '/avatars/mike.jpg',
+    rating: 5,
+    quote: 'The level of insight we get into our finances now is incredible. We make data-driven decisions that actually improve our bottom line.',
+    results: {
+      metric: 'cash flow',
+      improvement: '45%',
+      timeframe: '4 months'
+    },
+    industry: 'Food Service',
+    companySize: 'Small',
+    location: 'Rockwall, TX'
+  },
+  {
+    id: 'testimonial_3',
+    name: 'Jennifer Chen',
+    title: 'Owner',
+    company: 'Wellness Center Plus',
+    avatar: '/avatars/jennifer.jpg',
+    rating: 5,
+    quote: 'I was drowning in spreadsheets before Modern Ledger. Now I have clear, actionable financial reports that help me grow my business.',
+    results: {
+      metric: 'operational efficiency',
+      improvement: '60%',
+      timeframe: '3 months'
+    },
+    industry: 'Healthcare',
+    companySize: 'Medium',
+    location: 'Wylie, TX'
+  }
+];
+---
+
+<Layout title="Pricing - Modern Ledger | Plans Starting at $225/month" description="Choose the perfect bookkeeping plan for your Texas business. Transparent pricing, no hidden fees, and guaranteed ROI. Start with our free consultation today.">
+  <main>
+    <!-- A/B Test Manager -->
+    <ABTestManager 
+      tests={abTests}
+      enableAnalytics={true}
+      debugMode={false}
+    />
+
+    <!-- Dynamic Landing Page Hero -->
+    <LandingPageOptimizer 
+      config={{
+        variant: 'value-focused',
+        headline: {
+          primary: 'Simple, Transparent Pricing That Delivers Results',
+          secondary: 'No Hidden Fees. No Surprises. Just ROI.'
+        },
+        subheadline: 'Choose the perfect plan for your business and start seeing results within 30 days. Our proven system has helped 200+ businesses increase their profitability.',
+        cta: {
+          primary: 'Get Your Free ROI Analysis',
+          secondary: 'View Pricing Details',
+          href: '/contact'
+        },
+        heroImage: '/modern_ledger_1920x1080.png',
+        socialProof: {
+          clientCount: 200,
+          rating: 4.9,
+          testimonialSnippet: 'Increased our profit margin by 30% in just 6 months'
+        },
+        valueProposition: [
+          'Average 245% ROI within first year',
+          'Setup completed in under 2 hours',
+          '30-day money-back guarantee',
+          'Dedicated account manager included'
+        ]
+      }}
+      showVideo={false}
+      showSocialProof={true}
+      enableExitIntent={true}
+      enableHeatTracking={true}
+    />
+
+    <!-- Urgency Trigger -->
+    <UrgencyTrigger 
+      type="urgency"
+      message="Limited Time: Save up to 40% on all plans"
+      showCountdown={true}
+      targetDate="2024-12-31"
+    />
+
+    <!-- Smart Pricing Table -->
+    <SmartPricingTable 
+      tiers={pricingTiers}
+      variant="default"
+      showAnnualSavings={true}
+    />
+
+    <!-- ROI Calculator Section -->
+    <ROICalculator />
+
+    <!-- Advanced Testimonials -->
+    <AdvancedTestimonials 
+      testimonials={testimonials}
+      variant="carousel"
+      showFilters={true}
+      autoRotate={true}
+      showResults={true}
+      maxDisplay={6}
+    />
+
+    <!-- Enhanced FAQ -->
+    <EnhancedFAQAccordion />
+
+    <!-- Enhanced CTA Section -->
+    <EnhancedCTASection 
+      variant="default"
+      showUrgency={false}
+      includeTestimonial={true}
+      showRiskReversal={true}
+    />
+
+  </main>
+</Layout>
+
+<script>
+  // A/B test integration
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get A/B test variant if available
+    const heroVariant = window.abGetVariant?.('pricing_page_hero');
+    
+    if (heroVariant) {
+      // Apply variant configuration to landing page optimizer
+      const heroSection = document.querySelector('[data-variant]');
+      if (heroSection && heroVariant.config) {
+        // Update hero section based on variant
+        console.log('Applying A/B test variant:', heroVariant.name);
+        
+        // Track variant view
+        window.abTrackEvent?.('pricing_hero_view', {
+          variant: heroVariant.name
+        });
+      }
+    }
+
+    // Enhanced conversion tracking
+    const pricingButtons = document.querySelectorAll('[data-pricing-cta]');
+    pricingButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        window.abTrackGoal?.('pricing_conversion');
+        window.abTrackEvent?.('pricing_cta_click', {
+          tier: button.getAttribute('data-pricing-cta'),
+          position: 'pricing_table'
+        });
+      });
+    });
+
+    // ROI calculator interaction tracking
+    const roiCalculator = document.querySelector('.roi-calculator');
+    if (roiCalculator) {
+      roiCalculator.addEventListener('click', () => {
+        window.abTrackEvent?.('roi_calculator_interact');
+      });
+    }
+
+    // Testimonial engagement tracking
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    testimonialCards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        window.abTrackEvent?.('testimonial_click', {
+          testimonial_index: index
+        });
+      });
+    });
+
+    // FAQ interaction tracking
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        window.abTrackEvent?.('faq_interact', {
+          faq_index: index
+        });
+      });
+    });
+
+    // Enhanced exit intent for pricing page
+    let exitIntentShown = false;
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY <= 0 && !exitIntentShown && window.innerWidth > 768) {
+        exitIntentShown = true;
+        window.abTrackEvent?.('exit_intent_pricing');
+        
+        // Show special pricing offer modal if available
+        const exitModal = document.querySelector('.exit-intent-modal');
+        if (exitModal) {
+          exitModal.classList.remove('hidden');
+        }
+      }
+    });
+  });
+</script>

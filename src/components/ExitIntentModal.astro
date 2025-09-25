@@ -2,7 +2,14 @@
 // Exit intent modal
 ---
 
-<div id="exit-intent-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-brand-navy/60 p-4 backdrop-blur-sm">
+<div
+  id="exit-intent-modal"
+  class="fixed inset-0 z-50 hidden flex items-center justify-center bg-brand-navy/60 p-4 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="exit-modal-heading"
+  aria-describedby="exit-modal-description"
+>
   <div class="surface relative w-full max-w-md p-8">
     <!-- Close button -->
     <button
@@ -17,19 +24,54 @@
 
     <!-- Content -->
     <div class="text-center">
+      <!-- Urgency Banner -->
+      <div class="mb-4 rounded-lg bg-red-50 border border-red-200 px-3 py-2">
+        <p class="text-sm font-semibold text-red-700">
+          ⚠️ Wait! You're about to miss out on $2,000+ in potential savings
+        </p>
+      </div>
+
       <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-brand-sky">
         <svg class="h-8 w-8 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
       </div>
 
-      <h3 class="card-title mb-3 text-brand-navy">
-        Don't Leave Without Your Free Checklist!
+      <h3 id="exit-modal-heading" class="card-title mb-3 text-brand-navy">
+        Before You Go... Grab Your FREE Business Assessment!
       </h3>
 
-      <p class="text-body-sm text-neutral-500">
-        Get our comprehensive Month-End Close Checklist (Texas Edition) with 25+ steps to ensure your books are audit-ready and tax-prepared.
+      <p id="exit-modal-description" class="text-body-sm text-neutral-500 mb-4">
+        Join 150+ Texas business owners who discovered hidden savings in their bookkeeping. Get your personalized assessment (normally $200) FREE.
       </p>
+
+      <!-- Value Stack -->
+      <div class="mb-6 space-y-2 text-left">
+        <div class="flex items-center gap-3 text-sm">
+          <div class="flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
+            <svg class="h-3 w-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <span class="text-neutral-700"><strong>Custom ROI calculation</strong> based on your business size</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <div class="flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
+            <svg class="h-3 w-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <span class="text-neutral-700"><strong>Month-end close checklist</strong> (25+ steps, Texas-specific)</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm">
+          <div class="flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
+            <svg class="h-3 w-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <span class="text-neutral-700"><strong>Priority booking</strong> for free 15-min consultation</span>
+        </div>
+      </div>
 
       <!-- Lead capture form -->
       <form id="exit-modal-form" class="mt-6 space-y-4">
@@ -47,64 +89,178 @@
 
         <button
           type="submit"
-          class="btn btn-primary w-full justify-center"
+          class="btn btn-primary w-full justify-center text-base"
         >
-          Get My Free Checklist
+          🎯 Yes! Send My FREE Assessment (Value: $200)
         </button>
+        <p
+          id="exit-modal-feedback"
+          class="hidden text-center text-sm font-medium text-brand-navy"
+          role="status"
+          aria-live="polite"
+        ></p>
       </form>
 
-      <p class="mt-4 text-xs text-neutral-400">
-        No spam, unsubscribe at any time. We respect your privacy.
-      </p>
+      <div class="mt-4 space-y-2">
+        <p class="text-xs text-neutral-400">
+          ⚡ <strong>Instant delivery</strong> • 📧 <strong>No spam policy</strong> • 🔒 <strong>Secure & private</strong>
+        </p>
+        <p class="text-xs text-red-600 font-medium">
+          ⏰ Limited time: This assessment is FREE only until the end of the month
+        </p>
+      </div>
     </div>
   </div>
 </div>
 
-<script>
-  // Declare gtag function for TypeScript
-  declare function gtag(...args: any[]): void;
+<script is:inline>
+  (() => {
+    if (typeof window === 'undefined') return;
 
-  const modal = document.getElementById('exit-intent-modal');
-  const closeBtn = document.getElementById('close-exit-modal');
-  const form = document.getElementById('exit-modal-form');
+    const storageKey = 'ml-exit-intent-dismissed';
+    const modal = document.getElementById('exit-intent-modal');
+    const closeBtn = document.getElementById('close-exit-modal');
+    const form = document.getElementById('exit-modal-form');
+    const emailInput = document.getElementById('exit-email');
+    const feedback = document.getElementById('exit-modal-feedback');
+    const submitButton = form?.querySelector('button[type="submit"]');
 
-  let hasShown = false;
-
-  // Exit intent detection
-  document.addEventListener('mouseout', (e) => {
-    if (!hasShown && e.clientY < 0 && e.relatedTarget === null) {
-      modal?.classList.remove('hidden');
-      hasShown = true;
+    if (!(modal instanceof HTMLElement)) {
+      return;
     }
-  });
 
-  // Close modal
-  closeBtn?.addEventListener('click', () => {
-    modal?.classList.add('hidden');
-  });
+    const getStorage = () => {
+      try {
+        return window.localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    };
 
-  // Click outside to close
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) {
+    const setStorage = () => {
+      try {
+        window.localStorage.setItem(storageKey, '1');
+      } catch {
+        // ignore storage issues
+      }
+    };
+
+    const body = document.body;
+    const originalButtonText = submitButton?.textContent ?? 'Get My Free Checklist';
+
+    const setFeedback = (message, isError = false) => {
+      if (!(feedback instanceof HTMLElement)) return;
+      feedback.textContent = message;
+      feedback.classList.toggle('hidden', false);
+      feedback.classList.toggle('text-red-600', isError);
+      feedback.classList.toggle('text-brand-navy', !isError);
+    };
+
+    const clearFeedback = () => {
+      if (feedback instanceof HTMLElement) {
+        feedback.classList.add('hidden');
+        feedback.textContent = '';
+      }
+    };
+
+    const showModal = () => {
+      modal.classList.remove('hidden');
+      modal.setAttribute('data-open', 'true');
+      body.classList.add('overflow-hidden');
+    };
+
+    const hideModal = () => {
       modal.classList.add('hidden');
-    }
-  });
+      modal.removeAttribute('data-open');
+      body.classList.remove('overflow-hidden');
+      clearFeedback();
+      setStorage();
+    };
 
-  // Form submission
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = (document.getElementById('exit-email') as HTMLInputElement)?.value;
+    const shouldShowModal = () => getStorage() !== '1';
 
-    // Track conversion
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'download_checklist', {
-        event_category: 'engagement',
-        event_label: 'exit_intent_modal'
+    const handleMouseLeave = (event) => {
+      if (!shouldShowModal()) {
+        return;
+      }
+
+      const isLeavingWindow = event.clientY <= 0 && !event.relatedTarget;
+      if (!modal.hasAttribute('data-open') && isLeavingWindow) {
+        showModal();
+      }
+    };
+
+    document.addEventListener('mouseout', handleMouseLeave, { passive: true });
+
+    closeBtn?.addEventListener('click', hideModal);
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        hideModal();
+      }
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.hasAttribute('data-open')) {
+        hideModal();
+      }
+    });
+
+    if (form instanceof HTMLFormElement && emailInput instanceof HTMLInputElement) {
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const email = emailInput.value.trim();
+        if (!email) {
+          setFeedback('Please enter a valid email address.', true);
+          emailInput.focus();
+          return;
+        }
+
+        if (!(submitButton instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+
+        try {
+          const response = await fetch('/api/forms/exit-intent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email,
+              source: window.location.pathname,
+              url: window.location.href
+            })
+          });
+
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(result.error || 'Unable to send your checklist right now.');
+          }
+
+          setFeedback(result.message || 'Check your inbox for the checklist.');
+
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'download_checklist', {
+              event_category: 'engagement',
+              event_label: 'exit_intent_modal'
+            });
+          }
+
+          form.reset();
+
+          window.setTimeout(hideModal, 2500);
+        } catch (error) {
+          console.error('Exit intent form error:', error);
+          setFeedback('We could not send your checklist right now. Please try again or contact us.', true);
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
       });
     }
-
-    // Here you would send the email to your CRM/lead system
-    alert(`Thank you! Your checklist will be sent to ${email}`);
-    modal?.classList.add('hidden');
-  });
+  })();
 </script>

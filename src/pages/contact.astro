@@ -1,11 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getEnv } from '../lib/env';
+import LeadForm from '../components/LeadForm.astro';
 
 const env = getEnv();
 const pageTitle = "Contact Modern Ledger | Get Started Today";
 const pageDescription = "Ready to get your books in order? Contact Modern Ledger for professional bookkeeping services. Free consultation available.";
 const canonicalUrl = `${env.SITE_URL}/contact`;
+
+const phoneDigits = env.COMPANY_PHONE.replace(/\D/g, '') || '0000000000';
+const phoneDisplay = phoneDigits.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+const phoneHref = `tel:+1${phoneDigits}`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
@@ -47,7 +52,7 @@ const canonicalUrl = `${env.SITE_URL}/contact`;
                   </div>
                   <div>
                     <p class="text-sm font-semibold text-brand-navy">Phone</p>
-                    <p class="text-body-sm text-neutral-500">{env.COMPANY_PHONE}</p>
+                    <p class="text-body-sm text-neutral-500"><a href={phoneHref} class="hover:text-brand-navy">{phoneDisplay}</a></p>
                   </div>
                 </div>
 
@@ -87,62 +92,15 @@ const canonicalUrl = `${env.SITE_URL}/contact`;
             </div>
           </div>
 
-          <!-- Contact Form -->
-          <div class="surface p-8">
-            <h3 class="card-title mb-2">Send us a message</h3>
-            <p class="text-body-sm text-neutral-500 mb-8">
-              Share a few details and we’ll respond within one business day with next steps.
-            </p>
-            <form id="contact-form" class="grid gap-6">
-              <div class="grid gap-6 md:grid-cols-2">
-                <div>
-                  <label for="firstName" class="form-label">First Name *</label>
-                  <input type="text" id="firstName" name="firstName" required class="form-field">
-                </div>
-                <div>
-                  <label for="lastName" class="form-label">Last Name *</label>
-                  <input type="text" id="lastName" name="lastName" required class="form-field">
-                </div>
-              </div>
-
-              <div>
-                <label for="email" class="form-label">Email *</label>
-                <input type="email" id="email" name="email" required class="form-field">
-              </div>
-
-              <div>
-                <label for="phone" class="form-label">Phone</label>
-                <input type="tel" id="phone" name="phone" class="form-field">
-              </div>
-
-              <div>
-                <label for="company" class="form-label">Company Name</label>
-                <input type="text" id="company" name="company" class="form-field">
-              </div>
-
-              <div>
-                <label for="service" class="form-label">Service Interested In</label>
-                <select id="service" name="service" class="form-field">
-                  <option value="">Select a service...</option>
-                  <option value="bookkeeping">Bookkeeping Services</option>
-                  <option value="reconciliation">Monthly Reconciliation</option>
-                  <option value="clean-books">Clean Books</option>
-                  <option value="payroll">Payroll Integration</option>
-                  <option value="tax-support">Tax Preparation Support</option>
-                  <option value="consultation">Free Consultation</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="message" class="form-label">Message</label>
-                <textarea id="message" name="message" rows="4" class="form-field" placeholder="Tell us about your business and how we can help..."></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary w-full justify-center">
-                Send Message
-              </button>
-            </form>
-          </div>
+          <LeadForm
+            class="h-full"
+            eyebrow="Send us a message"
+            heading="Our team will respond within one business day"
+            subheading="Tell us what you’re managing internally, where the bottlenecks live, and the support you’re looking for. We’ll follow up with a tailored plan and pricing."
+            ctaLabel="Connect with Modern Ledger"
+            successMessage="Thanks for reaching out! A Modern Ledger lead advisor will follow up within one business day."
+            source="contact-page"
+          />
         </div>
       </div>
     </section>

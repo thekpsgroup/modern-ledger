@@ -5,12 +5,10 @@ import { join } from 'path';
 import { getEnv } from '../src/lib/env';
 
 const env = getEnv();
+const formsubmitEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(env.COMPANY_EMAIL)}`;
 
 function generateContactFormAPI(): string {
   return `import type { APIRoute } from 'astro';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface ContactFormData {
   name: string;
@@ -19,6 +17,8 @@ interface ContactFormData {
   message: string;
   honeypot?: string;
 }
+
+const FORM_SUBMIT_ENDPOINT = '${formsubmitEndpoint}';
 
 // Rate limiting store (in production, use Redis)
 const rateLimit = new Map<string, { count: number; resetTime: number }>();
@@ -96,22 +96,45 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Send email via Resend
-    const emailResult = await resend.emails.send({
-      from: 'Modern Ledger <noreply@modernledger.co>',
-      to: '${env.COMPANY_EMAIL}',
-      subject: 'New Contact Form Submission - Modern Ledger',
-      html: \`
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> \${formData.name}</p>
-        <p><strong>Email:</strong> \${formData.email}</p>
-        <p><strong>Phone:</strong> \${formData.phone || 'Not provided'}</p>
-        <p><strong>Message:</strong></p>
-        <p>\${formData.message.replace(/\n/g, '<br>')}</p>
-        <hr>
-        <p><small>Sent from Modern Ledger website contact form</small></p>
-      \`
+    const messageBody = [
+      'New contact form submission from modernledger.co',
+      'Name: ' + formData.name,
+      'Email: ' + formData.email,
+      'Phone: ' + (formData.phone || 'Not provided'),
+      '',
+      'Message:',
+      formData.message,
+      '',
+      'IP Address: ' + ip,
+      'User Agent: ' + (request.headers.get('user-agent') || 'Unknown')
+    ].join('\n');
+
+    const response = await fetch(FORM_SUBMIT_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || 'Not provided',
+        message: messageBody,
+        _replyto: formData.email,
+        _subject: 'New Contact Form Submission - Modern Ledger'
+      })
     });
+
+    const result = await response.json().catch(() => ({}));
+    const successFlag = typeof result?.success === 'undefined'
+      ? true
+      : String(result.success).toLowerCase() === 'true';
+
+    if (!response.ok || !successFlag) {
+      console.error('Formsubmit error:', result);
+      throw new Error(result?.message || 'Form submission failed');
+    }
 
     // Store lead data (in production, send to CRM)
     const leadData = {
