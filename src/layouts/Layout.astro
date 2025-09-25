@@ -1,10 +1,12 @@
 ---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { BRAND_ASSETS } from '../data/brand-assets.generated';
+import '../styles/global.css';
 
 export interface Props {
   title: string;
   description: string;
-  image?: string;
   ogImage?: string;
   canonical?: string;
   type?: 'website' | 'article';
@@ -18,7 +20,6 @@ export interface Props {
 const {
   title,
   description,
-  image = '/og-default.jpg',
   ogImage,
   canonical,
   type = 'website',
@@ -132,29 +133,35 @@ const finalOgImage = ogImage || defaultOgImage;
   }
   </script>
 </head>
-<body class="bg-white text-gray-900 font-sans">
+<body class="font-sans">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PH8SRL5"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
   <!-- Skip to main content -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary-600 text-white px-4 py-2 rounded-md z-50">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 rounded-md bg-brand-navy px-4 py-2 text-white shadow-card transition-transform focus:-translate-y-1">
     Skip to main content
   </a>
 
-  <slot />
+  <div class="min-h-screen flex flex-col">
+    <Header />
+    <main id="main-content" class="flex-1 w-full">
+      <slot />
+    </main>
+    <Footer />
+  </div>
 
   <!-- Cookie Consent -->
-  <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 z-40 hidden">
-    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
-      <p class="text-sm mb-4 md:mb-0 md:mr-4">
+  <div id="cookie-consent" class="fixed bottom-4 left-1/2 z-40 hidden w-[calc(100%-2rem)] -translate-x-1/2 rounded-2xl bg-brand-navy px-6 py-5 text-white shadow-elevation md:max-w-3xl">
+    <div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+      <p class="text-sm text-white/80">
         We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
-        <a href="/privacy" class="underline hover:no-underline">Learn more</a>
+        <a href="/privacy" class="ml-1 font-semibold text-brand-gold transition-colors hover:text-brand-gold-dark">Learn more</a>
       </p>
-      <div class="flex space-x-2">
-        <button id="accept-cookies" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded text-sm">Accept All</button>
-        <button id="decline-cookies" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded text-sm">Essential Only</button>
+      <div class="flex w-full flex-col gap-2 md:w-auto md:flex-row">
+  <button id="accept-cookies" class="btn btn-secondary w-full justify-center md:w-auto">Accept All</button>
+  <button id="decline-cookies" class="btn btn-inverse w-full justify-center md:w-auto">Essential Only</button>
       </div>
     </div>
   </div>
@@ -187,18 +194,18 @@ const finalOgImage = ogImage || defaultOgImage;
     // Cookie consent
     const consent = localStorage.getItem('cookie-consent');
     if (!consent) {
-      document.getElementById('cookie-consent').classList.remove('hidden');
+      document.getElementById('cookie-consent')?.classList.remove('hidden');
     }
 
     document.getElementById('accept-cookies')?.addEventListener('click', () => {
       localStorage.setItem('cookie-consent', 'accepted');
-      document.getElementById('cookie-consent').classList.add('hidden');
+      document.getElementById('cookie-consent')?.classList.add('hidden');
       // Load analytics here
     });
 
     document.getElementById('decline-cookies')?.addEventListener('click', () => {
       localStorage.setItem('cookie-consent', 'declined');
-      document.getElementById('cookie-consent').classList.add('hidden');
+      document.getElementById('cookie-consent')?.classList.add('hidden');
     });
   </script>
 </body>

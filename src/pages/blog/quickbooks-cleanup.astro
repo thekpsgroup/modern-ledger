@@ -4,12 +4,12 @@ import { getEnv } from '../../lib/env';
 
 const env = getEnv();
 const pageTitle = "QuickBooks Cleanup Guide | Modern Ledger";
-const pageDescription = "Step-by-step guide to cleaning up messy QuickBooks files and getting your books back on track.";
+const pageDescription = "Step-by-step guide to cleaning messy QuickBooks files so you can fix common issues, eliminate errors, and restore accurate financial reporting fast.";
 const canonicalUrl = `${env.SITE_URL}/blog/quickbooks-cleanup`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="min-h-screen bg-white">
     <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <header class="mb-12">
         <div class="text-sm text-green-600 font-medium mb-4">QuickBooks • March 10, 2024</div>
@@ -25,5 +25,5 @@ const canonicalUrl = `${env.SITE_URL}/blog/quickbooks-cleanup`;
         <p>Coming soon - comprehensive QuickBooks cleanup guide.</p>
       </div>
     </article>
-  </main>
+  </div>
 </Layout>

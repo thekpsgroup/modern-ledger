@@ -10,19 +10,20 @@ const partners = [
 ];
 ---
 
-<section class="py-12 bg-white border-t border-gray-100">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-8">
-      <p class="text-gray-600 font-medium">Trusted by industry leaders and serving Texas businesses</p>
+<section class="section-sm border-t border-neutral-100 bg-white">
+  <div class="container">
+    <div class="stack-sm text-center">
+      <span class="eyebrow mx-auto">Trusted Tools</span>
+      <p class="text-body-sm text-neutral-500">Preferred integration partners keeping your data secure.</p>
     </div>
 
-    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-8 md:gap-12">
       {partners.map(partner => (
-        <div class="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+        <div class="flex items-center justify-center transition-all duration-300 hover:opacity-80">
           <img
             src={partner.logo}
             alt={partner.alt}
-            class="h-8 md:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300"
+            class="h-8 w-auto opacity-60 md:h-10"
             loading="lazy"
           />
         </div>
@@ -30,12 +31,12 @@ const partners = [
     </div>
 
     <!-- Additional trust indicators -->
-    <div class="mt-8 text-center">
-      <div class="inline-flex items-center px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium">
-        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+    <div class="mt-10 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full bg-brand-sky/70 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-brand-navy">
+        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
         </svg>
-        SOC 2 Type II Compliant • Bank-Level Security • 256-bit SSL Encryption
+        SOC 2 Type II • Bank-Level Security • 256-bit SSL
       </div>
     </div>
   </div>

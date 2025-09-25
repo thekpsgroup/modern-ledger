@@ -1,12 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
 import ServicesGrid from '../../components/ServicesGrid.astro';
 import CTASection from '../../components/CTASection.astro';
 import FAQAccordion from '../../components/FAQAccordion.astro';
-import Footer from '../../components/Footer.astro';
 import { TESTIMONIALS } from '../../data/testimonials';
 
 // Filter testimonials for Wylie, TX and surrounding areas
@@ -19,18 +17,14 @@ const localTestimonials = TESTIMONIALS.filter(testimonial =>
 
 const pageTitle = "Bookkeeping Services in Wylie, TX | Modern Ledger";
 const pageDescription = "Professional bookkeeping services in Wylie, TX. Serving small businesses near Downtown Wylie. QuickBooks experts with 5-star Google reviews.";
-const pageUrl = "https://modernledger.co/locations/wylie-tx";
-
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  url={pageUrl}
-  image="/images/wylie-tx-bookkeeping.jpg"
+  ogImage="/images/wylie-tx-bookkeeping.jpg"
   type="website"
 >
-  <Header />
   <Hero
     title="Professional Bookkeeping Services in Wylie, TX"
     subtitle="Expert QuickBooks bookkeeping for small businesses in Wylie, TX and surrounding areas. Join 50+ local businesses saving time and money."
@@ -160,5 +154,4 @@ const pageUrl = "https://modernledger.co/locations/wylie-tx";
     </div>
   </section>
 
-  <Footer />
 </Layout>

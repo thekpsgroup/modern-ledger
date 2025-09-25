@@ -1,7 +1,6 @@
 #!/usr/bin/env ts-node
 
 import { readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
 import { getEnv } from '../src/lib/env';
 
 const env = getEnv();

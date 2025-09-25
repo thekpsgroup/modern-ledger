@@ -1,12 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
 import ServicesGrid from '../../components/ServicesGrid.astro';
 import CTASection from '../../components/CTASection.astro';
 import FAQAccordion from '../../components/FAQAccordion.astro';
-import Footer from '../../components/Footer.astro';
 import { TESTIMONIALS } from '../../data/testimonials';
 
 // Filter testimonials for Greenville, TX and surrounding areas
@@ -19,18 +17,14 @@ const localTestimonials = TESTIMONIALS.filter(testimonial =>
 
 const pageTitle = "Bookkeeping Services in Greenville, TX | Modern Ledger";
 const pageDescription = "Professional bookkeeping services in Greenville, TX. Serving small businesses near Downtown Greenville. QuickBooks experts with 5-star Google reviews.";
-const pageUrl = "https://modernledger.co/locations/greenville-tx";
-
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  url={pageUrl}
-  image="/images/greenville-tx-bookkeeping.jpg"
+  ogImage="/images/greenville-tx-bookkeeping.jpg"
   type="website"
 >
-  <Header />
   <Hero
     title="Professional Bookkeeping Services in Greenville, TX"
     subtitle="Expert QuickBooks bookkeeping for small businesses in Greenville, TX and surrounding areas. Join 50+ local businesses saving time and money."
@@ -160,5 +154,4 @@ const pageUrl = "https://modernledger.co/locations/greenville-tx";
     </div>
   </section>
 
-  <Footer />
 </Layout>

@@ -9,53 +9,54 @@ const canonicalUrl = `${env.SITE_URL}/about`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="page">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-gray-50 to-blue-50 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            About <span class="text-blue-600">Modern Ledger</span>
-          </h1>
-          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Your trusted partner for professional bookkeeping services in North Texas.
-            We help small businesses maintain accurate financial records and focus on what matters most - growing their business.
+    <section class="section section-muted">
+      <div class="container">
+        <div class="stack-sm text-center">
+          <span class="eyebrow mx-auto">About</span>
+          <h1 class="text-balance">Modern Ledger is your Texas bookkeeping partner.</h1>
+          <p class="text-body-lg text-neutral-500 mx-auto max-w-content-md">
+            We help ambitious business owners across North Texas stay tax-ready, investor-ready, and calm-in-the-chaos with meticulous books and proactive insight.
           </p>
         </div>
       </div>
     </section>
 
     <!-- Story Section -->
-    <section class="py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Our Story
-            </h2>
-            <p class="text-lg text-gray-600 mb-6">
-              Founded in 2020, Modern Ledger was born from a simple mission: to make professional bookkeeping
-              accessible and affordable for small businesses. We understand the challenges entrepreneurs face
-              when managing their finances, and we're here to provide the support they need.
-            </p>
-            <p class="text-lg text-gray-600 mb-6">
-              Our team combines decades of accounting experience with modern technology to deliver
-              accurate, timely, and compliant bookkeeping services. We serve businesses across North Texas,
-              from Royse City to Rockwall and beyond.
-            </p>
-            <p class="text-lg text-gray-600">
-              When you choose Modern Ledger, you're not just getting a bookkeeping service -
-              you're getting a partner committed to your business success.
-            </p>
+    <section class="section bg-white">
+      <div class="container">
+        <div class="grid gap-12 lg:grid-cols-[1fr_0.8fr]">
+          <div class="stack-sm">
+            <span class="eyebrow">Our Story</span>
+            <h2 class="text-balance">Born from the need for dependable, modern books</h2>
+            <div class="rich-text">
+              <p>
+                Modern Ledger launched in 2020 after watching owner-operators struggle with outdated bookkeeping, missing documentation, and surprise tax bills. We set out to give Texas businesses enterprise-level accuracy without enterprise-level overhead.
+              </p>
+              <p>
+                Today our team blends decades of accounting experience with automated workflows, secure integrations, and a transparent cadence. From Royse City to Rockwall and beyond, every client gets books that stand up to scrutiny and unlock decision-making confidence.
+              </p>
+              <p>
+                When you work with us, you get a dedicated partner who learns your business rhythms, anticipates what’s next, and communicates in plain language—not accountant jargon.
+              </p>
+            </div>
           </div>
-          <div class="bg-gray-100 rounded-lg p-8">
-            <div class="text-center">
-              <div class="text-6xl font-bold text-blue-600 mb-2">4+</div>
-              <div class="text-xl text-gray-600 mb-6">Years of Experience</div>
-              <div class="text-6xl font-bold text-green-600 mb-2">500+</div>
-              <div class="text-xl text-gray-600 mb-6">Businesses Served</div>
-              <div class="text-6xl font-bold text-purple-600 mb-2">99.9%</div>
-              <div class="text-xl text-gray-600">Accuracy Rate</div>
+
+          <div class="surface p-8 text-center sm:p-10">
+            <div class="grid gap-8">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand-gold">Years serving Texas</p>
+                <p class="mt-2 text-5xl font-semibold text-brand-navy">4+</p>
+              </div>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand-gold">Businesses supported</p>
+                <p class="mt-2 text-5xl font-semibold text-brand-navy">500+</p>
+              </div>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand-gold">Accuracy rate</p>
+                <p class="mt-2 text-5xl font-semibold text-brand-navy">99.9%</p>
+              </div>
             </div>
           </div>
         </div>
@@ -63,64 +64,59 @@ const canonicalUrl = `${env.SITE_URL}/about`;
     </section>
 
     <!-- Values Section -->
-    <section class="bg-gray-50 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Our Values
-          </h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            The principles that guide everything we do
+    <section class="section section-muted">
+      <div class="container">
+        <div class="stack-sm text-center">
+          <span class="eyebrow mx-auto">Values</span>
+          <h2 class="text-balance">The principles guiding every reconciliation and report</h2>
+          <p class="text-body-lg text-neutral-500 mx-auto max-w-content-md">
+            These aren’t wall art—they’re the checkpoints we use in every workflow, review, and client conversation.
           </p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {[
+            {
+              title: 'Accuracy first',
+              copy: 'Structured workflows, layered reviews, and detailed documentation mean your books are always audit-ready and investor-ready.',
+            },
+            {
+              title: 'Timely delivery',
+              copy: 'Month-end closes in days—not weeks—plus rapid responses so you can make decisions with fresh numbers.',
+            },
+            {
+              title: 'Personal partnership',
+              copy: 'You get a consistent point of contact who knows your industry nuances and speaks like part of your team.',
+            },
+          ].map(value => (
+            <div class="surface p-8">
+              <div class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-sky text-brand-navy">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="card-title mb-3">{value.title}</h3>
+              <p class="text-body-sm text-neutral-500">{value.copy}</p>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Accuracy First</h3>
-            <p class="text-gray-600">We maintain the highest standards of accuracy in all our work, ensuring your financial records are always reliable.</p>
-          </div>
-
-          <div class="text-center">
-            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Timely Service</h3>
-            <p class="text-gray-600">We understand the importance of timely financial information and deliver our services when you need them.</p>
-          </div>
-
-          <div class="text-center">
-            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Personal Service</h3>
-            <p class="text-gray-600">Every client receives personalized attention and dedicated support from our experienced team.</p>
-          </div>
+          ))}
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="bg-blue-600 py-20">
-      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Ready to Work with Us?
-        </h2>
-        <p class="text-xl text-blue-100 mb-8">
-          Join the hundreds of businesses that trust Modern Ledger with their financial records.
-        </p>
-        <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
-          Get Started Today
-        </a>
+    <section class="section section-contrast">
+      <div class="container">
+        <div class="stack-sm text-center">
+          <h2 class="text-balance">Ready to meet the team keeping Texas books spotless?</h2>
+          <p class="mx-auto max-w-content-sm text-sm text-white/80">
+            Let’s schedule a 15-minute consult to walk through your current accounting stack, growth goals, and where our team can remove friction.
+          </p>
+          <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a href="/contact" class="btn btn-secondary">Book a 15-min Consult</a>
+            <a href="/services/bookkeeping" class="btn btn-inverse">Explore Services</a>
+          </div>
+        </div>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>

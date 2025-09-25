@@ -4,12 +4,12 @@ import { getEnv } from '../../lib/env';
 
 const env = getEnv();
 const pageTitle = "Clean Books Service | Modern Ledger";
-const pageDescription = "Get your books cleaned up and organized. Professional cleanup of messy financial records.";
+const pageDescription = "Get your books cleaned up and organized. Professional cleanup of messy financial records for accurate reporting and tax preparation.";
 const canonicalUrl = `${env.SITE_URL}/services/clean-books`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="min-h-screen bg-white">
     <section class="bg-gradient-to-br from-purple-50 to-indigo-100 py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
@@ -36,5 +36,5 @@ const canonicalUrl = `${env.SITE_URL}/services/clean-books`;
         </p>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>

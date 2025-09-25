@@ -9,119 +9,120 @@ const canonicalUrl = `${env.SITE_URL}/contact`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="page">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Get In <span class="text-blue-600">Touch</span>
-          </h1>
-          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Ready to get your books in order? Let's discuss how Modern Ledger can help your business thrive.
+    <section class="section section-muted">
+      <div class="container">
+        <div class="stack-sm text-center">
+          <span class="eyebrow mx-auto">Contact</span>
+          <h1 class="text-balance">Let’s get your books calm, clean, and actionable.</h1>
+          <p class="text-body-lg text-neutral-500 mx-auto max-w-content-md">
+            Tell us a little about your business and we’ll craft a bookkeeping plan that matches your pace, complexity, and growth goals.
           </p>
         </div>
       </div>
     </section>
 
     <!-- Contact Form Section -->
-    <section class="py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-12">
+    <section class="section bg-white">
+      <div class="container">
+        <div class="grid gap-12 lg:grid-cols-[0.95fr_1.05fr]">
           <!-- Contact Info -->
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Let's Talk
-            </h2>
-            <p class="text-lg text-gray-600 mb-8">
-              Whether you're a startup looking to set up your books from the beginning,
-              or an established business needing help with cleanup and ongoing maintenance,
-              we're here to help.
-            </p>
+          <div class="stack-sm">
+            <div>
+              <span class="eyebrow">Let’s talk</span>
+              <h2 class="text-balance">Here’s how to reach the Modern Ledger team</h2>
+              <p class="text-body-sm text-neutral-500">
+                Whether you need an urgent cleanup, steady monthly support, or a fractional team to guide finance ops, we’re one quick message away.
+              </p>
+            </div>
 
-            <div class="space-y-6">
-              <div class="flex items-center">
-                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                  </svg>
+            <div class="surface p-8">
+              <div class="grid gap-6">
+                <div class="flex items-start gap-4">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-sky text-brand-navy">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-brand-navy">Phone</p>
+                    <p class="text-body-sm text-neutral-500">{env.COMPANY_PHONE}</p>
+                  </div>
                 </div>
-                <div>
-                  <div class="font-semibold text-gray-900">Phone</div>
-                  <div class="text-gray-600">{env.COMPANY_PHONE}</div>
-                </div>
-              </div>
 
-              <div class="flex items-center">
-                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                  <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
+                <div class="flex items-start gap-4">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-sky text-brand-navy">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-brand-navy">Email</p>
+                    <p class="text-body-sm text-neutral-500">{env.COMPANY_EMAIL}</p>
+                  </div>
                 </div>
-                <div>
-                  <div class="font-semibold text-gray-900">Email</div>
-                  <div class="text-gray-600">{env.COMPANY_EMAIL}</div>
-                </div>
-              </div>
 
-              <div class="flex items-start">
-                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4 mt-1">
-                  <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="font-semibold text-gray-900 mb-1">Service Areas</div>
-                  <div class="text-gray-600 text-sm">
-                    Royse City, TX • Rockwall, TX • Fate, TX<br>
-                    Caddo Mills, TX • Greenville, TX • Quinlan, TX<br>
-                    Rowlett, TX • Wylie, TX • Heath, TX
+                <div class="flex items-start gap-4">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-sky text-brand-navy">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-brand-navy">Service Areas</p>
+                    <p class="text-body-sm text-neutral-500">
+                      Royse City • Rockwall • Fate • Caddo Mills • Greenville • Quinlan • Rowlett • Wylie • Heath
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div class="surface p-6">
+              <p class="text-body-sm text-neutral-500">
+                Prefer a quick consult first? <a class="font-semibold text-brand-navy" href="/pricing">Review pricing</a> or <a class="font-semibold text-brand-navy" href="/roi-calculator">run the ROI calculator</a> before we chat.
+              </p>
+            </div>
           </div>
 
           <!-- Contact Form -->
-          <div class="bg-gray-50 rounded-lg p-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
-            <form id="contact-form" class="space-y-6">
-              <div class="grid md:grid-cols-2 gap-6">
+          <div class="surface p-8">
+            <h3 class="card-title mb-2">Send us a message</h3>
+            <p class="text-body-sm text-neutral-500 mb-8">
+              Share a few details and we’ll respond within one business day with next steps.
+            </p>
+            <form id="contact-form" class="grid gap-6">
+              <div class="grid gap-6 md:grid-cols-2">
                 <div>
-                  <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
-                  <input type="text" id="firstName" name="firstName" required
-                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <label for="firstName" class="form-label">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" required class="form-field">
                 </div>
                 <div>
-                  <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
-                  <input type="text" id="lastName" name="lastName" required
-                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <label for="lastName" class="form-label">Last Name *</label>
+                  <input type="text" id="lastName" name="lastName" required class="form-field">
                 </div>
               </div>
 
               <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                <input type="email" id="email" name="email" required
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" id="email" name="email" required class="form-field">
               </div>
 
               <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                <input type="tel" id="phone" name="phone"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" id="phone" name="phone" class="form-field">
               </div>
 
               <div>
-                <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
-                <input type="text" id="company" name="company"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <label for="company" class="form-label">Company Name</label>
+                <input type="text" id="company" name="company" class="form-field">
               </div>
 
               <div>
-                <label for="service" class="block text-sm font-medium text-gray-700 mb-2">Service Interested In</label>
-                <select id="service" name="service"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <label for="service" class="form-label">Service Interested In</label>
+                <select id="service" name="service" class="form-field">
                   <option value="">Select a service...</option>
                   <option value="bookkeeping">Bookkeeping Services</option>
                   <option value="reconciliation">Monthly Reconciliation</option>
@@ -133,14 +134,11 @@ const canonicalUrl = `${env.SITE_URL}/contact`;
               </div>
 
               <div>
-                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                <textarea id="message" name="message" rows="4"
-                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder="Tell us about your business and how we can help..."></textarea>
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" rows="4" class="form-field" placeholder="Tell us about your business and how we can help..."></textarea>
               </div>
 
-              <button type="submit"
-                      class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              <button type="submit" class="btn btn-primary w-full justify-center">
                 Send Message
               </button>
             </form>
@@ -148,5 +146,5 @@ const canonicalUrl = `${env.SITE_URL}/contact`;
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>

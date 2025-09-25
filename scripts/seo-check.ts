@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
 import { readFileSync, readdirSync, statSync } from 'fs';
-import { join, extname } from 'path';
+import { join } from 'path';
 import { JSDOM } from 'jsdom';
 
 interface SEOIssue {

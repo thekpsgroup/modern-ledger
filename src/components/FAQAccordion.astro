@@ -52,30 +52,29 @@ const faqs = [
 ];
 ---
 
-<section class="py-20 bg-gray-50">
-  <div class="container mx-auto px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Frequently Asked Questions
-        </h2>
-        <p class="text-xl text-gray-600">
-          Everything you need to know about working with Modern Ledger
+<section class="section bg-neutral-25">
+  <div class="container">
+    <div class="mx-auto max-w-content-md">
+      <div class="stack-sm text-center">
+        <span class="eyebrow mx-auto">FAQ</span>
+        <h2 class="text-balance">Frequently Asked Questions</h2>
+        <p class="text-body-lg text-neutral-500">
+          Everything you need to know about partnering with Modern Ledger.
         </p>
       </div>
 
-      <div class="space-y-4">
+      <div class="mt-12 space-y-4">
         {faqs.map((faq, index) => (
-          <div class="bg-white rounded-lg shadow-sm border border-gray-100">
+          <div class="surface">
             <button
-              class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset"
+              class="flex w-full items-center justify-between gap-6 rounded-[inherit] px-6 py-5 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold hover:bg-brand-sky/60"
               aria-expanded="false"
               data-accordion-button={index}
               aria-controls={`faq-content-${index}`}
             >
-              <span class="font-semibold text-gray-900 pr-4">{faq.question}</span>
+              <span class="pr-6 text-base font-semibold text-brand-navy">{faq.question}</span>
               <svg
-                class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-brand-gold transition-transform duration-200"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -86,10 +85,10 @@ const faqs = [
             </button>
             <div
               id={`faq-content-${index}`}
-              class="px-6 pb-4 hidden"
+              class="hidden px-6 pb-6"
               aria-labelledby={`faq-button-${index}`}
             >
-              <p class="text-gray-600 leading-relaxed pt-2">
+              <p class="text-body-sm text-neutral-500">
                 {faq.answer}
               </p>
             </div>
@@ -97,13 +96,13 @@ const faqs = [
         ))}
       </div>
 
-      <div class="text-center mt-12">
-        <p class="text-gray-600 mb-6">
-          Still have questions? We'd love to chat about your specific situation.
+      <div class="mt-12 text-center">
+        <p class="text-body-sm text-neutral-500">
+          Still have questions? We’ll tailor the answers to your books.
         </p>
         <a
           href="/contact"
-          class="inline-flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          class="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-navy px-8 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
           aria-label="Book a consultation to get your questions answered"
         >
           Book a Free Consultation

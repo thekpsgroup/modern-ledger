@@ -4,12 +4,12 @@ import { getEnv } from '../lib/env';
 
 const env = getEnv();
 const pageTitle = "Terms of Service | Modern Ledger";
-const pageDescription = "Read our terms of service and conditions for using Modern Ledger's bookkeeping services and website.";
+const pageDescription = "Read our terms of service to understand the agreements, responsibilities, and conditions for using Modern Ledger's bookkeeping services and website.";
 const canonicalUrl = `${env.SITE_URL}/terms`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="min-h-screen bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8">Terms of Service</h1>
 
@@ -35,5 +35,5 @@ const canonicalUrl = `${env.SITE_URL}/terms`;
         <p>For questions about these Terms of Service, please contact us at {env.COMPANY_EMAIL}.</p>
       </div>
     </div>
-  </main>
+  </div>
 </Layout>

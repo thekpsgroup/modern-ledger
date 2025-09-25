@@ -4,12 +4,12 @@ import { getEnv } from '../lib/env';
 
 const env = getEnv();
 const pageTitle = "ROI Calculator | Modern Ledger";
-const pageDescription = "Calculate the return on investment for professional bookkeeping services. See how much time and money you can save.";
+const pageDescription = "Calculate the return on investment for professional bookkeeping services and discover how much time and money your business saves by outsourcing the books.";
 const canonicalUrl = `${env.SITE_URL}/roi-calculator`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="min-h-screen bg-white">
     <section class="bg-gradient-to-br from-green-50 to-emerald-100 py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
@@ -64,5 +64,5 @@ const canonicalUrl = `${env.SITE_URL}/roi-calculator`;
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>

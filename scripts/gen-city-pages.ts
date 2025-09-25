@@ -1,10 +1,9 @@
 #!/usr/bin/env ts-node
 
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
-import { join, dirname } from 'path';
+import { join } from 'path';
 import { load } from 'js-yaml';
 import { getEnv } from '../src/lib/env';
-import { TESTIMONIALS } from '../src/data/testimonials';
 
 interface City {
   slug: string;
@@ -21,16 +20,7 @@ function loadCities(): City[] {
   return load(content) as City[];
 }
 
-function getLocalTestimonials(cityName: string) {
-  return TESTIMONIALS.filter(testimonial =>
-    testimonial.city?.toLowerCase().includes(cityName.toLowerCase().split(',')[0].toLowerCase())
-  );
-}
-
 function generateCityPage(city: City): string {
-  const localTestimonials = getLocalTestimonials(city.name);
-  const testimonialsToShow = localTestimonials.length > 0 ? localTestimonials : TESTIMONIALS.slice(0, 3);
-
   const landmarksText = city.landmarks.length > 0
     ? `near ${city.landmarks.slice(0, 2).join(' and ')}`
     : 'in the area';
@@ -199,47 +189,6 @@ const pageUrl = "${env.SITE_URL}/locations/${city.slug}";
 
   <Footer />
 </Layout>`;
-}
-
-function generateCityJSONLD(city: City, testimonials: any[]): string {
-  const localTestimonials = getLocalTestimonials(city.name);
-  const reviews = (localTestimonials.length > 0 ? localTestimonials : testimonials.slice(0, 3)).map(t => ({
-    "@type": "Review",
-    "reviewRating": { "@type": "Rating", "ratingValue": t.rating },
-    "author": { "@type": "Person", "name": t.name },
-    "reviewBody": t.quote
-  }));
-
-  return `  <!-- City-specific JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "${env.SITE_URL}/locations/${city.slug}#localbusiness",
-    "name": "Modern Ledger - ${city.name}",
-    "url": "${env.SITE_URL}/locations/${city.slug}",
-    "telephone": "+1${env.COMPANY_PHONE}",
-    "email": "${env.COMPANY_EMAIL}",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "${city.name}",
-      "addressRegion": "TX",
-      "addressCountry": "US"
-    },
-    "areaServed": ["${city.name}","Rockwall TX","Royse City TX","Fate TX"],
-    "priceRange": "$$",
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "${reviews.length}" },
-    "review": ${JSON.stringify(reviews, null, 4)},
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "${env.SITE_URL}" },
-        { "@type": "ListItem", "position": 2, "name": "Locations", "item": "${env.SITE_URL}/locations" },
-        { "@type": "ListItem", "position": 3, "name": "${city.name}", "item": "${env.SITE_URL}/locations/${city.slug}" }
-      ]
-    }
-  }
-  </script>`;
 }
 
 async function main() {

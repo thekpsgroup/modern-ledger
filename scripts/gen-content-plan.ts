@@ -2,9 +2,6 @@
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
-import { getEnv } from '../src/lib/env';
-
-const env = getEnv();
 
 interface ContentPlanEntry {
   month: string;
@@ -654,7 +651,7 @@ function formatContentPlan(plan: ContentPlanEntry[]): string {
   Object.entries(monthlyPlan).forEach(([month, entries]) => {
     output += `## ${month}\n\n`;
 
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
       output += `### Week ${entry.week}: ${entry.title}\n\n`;
       output += `**Target Keyword:** ${entry.targetKeyword}\n\n`;
       output += `**Search Intent:** ${entry.intent}\n\n`;

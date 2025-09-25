@@ -19,13 +19,13 @@ const objections = [
 ];
 ---
 
-<section class="py-20 bg-primary-600 text-white">
-  <div class="container mx-auto px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">
+<section class="section bg-brand-navy text-white">
+  <div class="container">
+    <div class="mx-auto max-w-content-md text-center">
+      <h2 class="text-balance mb-6">
         Ready to Get Your Books in Order?
       </h2>
-      <p class="text-xl mb-12 opacity-90 leading-relaxed">
+      <p class="text-body-lg mx-auto mb-12 max-w-content-sm opacity-80">
         Join 500+ Texas businesses who've eliminated bookkeeping stress and gained financial clarity.
         Book a free consultation and see how we can help your specific situation.
       </p>
@@ -34,7 +34,7 @@ const objections = [
       <div class="mb-12">
         <a
           href="/contact"
-          class="inline-flex items-center bg-white text-primary-600 hover:bg-gray-100 px-10 py-5 rounded-lg font-bold text-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          class="btn btn-secondary text-lg px-10"
           aria-label="Book your free 15-minute consultation"
         >
           Book Your Free 15-Minute Consult
@@ -42,20 +42,20 @@ const objections = [
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </a>
-        <p class="text-sm mt-4 opacity-75">
+        <p class="mt-4 text-sm opacity-75">
           No obligation • No sales pitch • Just honest advice for your business
         </p>
       </div>
 
       <!-- Objection handling -->
-      <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <div class="mb-12 grid gap-6 md:grid-cols-3">
         {objections.map(objection => (
-          <div class="text-center">
-            <div class="text-4xl mb-4">{objection.icon}</div>
-            <h3 class="font-semibold text-lg mb-2">
+          <div class="surface bg-white/10 p-6 text-center shadow-none">
+            <div class="mb-3 text-4xl">{objection.icon}</div>
+            <h3 class="font-semibold text-lg text-white">
               {objection.title}
             </h3>
-            <p class="text-sm opacity-90 leading-relaxed">
+            <p class="text-sm opacity-80">
               {objection.description}
             </p>
           </div>
@@ -64,12 +64,12 @@ const objections = [
 
       <!-- Secondary CTA -->
       <div class="border-t border-white/20 pt-8">
-        <p class="text-lg mb-6">
+        <p class="mb-6 text-lg">
           Not ready to book yet? Download our free Month-End Close Checklist.
         </p>
         <a
           href="/roi-calculator"
-          class="inline-flex items-center bg-primary-500 hover:bg-primary-400 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200"
+          class="btn btn-ghost border border-white/20 px-8 text-white hover:border-white hover:bg-white/10"
           aria-label="Get the free month-end close checklist"
         >
           Get Free Checklist

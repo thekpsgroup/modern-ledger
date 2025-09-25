@@ -1,195 +1,237 @@
 #!/usr/bin/env node
 
-import http from 'http';
-import https from 'https';
-import { URL } from 'url';
-import { readFileSync, readdirSync, statSync } from 'fs';
-import { join } from 'path';
+import { access, readdir, readFile } from 'node:fs/promises';
+import { constants } from 'node:fs';
+import path from 'node:path';
+import process from 'node:process';
+import { spawn } from 'node:child_process';
+import { setTimeout as delay } from 'node:timers/promises';
+import { JSDOM } from 'jsdom';
 
-class LinkChecker {
-  constructor(baseUrl = 'http://localhost:4321', distDir) {
-    this.baseUrl = baseUrl;
-    this.distDir = distDir;
-    this.checked = new Set();
-    this.broken = [];
-    this.warnings = [];
-  }
+const log = (...args) => console.log('[qa:links]', ...args);
 
-  async check(url) {
-    if (this.checked.has(url)) return;
-    this.checked.add(url);
+async function runCommand(command, args, options = {}) {
+	return new Promise((resolve, reject) => {
+		const child = spawn(command, args, {
+			shell: process.platform === 'win32',
+			stdio: options.stdio ?? 'inherit',
+			cwd: options.cwd ?? process.cwd(),
+			env: process.env,
+		});
 
-    // Skip favicon files as they're not critical
-    const urlObj = new URL(url);
-    if (urlObj.pathname.includes('favicon') || urlObj.pathname.includes('apple-touch-icon')) {
-      console.log(`⏭️  Skipping favicon: ${url}`);
-      return;
-    }
-
-    try {
-      // Convert URL to file path
-      const urlObj = new URL(url);
-      let filePath = urlObj.pathname;
-      if (filePath === '/' || filePath === '') {
-        filePath = '/index.html';
-      } else if (!filePath.endsWith('.html') && !filePath.includes('.')) {
-        filePath += '/index.html';
-      }
-
-      const fullPath = join(this.distDir, filePath.substring(1)); // Remove leading slash
-
-      // Check if file exists
-      try {
-        statSync(fullPath);
-        console.log(`✅ ${url} -> ${fullPath}`);
-      } catch (error) {
-        console.log(`❌ ${url} -> ${fullPath} (file not found)`);
-        this.broken.push({ url, error: 'File not found', type: 'internal' });
-        return;
-      }
-
-      // Read and parse HTML file
-      const content = readFileSync(fullPath, 'utf-8');
-      const links = this.extractLinks(content, url);
-
-      for (const link of links) {
-        if (link.startsWith('/')) {
-          // Internal link
-          const fullUrl = new URL(link, this.baseUrl).href;
-          await this.check(fullUrl);
-        } else if (link.startsWith('http') && !link.includes(this.baseUrl.replace('https://', '').replace('http://', ''))) {
-          // External link - just log for now (we won't check external links in static mode)
-          console.log(`🔗 External link: ${link}`);
-        }
-      }
-    } catch (error) {
-      console.log(`❌ ${url} - ${error.message}`);
-      this.broken.push({ url, error: error.message, type: 'internal' });
-    }
-  }
-
-  async checkExternal(url) {
-    if (this.checked.has(url)) return;
-    this.checked.add(url);
-
-    try {
-      const response = await this.fetchUrl(url);
-      if (response.status >= 400) {
-        this.warnings.push({ url, status: response.status, type: 'external' });
-      }
-    } catch (error) {
-      this.warnings.push({ url, error: error.message, type: 'external' });
-    }
-  }
-
-  fetchUrl(url) {
-    return new Promise((resolve, reject) => {
-      const protocol = url.startsWith('https:') ? https : http;
-      const req = protocol.get(url, (res) => {
-        let body = '';
-        res.on('data', (chunk) => {
-          if (body.length < 10000) { // Limit body size
-            body += chunk;
-          }
-        });
-        res.on('end', () => {
-          resolve({
-            status: res.statusCode,
-            contentType: res.headers['content-type'],
-            body
-          });
-        });
-      });
-
-      req.on('error', reject);
-      req.setTimeout(10000, () => {
-        req.destroy();
-        reject(new Error('Timeout'));
-      });
-    });
-  }
-
-  extractLinks(html, baseUrl) {
-    const links = [];
-    const linkRegex = /href=["']([^"']+)["']/g;
-    let match;
-
-    while ((match = linkRegex.exec(html)) !== null) {
-      const link = match[1];
-      if (!link.startsWith('#') && !link.startsWith('mailto:') && !link.startsWith('tel:')) {
-        links.push(link);
-      }
-    }
-
-    return [...new Set(links)]; // Remove duplicates
-  }
-
-  async start() {
-    console.log('🔗 Starting link checker...');
-    console.log(`Base URL: ${this.baseUrl}`);
-    console.log(`Dist directory: ${this.distDir}`);
-
-    try {
-      await this.check(this.baseUrl);
-
-      console.log(`\n📊 Link Check Results:`);
-      console.log(`   Total links checked: ${this.checked.size}`);
-      console.log(`   Broken internal links: ${this.broken.filter(l => l.type === 'internal').length}`);
-
-      if (this.broken.length > 0) {
-        console.log(`\n❌ Broken Links:`);
-        this.broken.forEach(link => {
-          console.log(`   ${link.url} - ${link.error}`);
-        });
-      }
-
-      if (this.broken.filter(l => l.type === 'internal').length > 0) {
-        console.log(`\n❌ Link check failed - broken internal links found`);
-        process.exit(1);
-      } else {
-        console.log(`\n✅ All internal links are working!`);
-      }
-
-    } catch (error) {
-      console.error('❌ Link checker failed:', error);
-      process.exit(1);
-    }
-  }
+		child.on('error', reject);
+		child.on('exit', (code) => {
+			if (code === 0) {
+				resolve();
+			} else {
+				reject(new Error(`${command} ${args.join(' ')} exited with code ${code}`));
+			}
+		});
+	});
 }
 
-// Check if server is running
-async function checkServer(url) {
-  try {
-    const response = await new Promise((resolve, reject) => {
-      const protocol = url.startsWith('https:') ? https : http;
-      protocol.get(url, (res) => {
-        resolve(res);
-      }).on('error', reject);
-    });
-    return true;
-  } catch (error) {
-    return false;
-  }
+async function ensureDist(distDir) {
+	try {
+		await access(distDir, constants.F_OK);
+		log('Found existing dist build.');
+	} catch {
+		log('dist folder not found, building site first...');
+		await runCommand('npm', ['run', 'build']);
+	}
+}
+
+async function walkHtmlFiles(dir) {
+	const entries = await readdir(dir, { withFileTypes: true });
+	const files = [];
+	for (const entry of entries) {
+		if (entry.name.startsWith('.')) continue;
+		const fullPath = path.join(dir, entry.name);
+		if (entry.isDirectory()) {
+			files.push(...(await walkHtmlFiles(fullPath)));
+		} else if (entry.isFile() && entry.name.endsWith('.html')) {
+			files.push(fullPath);
+		}
+	}
+	return files;
+}
+
+function normalizeInternalHref(href) {
+	const clean = href.split('#')[0].split('?')[0];
+	if (!clean) return null;
+	if (clean.endsWith('.xml') || clean.endsWith('.json') || clean.endsWith('.pdf')) return null;
+	if (clean.endsWith('/')) return `${clean}index.html`;
+	if (clean.endsWith('.html')) return clean;
+	return `${clean.replace(/\/$/, '')}/index.html`;
+}
+
+function resolveRelativeHref(filePath, href) {
+	const docDir = path.dirname(filePath);
+	const normalized = href.split('#')[0].split('?')[0];
+	if (!normalized) return null;
+	return path.normalize(path.join(docDir, normalized)).replace(/\\/g, '/');
+}
+
+async function checkInternalLink(distDir, sourceFile, href) {
+	const normalized = normalizeInternalHref(href);
+	if (!normalized) return null;
+	const filePath = path.join(distDir, normalized.startsWith('/') ? normalized.slice(1) : normalized);
+	try {
+		await access(filePath, constants.F_OK);
+		return null;
+	} catch {
+		return {
+			type: 'internal',
+			message: `Broken internal link -> ${href}`,
+			source: sourceFile,
+		};
+	}
+}
+
+async function checkRelativeLink(distDir, sourceFile, href) {
+	const candidate = resolveRelativeHref(sourceFile, href);
+	if (!candidate) return null;
+
+	const attempts = [];
+	const normalized = path.isAbsolute(candidate) ? candidate : path.resolve(candidate);
+	if (normalized.endsWith('.html')) {
+		attempts.push(normalized);
+	} else {
+		const trimmed = normalized.replace(/\/$/, '');
+		attempts.push(`${trimmed}.html`);
+		attempts.push(path.join(trimmed, 'index.html'));
+	}
+
+	for (const attempt of attempts) {
+		try {
+			await access(attempt, constants.F_OK);
+			return null;
+		} catch {
+			continue;
+		}
+	}
+
+	return {
+		type: 'internal',
+		message: `Broken relative link -> ${href}`,
+		source: sourceFile,
+	};
+}
+
+async function probeExternal(url) {
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 10000);
+	try {
+		const head = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: controller.signal });
+		if (head.ok) return null;
+		const getResponse = await fetch(url, { method: 'GET', redirect: 'follow', signal: controller.signal });
+		if (!getResponse.ok) {
+			return `${getResponse.status} ${getResponse.statusText}`;
+		}
+		return null;
+	} catch (error) {
+		return error instanceof Error ? error.message : 'Unknown fetch error';
+	} finally {
+		clearTimeout(timeout);
+	}
 }
 
 async function main() {
-  const baseUrl = process.env.SITE_URL || 'http://localhost:4321';
-  const distDir = join(process.cwd(), 'dist');
+	const projectRoot = process.cwd();
+	const distDir = path.join(projectRoot, 'dist');
+	await ensureDist(distDir);
 
-  console.log('🔗 Checking links in built files...');
+	const htmlFiles = await walkHtmlFiles(distDir);
+	if (htmlFiles.length === 0) {
+		log('No HTML files found in dist; nothing to check.');
+		return;
+	}
 
-  // Check if dist directory exists
-  try {
-    statSync(distDir);
-  } catch (error) {
-    console.error(`❌ Dist directory not found: ${distDir}`);
-    console.error('Please build the site first: npm run build');
-    process.exit(1);
-  }
+	const issues = [];
+	const externalMap = new Map();
 
-  const checker = new LinkChecker(baseUrl, distDir);
-  await checker.start();
+	for (const filePath of htmlFiles) {
+		const html = await readFile(filePath, 'utf-8');
+		const dom = new JSDOM(html);
+		const anchors = Array.from(dom.window.document.querySelectorAll('a[href]'));
+
+		for (const anchor of anchors) {
+			const href = (anchor.getAttribute('href') || '').trim();
+			if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+				continue;
+			}
+
+			if (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//')) {
+				const absoluteUrl = href.startsWith('//') ? `https:${href}` : href;
+				if (!externalMap.has(absoluteUrl)) {
+					externalMap.set(absoluteUrl, new Set());
+				}
+				externalMap.get(absoluteUrl).add(filePath);
+				continue;
+			}
+
+			if (href.startsWith('/')) {
+				const result = await checkInternalLink(distDir, filePath, href);
+				if (result) issues.push(result);
+				continue;
+			}
+
+			const result = await checkRelativeLink(distDir, filePath, href);
+			if (result) issues.push(result);
+		}
+	}
+
+	log(`Checking ${externalMap.size} external links...`);
+	const externalIssues = [];
+	const externalEntries = Array.from(externalMap.entries());
+	const concurrency = 5;
+	let index = 0;
+
+	async function worker() {
+		while (index < externalEntries.length) {
+			const currentIndex = index++;
+			const [url, sources] = externalEntries[currentIndex];
+			const status = await probeExternal(url);
+			if (status) {
+				externalIssues.push({
+					type: 'external',
+					message: `External link failed -> ${url} (${status})`,
+					sources: Array.from(sources),
+				});
+			} else {
+				log(`OK ${url}`);
+			}
+			await delay(50);
+		}
+	}
+
+	await Promise.all(Array.from({ length: Math.min(concurrency, externalEntries.length) }, worker));
+
+	if (externalIssues.length) {
+		issues.push(...externalIssues);
+	}
+
+	if (issues.length === 0) {
+		log(`✅ All links look good across ${htmlFiles.length} pages.`);
+		return;
+	}
+
+	log(`❌ Found ${issues.length} issues:`);
+	for (const issue of issues) {
+		if (issue.type === 'external') {
+			console.warn(` - ${issue.message}`);
+			console.warn(`   Referenced from:`);
+			for (const source of issue.sources) {
+				console.warn(`     • ${source}`);
+			}
+		} else {
+			console.warn(` - ${issue.message}`);
+			console.warn(`   Source: ${issue.source}`);
+		}
+	}
+	process.exitCode = 1;
 }
 
-// CLI execution
-main().catch(console.error);
+main().catch((err) => {
+	console.error('\n[qa:links] Error:', err instanceof Error ? err.message : err);
+	process.exit(1);
+});

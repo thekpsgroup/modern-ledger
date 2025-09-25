@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
@@ -14,15 +12,14 @@ import ExitIntentModal from '../components/ExitIntentModal.astro';
 ---
 
 <Layout
-  title="Modern Ledger - Professional Bookkeeping Services | Royse City, TX"
-  description="Bookkeeping without the payroll baggage. Monthly reconciliation, sharp reporting, and CFO-caliber clarity—without hiring in-house. Serving Royse City, TX and surrounding areas."
-  image="/og-home.jpg"
+  title="Modern Ledger - Bookkeeping Services | Royse City, TX"
+  description="Bookkeeping without the payroll baggage. Monthly reconciliation, sharp reporting, and CFO-caliber clarity for Royse City, TX businesses."
+  ogImage="/og-home.jpg"
 >
-  <Header />
   <StickyMobileCTA />
   <ExitIntentModal />
 
-  <main id="main-content">
+  <div class="flex flex-col">
     <Hero />
     <TrustBar />
     <ServicesGrid />
@@ -30,7 +27,5 @@ import ExitIntentModal from '../components/ExitIntentModal.astro';
     <ROICalculator />
     <FAQAccordion />
     <CTASection />
-  </main>
-
-  <Footer />
+  </div>
 </Layout>

@@ -25,11 +25,11 @@ const stats = [
 ];
 ---
 
-<section class="relative py-20 lg:py-28 overflow-hidden" style={backgroundImage ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;` : 'background: linear-gradient(to bottom right, #eff6ff, #ffffff);'}>
+<section class="section relative overflow-hidden" style={backgroundImage ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;` : 'background: linear-gradient(135deg, rgba(0,43,84,0.04), rgba(202,176,104,0.08))'}>
   <!-- Background Pattern (only if no background image) -->
   {!backgroundImage && (
-    <div class="absolute inset-0 opacity-5">
-      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(14, 165, 233, 0.3) 1px, transparent 0); background-size: 20px 20px;"></div>
+    <div class="pointer-events-none absolute inset-0 opacity-40">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(0, 43, 84, 0.2) 1px, transparent 0); background-size: 28px 28px;"></div>
     </div>
   )}
 
@@ -38,10 +38,10 @@ const stats = [
     <div class="absolute inset-0 bg-black bg-opacity-40"></div>
   )}
 
-  <div class="container mx-auto px-4 relative">
-    <div class="max-w-4xl mx-auto text-center">
+  <div class="container relative">
+    <div class="mx-auto max-w-content-lg text-center">
       <!-- Badge -->
-      <div class="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-8">
+      <div class="badge mx-auto mb-8 w-fit bg-white/80 text-brand-navy">
         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
         </svg>
@@ -49,20 +49,20 @@ const stats = [
       </div>
 
       <!-- Headline -->
-      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" class:list={["text-gray-900", { "text-white": backgroundImage }]}>
+      <h1 class="text-balance" class:list={["text-brand-navy", { "text-white": backgroundImage }]}>
         {title}
       </h1>
 
       <!-- Subheadline -->
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed" class:list={["text-gray-600", { "text-white": backgroundImage }]}>
+      <p class="text-balance text-body-lg mx-auto mb-10 max-w-content-md" class:list={["text-neutral-500", { "text-white/90": backgroundImage }]}>
         {subtitle}
       </p>
 
       <!-- CTAs -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+      <div class="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
         <a
           href={ctaLink}
-          class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          class="btn btn-primary text-lg px-8"
           aria-label={`Book a 15-minute consultation`}
         >
           {ctaText}
@@ -72,7 +72,7 @@ const stats = [
         </a>
         <a
           href="/pricing"
-          class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200"
+          class="btn btn-outline text-lg px-8"
           aria-label="View pricing options"
         >
           See Pricing
@@ -80,9 +80,9 @@ const stats = [
       </div>
 
       <!-- Trust Indicators -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm" class:list={["text-gray-500", { "text-white": backgroundImage }]}>
+      <div class="flex flex-col items-center justify-center gap-6 text-sm sm:flex-row" class:list={["text-neutral-500", { "text-white/80": backgroundImage }]}>
         <div class="flex items-center">
-          <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="mr-2 h-5 w-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
           </svg>
           No long-term contracts
@@ -103,14 +103,14 @@ const stats = [
     </div>
 
     <!-- Stats -->
-    <div class="max-w-6xl mx-auto mt-20">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="mx-auto mt-16 max-w-content-xl">
+      <div class="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
         {stats.map(stat => (
           <div class="text-center">
-            <div class="font-display text-3xl md:text-4xl font-bold mb-2" class:list={["text-primary-600", { "text-white": backgroundImage }]}>
+            <div class="font-display text-3xl font-semibold md:text-heading-4" class:list={["text-brand-navy", { "text-white": backgroundImage }]}>
               {stat.number}
             </div>
-            <div class="text-gray-600 font-medium" class:list={[{ "text-white": backgroundImage }]}>
+            <div class="text-sm font-medium uppercase tracking-wider text-neutral-500" class:list={[{ "text-white/80": backgroundImage }]}>
               {stat.label}
             </div>
           </div>

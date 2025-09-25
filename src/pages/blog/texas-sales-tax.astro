@@ -4,12 +4,12 @@ import { getEnv } from '../../lib/env';
 
 const env = getEnv();
 const pageTitle = "Texas Sales Tax Compliance | Modern Ledger";
-const pageDescription = "Essential guide to Texas sales tax requirements and compliance for small businesses.";
+const pageDescription = "Essential guide to Texas sales tax compliance for small businesses, covering nexus rules, filing schedules, rates, and practical tips to avoid costly penalties.";
 const canonicalUrl = `${env.SITE_URL}/blog/texas-sales-tax`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="min-h-screen bg-white">
     <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <header class="mb-12">
         <div class="text-sm text-orange-600 font-medium mb-4">Tax • February 28, 2024</div>
@@ -25,5 +25,5 @@ const canonicalUrl = `${env.SITE_URL}/blog/texas-sales-tax`;
         <p>Coming soon - comprehensive Texas sales tax compliance guide.</p>
       </div>
     </article>
-  </main>
+  </div>
 </Layout>

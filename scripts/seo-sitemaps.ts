@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
-import { writeFileSync, readdirSync, statSync, readFileSync } from 'fs';
-import { join, extname } from 'path';
+import { writeFileSync, readdirSync, statSync } from 'fs';
+import { join } from 'path';
 import { getEnv } from '../src/lib/env';
 
 const env = getEnv();
@@ -77,11 +77,6 @@ function findPages(dir: string): string[] {
 
   scan(dir);
   return pages;
-}
-
-function getLastModified(filePath: string): string {
-  const stat = statSync(filePath);
-  return stat.mtime.toISOString();
 }
 
 async function main() {

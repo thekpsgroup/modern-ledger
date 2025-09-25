@@ -1,12 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
 import ServicesGrid from '../../components/ServicesGrid.astro';
 import CTASection from '../../components/CTASection.astro';
 import FAQAccordion from '../../components/FAQAccordion.astro';
-import Footer from '../../components/Footer.astro';
 import { TESTIMONIALS } from '../../data/testimonials';
 
 // Filter testimonials for Caddo Mills, TX and surrounding areas
@@ -19,18 +17,15 @@ const localTestimonials = TESTIMONIALS.filter(testimonial =>
 
 const pageTitle = "Bookkeeping Services in Caddo Mills, TX | Modern Ledger";
 const pageDescription = "Professional bookkeeping services in Caddo Mills, TX. Serving small businesses in the area. QuickBooks experts with 5-star Google reviews.";
-const pageUrl = "https://modernledger.co/locations/caddo-mills-tx";
 
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  url={pageUrl}
-  image="/images/caddo-mills-tx-bookkeeping.jpg"
+  ogImage="/images/caddo-mills-tx-bookkeeping.jpg"
   type="website"
 >
-  <Header />
   <Hero
     title="Professional Bookkeeping Services in Caddo Mills, TX"
     subtitle="Expert QuickBooks bookkeeping for small businesses in Caddo Mills, TX and surrounding areas. Join 50+ local businesses saving time and money."
@@ -159,6 +154,4 @@ const pageUrl = "https://modernledger.co/locations/caddo-mills-tx";
       </div>
     </div>
   </section>
-
-  <Footer />
 </Layout>

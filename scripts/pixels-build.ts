@@ -247,7 +247,7 @@ async function main() {
   const pixelScripts = generatePixelScripts();
 
   // Write pixels library
-  const libPath = join(process.cwd(), 'src', 'lib', 'pixels.mjs');
+  const libPath = join(process.cwd(), 'src', 'lib', 'pixels.ts');
   writeFileSync(libPath, pixelsCode);
 
   // Write pixel scripts (to be included in layout)

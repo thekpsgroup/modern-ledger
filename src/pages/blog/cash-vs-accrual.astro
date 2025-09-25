@@ -4,12 +4,12 @@ import { getEnv } from '../../lib/env';
 
 const env = getEnv();
 const pageTitle = "Cash vs Accrual Accounting | Modern Ledger";
-const pageDescription = "Understanding the differences between cash and accrual accounting methods for small businesses.";
+const pageDescription = "Understand the differences between cash and accrual accounting for small businesses to align bookkeeping, taxes, and growth decisions with the right method.";
 const canonicalUrl = `${env.SITE_URL}/blog/cash-vs-accrual`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="min-h-screen bg-white">
     <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <header class="mb-12">
         <div class="text-sm text-purple-600 font-medium mb-4">Accounting • March 5, 2024</div>
@@ -25,5 +25,5 @@ const canonicalUrl = `${env.SITE_URL}/blog/cash-vs-accrual`;
         <p>Coming soon - detailed comparison of accounting methods.</p>
       </div>
     </article>
-  </main>
+  </div>
 </Layout>

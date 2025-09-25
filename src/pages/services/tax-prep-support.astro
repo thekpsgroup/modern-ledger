@@ -4,12 +4,12 @@ import { getEnv } from '../../lib/env';
 
 const env = getEnv();
 const pageTitle = "Tax Preparation Support | Modern Ledger";
-const pageDescription = "Professional tax preparation support services. Get your books tax-ready with expert assistance.";
+const pageDescription = "Professional tax preparation support that organizes books, gathers documents, and collaborates with CPAs to keep filings accurate, timely, and stress-free.";
 const canonicalUrl = `${env.SITE_URL}/services/tax-prep-support`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
-  <main class="min-h-screen bg-white">
+  <div class="min-h-screen bg-white">
     <section class="bg-gradient-to-br from-blue-50 to-cyan-100 py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
@@ -36,5 +36,5 @@ const canonicalUrl = `${env.SITE_URL}/services/tax-prep-support`;
         </p>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>
