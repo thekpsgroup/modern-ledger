@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="avatar-jennifer">
+  <defs>
+    <radialGradient id="skinGradientJen" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#FAD5D1"/>
+      <stop offset="100%" style="stop-color:#E8B4B8"/>
+    </radialGradient>
+    <radialGradient id="hairGradientJen" cx="50%" cy="20%" r="60%">
+      <stop offset="0%" style="stop-color:#4A5568"/>
+      <stop offset="100%" style="stop-color:#2D3748"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="100" cy="100" r="100" fill="#F8FAFC"/>
+
+  <!-- Hair -->
+  <ellipse cx="100" cy="75" rx="45" ry="40" fill="url(#hairGradientJen)"/>
+  <ellipse cx="100" cy="70" rx="40" ry="30" fill="url(#hairGradientJen)"/>
+  <ellipse cx="100" cy="85" rx="35" ry="25" fill="url(#hairGradientJen)"/>
+  <ellipse cx="80" cy="75" rx="12" ry="25" fill="url(#hairGradientJen)" transform="rotate(-20 80 75)"/>
+  <ellipse cx="120" cy="75" rx="12" ry="25" fill="url(#hairGradientJen)" transform="rotate(20 120 75)"/>
+
+  <!-- Face -->
+  <circle cx="100" cy="95" r="35" fill="url(#skinGradientJen)"/>
+
+  <!-- Eyes -->
+  <ellipse cx="88" cy="88" rx="4.5" ry="4" fill="#2D3748"/>
+  <ellipse cx="112" cy="88" rx="4.5" ry="4" fill="#2D3748"/>
+  <circle cx="89" cy="86" r="1.5" fill="#FFFFFF"/>
+  <circle cx="113" cy="86" r="1.5" fill="#FFFFFF"/>
+
+  <!-- Eyebrows -->
+  <ellipse cx="88" cy="82" rx="6" ry="1.5" fill="#2D3748"/>
+  <ellipse cx="112" cy="82" rx="6" ry="1.5" fill="#2D3748"/>
+
+  <!-- Nose -->
+  <ellipse cx="100" cy="95" rx="2" ry="3" fill="#E8B4B8"/>
+
+  <!-- Mouth -->
+  <path d="M 95 105 Q 100 108 105 105" stroke="#C53030" stroke-width="2" fill="#FAD5D1" stroke-linecap="round"/>
+
+  <!-- Blush -->
+  <circle cx="85" cy="100" r="3" fill="#FAD5D1" opacity="0.6"/>
+  <circle cx="115" cy="100" r="3" fill="#FAD5D1" opacity="0.6"/>
+
+  <!-- Shirt -->
+  <rect x="65" y="130" width="70" height="50" rx="35" fill="#ED64A6"/>
+  <rect x="75" y="140" width="50" height="30" rx="25" fill="#D53F8C"/>
+</svg>

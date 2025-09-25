@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" class="location-hero-heath">
+  <defs>
+    <linearGradient id="heroHeath" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D9488"/>
+      <stop offset="50%" style="stop-color:#14B8A6"/>
+      <stop offset="100%" style="stop-color:#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#heroHeath)"/>
+  <circle cx="1600" cy="200" r="150" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="200" cy="800" r="200" fill="rgba(255,255,255,0.05)"/>
+  <text x="960" y="500" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">Heath, TX</text>
+  <text x="960" y="580" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle">Professional Bookkeeping Services</text>
+</svg>

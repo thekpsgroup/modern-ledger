@@ -228,7 +228,7 @@ const generatedFormId = providedFormId ?? `lead-form-${Math.random().toString(36
 
 <script is:inline define:vars={{ formId: generatedFormId, successMessage }}>
   (() => {
-  const formId = {generatedFormId};
+  const formId = generatedFormId;
     if (typeof window === 'undefined') return;
 
     const form = document.querySelector(`[data-lead-form="${formId}"]`);

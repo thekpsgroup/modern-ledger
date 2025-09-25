@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="avatar-mike">
+  <defs>
+    <radialGradient id="skinGradientMike" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#F5CBA7"/>
+      <stop offset="100%" style="stop-color:#D2B48C"/>
+    </radialGradient>
+    <radialGradient id="hairGradientMike" cx="50%" cy="20%" r="60%">
+      <stop offset="0%" style="stop-color:#2D3748"/>
+      <stop offset="100%" style="stop-color:#1A202C"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="100" cy="100" r="100" fill="#F8FAFC"/>
+
+  <!-- Hair -->
+  <ellipse cx="100" cy="70" rx="42" ry="30" fill="url(#hairGradientMike)"/>
+  <ellipse cx="100" cy="75" rx="38" ry="25" fill="url(#hairGradientMike)"/>
+  <rect x="75" y="55" width="50" height="20" rx="25" fill="url(#hairGradientMike)"/>
+
+  <!-- Face -->
+  <circle cx="100" cy="95" r="35" fill="url(#skinGradientMike)"/>
+
+  <!-- Eyes -->
+  <circle cx="88" cy="88" r="4" fill="#2D3748"/>
+  <circle cx="112" cy="88" r="4" fill="#2D3748"/>
+  <circle cx="89" cy="86" r="1.5" fill="#FFFFFF"/>
+  <circle cx="113" cy="86" r="1.5" fill="#FFFFFF"/>
+
+  <!-- Eyebrows -->
+  <ellipse cx="88" cy="82" rx="6" ry="2" fill="#2D3748"/>
+  <ellipse cx="112" cy="82" rx="6" ry="2" fill="#2D3748"/>
+
+  <!-- Nose -->
+  <ellipse cx="100" cy="95" rx="2" ry="3" fill="#D2B48C"/>
+
+  <!-- Mouth -->
+  <ellipse cx="100" cy="108" rx="4" ry="2" fill="#C53030"/>
+
+  <!-- Mustache -->
+  <ellipse cx="100" cy="105" rx="8" ry="3" fill="#2D3748"/>
+
+  <!-- Shirt -->
+  <rect x="65" y="130" width="70" height="50" rx="35" fill="#3182CE"/>
+  <rect x="75" y="140" width="50" height="30" rx="25" fill="#2C5282"/>
+</svg>
