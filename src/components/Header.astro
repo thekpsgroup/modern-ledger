@@ -49,6 +49,9 @@ const currentPath = Astro.url.pathname;
             </a>
           );
         })}
+      ---
+      import { getEnv } from '../lib/env';
+      ---
       </nav>
 
       <!-- CTA Button -->
@@ -63,7 +66,8 @@ const currentPath = Astro.url.pathname;
         </a>
         <a
           href="/contact"
-          class="btn btn-primary h-11 px-6 text-sm shadow-soft"
+      const currentPath = Astro.url.pathname;
+      ---
           aria-label="Talk to a Modern Ledger expert"
         >
           Talk to a Texas-based expert
