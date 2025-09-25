@@ -1,5 +1,4 @@
 ---
-// Navigation data
 import { getEnv } from '../lib/env';
 
 const navItems = [
@@ -17,7 +16,6 @@ const phoneDisplay = phoneDigits.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
 const phoneHref = `tel:+1${phoneDigits}`;
 const currentPath = Astro.url.pathname;
 ---
-// Navigation data
 <header
   data-header
   class="sticky top-0 z-50 border-b border-brand-navy/10 bg-white/90 transition-all duration-300 supports-[backdrop-filter]:backdrop-blur backdrop-blur"
