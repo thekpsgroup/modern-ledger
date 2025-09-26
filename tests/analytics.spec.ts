@@ -166,7 +166,7 @@ test.describe('Analytics Integration Tests', () => {
     });
   });
 
-  test('GA4 consent management works correctly', async ({ page }) => {
+  test('GA4 consent management works correctly', async ({ page, browserName }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     await waitForAnalyticsReady(page);
@@ -174,7 +174,7 @@ test.describe('Analytics Integration Tests', () => {
     const initialConsentHandle = await page.waitForFunction(() => {
       const events = window.__trackedEvents || [];
       return events.find(event => Array.isArray(event) && event[0] === 'consent' && event[1] === 'default') || null;
-    });
+    }, { timeout: browserName === 'webkit' ? 10000 : 5000 });
     const initialConsent = await initialConsentHandle.jsonValue();
     expect(initialConsent[2].analytics_storage).toBe('denied');
 
@@ -188,12 +188,12 @@ test.describe('Analytics Integration Tests', () => {
     const consentUpdateHandle = await page.waitForFunction(() => {
       const events = window.__trackedEvents || [];
       return events.find(event => Array.isArray(event) && event[0] === 'consent' && event[1] === 'update') || null;
-    });
+    }, { timeout: browserName === 'webkit' ? 10000 : 5000 });
     const consentUpdate = await consentUpdateHandle.jsonValue();
     expect(consentUpdate[2].analytics_storage).toBe('granted');
   });
 
-  test('Lead form submission tracks correctly', async ({ page }) => {
+  test('Lead form submission tracks correctly', async ({ page, browserName }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     await waitForAnalyticsReady(page);
@@ -215,24 +215,25 @@ test.describe('Analytics Integration Tests', () => {
     await page.fill('#last-name', 'User');
     await page.fill('#email', 'test@example.com');
     await page.fill('#phone', '(555) 123-4567');
-    await page.fill('textarea[name="message"]', 'Test message');
+    await page.fill('#message', 'Test message');
 
-    // Submit form
-  const visibleSubmit = page.locator('#closing-cta-form button[type="submit"]:visible').first();
-  await visibleSubmit.waitFor({ state: 'visible' });
-  await visibleSubmit.click();
+    // Submit form and wait for the analytics event
+    await page.locator('#closing-cta-form button[type="submit"]').click();
+
+    // Wait a moment for the async form submission to complete
+    await page.waitForTimeout(1000);
 
     const leadEventHandle = await page.waitForFunction(() => {
       const events = window.__trackedEvents || [];
       return events.find(event => Array.isArray(event) && event[0] === 'event' && event[1] === 'lead_submit') || null;
-    });
+    }, { timeout: browserName === 'firefox' ? 10000 : 5000 });
     const leadEvent = await leadEventHandle.jsonValue();
     expect(leadEvent).toBeTruthy();
-    expect(leadEvent[2].form_id).toBeDefined();
+    expect(leadEvent[2].form_id).toBe('closing-cta-form');
     expect(leadEvent[2].page_path).toBe('/');
   });
 
-  test('CTA clicks are tracked', async ({ page }) => {
+  test('CTA clicks are tracked', async ({ page, browserName }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     await waitForAnalyticsReady(page);
@@ -267,10 +268,13 @@ test.describe('Analytics Integration Tests', () => {
     let ctaButton = await findCTA();
 
     if (!ctaButton) {
-      const mobileMenuButton = page.locator('#mobile-menu-button:visible');
-      if (await mobileMenuButton.count()) {
-        await mobileMenuButton.click();
-        await page.locator('#mobile-menu nav').waitFor({ state: 'visible' });
+      const mobileMenuToggle = page.locator('[data-testid="mobile-menu-toggle"]:visible');
+      if (await mobileMenuToggle.count()) {
+        const expanded = await mobileMenuToggle.getAttribute('aria-expanded');
+        if (expanded !== 'true') {
+          await mobileMenuToggle.click();
+        }
+        await page.locator('[data-testid="mobile-menu-panel"] nav').waitFor({ state: 'visible' });
       }
       ctaButton = await findCTA();
     }
@@ -293,28 +297,36 @@ test.describe('Analytics Integration Tests', () => {
     const ctaEventHandle = await page.waitForFunction(() => {
       const events = window.__trackedEvents || [];
       return events.find(event => Array.isArray(event) && event[0] === 'event' && event[1] === 'cta_click') || null;
-    });
+    }, { timeout: browserName === 'firefox' ? 10000 : 5000 });
     const ctaEvent = await ctaEventHandle.jsonValue();
     expect(ctaEvent).toBeTruthy();
     expect(ctaEvent[2].cta_text).toBeDefined();
     expect(ctaEvent[2].page_path).toBe('/');
   });
 
-  test('Phone and email links are tracked', async ({ page }) => {
+  // 🔧 Copilot: Mobile Safari needs extra time for GA events—after clicking, wait briefly for the analytics request before asserting.
+  test('Phone and email links are tracked', async ({ page, browserName }) => {
     await page.goto('/contact');
     await page.waitForLoadState('networkidle');
     await waitForAnalyticsReady(page);
     await page.waitForFunction(() => window.__analyticsClickTrackingReady === true);
 
     const ensureMobileMenuOpen = async () => {
-      const mobileMenuButton = page.locator('#mobile-menu-button:visible');
-      if (await mobileMenuButton.count()) {
-        const expanded = await mobileMenuButton.getAttribute('aria-expanded');
-        if (expanded !== 'true') {
-          await mobileMenuButton.click();
-          await page.locator('#mobile-menu nav').waitFor({ state: 'visible' });
-        }
+      const viewport = page.viewportSize();
+      if (viewport && viewport.width >= 768) {
+        return;
       }
+
+      const mobileMenuToggle = page.locator('[data-testid="mobile-menu-toggle"]:visible');
+      if (!(await mobileMenuToggle.count())) {
+        return;
+      }
+
+      const expanded = await mobileMenuToggle.getAttribute('aria-expanded');
+      if (expanded !== 'true') {
+        await mobileMenuToggle.click();
+      }
+      await page.locator('[data-testid="mobile-menu-panel"] nav').waitFor({ state: 'visible' });
     };
 
     // Find phone link
@@ -334,10 +346,14 @@ test.describe('Analytics Integration Tests', () => {
         }, { capture: true });
       });
       await phoneLink.click({ noWaitAfter: true });
+      await page.waitForTimeout(500);
+
+      // Increased timeout for Mobile Safari
+      const timeout = browserName === 'webkit' ? 10000 : 5000;
       const callEventHandle = await page.waitForFunction(() => {
         const events = window.__trackedEvents || [];
         return events.find(event => Array.isArray(event) && event[0] === 'event' && event[1] === 'call_click') || null;
-      });
+      }, { timeout });
       const callEvent = await callEventHandle.jsonValue();
       expect(callEvent).toBeTruthy();
       expect(callEvent[2].phone_number).toBeDefined();
@@ -360,12 +376,16 @@ test.describe('Analytics Integration Tests', () => {
         }, { capture: true });
       });
       await emailLink.click({ noWaitAfter: true });
+      await page.waitForTimeout(500);
       const emailEventsDebug = await page.evaluate(() => window.__trackedEvents || []);
       console.log('Email events after click:', emailEventsDebug);
+
+      // Increased timeout for Mobile Safari
+      const timeout = browserName === 'webkit' ? 10000 : 5000;
       const emailEventHandle = await page.waitForFunction(() => {
         const events = window.__trackedEvents || [];
         return events.find(event => Array.isArray(event) && event[0] === 'event' && event[1] === 'email_click') || null;
-      });
+      }, { timeout });
       const emailEvent = await emailEventHandle.jsonValue();
       expect(emailEvent).toBeTruthy();
       expect(emailEvent[2].email_address).toBeDefined();

@@ -226,7 +226,7 @@ const generatedFormId = providedFormId ?? `lead-form-${Math.random().toString(36
   </form>
 </div>
 
-<script is:inline define:vars={{ formId: generatedFormId, successMessage }}>
+<script lang="ts" is:inline define:vars={{ formId: generatedFormId, successMessage }}>
   (() => {
   const formId = generatedFormId;
     if (typeof window === 'undefined') return;
@@ -391,8 +391,8 @@ const generatedFormId = providedFormId ?? `lead-form-${Math.random().toString(36
         prefillFromQuery();
 
         // Track lead form submission
-        if (typeof window !== 'undefined' && (window as any).analytics?.trackLeadSubmit) {
-          (window as any).analytics.trackLeadSubmit(generatedFormId, window.location.pathname);
+        if (typeof window !== 'undefined' && window.analytics?.trackLeadSubmit) {
+          window.analytics.trackLeadSubmit(generatedFormId, window.location.pathname);
         }
 
         if (typeof window.gtag === 'function') {

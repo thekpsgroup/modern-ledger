@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro';
 import { z } from 'zod';
 import getEnv from '../../../lib/env';
 
+export const prerender = false;
+
 const env = getEnv();
 const formsubmitEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(env.COMPANY_EMAIL)}`;
 
@@ -211,3 +213,15 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 };
+
+export const GET: APIRoute = () =>
+  new Response(
+    JSON.stringify({ error: 'Method not allowed. Use POST.' }),
+    {
+      status: 405,
+      headers: {
+        'Content-Type': 'application/json',
+        Allow: 'POST'
+      }
+    }
+  );

@@ -1,5 +1,26 @@
 import { test, expect } from '@playwright/test';
+import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+
+const openMobileMenuIfNeeded = async (page: Page) => {
+  const viewport = page.viewportSize();
+  if (viewport && viewport.width >= 768) {
+    return false;
+  }
+
+  const mobileMenuToggle = page.locator('[data-testid="mobile-menu-toggle"]:visible');
+  if (!(await mobileMenuToggle.count())) {
+    return false;
+  }
+
+  const expanded = await mobileMenuToggle.getAttribute('aria-expanded');
+  if (expanded !== 'true') {
+    await mobileMenuToggle.click();
+  }
+
+  await page.locator('[data-testid="mobile-menu-panel"] nav').waitFor({ state: 'visible' });
+  return true;
+};
 
 test.describe('Modern Ledger E2E Tests', () => {
   test.describe.configure({ mode: 'parallel' });
@@ -17,18 +38,7 @@ test.describe('Modern Ledger E2E Tests', () => {
       { text: 'Contact', href: '/contact' }
     ];
 
-    const maybeOpenMobileMenu = async () => {
-      const mobileMenuButton = page.locator('#mobile-menu-button:visible');
-      if (await mobileMenuButton.count()) {
-        const expanded = await mobileMenuButton.getAttribute('aria-expanded');
-        if (expanded !== 'true') {
-          await mobileMenuButton.click();
-          await page.locator('#mobile-menu nav').waitFor({ state: 'visible' });
-        }
-        return true;
-      }
-      return false;
-    };
+    const maybeOpenMobileMenu = async () => openMobileMenuIfNeeded(page);
 
     for (const link of navLinks) {
       const desktopLink = page.locator('header nav').getByRole('link', { name: link.text });
@@ -38,7 +48,7 @@ test.describe('Modern Ledger E2E Tests', () => {
       }
 
       const menuOpened = await maybeOpenMobileMenu();
-      const mobileLink = page.locator('#mobile-menu').getByRole('link', { name: link.text });
+      const mobileLink = page.locator('[data-testid="mobile-menu-panel"]').getByRole('link', { name: link.text });
       if (menuOpened && (await mobileLink.count())) {
         await expect(mobileLink).toBeVisible();
         await expect(mobileLink).toHaveAttribute('href', link.href);
@@ -222,6 +232,7 @@ test.describe('Modern Ledger E2E Tests', () => {
     }
   });
 
+  // 🔧 Copilot: Mobile layouts hide the primary nav. If the "Services" link isn't visible, open the mobile menu toggle first.
   // 404 tests
   test('404: random path returns custom 404', async ({ page }) => {
     await page.goto('/random-nonexistent-path');
@@ -232,21 +243,21 @@ test.describe('Modern Ledger E2E Tests', () => {
     // Check for navigation links
     const homeLink = page.locator('a[href="/"]').first();
     if (!(await homeLink.isVisible())) {
-      const mobileMenuButton = page.locator('#mobile-menu-button:visible');
-      if (await mobileMenuButton.count()) {
-        await mobileMenuButton.click();
-        await page.locator('#mobile-menu nav').waitFor({ state: 'visible' });
-      }
+      await openMobileMenuIfNeeded(page);
     }
-
-    await expect(page.locator('a[href="/"]').first()).toBeVisible();
+    await expect(homeLink).toBeVisible();
 
     const servicesLink = page.locator('a[href*="services"]').first();
     if (!(await servicesLink.isVisible())) {
-      const mobileServicesLink = page.locator('#mobile-menu').getByRole('link', { name: /services/i });
-      if (await mobileServicesLink.count()) {
-        await expect(mobileServicesLink.first()).toBeVisible();
-        return;
+      const menuOpened = await openMobileMenuIfNeeded(page);
+      if (menuOpened) {
+        const mobileServicesLink = page
+          .locator('[data-testid="mobile-menu-panel"]').getByRole('link', { name: /services/i })
+          .first();
+        if (await mobileServicesLink.count()) {
+          await expect(mobileServicesLink).toBeVisible();
+          return;
+        }
       }
     }
 
@@ -508,6 +519,7 @@ test.describe('Accessibility Tests', () => {
 });
 
 // Visual regression tests
+// To refresh visual baselines after intentional layout updates, run: npm run test:update-snapshots
 test.describe('Visual Regression Tests', () => {
   const pages = [
     '/',
@@ -528,27 +540,65 @@ test.describe('Visual Regression Tests', () => {
   for (const pagePath of pages) {
     test(`Visual regression: ${pagePath} - desktop`, async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
+
+      // Ensure consistent cookie consent state to prevent banner from showing/hiding
+      await page.addInitScript(() => {
+        localStorage.setItem('cookie-consent', 'accepted');
+        localStorage.setItem('cookie-consent-version', '1.0');
+        localStorage.setItem('analytics-cookies', 'true');
+        localStorage.setItem('marketing-cookies', 'true');
+      });
+
       await page.goto(pagePath);
       await page.waitForLoadState('networkidle');
+
+      // Additional wait for any dynamic content to stabilize
+      await page.waitForTimeout(1000);
+
+      // Wait for fonts to load
+      await page.waitForFunction(() => {
+        return document.fonts.ready;
+      });
 
       // Take full page screenshot (except for locations which is too long)
       const isFullPage = !pagePath.includes('/locations');
       await expect(page).toHaveScreenshot(`${pagePath.replace(/\//g, '-')}-desktop.png`, {
         fullPage: isFullPage,
-        threshold: 0.001 // 0.1% difference threshold
+        threshold: 0.001, // 0.1% difference threshold
+        animations: 'disabled',
+        caret: 'hide'
       });
     });
 
     test(`Visual regression: ${pagePath} - mobile`, async ({ page }) => {
       await page.setViewportSize({ width: 360, height: 740 });
+
+      // Ensure consistent cookie consent state to prevent banner from showing/hiding
+      await page.addInitScript(() => {
+        localStorage.setItem('cookie-consent', 'accepted');
+        localStorage.setItem('cookie-consent-version', '1.0');
+        localStorage.setItem('analytics-cookies', 'true');
+        localStorage.setItem('marketing-cookies', 'true');
+      });
+
       await page.goto(pagePath);
       await page.waitForLoadState('networkidle');
+
+      // Additional wait for any dynamic content to stabilize
+      await page.waitForTimeout(1000);
+
+      // Wait for fonts to load
+      await page.waitForFunction(() => {
+        return document.fonts.ready;
+      });
 
       // Take full page screenshot (except for locations which is too long)
       const isFullPage = !pagePath.includes('/locations');
       await expect(page).toHaveScreenshot(`${pagePath.replace(/\//g, '-')}-mobile.png`, {
         fullPage: isFullPage,
-        threshold: 0.001 // 0.1% difference threshold
+        threshold: 0.001, // 0.1% difference threshold
+        animations: 'disabled',
+        caret: 'hide'
       });
     });
   }

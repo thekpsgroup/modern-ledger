@@ -66,18 +66,27 @@ const heroSteps = [
 ];
 ---
 
+<style>
+  .hero-gradient-bg {
+    background: linear-gradient(135deg, rgba(0,43,84,0.04), rgba(202,176,104,0.08));
+  }
+  .dotted-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0, 43, 84, 0.16) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+</style>
+
 <section
   class="section relative overflow-hidden"
-  style={backgroundImage
-    ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;`
-    : 'background: linear-gradient(135deg, rgba(0,43,84,0.04), rgba(202,176,104,0.08))'}
+  class:list={[
+    backgroundImage
+      ? "bg-cover bg-center"
+      : "hero-gradient-bg"
+  ]}
+  style={backgroundImage ? `background-image: url('${backgroundImage}');` : undefined}
 >
   {!backgroundImage && (
-    <div class="pointer-events-none absolute inset-0 opacity-40">
-      <div
-        class="absolute inset-0"
-        style="background-image: radial-gradient(circle at 1px 1px, rgba(0, 43, 84, 0.16) 1px, transparent 0); background-size: 28px 28px;"
-      ></div>
+    <div class="pointer-events-none absolute inset-0 opacity-40 dotted-bg">
     </div>
   )}
 
@@ -136,7 +145,7 @@ const heroSteps = [
           </a>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-neutral-400">
+        <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500">
           {heroIndustries.map((industry) => (
             <span class="rounded-full border border-neutral-100 bg-white px-3 py-2 text-[0.65rem] text-neutral-500">
               {industry}
@@ -157,7 +166,7 @@ const heroSteps = [
                   {stat.number}
                   {stat.suffix && <span class="text-base font-medium">{stat.suffix}</span>}
                 </div>
-                <p class="m-0 text-xs text-neutral-400" class:list={[{ 'text-white/70': Boolean(backgroundImage) }]}>
+                <p class="m-0 text-xs text-neutral-500" class:list={[{ 'text-white/70': Boolean(backgroundImage) }]}>
                   {stat.label}
                 </p>
               </div>
@@ -169,7 +178,7 @@ const heroSteps = [
       <div class="relative">
         <div class="grid gap-6">
           <div class="rounded-[32px] border border-brand-navy/10 bg-white/95 p-6 shadow-soft backdrop-blur">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-400">
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
               Why finance teams switch to Modern Ledger
             </p>
             <div class="mt-5 grid gap-4">
@@ -202,7 +211,7 @@ const heroSteps = [
           </div>
 
           <div class="rounded-3xl border border-brand-navy/10 bg-white/95 p-6 shadow-soft">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-400">What the first month includes</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">What the first month includes</p>
             <ul class="mt-4 space-y-3 text-sm text-neutral-600">
               {heroSteps.map((step) => (
                 <li class="flex items-start gap-3">
@@ -219,7 +228,7 @@ const heroSteps = [
     </div>
 
     <div class="mt-16 flex flex-wrap items-center gap-6 rounded-3xl border border-white/60 bg-white/90 px-6 py-4 shadow-soft" class:list={[{ 'bg-white/15 text-white': Boolean(backgroundImage) }]}>
-      <span class="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-400" class:list={[{ 'text-white/70': Boolean(backgroundImage) }]}>
+      <span class="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500" class:list={[{ 'text-white/70': Boolean(backgroundImage) }]}>
         Trusted by teams running on
       </span>
       <div class="flex flex-wrap items-center gap-6">

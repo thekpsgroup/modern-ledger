@@ -182,27 +182,27 @@ const finalOgImage = ogImage || defaultOgImage;
 
     <!-- Cookie Customization Panel (Hidden by default) -->
     <div id="cookie-customization" class="hidden mt-4 pt-4 border-t border-white/10">
-      <div class="space-y-3">
+        <div class="space-y-3">
         <div class="flex items-center justify-between">
-          <div>
+          <label for="essential-cookies">
             <h4 class="font-medium">Essential Cookies</h4>
             <p class="text-xs text-white/60">Required for website functionality</p>
-          </div>
-          <input type="checkbox" checked disabled class="rounded border-white/20 bg-white/10" />
+          </label>
+          <input type="checkbox" id="essential-cookies" checked disabled class="rounded border-white/20 bg-white/10" title="Essential Cookies" />
         </div>
         <div class="flex items-center justify-between">
-          <div>
+          <label for="analytics-cookies">
             <h4 class="font-medium">Analytics Cookies</h4>
             <p class="text-xs text-white/60">Help us improve our website</p>
-          </div>
-          <input type="checkbox" id="analytics-cookies" class="rounded border-white/20 bg-white/10" />
+          </label>
+          <input type="checkbox" id="analytics-cookies" class="rounded border-white/20 bg-white/10" title="Analytics Cookies" />
         </div>
         <div class="flex items-center justify-between">
-          <div>
+          <label for="marketing-cookies">
             <h4 class="font-medium">Marketing Cookies</h4>
             <p class="text-xs text-white/60">Personalized ads and content</p>
-          </div>
-          <input type="checkbox" id="marketing-cookies" class="rounded border-white/20 bg-white/10" />
+          </label>
+          <input type="checkbox" id="marketing-cookies" class="rounded border-white/20 bg-white/10" title="Marketing Cookies" />
         </div>
         <div class="flex justify-end gap-2 mt-3">
           <button id="save-preferences" class="btn btn-primary text-sm">Save Preferences</button>
