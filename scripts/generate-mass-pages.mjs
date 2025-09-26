@@ -8,7 +8,9 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 
+const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -170,7 +172,7 @@ class MassPageGenerator {
   }
 
   async generateMassContent() {
-    console.log('🚀 Starting mass page generation...');
+    console.log('Starting mass page generation...');
     console.log(`Target: ${CONFIG.totalTarget} pages`);
     console.log(`Batch size: ${CONFIG.batchSize} pages`);
     console.log('');
@@ -189,10 +191,10 @@ class MassPageGenerator {
 
     const duration = (Date.now() - this.startTime) / 1000;
     console.log('');
-    console.log(`✅ Mass generation completed!`);
-    console.log(`📊 Total pages generated: ${this.generatedCount}`);
-    console.log(`⏱️  Total time: ${duration.toFixed(2)} seconds`);
-    console.log(`📈 Average: ${(this.generatedCount / duration).toFixed(2)} pages/second`);
+    console.log(`Mass generation completed!`);
+    console.log(`Total pages generated: ${this.generatedCount}`);
+    console.log(`Total time: ${duration.toFixed(2)} seconds`);
+    console.log(`Average: ${(this.generatedCount / duration).toFixed(2)} pages/second`);
   }
 
   ensureDirectories() {
@@ -200,32 +202,32 @@ class MassPageGenerator {
     dirs.forEach(dir => {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
-        console.log(`📁 Created directory: ${dir}`);
+        console.log(`Created directory: ${dir}`);
       }
     });
   }
 
   async generateBlogPosts() {
-    console.log('📝 Generating blog posts...');
+    console.log('Generating blog posts...');
 
     const topics = this.flattenTopics();
     console.log(`Found ${topics.length} potential topics`);
 
-    // Generate only first 10 for testing
-    const testTopics = topics.slice(0, 10);
-    console.log(`Testing with ${testTopics.length} topics`);
+    // Generate all topics for full SEO impact
+    const allTopics = topics.slice(0, 200); // Generate up to 200 blog posts
+    console.log(`Generating ${allTopics.length} blog posts for maximum SEO impact`);
 
-    for (const topic of testTopics) {
+    for (const topic of allTopics) {
       console.log(`Generating: ${topic}`);
       await this.generateBlogPost(topic);
       await this.delay(CONFIG.delayBetweenGenerations);
     }
 
-    console.log(`📊 Generated ${Math.min(10, this.generatedCount)} blog posts in test batch...`);
+    console.log(`Generated ${Math.min(200, this.generatedCount)} blog posts`);
   }
 
   async generateServicePages() {
-    console.log('🛠️  Generating service pages...');
+    console.log('Generating service pages...');
 
     const services = [
       'bookkeeping-services',
@@ -243,7 +245,7 @@ class MassPageGenerator {
   }
 
   async generateLocationPages() {
-    console.log('📍 Generating location pages...');
+    console.log('Generating location pages...');
 
     const locations = TEXAS_CITIES.slice(0, 50); // Generate for top 50 cities
 
@@ -830,7 +832,7 @@ const canonicalUrl = \`\${env.SITE_URL}/locations/${fileName}\`;
 
 // Main execution
 async function main() {
-  console.log('🚀 Starting mass page generation script...');
+  console.log('Starting mass page generation script...');
 
   const generator = new MassPageGenerator();
   console.log('Generator created');
@@ -858,7 +860,7 @@ async function main() {
         break;
 
       default:
-        console.log('🚀 Modern Ledger Mass Page Generator');
+        console.log('Modern Ledger Mass Page Generator');
         console.log('');
         console.log('Usage:');
         console.log('  node generate-mass-pages.mjs generate     # Generate all page types');

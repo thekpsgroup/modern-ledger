@@ -1,0 +1,137 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const canonicalUrl = `${env.SITE_URL}/services/quickbooks-support`;
+---
+
+<ServiceLayout
+  title="Quickbooks Support | Professional Bookkeeping Services Texas"
+  description="Expert quickbooks support for Texas small businesses. Professional bookkeeping, accounting, and financial management services from Modern Ledger."
+  canonical={canonicalUrl}
+>
+  <div class="service-hero">
+    <h1>Quickbooks Support</h1>
+    <p class="lead">Modern Ledger provides comprehensive quickbooks support designed specifically for Texas businesses. Our certified professionals combine deep industry knowledge with cutting-edge technology to deliver exceptional results.</p>
+  </div>
+
+  <section class="features">
+    <h2>Our Quickbooks Support Include</h2>
+    <div class="features-grid">
+      
+      <div class="feature-card">
+        <h3>QuickBooks Online setup and configuration</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Custom chart of accounts setup</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Automated transaction categorization</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Financial reporting customization</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>User training and support</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Data migration and cleanup</h3>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="benefits">
+    <h2>Benefits of Professional Quickbooks Support</h2>
+    <ul class="benefits-list">
+      <li>Save time and focus on your business</li>
+      <li>Ensure accuracy and compliance</li>
+      <li>Access expert financial guidance</li>
+      <li>Reduce costs and improve efficiency</li>
+      <li>Gain valuable business insights</li>
+      <li>Peace of mind with professional support</li>
+    </ul>
+  </section>
+
+  <section class="pricing">
+    <h2>Pricing Plans</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <div class="price">$299<span>/month</span></div>
+        <ul>
+          <li>Basic bookkeeping</li>
+          <li>Monthly reports</li>
+          <li>Email support</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Professional</h3>
+        <div class="price">$599<span>/month</span></div>
+        <ul>
+          <li>Advanced bookkeeping</li>
+          <li>Weekly reports</li>
+          <li>Phone support</li>
+          <li>Tax planning</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">$999<span>/month</span></div>
+        <ul>
+          <li>Full-service accounting</li>
+          <li>Daily reports</li>
+          <li>Dedicated manager</li>
+          <li>Comprehensive tax services</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <TestimonialCarousel testimonials={[{"name":"Sarah Johnson","company":"Johnson Realty","text":"Modern Ledger transformed our financial management. Their expertise and attention to detail helped us save thousands in taxes and improve our cash flow.","rating":5},{"name":"Mike Chen","company":"Chen Construction","text":"Outstanding service! The team at Modern Ledger understands construction accounting and helped us streamline our entire financial process.","rating":5},{"name":"Jennifer Davis","company":"Davis Consulting","text":"Professional, reliable, and incredibly knowledgeable. Modern Ledger has been instrumental in our business growth and financial planning.","rating":5}]} />
+
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-accordion">
+      
+      <div class="faq-item">
+        <h3>How quickly can you start working on my books?</h3>
+        <p>We can typically begin within 1-2 business days of signing your agreement, depending on your current bookkeeping status and our availability.</p>
+      </div>
+      
+      
+      <div class="faq-item">
+        <h3>Do you work with businesses in my industry?</h3>
+        <p>Yes! We serve businesses across all industries including retail, construction, healthcare, professional services, e-commerce, and more.</p>
+      </div>
+      
+      
+      <div class="faq-item">
+        <h3>What accounting software do you use?</h3>
+        <p>We primarily use QuickBooks Online but can also work with Xero, FreshBooks, and other popular accounting platforms.</p>
+      </div>
+      
+      
+      <div class="faq-item">
+        <h3>How do you ensure data security?</h3>
+        <p>We use bank-level encryption, secure cloud storage, and follow strict data protection protocols to ensure your financial information remains confidential.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <CTASection />
+</ServiceLayout>
