@@ -10,8 +10,11 @@ import { glob } from 'glob';
 import { readFile } from 'fs/promises';
 import { join, extname } from 'path';
 
-// Emoji regex pattern - matches common Unicode emoji ranges but excludes checkmarks
+// Emoji regex pattern - matches common Unicode emoji ranges but excludes checkmarks and allowed UI emojis
 const EMOJI_REGEX = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FE}]|[\u{2700}-\u{27BF}]/gu;
+
+// Allowed emojis for UI enhancement (professional/business context only)
+const ALLOWED_EMOJIS = ['✔', '✓', '🔍', '💰', '📊', '⚡'];
 
 // File extensions to check
 const EXTENSIONS_TO_CHECK = [
@@ -37,9 +40,9 @@ async function checkFileForEmojis(filePath) {
     const matches = content.match(EMOJI_REGEX);
 
     if (matches) {
-      // Filter out allowed characters like checkmarks (✔)
+      // Filter out allowed characters like checkmarks and UI enhancement emojis
       const filteredMatches = matches.filter(emoji =>
-        !['✔', '✓'].includes(emoji)
+        !ALLOWED_EMOJIS.includes(emoji)
       );
 
       if (filteredMatches.length > 0) {
