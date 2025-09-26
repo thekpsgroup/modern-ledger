@@ -1,0 +1,119 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const canonicalUrl = `${env.SITE_URL}/services/advanced-accounting`;
+---
+
+<ServiceLayout
+  title="Advanced Accounting Services | Professional Bookkeeping Services Texas"
+  description="Sophisticated accounting solutions for complex business needs. From forensic accounting to international expansion."
+  canonical={canonicalUrl}
+>
+  <div class="service-hero">
+    <h1>Advanced Accounting</h1>
+    <p class="lead">Handle complex accounting challenges with advanced expertise. Our team provides sophisticated solutions for mergers, international expansion, and specialized financial needs.</p>
+  </div>
+
+  <section class="features">
+    <h2>Our Advanced Accounting Include</h2>
+    <div class="features-grid">
+      
+      <div class="feature-card">
+        <h3>Forensic accounting and investigations</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Mergers and acquisitions support</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>International accounting services</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Business valuation and appraisals</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Complex tax planning strategies</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Advanced financial modeling</h3>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="benefits">
+    <h2>Benefits of Professional Advanced Accounting</h2>
+    <ul class="benefits-list">
+      <li>Expertise in complex financial matters</li>
+      <li>Strategic transaction support</li>
+      <li>International business guidance</li>
+      <li>Accurate business valuations</li>
+      <li>Sophisticated tax strategies</li>
+      <li>Advanced analytical insights</li>
+    </ul>
+  </section>
+
+  <section class="pricing">
+    <h2>Pricing Plans</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <div class="price">$599<span>/month</span></div>
+        <ul>
+          <li>Advanced analysis</li>
+          <li>Strategic planning</li>
+          <li>Monthly advisory</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Professional</h3>
+        <div class="price">$1,199<span>/month</span></div>
+        <ul>
+          <li>Complex transactions</li>
+          <li>International services</li>
+          <li>Valuation services</li>
+          <li>Advanced modeling</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">$1,999<span>/month</span></div>
+        <ul>
+          <li>Full strategic support</li>
+          <li>M&A advisory</li>
+          <li>Global expansion</li>
+          <li>Executive financial strategy</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <TestimonialCarousel testimonials={[{"name":"Sarah Johnson","company":"Johnson Realty","text":"Modern Ledger transformed our financial management. Their expertise and attention to detail helped us save thousands in taxes and improve our cash flow.","rating":5},{"name":"Mike Chen","company":"Chen Construction","text":"Outstanding service! The team at Modern Ledger understands construction accounting and helped us streamline our entire financial process.","rating":5},{"name":"Jennifer Davis","company":"Davis Consulting","text":"Professional, reliable, and incredibly knowledgeable. Modern Ledger has been instrumental in our business growth and financial planning.","rating":5}]} />
+
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-accordion">
+      
+      <div class="faq-item">
+        <h3>What constitutes advanced accounting services?</h3>
+        <p>Advanced accounting includes forensic investigations, M&A support, international accounting, business valuations, complex tax strategies, and sophisticated financial modeling.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <CTASection />
+</ServiceLayout>

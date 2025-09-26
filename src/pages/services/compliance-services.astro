@@ -1,0 +1,119 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const canonicalUrl = `${env.SITE_URL}/services/compliance-services`;
+---
+
+<ServiceLayout
+  title="Regulatory Compliance Services | Professional Bookkeeping Services Texas"
+  description="Ensure regulatory compliance across all areas. From SOX to industry-specific regulations, we keep you compliant."
+  canonical={canonicalUrl}
+>
+  <div class="service-hero">
+    <h1>Compliance Services</h1>
+    <p class="lead">Navigate complex regulatory requirements with confidence. Our compliance experts ensure your business meets all federal, state, and industry-specific regulations.</p>
+  </div>
+
+  <section class="features">
+    <h2>Our Compliance Services Include</h2>
+    <div class="features-grid">
+      
+      <div class="feature-card">
+        <h3>Regulatory compliance assessments</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Compliance program development</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Internal controls design</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Risk assessment and monitoring</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Audit preparation and support</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Compliance training and documentation</h3>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="benefits">
+    <h2>Benefits of Professional Compliance Services</h2>
+    <ul class="benefits-list">
+      <li>Minimize regulatory risk and penalties</li>
+      <li>Ensure ongoing compliance</li>
+      <li>Strengthen internal controls</li>
+      <li>Prepare for audits and examinations</li>
+      <li>Build stakeholder confidence</li>
+      <li>Focus on core business activities</li>
+    </ul>
+  </section>
+
+  <section class="pricing">
+    <h2>Pricing Plans</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <div class="price">$449<span>/month</span></div>
+        <ul>
+          <li>Compliance assessment</li>
+          <li>Basic monitoring</li>
+          <li>Quarterly reviews</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Professional</h3>
+        <div class="price">$899<span>/month</span></div>
+        <ul>
+          <li>Comprehensive compliance</li>
+          <li>Internal controls</li>
+          <li>Monthly reporting</li>
+          <li>Training</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">$1,499<span>/month</span></div>
+        <ul>
+          <li>Full compliance management</li>
+          <li>Advanced monitoring</li>
+          <li>Executive reporting</li>
+          <li>Regulatory advocacy</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <TestimonialCarousel testimonials={[{"name":"Sarah Johnson","company":"Johnson Realty","text":"Modern Ledger transformed our financial management. Their expertise and attention to detail helped us save thousands in taxes and improve our cash flow.","rating":5},{"name":"Mike Chen","company":"Chen Construction","text":"Outstanding service! The team at Modern Ledger understands construction accounting and helped us streamline our entire financial process.","rating":5},{"name":"Jennifer Davis","company":"Davis Consulting","text":"Professional, reliable, and incredibly knowledgeable. Modern Ledger has been instrumental in our business growth and financial planning.","rating":5}]} />
+
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-accordion">
+      
+      <div class="faq-item">
+        <h3>What regulations apply to my business?</h3>
+        <p>Regulatory requirements vary by industry, size, and location. We conduct a comprehensive assessment to identify all applicable regulations for your specific situation.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <CTASection />
+</ServiceLayout>

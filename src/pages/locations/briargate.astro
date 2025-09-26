@@ -1,0 +1,112 @@
+---
+import LocationLayout from '../../layouts/LocationLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const canonicalUrl = `${env.SITE_URL}/locations/briargate`;
+---
+
+<LocationLayout
+  title="Bookkeeping Services in Briargate, Texas | Modern Ledger"
+  description="Professional bookkeeping and accounting services in Briargate, Texas. Local expertise with nationwide standards. Serving Briargate businesses since 2019."
+  city="Briargate"
+  canonical={canonicalUrl}
+>
+  <div class="location-hero">
+    <h1>Bookkeeping Services in Briargate, Texas</h1>
+    <p class="lead">Modern Ledger provides exceptional bookkeeping and accounting services to businesses in Briargate, Texas. As a locally-owned company with deep roots in the Texas business community, we understand the unique challenges and opportunities that Briargate businesses face.</p>
+  </div>
+
+  <section class="services">
+    <h2>Our Services in Briargate</h2>
+    <div class="services-grid">
+      
+      <div class="service-card">
+        <h3>Monthly Bookkeeping</h3>
+        <p>Professional monthly bookkeeping tailored for Briargate businesses.</p>
+      </div>
+      
+      
+      <div class="service-card">
+        <h3>Tax Preparation</h3>
+        <p>Professional tax preparation tailored for Briargate businesses.</p>
+      </div>
+      
+      
+      <div class="service-card">
+        <h3>QuickBooks Support</h3>
+        <p>Professional quickbooks support tailored for Briargate businesses.</p>
+      </div>
+      
+      
+      <div class="service-card">
+        <h3>Financial Planning</h3>
+        <p>Professional financial planning tailored for Briargate businesses.</p>
+      </div>
+      
+      
+      <div class="service-card">
+        <h3>Business Consulting</h3>
+        <p>Professional business consulting tailored for Briargate businesses.</p>
+      </div>
+      
+      
+      <div class="service-card">
+        <h3>Payroll Services</h3>
+        <p>Professional payroll services tailored for Briargate businesses.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="why-choose-us">
+    <h2>Why Choose Modern Ledger in Briargate?</h2>
+    <ul class="reasons-list">
+      <li>Local Briargate expertise with Texas-wide knowledge</li>
+      <li>Certified QuickBooks ProAdvisors on staff</li>
+      <li>Licensed Texas tax professionals</li>
+      <li>Dedicated account managers for personalized service</li>
+      <li>Technology-driven solutions for efficiency</li>
+      <li>Proven track record with 500+ Texas businesses</li>
+    </ul>
+  </section>
+
+  <section class="local-info">
+    <h2>About Briargate, Texas</h2>
+    <div class="local-stats">
+      <div class="stat">
+        <strong>Population:</strong> 50,000+ residents
+      </div>
+      <div class="stat">
+        <strong>Business Climate:</strong> Thriving business community with diverse industries
+      </div>
+      <div class="stat">
+        <strong>Key Industries:</strong> Healthcare, Education, Manufacturing, Retail, Professional Services
+      </div>
+      <div class="stat">
+        <strong>Economic Growth:</strong> Strong growth trajectory with expanding business opportunities
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Our Briargate Office</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <strong>Phone:</strong> (972) 555-0123
+      </div>
+      <div class="contact-item">
+        <strong>Email:</strong> hello@modernledger.com
+      </div>
+      <div class="contact-item">
+        <strong>Address:</strong> 123 Business Drive, Briargate, TX 75001
+      </div>
+      <div class="contact-item">
+        <strong>Hours:</strong> Monday - Friday: 8:00 AM - 6:00 PM CST
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</LocationLayout>

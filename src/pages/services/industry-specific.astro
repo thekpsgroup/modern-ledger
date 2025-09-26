@@ -1,0 +1,119 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
+import { getEnv } from '../../lib/env';
+
+const env = getEnv();
+const canonicalUrl = `${env.SITE_URL}/services/industry-specific`;
+---
+
+<ServiceLayout
+  title="Industry-Specific Accounting Services | Professional Bookkeeping Services Texas"
+  description="Specialized accounting services tailored to your industry. Industry expertise combined with Texas business knowledge."
+  canonical={canonicalUrl}
+>
+  <div class="service-hero">
+    <h1>Industry Specific</h1>
+    <p class="lead">Every industry has unique accounting challenges. Our industry-specific services combine deep sector knowledge with Texas business expertise.</p>
+  </div>
+
+  <section class="features">
+    <h2>Our Industry Specific Include</h2>
+    <div class="features-grid">
+      
+      <div class="feature-card">
+        <h3>Industry-specific chart of accounts</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Custom reporting and KPIs</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Regulatory compliance expertise</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Industry benchmarking</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Specialized tax strategies</h3>
+      </div>
+      
+    
+      <div class="feature-card">
+        <h3>Process optimization</h3>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="benefits">
+    <h2>Benefits of Professional Industry Specific</h2>
+    <ul class="benefits-list">
+      <li>Industry-tailored financial management</li>
+      <li>Regulatory compliance expertise</li>
+      <li>Competitive benchmarking insights</li>
+      <li>Optimized processes and workflows</li>
+      <li>Strategic industry-specific advice</li>
+      <li>Reduced industry-specific risks</li>
+    </ul>
+  </section>
+
+  <section class="pricing">
+    <h2>Pricing Plans</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <div class="price">$349<span>/month</span></div>
+        <ul>
+          <li>Industry setup</li>
+          <li>Basic reporting</li>
+          <li>Email support</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Professional</h3>
+        <div class="price">$699<span>/month</span></div>
+        <ul>
+          <li>Advanced industry services</li>
+          <li>Custom reporting</li>
+          <li>Phone support</li>
+          <li>Strategic planning</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">$1,199<span>/month</span></div>
+        <ul>
+          <li>Full industry specialization</li>
+          <li>Executive advisory</li>
+          <li>Process optimization</li>
+          <li>Industry networking</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <TestimonialCarousel testimonials={[{"name":"Sarah Johnson","company":"Johnson Realty","text":"Modern Ledger transformed our financial management. Their expertise and attention to detail helped us save thousands in taxes and improve our cash flow.","rating":5},{"name":"Mike Chen","company":"Chen Construction","text":"Outstanding service! The team at Modern Ledger understands construction accounting and helped us streamline our entire financial process.","rating":5},{"name":"Jennifer Davis","company":"Davis Consulting","text":"Professional, reliable, and incredibly knowledgeable. Modern Ledger has been instrumental in our business growth and financial planning.","rating":5}]} />
+
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-accordion">
+      
+      <div class="faq-item">
+        <h3>Do you serve my industry?</h3>
+        <p>We serve businesses across all major industries including construction, healthcare, retail, professional services, manufacturing, and more. Contact us to discuss your specific industry needs.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <CTASection />
+</ServiceLayout>
