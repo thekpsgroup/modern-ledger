@@ -2,22 +2,22 @@
 // Differentiator cards data
 const differentiators = [
   {
-    icon: '',
+    icon: '🔍',
     title: 'Proactive Oversight',
     description: 'We don\'t just record transactions—we identify patterns, catch errors, and prevent costly mistakes before they happen.'
   },
   {
-    icon: '',
+    icon: '💰',
     title: 'Tax-Smart Cleanups',
     description: 'Every entry is optimized for tax efficiency, ensuring you maximize deductions and minimize liabilities.'
   },
   {
-    icon: '',
+    icon: '📊',
     title: 'Real-Time Reports',
     description: 'Access live financial dashboards anytime, anywhere. Make data-driven decisions with confidence.'
   },
   {
-    icon: '',
+    icon: '⚡',
     title: 'Lightning-Fast Turnaround',
     description: 'Monthly closes completed in days, not weeks. Get accurate books without the wait.'
   }
@@ -35,8 +35,8 @@ const differentiators = [
     </div>
 
     <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-      {differentiators.map(differentiator => (
-        <div class="surface p-8 text-center transition-transform duration-200 hover:-translate-y-1">
+      {differentiators.map((differentiator, index) => (
+        <div class="surface p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in-up" style={`animation-delay: ${index * 100}ms;`}>
           <div class="mb-5 text-4xl">{differentiator.icon}</div>
           <h3 class="card-title mb-3">
             {differentiator.title}

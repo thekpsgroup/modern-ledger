@@ -31,7 +31,7 @@ const heroHeadlineTest = {
 };
 
 const ctaCopyTest = {
-  control: "Schedule a Free Consultation",
+  control: "Get Started Today",
   variant: "Get My Free Assessment"
 };
 
@@ -87,7 +87,7 @@ const heroLogos = [
           class="inline-flex items-center gap-2 rounded-full border border-brand-navy/10 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-brand-navy"
           class:list={[{ 'bg-white/20 text-white': Boolean(backgroundImage) }]}
         >
-          Texas-based bookkeeping team  Est. 2010
+          Texas-based bookkeeping team  Est. 2018
         </div>
 
         <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -103,7 +103,7 @@ const heroLogos = [
 
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
           <div class="inline-flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a href={ctaLink} class="btn btn-primary px-8 text-base" aria-label="Start the Modern Ledger intake">
+            <a href={ctaLink} class="btn btn-primary btn-magnetic px-8 text-base" aria-label="Start the Modern Ledger intake">
               {finalCTAText}
               <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -111,11 +111,17 @@ const heroLogos = [
             </a>
             <a
               href={phoneHref}
-              class="btn btn-outline px-6 text-base"
+              class="btn btn-outline btn-magnetic px-6 text-base"
               aria-label={`Call Modern Ledger at ${phoneDisplay}`}
             >
               Call {phoneDisplay}
             </a>
+          </div>
+          <div class="urgency-badge inline-flex items-center gap-2 rounded-full bg-orange-50 px-3 py-2 text-sm font-medium text-orange-700">
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clip-rule="evenodd"></path>
+            </svg>
+            Limited spots available this month
           </div>
           <a
             href="#testimonials"
@@ -138,6 +144,13 @@ const heroLogos = [
           ))}
         </div>
 
+        <div class="trust-signal inline-flex items-center gap-2 rounded-full bg-green-50 px-3 py-2 text-sm font-medium text-green-700">
+          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          Trusted by 500+ Texas businesses since 2018
+        </div>
+
         <div class="grid gap-5 text-sm text-neutral-500 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <div class="flex items-start gap-3 rounded-2xl border border-white/60 bg-white/85 p-4 shadow-sm" class:list={[{ 'bg-white/15 text-white': Boolean(backgroundImage) }]}>
@@ -147,11 +160,10 @@ const heroLogos = [
                 </svg>
               </div>
               <div>
-                <div class="text-2xl font-semibold text-brand-navy" class:list={[{ 'text-white': Boolean(backgroundImage) }]}>
-                  {stat.number}
-                  {stat.suffix && <span class="text-base font-medium">{stat.suffix}</span>}
+                <div class="text-2xl font-bold text-brand-navy mb-1" class:list={[{ 'text-white': Boolean(backgroundImage) }]}>
+                  {stat.number}<span class="text-lg font-medium">{stat.suffix}</span>
                 </div>
-                <p class="m-0 text-xs text-neutral-500" class:list={[{ 'text-white/70': Boolean(backgroundImage) }]}>
+                <p class="text-sm text-neutral-600 leading-tight" class:list={[{ 'text-white/70': Boolean(backgroundImage) }]}>
                   {stat.label}
                 </p>
               </div>
@@ -167,7 +179,7 @@ const heroLogos = [
       </span>
       <div class="flex flex-wrap items-center gap-6">
         {heroLogos.map((logo) => (
-          <img src={logo.logo} alt={logo.alt} class="h-8 w-auto opacity-70" loading="lazy" />
+          <img src={logo.logo} alt={logo.alt} class="h-8 w-auto opacity-70" width="32" height="32" loading="lazy" />
         ))}
       </div>
     </div>

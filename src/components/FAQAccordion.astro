@@ -64,7 +64,7 @@ const faqs = [
       </div>
 
       <div class="mt-12 space-y-4">
-        {faqs.map((faq, index) => (
+        {faqs.slice(0, 6).map((faq, index) => (
           <div class="surface">
             <button
               type="button"
@@ -95,6 +95,59 @@ const faqs = [
             </div>
           </div>
         ))}
+
+        <!-- Progressive disclosure: Show more FAQs -->
+        <div id="additional-faqs" class="hidden space-y-4">
+          {faqs.slice(6).map((faq, index) => (
+            <div class="surface">
+              <button
+                type="button"
+                class="flex w-full items-center justify-between gap-6 rounded-[inherit] px-6 py-5 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold hover:bg-brand-sky/60"
+                aria-expanded="false"
+                data-accordion-button={index + 6}
+                aria-controls={`faq-content-${index + 6}`}
+              >
+                <span class="pr-6 text-base font-semibold text-brand-navy">{faq.question}</span>
+                <svg
+                  class="h-5 w-5 flex-shrink-0 text-brand-gold transition-transform duration-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  data-accordion-icon={index + 6}
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div
+                id={`faq-content-${index + 6}`}
+                class="hidden px-6 pb-6"
+                aria-labelledby={`faq-button-${index + 6}`}
+              >
+                <p class="text-body-sm text-neutral-500">
+                  {faq.answer}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Show more button -->
+        {faqs.length > 6 && (
+          <div class="text-center pt-4">
+            <button
+              id="show-more-faqs"
+              class="btn btn-outline"
+              aria-expanded="false"
+              aria-controls="additional-faqs"
+            >
+              <span id="show-more-text">Show {faqs.length - 6} More Questions</span>
+              <span id="show-less-text" class="hidden">Show Less</span>
+              <svg class="w-4 h-4 ml-2 transition-transform duration-200" id="show-more-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
 
       <div class="mt-12 text-center">
@@ -120,8 +173,8 @@ const faqs = [
   (() => {
     if (typeof document === 'undefined') return;
 
+    // Accordion functionality
     const buttons = document.querySelectorAll('[data-accordion-button]');
-
     buttons.forEach((button) => {
       if (!(button instanceof HTMLElement)) return;
 
@@ -145,6 +198,29 @@ const faqs = [
         }
       });
     });
+
+    // Progressive disclosure functionality
+    const showMoreBtn = document.getElementById('show-more-faqs');
+    const additionalFaqs = document.getElementById('additional-faqs');
+    const showMoreText = document.getElementById('show-more-text');
+    const showLessText = document.getElementById('show-less-text');
+    const showMoreIcon = document.getElementById('show-more-icon');
+
+    if (showMoreBtn && additionalFaqs) {
+      showMoreBtn.addEventListener('click', () => {
+        const isExpanded = showMoreBtn.getAttribute('aria-expanded') === 'true';
+
+        showMoreBtn.setAttribute('aria-expanded', String(!isExpanded));
+        additionalFaqs.classList.toggle('hidden');
+
+        if (showMoreText) showMoreText.classList.toggle('hidden');
+        if (showLessText) showLessText.classList.toggle('hidden');
+
+        if (showMoreIcon instanceof HTMLElement) {
+          showMoreIcon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      });
+    }
   })();
 </script>
 

@@ -18,8 +18,7 @@ export const TESTIMONIALS: Testimonial[] = [
       "Absolutely love this company! Karson has been the biggest help getting me on track for a great future in business. Flexible hours and cost to accommodate all business types and sizes! So very thankful for them.",
     source: "Google",
     city: "Royse City, TX",
-    date: "2 months ago",
-    avatar: "/avatars/jennifer.jpg"
+    date: "2 months ago"
   },
   {
     name: "Amy Nguyen",
@@ -29,8 +28,7 @@ export const TESTIMONIALS: Testimonial[] = [
       "The KPS Group was incredibly helpful! Karson took the time to understand our needs and helped modernize our tools, marketing, and accounting systems. Super knowledgeable, easy to work with, and genuinely cares about helping businesses grow. Highly recommend!",
     source: "Google",
     city: "DFW, TX",
-    date: "2 months ago",
-    avatar: "/avatars/mike.jpg"
+    date: "2 months ago"
   },
   {
     name: "Amber Smith",
@@ -38,8 +36,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "Karson is professional and committed to his business!",
     source: "Google",
     city: "Royse City, TX",
-    date: "3 months ago",
-    avatar: "/avatars/sarah.jpg"
+    date: "3 months ago"
   },
   {
     name: "Adam Farmer",
@@ -49,8 +46,7 @@ export const TESTIMONIALS: Testimonial[] = [
       "Top notch consulting and bookkeeping services. Modern Ledger was a game changer for my small business. Highly recommend.",
     source: "Google",
     city: "Rockwall County, TX",
-    date: "3 months ago",
-    avatar: "/avatars/jennifer.jpg"
+    date: "3 months ago"
   },
   {
     name: "Brandon & Holly Gibson",
@@ -58,7 +54,6 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "An amazing consultant for our growing business!",
     source: "Google",
     city: "Royse City, TX",
-    date: "3 months ago",
-    avatar: "/avatars/mike.jpg"
+    date: "3 months ago"
   }
 ];
