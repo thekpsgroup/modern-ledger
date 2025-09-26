@@ -70,7 +70,7 @@ function fixLocationTitles() {
       const newLength = newTitle.length;
 
       if (newLength > 60) {
-        console.log(`⚠️  Still too long (${newLength} chars): ${file}`);
+        console.log(`WARNING: Still too long (${newLength} chars): ${file}`);
         console.log(`   Original: "${originalTitle}"`);
         console.log(`   Shortened: "${newTitle}"`);
         continue;
@@ -84,18 +84,18 @@ function fixLocationTitles() {
 
       writeFileSync(filePath, newContent, 'utf-8');
 
-      console.log(`✅ Fixed: ${file}`);
+      console.log(`SUCCESS: Fixed: ${file}`);
       console.log(`   "${originalTitle}" (${originalLength} chars)`);
       console.log(`   → "${newTitle}" (${newLength} chars)`);
 
       fixedCount++;
 
     } catch (error) {
-      console.error(`❌ Error processing ${file}:`, error.message);
+      console.error(`ERROR: Error processing ${file}:`, error.message);
     }
   }
 
-  console.log(`\n🎉 Location title optimization complete!`);
+  console.log(`\nCOMPLETED: Location title optimization complete!`);
   console.log(`   Fixed ${fixedCount} location page titles`);
 }
 
