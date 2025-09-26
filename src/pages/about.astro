@@ -103,6 +103,104 @@ const canonicalUrl = `${env.SITE_URL}/about`;
       </div>
     </section>
 
+    <!-- Data Security Section -->
+    <section class="section bg-white">
+      <div class="container">
+        <div class="stack-sm text-center mb-12">
+          <span class="eyebrow mx-auto">Security & Compliance</span>
+          <h2 class="text-balance">Your financial data is protected by enterprise-grade security</h2>
+          <p class="text-body-lg text-neutral-500 mx-auto max-w-content-md">
+            We handle sensitive financial information every day, so we've built our security practices around the highest standards in the industry.
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              icon: 'lock',
+              title: 'Bank-Level Encryption',
+              copy: 'All data is encrypted in transit and at rest using 256-bit AES encryption, the same standard used by major banks.',
+            },
+            {
+              icon: 'shield',
+              title: 'Multi-Layer Security',
+              copy: 'Multi-factor authentication, role-based access controls, and regular security audits protect your information.',
+            },
+            {
+              icon: 'eye-off',
+              title: 'Complete Confidentiality',
+              copy: 'All team members sign comprehensive NDAs and undergo background checks. Your data never leaves our secure systems.',
+            },
+            {
+              icon: 'check-circle',
+              title: 'Regulatory Compliance',
+              copy: 'We comply with GLBA, Texas privacy laws, and industry best practices for financial data protection.',
+            },
+            {
+              icon: 'server',
+              title: 'Secure Infrastructure',
+              copy: 'Your data is stored on SOC 2 compliant servers with automated backups and disaster recovery procedures.',
+            },
+            {
+              icon: 'users',
+              title: 'Limited Access',
+              copy: 'Only authorized personnel with business need can access your data, and all access is logged and monitored.',
+            },
+          ].map(security => (
+            <div class="surface p-6 text-center">
+              <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-sky text-brand-navy">
+                {security.icon === 'lock' && (
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                )}
+                {security.icon === 'shield' && (
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                  </svg>
+                )}
+                {security.icon === 'eye-off' && (
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+                  </svg>
+                )}
+                {security.icon === 'check-circle' && (
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                )}
+                {security.icon === 'server' && (
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                  </svg>
+                )}
+                {security.icon === 'users' && (
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                  </svg>
+                )}
+              </div>
+              <h3 class="card-title mb-3">{security.title}</h3>
+              <p class="text-body-sm text-neutral-500">{security.copy}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="mt-16 text-center">
+          <p class="text-sm text-neutral-500 mb-6">Trusted by Texas businesses and integrated with industry-leading platforms</p>
+          <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
+            <img src="/logos/quickbooks.svg" alt="QuickBooks Certified" class="h-8 w-auto" />
+            <img src="/logos/plaid.svg" alt="Plaid Secure" class="h-8 w-auto" />
+            <img src="/logos/gusto.svg" alt="Gusto Integrated" class="h-8 w-auto" />
+            <img src="/logos/bench.svg" alt="Bench Accounting" class="h-8 w-auto" />
+            <img src="/logos/cpa.svg" alt="CPA Network" class="h-8 w-auto" />
+            <img src="/logos/tscpa.svg" alt="Texas Society of CPAs" class="h-8 w-auto" />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="section section-contrast">
       <div class="container">

@@ -16,6 +16,10 @@ Allow: *.svg
 Allow: *.ico
 
 # Sitemaps
-Sitemap: https://modernledger.com/sitemap.xml
-Sitemap: https://modernledger.com/sitemap-blog.xml
-Sitemap: https://modernledger.com/sitemap-locations.xml
+Sitemap: https://modernledger.co/sitemap.xml
+Sitemap: https://modernledger.co/sitemap-blog.xml
+Sitemap: https://modernledger.co/sitemap-locations.xml
+
+# Security
+# Contact: security@thekpsgroup.com
+# Encryption: https://modernledger.co/.well-known/security.txt

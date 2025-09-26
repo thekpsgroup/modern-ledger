@@ -4,8 +4,8 @@ import { getEnv } from '../../lib/env';
 import LeadForm from '../../components/LeadForm.astro';
 
 const env = getEnv();
-const pageTitle = "Bookkeeping Services | Modern Ledger";
-const pageDescription = "Professional bookkeeping services for small businesses. Accurate financial records, monthly reconciliation, and tax-ready books.";
+const pageTitle = "Monthly Bookkeeping That Eliminates Tax Surprises - Modern Ledger";
+const pageDescription = "Professional bookkeeping services that keep your books accurate, audit-ready, and tax-compliant. Focus on growing your business while we handle the numbers.";
 const canonicalUrl = `${env.SITE_URL}/services/bookkeeping`;
 ---
 
@@ -16,33 +16,32 @@ const canonicalUrl = `${env.SITE_URL}/services/bookkeeping`;
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Professional <span class="text-blue-600">Bookkeeping</span> Services
+            Monthly Bookkeeping That <span class="text-blue-600">Eliminates Tax Surprises</span>
           </h1>
           <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Keep your books accurate and up-to-date with our comprehensive bookkeeping services.
-            Focus on growing your business while we handle the numbers.
+            Stop dreading tax season. Our GAAP-compliant bookkeeping ensures your books are always audit-ready, accurate, and tax-compliant. Focus on growing your business while we handle the numbers.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contact" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-              Get Started Today
+              Schedule a Free Consultation
             </a>
             <a href="/pricing" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-              View Pricing
+              View Pricing Plans
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services Grid -->
-    <section class="py-20">
+    <!-- Who It's For Section -->
+    <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            What We Include
+            Who It's For
           </h2>
           <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Comprehensive bookkeeping services tailored to your business needs
+            Perfect for business owners who want accurate books without the bookkeeping burden
           </p>
         </div>
 
@@ -50,122 +49,200 @@ const canonicalUrl = `${env.SITE_URL}/services/bookkeeping`;
           <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Transaction Recording</h3>
-            <p class="text-gray-600">Accurate recording of all financial transactions including income, expenses, and transfers.</p>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Small Business Owners</h3>
+            <p class="text-gray-600">Entrepreneurs with 1-50 employees who need accurate books but don't have time for daily accounting tasks.</p>
           </div>
 
           <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Monthly Reconciliation</h3>
-            <p class="text-gray-600">Bank and credit card reconciliation to ensure all transactions are properly recorded.</p>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Growing Contractors</h3>
+            <p class="text-gray-600">Construction and service businesses scaling up who need reliable financial records for bidding and tax compliance.</p>
           </div>
 
           <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Financial Reports</h3>
-            <p class="text-gray-600">Profit & Loss statements, Balance Sheets, and Cash Flow reports prepared monthly.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Tax Preparation Support</h3>
-            <p class="text-gray-600">Year-end tax preparation assistance and tax-ready financial statements.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">QuickBooks Integration</h3>
-            <p class="text-gray-600">Seamless integration with QuickBooks Online and Desktop for real-time bookkeeping.</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Compliance & Accuracy</h3>
-            <p class="text-gray-600">GAAP-compliant bookkeeping with 99.9% accuracy guarantee on all transactions.</p>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Tax-Conscious Businesses</h3>
+            <p class="text-gray-600">Companies that want to maximize deductions and minimize tax surprises through proper expense categorization and documentation.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Lead Form Section -->
-    <section class="bg-neutral-25 py-20">
+    <!-- Pricing Comparison Table -->
+    <section class="py-20 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-start">
-          <div class="space-y-6">
-            <span class="eyebrow">Bookkeeping partnership</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Ready for clean, audit-ready books?</h2>
-            <p class="text-lg text-gray-600">
-              Tell us how many hours your team is spending on reconciliation, where the messes live, and which systems we should plug into. We’ll pair you with a dedicated Modern Ledger pod and outline the first 30 days of cleanup and monthly cadence.
-            </p>
-            <ul class="space-y-3 text-sm text-gray-600">
-              <li class="flex items-start gap-3">
-                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Get a transaction volume review and pricing confirmation within one business day.
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Receive a cleanup scope detailing deliverables, timelines, and data hand-off.
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Walk away with a documented weekly and monthly reporting cadence.
-              </li>
-            </ul>
-          </div>
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Choose Your Bookkeeping Plan
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Transparent pricing based on your transaction volume and complexity
+          </p>
+        </div>
 
-          <LeadForm
-            class="h-full"
-            eyebrow="Bookkeeping intake"
-            heading="Tell us about your books"
-            subheading="Share the accounting tools you use, how often you reconcile, and where you need relief."
-            ctaLabel="Plan my bookkeeping support"
-            successMessage="Thanks! A Modern Ledger team lead will review your bookkeeping intake and respond with a tailored proposal within one business day."
-            source="service-bookkeeping"
-          />
+        <div class="overflow-x-auto">
+          <table class="w-full bg-white rounded-lg shadow-sm border border-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Features</th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Starter<br/><span class="text-xs text-gray-500">Up to 50 transactions/mo</span></th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Growth<br/><span class="text-xs text-gray-500">51-200 transactions/mo</span></th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Enterprise<br/><span class="text-xs text-gray-500">200+ transactions/mo</span></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900 font-medium">Monthly Price</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$299/mo</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$599/mo</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$1,199/mo</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Transaction Recording</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Monthly Reconciliation</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Financial Reports</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Tax Preparation Support</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Dedicated Account Manager</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Priority Support</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- Mid-Page CTA -->
+    <section class="py-20 bg-blue-600">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Ready to Eliminate Tax Season Stress?
+        </h2>
+        <p class="text-xl text-blue-100 mb-8">
+          Book a 15-minute call to see how our bookkeeping can transform your financial clarity.
+        </p>
+        <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+          Book a Call
+        </a>
+      </div>
+    </section>
+
+    <!-- Case Study/Testimonial -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg border border-blue-200">
+            <div class="flex items-start gap-4">
+              <img src="/avatars/mike.jpg" alt="Mike Johnson" class="w-16 h-16 rounded-full object-cover" />
+              <div class="flex-1">
+                <blockquote class="text-lg text-gray-900 mb-4 italic">
+                  "Modern Ledger's bookkeeping saved us from a $15,000 tax penalty. Their proactive approach caught deductions we would have missed and organized our records perfectly for audit. Best investment we've made for our construction business."
+                </blockquote>
+                <div class="flex items-center gap-2">
+                  <div>
+                    <div class="font-semibold text-gray-900">Mike Johnson</div>
+                    <div class="text-sm text-gray-600">Owner, Johnson Construction</div>
+                  </div>
+                  <div class="ml-auto flex">
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-gray-600">
+            Common concerns about switching to professional bookkeeping
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">How much does professional bookkeeping cost?</h3>
+            <p class="text-gray-600">Our pricing starts at $299/month for businesses with up to 50 transactions. The cost scales with your transaction volume and complexity, but typically saves you money by preventing costly tax mistakes and freeing up your time for revenue-generating activities.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">How do I switch from my current bookkeeping system?</h3>
+            <p class="text-gray-600">We handle the entire transition process. We'll review your current books, identify any gaps or errors, and create a clean migration plan. Most clients are fully transitioned within 2-4 weeks with zero disruption to their business operations.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Is my financial data secure?</h3>
+            <p class="text-gray-600">Absolutely. We use bank-level encryption, SOC 2 Type II compliance, and never store sensitive data on personal devices. Your financial information is safer with us than in most accounting software, and we maintain detailed audit trails of all access.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">How long does onboarding take?</h3>
+            <p class="text-gray-600">Most clients are up and running within 1-2 weeks. We start with a comprehensive assessment of your current financial situation, set up integrations with your existing systems, and provide training for your team. You'll see immediate improvements in your financial clarity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
     <section class="bg-blue-600 py-20">
       <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Ready to Get Your Books in Order?
+          Start With a Free Clean-Up Review
         </h2>
         <p class="text-xl text-blue-100 mb-8">
-          Join hundreds of businesses that trust Modern Ledger with their financial records.
+          Get your books assessed at no cost. We'll identify issues and give you a clear path to clean, compliant financial records.
         </p>
         <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
-          Start Your Free Trial
+          Get Free Review
         </a>
       </div>
     </section>

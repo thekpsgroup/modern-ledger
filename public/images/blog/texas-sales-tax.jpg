@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" class="og-default">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E3A8A"/>
+      <stop offset="100%" style="stop-color:#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <text x="600" y="280" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">Modern Ledger</text>
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">Professional Bookkeeping Services</text>
+  <text x="600" y="380" font-family="Arial, sans-serif" font-size="18" fill="#E0E7FF" text-anchor="middle">Texas Business Accounting Experts</text>
+</svg>

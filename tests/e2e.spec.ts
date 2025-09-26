@@ -17,10 +17,35 @@ test.describe('Modern Ledger E2E Tests', () => {
       { text: 'Contact', href: '/contact' }
     ];
 
+    const maybeOpenMobileMenu = async () => {
+      const mobileMenuButton = page.locator('#mobile-menu-button:visible');
+      if (await mobileMenuButton.count()) {
+        const expanded = await mobileMenuButton.getAttribute('aria-expanded');
+        if (expanded !== 'true') {
+          await mobileMenuButton.click();
+          await page.locator('#mobile-menu nav').waitFor({ state: 'visible' });
+        }
+        return true;
+      }
+      return false;
+    };
+
     for (const link of navLinks) {
-      const navLink = page.locator('nav').getByRole('link', { name: link.text });
-      await expect(navLink).toBeVisible();
-      await expect(navLink).toHaveAttribute('href', link.href);
+      const desktopLink = page.locator('header nav').getByRole('link', { name: link.text });
+      if (await desktopLink.isVisible()) {
+        await expect(desktopLink).toHaveAttribute('href', link.href);
+        continue;
+      }
+
+      const menuOpened = await maybeOpenMobileMenu();
+      const mobileLink = page.locator('#mobile-menu').getByRole('link', { name: link.text });
+      if (menuOpened && (await mobileLink.count())) {
+        await expect(mobileLink).toBeVisible();
+        await expect(mobileLink).toHaveAttribute('href', link.href);
+      } else {
+        await expect(desktopLink).toBeVisible();
+        await expect(desktopLink).toHaveAttribute('href', link.href);
+      }
     }
   });
 
@@ -205,8 +230,27 @@ test.describe('Modern Ledger E2E Tests', () => {
     expect(await page.locator('h1:has-text("404"), h1:has-text("Page Not Found")').count()).toBeGreaterThan(0);
 
     // Check for navigation links
+    const homeLink = page.locator('a[href="/"]').first();
+    if (!(await homeLink.isVisible())) {
+      const mobileMenuButton = page.locator('#mobile-menu-button:visible');
+      if (await mobileMenuButton.count()) {
+        await mobileMenuButton.click();
+        await page.locator('#mobile-menu nav').waitFor({ state: 'visible' });
+      }
+    }
+
     await expect(page.locator('a[href="/"]').first()).toBeVisible();
-    await expect(page.locator('a[href*="services"]').first()).toBeVisible();
+
+    const servicesLink = page.locator('a[href*="services"]').first();
+    if (!(await servicesLink.isVisible())) {
+      const mobileServicesLink = page.locator('#mobile-menu').getByRole('link', { name: /services/i });
+      if (await mobileServicesLink.count()) {
+        await expect(mobileServicesLink.first()).toBeVisible();
+        return;
+      }
+    }
+
+    await expect(servicesLink).toBeVisible();
   });
 });
 

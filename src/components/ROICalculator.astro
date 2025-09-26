@@ -1,4 +1,4 @@
----
+﻿---
 // ROI Calculator component
 ---
 
@@ -145,7 +145,7 @@
                   </svg>
                 </div>
                 <p class="text-sm font-semibold text-brand-navy">
-                  📧 Get a custom savings report based on your numbers
+                  Get a custom savings report based on your numbers
                 </p>
               </div>
               
@@ -168,166 +168,12 @@
                     required
                   />
                 </div>
-                <button
-                  type="submit"
-                  id="roi-submit-btn"
-                  class="btn btn-primary w-full justify-center text-sm"
-                >
-                  <span id="roi-submit-text">📊 Email My Custom ROI Report</span>
-                  <span id="roi-submit-loading" class="hidden">Generating report...</span>
-                </button>
                 <p id="roi-feedback" class="hidden text-center text-xs" role="status" aria-live="polite"></p>
               </form>
               
               <p class="mt-3 text-xs text-neutral-500 text-center">
                 💡 <strong>Instant delivery</strong> • No sales calls • Includes 3 cost-saving strategies
               </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>">
-      <div class="stack-sm text-center">
-        <span class="eyebrow mx-auto">ROI Calculator</span>
-        <h2 class="text-balance">Calculate Your Bookkeeping ROI</h2>
-        <p class="text-body-lg text-neutral-500">
-          Estimate the time and dollars you can reclaim by partnering with Modern Ledger.
-        </p>
-      </div>
-
-      <div class="mt-12 surface p-8 md:p-12">
-        <div class="grid gap-10 md:grid-cols-2">
-          <!-- Calculator Inputs -->
-          <div class="space-y-6">
-            <h3 class="card-title">Your Current Situation</h3>
-
-            <!-- Hours per month -->
-            <div>
-              <label for="hours-per-month" class="mb-2 block text-sm font-semibold text-brand-navy">
-                Hours spent on bookkeeping per month
-              </label>
-              <input
-                type="number"
-                id="hours-per-month"
-                min="1"
-                max="160"
-                value="20"
-                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
-              />
-            </div>
-
-            <!-- Hourly rate -->
-            <div>
-              <label for="hourly-rate" class="mb-2 block text-sm font-semibold text-brand-navy">
-                Your hourly rate or cost per hour ($)
-              </label>
-              <input
-                type="number"
-                id="hourly-rate"
-                min="15"
-                max="200"
-                value="50"
-                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
-              />
-            </div>
-
-            <!-- Errors per month -->
-            <div>
-              <label for="errors-per-month" class="mb-2 block text-sm font-semibold text-brand-navy">
-                Bookkeeping errors caught per month
-              </label>
-              <input
-                type="number"
-                id="errors-per-month"
-                min="0"
-                max="50"
-                value="3"
-                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
-              />
-            </div>
-
-            <!-- Cost per error -->
-            <div>
-              <label for="cost-per-error" class="mb-2 block text-sm font-semibold text-brand-navy">
-                Average cost per bookkeeping error ($)
-              </label>
-              <input
-                type="number"
-                id="cost-per-error"
-                min="50"
-                max="5000"
-                value="500"
-                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
-              />
-            </div>
-
-            <!-- Tax penalties -->
-            <div>
-              <label for="tax-penalties" class="mb-2 block text-sm font-semibold text-brand-navy">
-                Annual tax penalty risk ($)
-              </label>
-              <input
-                type="number"
-                id="tax-penalties"
-                min="0"
-                max="10000"
-                value="2000"
-                class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
-              />
-            </div>
-          </div>
-
-          <!-- Results -->
-          <div class="space-y-6">
-            <h3 class="card-title">Your Potential Savings</h3>
-
-            <!-- Monthly Savings -->
-            <div class="rounded-xl border border-brand-sky bg-white/60 p-6">
-              <div class="mb-2 flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">Monthly Time Savings</span>
-                <span id="monthly-time-savings" class="text-2xl font-semibold text-brand-navy">$0</span>
-              </div>
-              <p class="text-sm text-neutral-500">Hours you can reinvest in growth.</p>
-            </div>
-
-            <!-- Annual Savings -->
-            <div class="rounded-xl border border-brand-sky bg-white/60 p-6">
-              <div class="mb-2 flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">Annual Cost Savings</span>
-                <span id="annual-savings" class="text-2xl font-semibold text-brand-navy">$0</span>
-              </div>
-              <p class="text-sm text-neutral-500">Avoid the payroll burden of an in-house hire.</p>
-            </div>
-
-            <!-- Error Prevention -->
-            <div class="rounded-xl border border-brand-sky bg-white/60 p-6">
-              <div class="mb-2 flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">Error Prevention Value</span>
-                <span id="error-prevention" class="text-2xl font-semibold text-brand-navy">$0</span>
-              </div>
-              <p class="text-sm text-neutral-500">Savings from catching costly mistakes early.</p>
-            </div>
-
-            <!-- Total ROI -->
-            <div class="rounded-xl border border-brand-gold bg-brand-sky/40 p-6">
-              <div class="mb-2 flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-navy">Total Annual ROI</span>
-                <span id="total-roi" class="text-3xl font-semibold text-brand-navy">$0</span>
-              </div>
-              <p class="text-sm text-neutral-500">Complete financial impact of outsourcing.</p>
-            </div>
-
-            <!-- CTA -->
-            <div class="rounded-xl border border-neutral-100 bg-white p-6">
-              <p class="text-sm text-neutral-500">
-                Ready to start saving? We’ll build a plan around your numbers.
-              </p>
-              <button
-                id="get-quote-btn"
-                class="btn btn-primary mt-4 w-full justify-center"
-              >
-                Get Your Free Quote
-              </button>
             </div>
           </div>
         </div>
@@ -380,6 +226,18 @@
       updateText('annual-savings', formatCurrency(annualCostSavings));
       updateText('error-prevention', formatCurrency(errorPreventionValue));
       updateText('total-roi', formatCurrency(totalROI));
+
+      // Track calculator usage
+      if (typeof window !== 'undefined' && window.analytics?.trackCalculatorUsed) {
+        const inputsHash = btoa(JSON.stringify({
+          hoursPerMonth,
+          hourlyRate,
+          errorsPerMonth,
+          costPerError,
+          taxPenalties
+        }));
+        window.analytics.trackCalculatorUsed(inputsHash, window.location.pathname);
+      }
     };
 
     const inputIds = ['hours-per-month', 'hourly-rate', 'errors-per-month', 'cost-per-error', 'tax-penalties'];

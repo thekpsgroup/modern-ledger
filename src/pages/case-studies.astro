@@ -36,4 +36,17 @@ const canonicalUrl = `${env.SITE_URL}/case-studies`;
       </div>
     </section>
   </div>
+
+  <!-- Structured Data: Article Collection -->
+  <script type="application/ld+json" set:html={
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Modern Ledger Case Studies",
+      "description": "Success stories from businesses that transformed their financial management with Modern Ledger",
+      "url": "https://modernledger.co/case-studies",
+      "numberOfItems": 0,
+      "itemListElement": []
+    })
+  }></script>
 </Layout>

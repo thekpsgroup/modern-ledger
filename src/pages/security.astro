@@ -1,0 +1,264 @@
+---
+// Security and Trust page for Modern Ledger
+const title = "Security & Trust | Modern Ledger";
+const description = "Learn about our security measures, data protection practices, and commitment to keeping your financial information safe and secure.";
+---
+
+<html lang="en">
+<head>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href="https://www.modernledger.co/security" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content="https://www.modernledger.co/security" />
+  <meta property="og:type" content="website" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Security & Trust",
+    "description": description,
+    "url": "https://www.modernledger.co/security",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Ledger"
+    }
+  })}></script>
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Your Security is Our <span class="text-amber-400">Top Priority</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl mx-auto">
+          We employ industry-leading security measures to protect your financial data
+          and ensure your information remains confidential and secure.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security Features -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-900">
+        Enterprise-Grade Security Measures
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Bank-Level Encryption</h3>
+          <p class="text-slate-600">All data is encrypted using AES-256 encryption, the same standard used by major banks and financial institutions.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Secure Cloud Infrastructure</h3>
+          <p class="text-slate-600">We use SOC 2 Type II compliant cloud providers with redundant systems and 99.9% uptime guarantees.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Multi-Factor Authentication</h3>
+          <p class="text-slate-600">All accounts require multi-factor authentication (MFA) to ensure only authorized users can access your data.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Regular Security Audits</h3>
+          <p class="text-slate-600">We conduct regular security audits and penetration testing to identify and address potential vulnerabilities.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Real-Time Monitoring</h3>
+          <p class="text-slate-600">24/7 monitoring of our systems with automated alerts for any suspicious activity or security incidents.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Data Backup & Recovery</h3>
+          <p class="text-slate-600">Automated daily backups with secure offsite storage and tested disaster recovery procedures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance & Certifications -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-900">
+        Compliance & Certifications
+      </h2>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold mb-6 text-slate-900">Industry Standards</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <div>
+                <strong class="text-slate-900">SOC 2 Type II Compliant</strong>
+                <p class="text-slate-600">Regular audits ensure our security controls meet industry standards.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <div>
+                <strong class="text-slate-900">GDPR Compliant</strong>
+                <p class="text-slate-600">We adhere to EU data protection regulations for all client data.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <div>
+                <strong class="text-slate-900">CCPA Compliant</strong>
+                <p class="text-slate-600">California Consumer Privacy Act compliance for California residents.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <div>
+                <strong class="text-slate-900">Texas State Board Registered</strong>
+                <p class="text-slate-600">Licensed and registered with the Texas State Board of Public Accountancy.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold mb-6 text-slate-900">Security Partners</h3>
+          <div class="space-y-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                  <span class="text-blue-600 font-bold text-sm">QB</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-slate-900">QuickBooks Certified</h4>
+                  <p class="text-sm text-slate-600">Certified QuickBooks ProAdvisor</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                  <span class="text-green-600 font-bold text-sm">BC</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-slate-900">Bench Accounting</h4>
+                  <p class="text-sm text-slate-600">Secure bookkeeping platform integration</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                  <span class="text-purple-600 font-bold text-sm">PL</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-slate-900">Plaid</h4>
+                  <p class="text-sm text-slate-600">Bank-grade secure bank connections</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Protection -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-900">
+        How We Protect Your Data
+      </h2>
+      <div class="prose prose-lg max-w-none">
+        <h3>Data Encryption</h3>
+        <p>All data transmitted between your devices and our servers is encrypted using TLS 1.3, the latest and most secure version of the Transport Layer Security protocol. At rest, your data is encrypted using AES-256 encryption.</p>
+
+        <h3>Access Controls</h3>
+        <p>We implement role-based access controls (RBAC) ensuring that only authorized personnel can access your data. All access is logged and monitored for security purposes.</p>
+
+        <h3>Regular Updates</h3>
+        <p>Our systems are kept up-to-date with the latest security patches and updates. We regularly review and update our security measures to address emerging threats.</p>
+
+        <h3>Incident Response</h3>
+        <p>In the unlikely event of a security incident, we have a comprehensive incident response plan in place. We will notify affected clients within 72 hours as required by law.</p>
+
+        <h3>Data Retention</h3>
+        <p>We retain your financial data only as long as necessary to provide our services and comply with legal requirements. When data is no longer needed, it is securely deleted.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Signals -->
+  <section class="py-16 bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+        Trusted by Texas Businesses
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="text-4xl font-bold text-amber-400 mb-2">500+</div>
+          <div class="text-slate-300">Businesses Served</div>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-amber-400 mb-2">99.9%</div>
+          <div class="text-slate-300">Uptime Guarantee</div>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-amber-400 mb-2">24/7</div>
+          <div class="text-slate-300">Security Monitoring</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-amber-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900">
+        Ready to Experience Secure Bookkeeping?
+      </h2>
+      <p class="text-xl text-slate-600 mb-8">
+        Join hundreds of Texas businesses who trust Modern Ledger with their financial data.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold py-3 px-8 rounded-lg transition-colors">
+          Start Your Secure Journey
+        </a>
+        <a href="/about" class="border-2 border-amber-500 hover:bg-amber-500 hover:text-slate-900 text-amber-600 font-semibold py-3 px-8 rounded-lg transition-colors">
+          Learn More About Us
+        </a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

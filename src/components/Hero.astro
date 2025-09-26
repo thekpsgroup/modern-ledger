@@ -17,12 +17,26 @@ const phoneDisplay = phoneDigits.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
 const phoneHref = `tel:+1${phoneDigits}`;
 
 const {
-  title = 'Audit-ready bookkeeping for Texas operators in 30 days',
-  subtitle = 'Plug a Texas-based bookkeeping squad into your QuickBooks, reconcile monthly, and turn messy numbers into CFO-level reporting—without adding payroll.',
-  ctaText = 'Build my bookkeeping plan',
+  title = 'Bookkeeping That Pays For Itself.',
+  subtitle = 'Modern Ledger catches the errors others miss and saves you thousands.',
+  ctaText,
   ctaLink = '/contact',
   backgroundImage
 } = Astro.props;
+
+// A/B testing for hero headline and CTA
+const heroHeadlineTest = {
+  control: "Audit-ready bookkeeping in 30 days.",
+  variant: "Bookkeeping that pays for itself in 30 days."
+};
+
+const ctaCopyTest = {
+  control: "Schedule a Free Consultation",
+  variant: "Get My Free Assessment"
+};
+
+// Use provided CTA text or default to control
+const finalCTAText = ctaText || ctaCopyTest.control;
 
 const stats = [
   { number: '51', suffix: 'hrs', label: 'Average time saved each month' },
@@ -37,6 +51,18 @@ const heroLogos = [
   { name: 'QuickBooks Elite', logo: '/logos/quickbooks.svg', alt: 'QuickBooks Elite ProAdvisor badge' },
   { name: 'Gusto Partner', logo: '/logos/gusto.svg', alt: 'Gusto payroll partner badge' },
   { name: 'Texas Society of CPAs', logo: '/logos/tscpa.svg', alt: 'Texas Society of CPAs member badge' }
+];
+
+const heroImpact = stats.map(({ number, suffix, label }) => ({
+  value: number,
+  suffix,
+  label
+}));
+
+const heroSteps = [
+  'Diagnostic clean-up and benchmarking report delivered in week one.',
+  'Dedicated accountant syncing QuickBooks, payroll, and banking daily.',
+  'Monthly partner review tailored to Texas-based growth decisions.'
 ];
 ---
 
@@ -84,7 +110,7 @@ const heroLogos = [
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
           <div class="inline-flex flex-col gap-3 sm:flex-row sm:items-center">
             <a href={ctaLink} class="btn btn-primary px-8 text-base" aria-label="Start the Modern Ledger intake">
-              {ctaText}
+              {finalCTAText}
               <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
               </svg>
@@ -141,25 +167,52 @@ const heroLogos = [
       </div>
 
       <div class="relative">
-        <div class="relative overflow-hidden rounded-[32px] border border-white/60 bg-white/80 p-3 shadow-soft backdrop-blur">
-          <img
-            src="/modern_ledger_1920x1080.png"
-            alt="Modern Ledger month-end close dashboard"
-            class="h-full w-full rounded-[28px] object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div class="absolute -bottom-8 left-6 right-6 hidden rounded-2xl border border-brand-navy/10 bg-white p-4 shadow-soft md:flex">
-          <div class="flex gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-sky text-brand-navy">
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v9a2 2 0 01-2 2h-2M7 8H5a2 2 0 00-2 2v9a2 2 0 002 2h2m10-13V5a5 5 0 00-10 0v3m10 0H7"></path>
-              </svg>
+        <div class="grid gap-6">
+          <div class="rounded-[32px] border border-brand-navy/10 bg-white/95 p-6 shadow-soft backdrop-blur">
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-400">
+              Why finance teams switch to Modern Ledger
+            </p>
+            <div class="mt-5 grid gap-4">
+              {heroImpact.map((impact) => (
+                <div class="flex items-center justify-between gap-4 rounded-2xl border border-neutral-100 bg-neutral-50/60 px-4 py-3">
+                  <div class="text-2xl font-semibold text-brand-navy">
+                    {impact.value}
+                    {impact.suffix && <span class="ml-1 text-base font-medium">{impact.suffix}</span>}
+                  </div>
+                  <p class="m-0 text-xs text-neutral-500 text-right">{impact.label}</p>
+                </div>
+              ))}
             </div>
-            <div>
-              <p class="m-0 text-sm font-semibold text-brand-navy">"Modern Ledger cleaned 18 months of backlog and gave us investor-ready financials in six weeks."</p>
-              <p class="m-0 text-xs text-neutral-500">Amber L., COO • Rockwall commercial contractor</p>
+          </div>
+
+          <div class="rounded-3xl border border-brand-navy/10 bg-gradient-to-br from-brand-navy via-brand-navy/95 to-brand-slate/80 p-6 text-white shadow-soft">
+            <div class="flex items-start gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v9a2 2 0 01-2 2h-2M7 8H5a2 2 0 00-2 2v9a2 2 0 002 2h2m10-13V5a5 5 0 00-10 0v3m10 0H7"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="m-0 text-sm font-medium leading-relaxed">
+                  “Modern Ledger cleaned 18 months of backlog and gave us investor-ready financials in six weeks.”
+                </p>
+                <p class="m-0 mt-2 text-xs text-white/70">Amber L., COO · Rockwall commercial contractor</p>
+              </div>
             </div>
+          </div>
+
+          <div class="rounded-3xl border border-brand-navy/10 bg-white/95 p-6 shadow-soft">
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-400">What the first month includes</p>
+            <ul class="mt-4 space-y-3 text-sm text-neutral-600">
+              {heroSteps.map((step) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-brand-gold/20 text-xs font-semibold text-brand-gold">
+                    ✓
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -177,3 +230,91 @@ const heroLogos = [
     </div>
   </div>
 </section>
+
+<script>
+  // A/B Testing for Hero component
+  const AB_TESTS = {
+    hero_headline: {
+      control: "Audit-ready bookkeeping in 30 days.",
+      variant: "Bookkeeping that pays for itself in 30 days."
+    },
+    cta_copy: {
+      control: "Schedule a Free Consultation",
+      variant: "Get My Free Assessment"
+    }
+  };
+
+  // Get or assign user to test variant
+  function getTestVariant(testName: string): 'control' | 'variant' {
+    if (typeof localStorage === 'undefined') return 'control';
+
+    const storageKey = `ab_test_${testName}`;
+    const stored = localStorage.getItem(storageKey);
+
+    if (stored === 'control' || stored === 'variant') {
+      return stored;
+    }
+
+    // Simple random assignment (50/50)
+    const variant = Math.random() < 0.5 ? 'control' : 'variant';
+    localStorage.setItem(storageKey, variant);
+    return variant;
+  }
+
+  // Apply A/B test variants to hero
+  function applyABTests() {
+    // Hero headline test
+    const headlineVariant = getTestVariant('hero_headline');
+    const headlineElement = document.querySelector('h1');
+
+    if (headlineElement && headlineElement.textContent?.includes('Bookkeeping That Pays For Itself')) {
+      headlineElement.textContent = AB_TESTS.hero_headline[headlineVariant];
+    }
+
+    // CTA copy test
+    const ctaVariant = getTestVariant('cta_copy');
+    const ctaButton = document.querySelector('.btn-primary');
+
+    if (ctaButton && ctaButton.textContent?.includes('Schedule a Free Consultation')) {
+      ctaButton.innerHTML = ctaButton.innerHTML.replace(
+        'Schedule a Free Consultation',
+        AB_TESTS.cta_copy[ctaVariant]
+      );
+    }
+  }
+
+  // Track CTA clicks for A/B testing
+  function trackABCTA() {
+    const ctaButtons = document.querySelectorAll('.btn-primary, a[href*="contact"]');
+
+    ctaButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const headlineVariant = getTestVariant('hero_headline');
+        const ctaVariant = getTestVariant('cta_copy');
+
+        // Track in GA4
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'ab_test_conversion', {
+            test_name: 'hero_headline',
+            test_variant: headlineVariant,
+            conversion_type: 'cta_click',
+            page_path: window.location.pathname
+          });
+
+          (window as any).gtag('event', 'ab_test_conversion', {
+            test_name: 'cta_copy',
+            test_variant: ctaVariant,
+            conversion_type: 'cta_click',
+            page_path: window.location.pathname
+          });
+        }
+      });
+    });
+  }
+
+  // Initialize A/B tests
+  document.addEventListener('DOMContentLoaded', () => {
+    applyABTests();
+    trackABCTA();
+  });
+</script>

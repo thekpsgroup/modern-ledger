@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const cities = await import('../../data/cities.json').then(m => m.default).catch(() => []);
+
+const title = "Bookkeeping Services in Texas | Modern Ledger";
+const description = "Professional bookkeeping services across Texas. Serving Royse City and 100+ miles radius including Dallas, Fort Worth, Plano, Frisco, McKinney, and surrounding communities.";
+---
+
+<Layout title={title} description={description}>
+  <section class="py-20 bg-gradient-to-br from-brand-navy to-brand-sky text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        Bookkeeping Services in Texas
+      </h1>
+      <p class="text-xl mb-8 max-w-3xl mx-auto">
+        Professional bookkeeping services across Northeast Texas, from Royse City to Dallas and beyond. We serve 100+ cities and towns in the DFW metro area.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Cities We Serve</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Click on any city below to learn about our bookkeeping services in that area
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {cities.map(city => (
+          <a
+            href={`/locations/${city.slug}/`}
+            class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-brand-gold transition-all duration-200 group"
+          >
+            <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-brand-navy">
+              {city.name}, TX
+            </h3>
+            <p class="text-gray-600 text-sm mb-3">
+              {city.distance === 0 ? 'Home base' : `≈ ${city.distance.toFixed(1)} miles away`}
+            </p>
+            <div class="text-brand-gold font-medium text-sm">
+              View services →
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {cities.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-gray-600">Loading city data...</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Don't See Your City?</h2>
+      <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        We serve businesses throughout the DFW metro area. Contact us to see if we can help your location.
+      </p>
+      <a
+        href="/contact"
+        class="inline-block bg-brand-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-sky transition-colors"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+</Layout>

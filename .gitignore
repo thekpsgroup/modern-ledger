@@ -29,6 +29,10 @@ Thumbs.db
 logs
 *.log
 
+# Playwright output
+playwright-report/
+test-results/
+
 # Runtime data
 pids
 *.pid

@@ -1,0 +1,65 @@
+---
+// How It Works process data
+const processSteps = [
+  {
+    step: 1,
+    title: 'Onboarding',
+    description: 'We assess your current bookkeeping setup, review your financial data, and create a customized plan for your business.',
+    icon: '📋'
+  },
+  {
+    step: 2,
+    title: 'Monthly Execution',
+    description: 'Our team handles all transaction recording, bank reconciliations, and financial statement preparation on a monthly basis.',
+    icon: '⚙️'
+  },
+  {
+    step: 3,
+    title: 'Review & Insights',
+    description: 'We provide detailed reports, financial insights, and recommendations to help you make informed business decisions.',
+    icon: '📈'
+  }
+];
+---
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="stack-sm text-center">
+      <span class="eyebrow mx-auto">How It Works</span>
+      <h2 class="text-balance">Simple, Transparent Process</h2>
+      <p class="text-body-lg mx-auto max-w-content-md text-neutral-500">
+        Get started with Modern Ledger in three straightforward steps.
+      </p>
+    </div>
+
+    <div class="mt-14">
+      <div class="relative">
+        <!-- Connection line -->
+        <div class="absolute left-1/2 top-0 hidden h-full w-0.5 -translate-x-1/2 bg-brand-gold/30 lg:block"></div>
+
+        <div class="space-y-12 lg:space-y-0">
+          {processSteps.map((step, index) => (
+            <div class={`relative flex flex-col items-center lg:flex-row ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+              <!-- Step circle -->
+              <div class="absolute left-1/2 top-8 z-10 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full bg-brand-navy text-white shadow-lg lg:top-1/2 lg:-translate-y-1/2">
+                <span class="text-lg font-bold">{step.step}</span>
+              </div>
+
+              <!-- Content -->
+              <div class={`w-full pt-20 pb-8 lg:w-1/2 lg:pt-8 lg:pb-8 ${index % 2 === 0 ? 'lg:pr-12 lg:text-right' : 'lg:pl-12 lg:text-left'}`}>
+                <div class="surface p-8">
+                  <div class="mb-4 text-3xl">{step.icon}</div>
+                  <h3 class="card-title mb-3">{step.title}</h3>
+                  <p class="text-body-sm text-neutral-500">{step.description}</p>
+                </div>
+              </div>
+
+              <!-- Spacer for alignment -->
+              <div class="hidden w-1/2 lg:block"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

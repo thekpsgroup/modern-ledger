@@ -2,13 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
-import ServicesGrid from '../components/ServicesGrid.astro';
-import TestimonialHighlight from '../components/TestimonialHighlight.astro';
+import DifferentiatorCards from '../components/DifferentiatorCards.astro';
 import TestimonialCarousel from '../components/TestimonialCarousel.astro';
-import ROICalculator from '../components/ROICalculator.astro';
-import EnhancedFAQAccordion from '../components/EnhancedFAQAccordion.astro';
-import EnhancedCTASection from '../components/EnhancedCTASection.astro';
-import ProgressiveLeadForm from '../components/ProgressiveLeadForm.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import ServiceTeasers from '../components/ServiceTeasers.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
 import StickyMobileCTA from '../components/StickyMobileCTA.astro';
 import ExitIntentModal from '../components/ExitIntentModal.astro';
 ---
@@ -24,12 +22,193 @@ import ExitIntentModal from '../components/ExitIntentModal.astro';
   <div class="flex flex-col">
     <Hero />
     <TrustBar />
-    <ServicesGrid />
-    <TestimonialHighlight />
+    <DifferentiatorCards />
     <TestimonialCarousel />
-    <ROICalculator />
-    <ProgressiveLeadForm />
-    <EnhancedFAQAccordion />
-    <EnhancedCTASection variant="social-proof" />
+    <HowItWorks />
+    <ServiceTeasers />
+    <ClosingCTA />
   </div>
+
+  <!-- Structured Data: Organization + LocalBusiness -->
+  <script type="application/ld+json" set:html={
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://modernledger.co/#organization",
+          "name": "Modern Ledger",
+          "url": "https://modernledger.co",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://modernledger.co/logos/modern-ledger-logo.png",
+            "width": 400,
+            "height": 400
+          },
+          "description": "Professional bookkeeping services for small businesses in North Texas. Monthly reconciliation, clean books, and CFO-caliber financial clarity.",
+          "telephone": "+1-469-534-3392",
+          "email": "sales@thekpsgroup.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Serving North Texas",
+            "addressLocality": "Royse City",
+            "addressRegion": "TX",
+            "postalCode": "75189",
+            "addressCountry": "US"
+          },
+          "sameAs": [
+            "https://www.facebook.com/modernledger",
+            "https://www.linkedin.com/company/modern-ledger",
+            "https://twitter.com/modernledger"
+          ],
+          "foundingDate": "2020",
+          "priceRange": "$$",
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Royse City"
+            },
+            {
+              "@type": "City",
+              "name": "Rockwall"
+            },
+            {
+              "@type": "City",
+              "name": "Rowlett"
+            },
+            {
+              "@type": "City",
+              "name": "Wylie"
+            },
+            {
+              "@type": "City",
+              "name": "Fate"
+            },
+            {
+              "@type": "City",
+              "name": "Heath"
+            },
+            {
+              "@type": "City",
+              "name": "Greenville"
+            },
+            {
+              "@type": "City",
+              "name": "Quinlan"
+            },
+            {
+              "@type": "City",
+              "name": "Caddo Mills"
+            }
+          ],
+          "serviceType": [
+            "Bookkeeping",
+            "Monthly Reconciliation",
+            "Clean Books Service",
+            "Payroll Integration",
+            "Tax Preparation Support"
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://modernledger.co/#localbusiness",
+          "name": "Modern Ledger",
+          "url": "https://modernledger.co",
+          "logo": "https://modernledger.co/logos/modern-ledger-logo.png",
+          "description": "Professional bookkeeping services for small businesses in North Texas. Monthly reconciliation, clean books, and CFO-caliber financial clarity.",
+          "telephone": "+1-469-534-3392",
+          "email": "sales@thekpsgroup.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Serving North Texas",
+            "addressLocality": "Royse City",
+            "addressRegion": "TX",
+            "postalCode": "75189",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 32.9754,
+            "longitude": -96.3344
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Royse City"
+            },
+            {
+              "@type": "City",
+              "name": "Rockwall"
+            },
+            {
+              "@type": "City",
+              "name": "Rowlett"
+            },
+            {
+              "@type": "City",
+              "name": "Wylie"
+            },
+            {
+              "@type": "City",
+              "name": "Fate"
+            },
+            {
+              "@type": "City",
+              "name": "Heath"
+            },
+            {
+              "@type": "City",
+              "name": "Greenville"
+            },
+            {
+              "@type": "City",
+              "name": "Quinlan"
+            },
+            {
+              "@type": "City",
+              "name": "Caddo Mills"
+            }
+          ],
+          "priceRange": "$$",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "47",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Bookkeeping Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Monthly Bookkeeping",
+                  "description": "Complete monthly bookkeeping and reconciliation services"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Clean Books Service",
+                  "description": "Get your books audit-ready and organized"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Payroll Integration",
+                  "description": "Seamlessly integrate payroll with your bookkeeping"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    })
+  }></script>
 </Layout>

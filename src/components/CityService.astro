@@ -1,0 +1,346 @@
+---
+// City Service Page Template
+// Reusable template for local city-specific bookkeeping service pages
+
+export interface Props {
+  city: string;
+  county: string;
+  population: string;
+  industries: string[];
+  testimonial: {
+    name: string;
+    business: string;
+    quote: string;
+  };
+  content: {
+    intro: string;
+    benefits: string[];
+    cta: string;
+  };
+}
+
+const {
+  city,
+  county,
+  population,
+  industries,
+  testimonial,
+  content
+} = Astro.props;
+
+// Generate meta description
+const metaDescription = `Professional bookkeeping services in ${city}, TX. Serving ${industries.join(', ')} businesses in ${county} County. Accurate financial records, tax preparation, and business consulting. Free consultation.`;
+
+// Generate title
+const title = `Bookkeeping in ${city}, TX | Modern Ledger`;
+
+// Generate slug
+const slug = city.toLowerCase().replace(/\s+/g, '-');
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{title}</title>
+  <meta name="description" content={metaDescription} />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href={`${Astro.site}/services/bookkeeping`} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={metaDescription} />
+  <meta property="og:image" content={`${Astro.site}/og-default.jpg`} />
+  <meta property="og:url" content={`${Astro.site}/locations/${slug}-tx`} />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={metaDescription} />
+  <meta name="twitter:image" content={`${Astro.site}/og-default.jpg`} />
+
+  <!-- Local Business Schema -->
+  <script type="application/ld+json" set:html={
+    JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Modern Ledger",
+      "description": `Professional bookkeeping services in ${city}, Texas`,
+      "url": `${Astro.site}/locations/${slug}-tx`,
+      "telephone": "(972) 555-0123",
+      "email": "hello@modernledger.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": city,
+        "addressRegion": "TX",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "32.7767", // Generic TX coordinates
+        "longitude": "-96.7970"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": city,
+        "addressRegion": "TX"
+      },
+      "serviceType": "Bookkeeping Services",
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127"
+      }
+    })
+  }></script>
+</head>
+
+<body class="bg-white">
+  <!-- Header -->
+  <header class="bg-brand-navy text-white">
+    <div class="container max-w-6xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center space-x-2">
+          <img src="/logos/modern-ledger-logo.png" alt="Modern Ledger" class="h-8 w-auto" />
+        </a>
+        <nav class="hidden md:flex space-x-8">
+          <a href="/services" class="hover:text-brand-gold transition-colors">Services</a>
+          <a href="/resources" class="hover:text-brand-gold transition-colors">Resources</a>
+          <a href="/about" class="hover:text-brand-gold transition-colors">About</a>
+          <a href="/contact" class="hover:text-brand-gold transition-colors">Contact</a>
+        </nav>
+        <a href="/contact" class="bg-brand-gold text-brand-navy px-6 py-2 rounded-lg font-semibold hover:bg-brand-gold/90 transition-colors">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-brand-sky/10 to-brand-gold/10 py-16 md:py-24">
+    <div class="container max-w-4xl mx-auto px-4">
+      <!-- Breadcrumbs -->
+      <nav class="mb-8" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2 text-sm text-neutral-600">
+          <li><a href="/" class="hover:text-brand-navy">Home</a></li>
+          <li><span class="text-neutral-400">/</span></li>
+          <li><a href="/services/bookkeeping" class="hover:text-brand-navy">Bookkeeping Services</a></li>
+          <li><span class="text-neutral-400">/</span></li>
+          <li><span class="text-brand-navy font-medium" aria-current="page">{city}, TX</span></li>
+        </ol>
+      </nav>
+
+      <h1 class="text-4xl md:text-5xl font-bold text-brand-navy mb-6">
+        Bookkeeping in {city}, TX
+      </h1>
+
+      <div class="text-lg text-neutral-700 leading-relaxed space-y-4">
+        <p>{content.intro}</p>
+        <p>
+          As a {city} business owner, you need more than just basic bookkeeping.
+          You need accurate financial records that help you make smart decisions,
+          prepare for tax season, and grow your {industries.join(', ')} business.
+          That's where Modern Ledger comes in.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-16 bg-white">
+    <div class="container max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-brand-navy mb-8 text-center">
+        Why Choose Modern Ledger in {city}?
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {content.benefits.map(benefit => (
+          <div class="text-center">
+            <div class="w-16 h-16 bg-brand-sky/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <p class="text-neutral-700">{benefit}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="py-16 bg-neutral-50">
+    <div class="container max-w-4xl mx-auto px-4">
+      <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold text-brand-navy mb-4">
+            What {city} Business Owners Say
+          </h2>
+          <div class="flex justify-center mb-6">
+            {[...Array(5)].map(() => (
+              <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+        </div>
+
+        <blockquote class="text-lg text-neutral-700 italic text-center mb-6">
+          "{testimonial.quote}"
+        </blockquote>
+
+        <div class="text-center">
+          <p class="font-semibold text-brand-navy">{testimonial.name}</p>
+          <p class="text-neutral-600">{testimonial.business}</p>
+          <p class="text-sm text-neutral-500">{city}, TX</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-16 bg-white">
+    <div class="container max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-brand-navy mb-8 text-center">
+        Bookkeeping Services for {city} Businesses
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-neutral-50 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-brand-navy mb-4">Monthly Bookkeeping</h3>
+          <ul class="space-y-2 text-neutral-700">
+            <li>• Bank and credit card reconciliation</li>
+            <li>• Accounts payable and receivable</li>
+            <li>• Monthly financial statements</li>
+            <li>• Unlimited email support</li>
+          </ul>
+        </div>
+
+        <div class="bg-neutral-50 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-brand-navy mb-4">Tax Preparation Support</h3>
+          <ul class="space-y-2 text-neutral-700">
+            <li>• Year-end tax preparation coordination</li>
+            <li>• Quarterly tax planning</li>
+            <li>• Texas margin tax compliance</li>
+            <li>• Sales tax filing assistance</li>
+          </ul>
+        </div>
+
+        <div class="bg-neutral-50 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-brand-navy mb-4">Clean Books Service</h3>
+          <ul class="space-y-2 text-neutral-700">
+            <li>• Historical bookkeeping cleanup</li>
+            <li>• QuickBooks setup and training</li>
+            <li>• Process documentation</li>
+            <li>• Going forward bookkeeping</li>
+          </ul>
+        </div>
+
+        <div class="bg-neutral-50 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-brand-navy mb-4">Business Consulting</h3>
+          <ul class="space-y-2 text-neutral-700">
+            <li>• Cash flow analysis</li>
+            <li>• Profitability reviews</li>
+            <li>• Budget creation</li>
+            <li>• Growth planning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-brand-navy text-white">
+    <div class="container max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">
+        {content.cta}
+      </h2>
+
+      <p class="text-xl mb-8 text-blue-100">
+        Get your books in order and focus on growing your {city} business.
+        Schedule a free consultation with a Texas-based bookkeeping expert.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-brand-gold text-brand-navy px-8 py-4 rounded-lg font-semibold hover:bg-brand-gold/90 transition-colors">
+          Schedule Free Consultation
+        </a>
+        <a href="tel:(972) 555-0123" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+          Call (972) 555-0123
+        </a>
+      </div>
+
+      <p class="text-sm text-blue-200 mt-6">
+        No contracts • Cancel anytime • Texas-based support
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-900 text-white py-12">
+    <div class="container max-w-6xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <img src="/logos/modern-ledger-logo.png" alt="Modern Ledger" class="h-8 w-auto mb-4" />
+          <p class="text-neutral-400 text-sm">
+            Professional bookkeeping services for Texas businesses.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold mb-4">Services</h3>
+          <ul class="space-y-2 text-sm text-neutral-400">
+            <li><a href="/services/bookkeeping" class="hover:text-white">Bookkeeping</a></li>
+            <li><a href="/services/clean-books" class="hover:text-white">Clean Books</a></li>
+            <li><a href="/services/monthly-reconciliation" class="hover:text-white">Reconciliation</a></li>
+            <li><a href="/services/tax-prep-support" class="hover:text-white">Tax Support</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold mb-4">Resources</h3>
+          <ul class="space-y-2 text-sm text-neutral-400">
+            <li><a href="/resources" class="hover:text-white">Blog</a></li>
+            <li><a href="/roi-calculator" class="hover:text-white">ROI Calculator</a></li>
+            <li><a href="/case-studies" class="hover:text-white">Case Studies</a></li>
+            <li><a href="/about" class="hover:text-white">About</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold mb-4">Contact</h3>
+          <ul class="space-y-2 text-sm text-neutral-400">
+            <li>hello@modernledger.com</li>
+            <li>(972) 555-0123</li>
+            <li>Serving North Texas</li>
+            <li><a href="/contact" class="hover:text-white">Get Started</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-neutral-800 mt-8 pt-8 text-center text-sm text-neutral-400">
+        <p>&copy; 2025 Modern Ledger. All rights reserved. | <a href="/privacy" class="hover:text-white">Privacy Policy</a> | <a href="/terms" class="hover:text-white">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .container {
+    @apply mx-auto px-4;
+  }
+
+  .btn-primary {
+    @apply bg-brand-navy text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-navy/90 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-brand-navy text-brand-navy px-6 py-3 rounded-lg font-semibold hover:bg-brand-navy/10 transition-colors;
+  }
+</style>

@@ -1,0 +1,255 @@
+---
+// Dynamic city page for Modern Ledger bookkeeping services
+// Supports SEO-optimized pages for cities within 100 miles of Royse City, TX
+
+export async function getStaticPaths() {
+  const cities = await import('../../data/cities.json').then(m => m.default);
+
+  return cities.map((city: any) => ({
+    params: { slug: city.slug },
+    props: { city }
+  }));
+}
+
+interface City {
+  name: string;
+  slug: string;
+  lat: number;
+  lng: number;
+  distance: number;
+  county?: string;
+  population: number;
+}
+
+interface Props {
+  city: City;
+}
+
+const { city } = Astro.props as Props;
+const canonicalUrl = `${Astro.site?.toString().replace(/\/$/, '')}/locations/${city.slug}`;
+
+const pageTitle = `${city.name}, TX Bookkeeping Services | Modern Ledger`;
+const pageDescription = `Professional bookkeeping services in ${city.name}, TX. Local expertise with modern technology. Serving ${city.county || 'Northeast Texas'}. Get your books in order today.`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Modern Ledger",
+  "description": `Professional bookkeeping services in ${city.name}, Texas`,
+  "url": canonicalUrl,
+  "telephone": "(469) 534-3392",
+  "email": "hello@modernledger.co",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": city.name,
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": city.lat,
+    "longitude": city.lng
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": city.name,
+    "addressRegion": "TX"
+  },
+  "serviceType": ["Bookkeeping", "Accounting", "Tax Preparation", "Financial Reporting"],
+  "priceRange": "$$"
+};
+---
+
+<html lang="en">
+<head>
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription} />
+  <meta name="keywords" content={`${city.name} bookkeeping, ${city.name} accountant, Texas bookkeeping services, small business accounting ${city.name}`} />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDescription} />
+
+  <!-- Local SEO -->
+  <meta name="geo.region" content="US-TX" />
+  <meta name="geo.placename" content={`${city.name}, TX`} />
+  <meta name="geo.position" content={`${city.lat};${city.lng}`} />
+  <meta name="ICBM" content={`${city.lat}, ${city.lng}`} />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Bookkeeping Services in <span class="text-amber-400">{city.name}, TX</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl mx-auto">
+          Professional bookkeeping services tailored for {city.name} businesses.
+          Local expertise with modern technology. Serving {city.county || 'Northeast Texas'}.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold py-3 px-8 rounded-lg transition-colors">
+            Get Started Today
+          </a>
+          <a href="tel:+14695343392" class="border-2 border-amber-400 hover:bg-amber-400 hover:text-slate-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+            Call (469) 534-3392
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-900">
+        Bookkeeping Services in {city.name}
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Monthly Bookkeeping</h3>
+          <p class="text-slate-600">Complete monthly bookkeeping services including transaction recording, reconciliation, and financial reporting.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Tax Preparation</h3>
+          <p class="text-slate-600">Professional tax preparation and planning services to maximize your deductions and minimize your tax liability.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">QuickBooks Setup</h3>
+          <p class="text-slate-600">Complete QuickBooks setup and training to ensure your books are accurate and up-to-date.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Payroll Processing</h3>
+          <p class="text-slate-600">Full-service payroll processing with tax filing and compliance for Texas businesses.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">Financial Reporting</h3>
+          <p class="text-slate-600">Custom financial reports and analysis to help you make informed business decisions.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3 text-slate-900">CFO Services</h3>
+          <p class="text-slate-600">Strategic financial guidance and consulting for growing {city.name} businesses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Area Section -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h3 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900">
+            Serving {city.name} & Surrounding Areas
+          </h3>
+          <p class="text-lg text-slate-600 mb-6">
+            As a local bookkeeping service, we understand the unique challenges faced by {city.name} businesses.
+            Located just {city.distance.toFixed(1)} miles from our office in Royse City, we provide personalized service
+            with the convenience of modern technology.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-amber-400 rounded-full mr-3"></div>
+              <span class="text-slate-700">Local expertise in {city.county || 'Northeast Texas'}</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-amber-400 rounded-full mr-3"></div>
+              <span class="text-slate-700">Understanding of local business environment</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-amber-400 rounded-full mr-3"></div>
+              <span class="text-slate-700">Quick response times for urgent needs</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-amber-400 rounded-full mr-3"></div>
+              <span class="text-slate-700">Population: {city.population ? city.population.toLocaleString() : 'N/A'} residents</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold mb-6 text-slate-900">Why Choose Modern Ledger?</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <span class="text-slate-700">Certified QuickBooks ProAdvisor</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <span class="text-slate-700">Texas State Board of Public Accountancy registered</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <span class="text-slate-700">Modern cloud-based bookkeeping solutions</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <span class="text-slate-700">Dedicated account manager for your business</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <span class="text-slate-700">Monthly financial reporting and analysis</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-3">✓</span>
+              <span class="text-slate-700">Tax planning and preparation services</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-slate-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h3 class="text-3xl md:text-4xl font-bold mb-6">
+        Ready to Get Your {city.name} Books in Order?
+      </h3>
+      <p class="text-xl text-slate-300 mb-8">
+        Contact us today for a free consultation and see how we can help your business thrive.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold py-3 px-8 rounded-lg transition-colors">
+          Schedule Free Consultation
+        </a>
+        <a href="tel:+14695343392" class="border-2 border-amber-400 hover:bg-amber-400 hover:text-slate-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+          Call Now: (469) 534-3392
+        </a>
+      </div>
+      <p class="text-sm text-slate-400 mt-4">
+        Serving {city.name} and surrounding Texas communities
+      </p>
+    </div>
+  </section>
+
+  <!-- Navigation -->
+  <nav class="py-8 bg-white border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row justify-between items-center">
+        <a href="/locations" class="text-amber-600 hover:text-amber-700 font-medium">
+          ← View All Locations
+        </a>
+        <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+          <span class="text-slate-600">Distance from Royse City: {city.distance.toFixed(1)} miles</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</body>
+</html>

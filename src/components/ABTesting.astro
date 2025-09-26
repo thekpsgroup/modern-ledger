@@ -1,0 +1,57 @@
+---
+// Lightweight A/B Testing Component
+---
+
+<script>
+  // A/B test configurations
+  const AB_TESTS = {
+    hero_headline: {
+      control: "Audit-ready bookkeeping in 30 days.",
+      variant: "Bookkeeping that pays for itself in 30 days."
+    },
+    cta_copy: {
+      control: "Schedule a Free Consultation",
+      variant: "Get My Free Assessment"
+    },
+    social_proof_position: {
+      control: "logos_above_fold", // Logos above fold
+      variant: "testimonials_above_fold" // Testimonials above fold
+    }
+  };
+
+  // Get or assign user to test variant
+  function getTestVariant(testName: string): 'control' | 'variant' {
+    const storageKey = `ab_test_${testName}`;
+    const stored = localStorage.getItem(storageKey);
+
+    if (stored === 'control' || stored === 'variant') {
+      return stored;
+    }
+
+    // Simple random assignment (50/50)
+    const variant = Math.random() < 0.5 ? 'control' : 'variant';
+    localStorage.setItem(storageKey, variant);
+    return variant;
+  }
+
+  // Track conversion for A/B test
+  function trackABConversion(testName: string, variant: string, conversionType: string) {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'ab_test_conversion', {
+        test_name: testName,
+        test_variant: variant,
+        conversion_type: conversionType,
+        page_path: window.location.pathname
+      });
+    }
+  }
+
+  // Make functions available globally
+  if (typeof window !== 'undefined') {
+    (window as any).abTesting = {
+      getTestVariant,
+      trackABConversion,
+      tests: AB_TESTS
+    };
+  }
+</script>

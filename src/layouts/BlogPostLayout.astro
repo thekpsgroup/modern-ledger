@@ -1,0 +1,232 @@
+---
+import Layout from './Layout.astro';
+import CTASection from '../components/CTASection.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  publishDate: string;
+  modifiedDate: string;
+  author: string;
+  category: string;
+  tags: string[];
+  image: string;
+  canonical?: string;
+  type?: 'article';
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  modifiedDate,
+  author,
+  category,
+  tags,
+  image,
+  canonical,
+  type = 'article'
+} = Astro.props;
+
+// Get category color
+const getCategoryColor = (cat: string) => {
+  switch (cat.toLowerCase()) {
+    case 'bookkeeping tips':
+    case 'bookkeeping':
+      return 'blue';
+    case 'tax strategies':
+    case 'tax':
+      return 'green';
+    case 'growth stories':
+      return 'purple';
+    default:
+      return 'blue';
+  }
+};
+
+const categoryColor = getCategoryColor(category);
+
+// Format dates
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+const publishedTime = new Date(publishDate).toISOString();
+const modifiedTime = new Date(modifiedDate).toISOString();
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogImage={image}
+  canonical={canonical}
+  type={type}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  author={author}
+  section={category}
+  tags={tags}
+>
+  <div class="min-h-screen bg-white">
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-to-br from-brand-sky/30 to-blue-50">
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-6 ${
+            categoryColor === 'blue'
+              ? 'bg-blue-50 text-blue-700'
+              : categoryColor === 'green'
+              ? 'bg-green-50 text-green-700'
+              : 'bg-purple-50 text-purple-700'
+          }`}>
+            {category}
+          </div>
+          <h1 class="text-3xl md:text-5xl font-bold text-brand-navy mb-6 leading-tight">
+            {title}
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            {description}
+          </p>
+          <div class="flex items-center justify-center gap-6 text-sm text-gray-500">
+            <span>By {author}</span>
+            <span>•</span>
+            <span>{formatDate(publishDate)}</span>
+            <span>•</span>
+            <span>5 min read</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- Featured Image -->
+      <div class="mb-12">
+        <img
+          src={image}
+          alt={title}
+          class="w-full h-64 md:h-96 object-cover rounded-2xl shadow-card"
+          loading="eager"
+        />
+      </div>
+
+      <!-- Table of Contents -->
+      <div class="bg-gray-50 rounded-xl p-6 mb-12 border border-gray-100">
+        <h2 class="text-lg font-semibold text-brand-navy mb-4">Table of Contents</h2>
+        <nav class="space-y-2">
+          <a href="#introduction" class="block text-gray-600 hover:text-brand-gold transition-colors">Introduction</a>
+          <a href="#main-content" class="block text-gray-600 hover:text-brand-gold transition-colors">Main Content</a>
+          <a href="#conclusion" class="block text-gray-600 hover:text-brand-gold transition-colors">Conclusion</a>
+        </nav>
+      </div>
+
+      <!-- Article Body -->
+      <div class="prose prose-lg max-w-none prose-headings:text-brand-navy prose-a:text-brand-gold hover:prose-a:text-brand-gold-dark prose-strong:text-brand-navy prose-blockquote:border-brand-gold">
+        <slot />
+      </div>
+
+      <!-- Inline CTA -->
+      <div class="my-12 bg-gradient-to-r from-brand-sky to-blue-50 rounded-2xl p-8 border border-brand-gold/20">
+        <div class="text-center">
+          <h3 class="text-2xl font-bold text-brand-navy mb-4">
+            Need Help with This?
+          </h3>
+          <p class="text-gray-600 mb-6">
+            Our Texas-based bookkeeping experts can help you implement these strategies and get your books in order.
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center px-8 py-4 bg-brand-navy text-white font-semibold rounded-lg hover:bg-brand-navy-dark transition-colors duration-200"
+          >
+            Schedule a Call
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mb-12">
+        {tags.map((tag) => (
+          <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+            #{tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- Author Bio -->
+      <div class="bg-gray-50 rounded-xl p-6 mb-12 border border-gray-100">
+        <div class="flex items-center gap-4">
+          <img
+            src="/avatars/mike.jpg"
+            alt="Mike Johnson"
+            class="w-16 h-16 rounded-full object-cover"
+          />
+          <div>
+            <h3 class="font-semibold text-brand-navy">Mike Johnson</h3>
+            <p class="text-gray-600 text-sm">CPA and Lead Bookkeeper at Modern Ledger</p>
+            <p class="text-gray-600 text-sm mt-1">
+              Mike has helped hundreds of Texas businesses get their books in order and scale their operations.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Posts -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-brand-navy mb-6">Related Articles</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-card border border-gray-100 p-6 hover:shadow-card-hover transition-shadow duration-300">
+            <div class="text-sm text-blue-600 font-medium mb-2">Bookkeeping Tips</div>
+            <h4 class="font-bold text-brand-navy mb-2">
+              <a href="/resources/quickbooks-cleanup" class="hover:text-brand-gold transition-colors">
+                QuickBooks Cleanup Guide
+              </a>
+            </h4>
+            <p class="text-gray-600 text-sm">Step-by-step guide to cleaning up messy QuickBooks files.</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-card border border-gray-100 p-6 hover:shadow-card-hover transition-shadow duration-300">
+            <div class="text-sm text-green-600 font-medium mb-2">Tax Strategies</div>
+            <h4 class="font-bold text-brand-navy mb-2">
+              <a href="/resources/texas-sales-tax" class="hover:text-brand-gold transition-colors">
+                Texas Sales Tax Compliance
+              </a>
+            </h4>
+            <p class="text-gray-600 text-sm">Essential guide to Texas sales tax requirements.</p>
+          </article>
+        </div>
+      </div>
+    </article>
+
+    <!-- Final CTA Section -->
+    <CTASection />
+  </div>
+</Layout>
+
+<script>
+  // Table of contents smooth scrolling
+  document.addEventListener('DOMContentLoaded', () => {
+    const tocLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href')?.substring(1);
+        const targetElement = targetId ? document.getElementById(targetId) : null;
+
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  });
+</script>

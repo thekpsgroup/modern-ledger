@@ -5,7 +5,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://modernledger.co',
+  site: 'https://www.modernledger.co',
   integrations: [
     react(),
     tailwind({
@@ -14,15 +14,15 @@ export default defineConfig({
     mdx(),
     sitemap({
       customPages: [
-        'https://modernledger.co/locations/royse-city-tx',
-        'https://modernledger.co/locations/fate-tx',
-        'https://modernledger.co/locations/rockwall-tx',
-        'https://modernledger.co/locations/caddo-mills-tx',
-        'https://modernledger.co/locations/greenville-tx',
-        'https://modernledger.co/locations/quinlan-tx',
-        'https://modernledger.co/locations/rowlett-tx',
-        'https://modernledger.co/locations/wylie-tx',
-        'https://modernledger.co/locations/heath-tx',
+        'https://www.modernledger.co/locations/royse-city-tx',
+        'https://www.modernledger.co/locations/fate-tx',
+        'https://www.modernledger.co/locations/rockwall-tx',
+        'https://www.modernledger.co/locations/caddo-mills-tx',
+        'https://www.modernledger.co/locations/greenville-tx',
+        'https://www.modernledger.co/locations/quinlan-tx',
+        'https://www.modernledger.co/locations/rowlett-tx',
+        'https://www.modernledger.co/locations/wylie-tx',
+        'https://www.modernledger.co/locations/heath-tx',
       ],
     }),
   ],

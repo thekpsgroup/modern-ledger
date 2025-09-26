@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 import { BRAND_ASSETS } from '../data/brand-assets.generated';
 import '../styles/global.css';
 
@@ -107,6 +108,9 @@ const finalOgImage = ogImage || defaultOgImage;
   <!-- Umami Analytics -->
   <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="b31033f3-f5e0-4534-83ea-1679fc594432"></script>
 
+  <!-- GA4 Analytics Component -->
+  <Analytics />
+
   <!-- JSON-LD Schema -->
   <script is:inline type="application/ld+json">
   {
@@ -156,15 +160,53 @@ const finalOgImage = ogImage || defaultOgImage;
   </div>
 
   <!-- Cookie Consent -->
-  <div id="cookie-consent" class="fixed bottom-4 left-1/2 z-40 hidden w-[calc(100%-2rem)] -translate-x-1/2 rounded-2xl bg-brand-navy px-6 py-5 text-white shadow-elevation md:max-w-3xl">
-    <div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
-      <p class="text-sm text-white/80">
-        We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
-        <a href="/privacy" class="ml-1 font-semibold text-brand-gold transition-colors hover:text-brand-gold-dark">Learn more</a>
-      </p>
-      <div class="flex w-full flex-col gap-2 md:w-auto md:flex-row">
-  <button id="accept-cookies" class="btn btn-secondary w-full justify-center md:w-auto">Accept All</button>
-  <button id="decline-cookies" class="btn btn-inverse w-full justify-center md:w-auto">Essential Only</button>
+  <div id="cookie-consent" class="fixed bottom-4 left-1/2 z-40 hidden w-[calc(100%-2rem)] -translate-x-1/2 rounded-2xl bg-brand-navy px-6 py-5 text-white shadow-elevation md:max-w-4xl">
+    <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+      <div class="flex-1">
+        <h3 class="text-lg font-semibold mb-2">We Value Your Privacy</h3>
+        <p class="text-sm text-white/80 mb-3">
+          We use cookies and similar technologies to enhance your experience, analyze site usage, and provide personalized content. By continuing to use our site, you consent to our use of cookies in accordance with our <a href="/privacy" class="underline hover:text-brand-gold transition-colors">Privacy Policy</a>.
+        </p>
+        <div class="text-xs text-white/60">
+          <p class="mb-1"><strong>Essential Cookies:</strong> Required for site functionality and security</p>
+          <p class="mb-1"><strong>Analytics Cookies:</strong> Help us understand how visitors use our site</p>
+          <p><strong>Marketing Cookies:</strong> Used to deliver relevant advertisements</p>
+        </div>
+      </div>
+      <div class="flex w-full flex-col gap-2 md:w-auto md:min-w-[200px]">
+        <button id="accept-all-cookies" class="btn btn-secondary w-full justify-center md:w-auto">Accept All Cookies</button>
+        <button id="accept-essential-cookies" class="btn btn-inverse w-full justify-center md:w-auto">Essential Only</button>
+        <button id="customize-cookies" class="btn btn-outline w-full justify-center md:w-auto text-sm">Customize</button>
+      </div>
+    </div>
+
+    <!-- Cookie Customization Panel (Hidden by default) -->
+    <div id="cookie-customization" class="hidden mt-4 pt-4 border-t border-white/10">
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="font-medium">Essential Cookies</h4>
+            <p class="text-xs text-white/60">Required for website functionality</p>
+          </div>
+          <input type="checkbox" checked disabled class="rounded border-white/20 bg-white/10" />
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="font-medium">Analytics Cookies</h4>
+            <p class="text-xs text-white/60">Help us improve our website</p>
+          </div>
+          <input type="checkbox" id="analytics-cookies" class="rounded border-white/20 bg-white/10" />
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="font-medium">Marketing Cookies</h4>
+            <p class="text-xs text-white/60">Personalized ads and content</p>
+          </div>
+          <input type="checkbox" id="marketing-cookies" class="rounded border-white/20 bg-white/10" />
+        </div>
+        <div class="flex justify-end gap-2 mt-3">
+          <button id="save-preferences" class="btn btn-primary text-sm">Save Preferences</button>
+        </div>
       </div>
     </div>
   </div>
@@ -194,22 +236,100 @@ const finalOgImage = ogImage || defaultOgImage;
   </style>
 
   <script>
-    // Cookie consent
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) {
-      document.getElementById('cookie-consent')?.classList.remove('hidden');
+    // Global type declarations
+    declare global {
+      interface Window {
+        analytics?: {
+          setConsent: (consent: 'granted' | 'denied') => void;
+          trackLeadSubmit: (formId: string, page: string) => void;
+          trackCallClick: (phoneNumber: string, page: string) => void;
+          trackEmailClick: (email: string, page: string) => void;
+          trackCTAClick: (ctaText: string, page: string) => void;
+          trackCalculatorUsed: (inputsHash: string, page: string) => void;
+          hasConsent: () => boolean;
+        };
+      }
     }
+    // Enhanced Cookie Consent Management
+    document.addEventListener('DOMContentLoaded', () => {
+      const consent = localStorage.getItem('cookie-consent');
+      const consentVersion = localStorage.getItem('cookie-consent-version');
+      const currentVersion = '1.0'; // Increment when privacy policy changes
 
-    document.getElementById('accept-cookies')?.addEventListener('click', () => {
-      localStorage.setItem('cookie-consent', 'accepted');
-      document.getElementById('cookie-consent')?.classList.add('hidden');
-      // Load analytics here
+      // Show banner if no consent or outdated version
+      if (!consent || consentVersion !== currentVersion) {
+        document.getElementById('cookie-consent')?.classList.remove('hidden');
+      }
+
+      // Accept All Cookies
+      document.getElementById('accept-all-cookies')?.addEventListener('click', () => {
+        localStorage.setItem('cookie-consent', 'accepted');
+        localStorage.setItem('cookie-consent-version', currentVersion);
+        localStorage.setItem('analytics-cookies', 'true');
+        localStorage.setItem('marketing-cookies', 'true');
+        document.getElementById('cookie-consent')?.classList.add('hidden');
+        initializeAnalytics();
+        // Set GA4 consent
+        if (window.analytics) {
+          window.analytics.setConsent('granted');
+        }
+      });
+
+      // Accept Essential Only
+      document.getElementById('accept-essential-cookies')?.addEventListener('click', () => {
+        localStorage.setItem('cookie-consent', 'essential-only');
+        localStorage.setItem('cookie-consent-version', currentVersion);
+        localStorage.setItem('analytics-cookies', 'false');
+        localStorage.setItem('marketing-cookies', 'false');
+        document.getElementById('cookie-consent')?.classList.add('hidden');
+        // Essential cookies only - no analytics initialization
+      });
+
+      // Customize Cookies
+      document.getElementById('customize-cookies')?.addEventListener('click', () => {
+        const customization = document.getElementById('cookie-customization');
+        customization?.classList.toggle('hidden');
+
+        // Load saved preferences
+        const analyticsEnabled = localStorage.getItem('analytics-cookies') === 'true';
+        const marketingEnabled = localStorage.getItem('marketing-cookies') === 'true';
+        (document.getElementById('analytics-cookies') as HTMLInputElement).checked = analyticsEnabled;
+        (document.getElementById('marketing-cookies') as HTMLInputElement).checked = marketingEnabled;
+      });
+
+      // Save Custom Preferences
+      document.getElementById('save-preferences')?.addEventListener('click', () => {
+        const analyticsEnabled = (document.getElementById('analytics-cookies') as HTMLInputElement).checked;
+        const marketingEnabled = (document.getElementById('marketing-cookies') as HTMLInputElement).checked;
+
+        localStorage.setItem('cookie-consent', 'custom');
+        localStorage.setItem('cookie-consent-version', currentVersion);
+        localStorage.setItem('analytics-cookies', analyticsEnabled.toString());
+        localStorage.setItem('marketing-cookies', marketingEnabled.toString());
+
+        document.getElementById('cookie-consent')?.classList.add('hidden');
+
+        if (analyticsEnabled) {
+          initializeAnalytics();
+          // Set GA4 consent
+          if (window.analytics) {
+            window.analytics.setConsent('granted');
+          }
+        } else {
+          // Deny GA4 consent
+          if (window.analytics) {
+            window.analytics.setConsent('denied');
+          }
+        }
+      });
     });
 
-    document.getElementById('decline-cookies')?.addEventListener('click', () => {
-      localStorage.setItem('cookie-consent', 'declined');
-      document.getElementById('cookie-consent')?.classList.add('hidden');
-    });
+    // Initialize Analytics (Google Tag Manager & Umami)
+    function initializeAnalytics() {
+      // Google Tag Manager is already loaded in the head
+      // Umami is already loaded in the head
+      console.log('Analytics initialized');
+    }
   </script>
 </body>
 </html>

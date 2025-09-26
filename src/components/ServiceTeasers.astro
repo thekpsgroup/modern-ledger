@@ -1,0 +1,83 @@
+---
+// Service teaser cards data
+const services = [
+  {
+    title: 'Bookkeeping Services',
+    description: 'Complete bookkeeping solutions including transaction recording, reconciliation, and financial reporting.',
+    link: '/services/bookkeeping',
+    icon: '📊'
+  },
+  {
+    title: 'Monthly Reconciliation',
+    description: 'Bank and credit card reconciliation with variance analysis and adjusting entries.',
+    link: '/services/monthly-reconciliation',
+    icon: '🔄'
+  },
+  {
+    title: 'Clean Books Service',
+    description: 'Comprehensive cleanup of messy books with categorization and historical data restoration.',
+    link: '/services/clean-books',
+    icon: '🧹'
+  },
+  {
+    title: 'Payroll Integration',
+    description: 'Seamless integration with Gusto, ADP, and other payroll providers for accurate tracking.',
+    link: '/services/payroll-integration',
+    icon: '💰'
+  },
+  {
+    title: 'Tax Preparation Support',
+    description: 'Month-end close procedures optimized for tax season and CPA handoffs.',
+    link: '/services/tax-prep-support',
+    icon: '📋'
+  }
+];
+---
+
+<section class="section bg-neutral-25">
+  <div class="container">
+    <div class="stack-sm text-center">
+      <span class="eyebrow mx-auto">Our Services</span>
+      <h2 class="text-balance">Comprehensive Bookkeeping Solutions</h2>
+      <p class="text-body-lg mx-auto max-w-content-md text-neutral-500">
+        From basic bookkeeping to advanced financial management, we have the right service for your business.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {services.map(service => (
+        <a
+          href={service.link}
+          class="surface group block p-8 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation"
+        >
+          <div class="mb-5 text-4xl">{service.icon}</div>
+          <h3 class="card-title mb-3 group-hover:text-brand-gold transition-colors">
+            {service.title}
+          </h3>
+          <p class="text-body-sm text-neutral-500 mb-4">
+            {service.description}
+          </p>
+          <div class="flex items-center text-sm font-semibold text-brand-navy group-hover:text-brand-gold transition-colors">
+            Learn More
+            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-14 text-center">
+      <a
+        href="/services/bookkeeping"
+        class="btn btn-primary"
+        aria-label="View all bookkeeping services"
+      >
+        View All Services
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

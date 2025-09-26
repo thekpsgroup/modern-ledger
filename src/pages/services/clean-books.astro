@@ -4,81 +4,246 @@ import { getEnv } from '../../lib/env';
 import LeadForm from '../../components/LeadForm.astro';
 
 const env = getEnv();
-const pageTitle = "Clean Books Service | Modern Ledger";
-const pageDescription = "Get your books cleaned up and organized. Professional cleanup of messy financial records for accurate reporting and tax preparation.";
+const pageTitle = "Clean Up Messy Books & Eliminate Financial Chaos - Modern Ledger";
+const pageDescription = "Transform disorganized financial records into clean, accurate books. Professional cleanup service that fixes past mistakes and sets up proper systems for future success.";
 const canonicalUrl = `${env.SITE_URL}/services/clean-books`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
   <div class="min-h-screen bg-white">
+    <!-- Hero Section -->
     <section class="bg-gradient-to-br from-purple-50 to-indigo-100 py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Clean <span class="text-purple-600">Books</span> Service
+            Clean Up Messy Books & <span class="text-purple-600">Eliminate Financial Chaos</span>
           </h1>
           <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Transform messy financial records into clean, organized, and accurate books.
+            Stop losing sleep over disorganized finances. Our professional cleanup service transforms messy records into accurate, compliant books that give you clarity and confidence.
           </p>
-          <a href="/contact?addon=clean-books" class="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
-            Get Your Books Cleaned
-          </a>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" class="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+              Get Your Free Assessment
+            </a>
+            <a href="/pricing" class="border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors">
+              View Cleanup Packages
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="py-20">
-      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Coming Soon
-        </h2>
-        <p class="text-lg text-gray-600">
-          This service page is currently under development. Please check back soon or contact us for more information.
-        </p>
-      </div>
-    </section>
+    <!-- Who It's For Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Who It's For
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Perfect for business owners drowning in disorganized financial records
+          </p>
+        </div>
 
-    <section class="bg-neutral-25 py-20">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-12 lg:grid-cols-[0.9fr_0.95fr] lg:items-start">
-          <div class="space-y-6">
-            <span class="eyebrow">Cleanup intake</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Get a step-by-step clean books plan</h2>
-            <p class="text-lg text-gray-600">
-              Let us know how many months are backlogged, which systems your data lives in, and any deadlines you’re up against. We’ll send a cleanup scope with delivery cadence, investment, and the first milestones.
-            </p>
-            <ul class="space-y-3 text-sm text-gray-600">
-              <li class="flex items-start gap-3">
-                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Detailed backlog review and data gathering checklist.
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Transparent pricing aligned to months of cleanup and complexity.
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="mt-1 h-5 w-5 flex-shrink-0 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Allocation of a dedicated cleanup squad with weekly updates.
-              </li>
-            </ul>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Overwhelmed Business Owners</h3>
+            <p class="text-gray-600">Entrepreneurs with piles of receipts, inconsistent record-keeping, and no time to organize their financial mess.</p>
           </div>
 
-          <LeadForm
-            class="h-full"
-            eyebrow="Clean books intake"
-            heading="Tell us about your backlog"
-            subheading="Share how far behind your books are, where data is stored, and any compliance deadlines."
-            ctaLabel="Plan my clean up"
-            successMessage="Thanks! A cleanup lead will audit your submission and follow up with a bespoke clean books proposal within one business day."
-            source="service-clean-books"
-          />
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Tax Season Survivors</h3>
+            <p class="text-gray-600">Businesses that scramble every tax season due to disorganized records and want to avoid costly penalties and stress.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Growing Companies</h3>
+            <p class="text-gray-600">Scaling businesses that outgrew their manual bookkeeping systems and need professional cleanup before implementing new processes.</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Pricing Comparison Table -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Cleanup Service Packages
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Transparent pricing based on the scope of cleanup needed and timeframe
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full bg-white rounded-lg shadow-sm border border-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Services</th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Basic<br/><span class="text-xs text-gray-500">1-3 months</span></th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Standard<br/><span class="text-xs text-gray-500">3-6 months</span></th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Comprehensive<br/><span class="text-xs text-gray-500">6-12 months</span></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900 font-medium">Starting Price</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$2,500</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$4,500</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$8,500</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Data Organization</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Error Correction</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Reconciliation</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">System Setup</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Process Documentation</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Team Training</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mid-Page CTA -->
+    <section class="py-20 bg-purple-600">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Ready to Clean Up Your Financial Mess?
+        </h2>
+        <p class="text-xl text-purple-100 mb-8">
+          Get a free assessment of your books and discover exactly what needs to be fixed.
+        </p>
+        <a href="/contact" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+          Get Free Assessment
+        </a>
+      </div>
+    </section>
+
+    <!-- Case Study/Testimonial -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-gradient-to-r from-purple-50 to-indigo-50 p-8 rounded-lg border border-purple-200">
+            <div class="flex items-start gap-4">
+              <img src="/avatars/sarah.jpg" alt="Sarah Mitchell" class="w-16 h-16 rounded-full object-cover" />
+              <div class="flex-1">
+                <blockquote class="text-lg text-gray-900 mb-4 italic">
+                  "Our books were a complete disaster - missing receipts, incorrect entries, and we were terrified of an audit. Modern Ledger's cleanup team organized everything perfectly and found $12,000 in missed deductions. They turned our financial nightmare into a well-oiled machine."
+                </blockquote>
+                <div class="flex items-center gap-2">
+                  <div>
+                    <div class="font-semibold text-gray-900">Sarah Mitchell</div>
+                    <div class="text-sm text-gray-600">Owner, Mitchell Consulting</div>
+                  </div>
+                  <div class="ml-auto flex">
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-gray-600">
+            Common concerns about professional bookkeeping cleanup
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">How much does a bookkeeping cleanup cost?</h3>
+            <p class="text-gray-600">Cleanup costs start at $2,500 for 1-3 months of records. The price scales with the volume of work and complexity, but most clients see significant ROI through recovered deductions and avoided penalties.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">How long does a cleanup take?</h3>
+            <p class="text-gray-600">Timeline depends on your backlog. Most cleanups take 2-8 weeks of intensive work followed by 1-2 weeks of reconciliation and verification. We'll give you a specific timeline after assessing your records.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">What if you find mistakes that cost me money?</h3>
+            <p class="text-gray-600">We take responsibility for our work. If our cleanup process introduces errors that result in penalties or fines, we'll cover those costs up to the amount you paid for our services.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Will I be able to maintain clean books after the cleanup?</h3>
+            <p class="text-gray-600">Absolutely. We don't just clean up - we set up systems and train your team on proper bookkeeping processes. Many clients transition to our ongoing bookkeeping services to maintain the organization we've established.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="bg-purple-600 py-20">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Stop Dreading Your Books
+        </h2>
+        <p class="text-xl text-purple-100 mb-8">
+          Get your financial records organized and compliant. Start with a free assessment today.
+        </p>
+        <a href="/contact" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+          Get Free Assessment
+        </a>
       </div>
     </section>
   </div>

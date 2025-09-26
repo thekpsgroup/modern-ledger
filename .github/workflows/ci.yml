@@ -206,14 +206,128 @@ jobs:
           COMPANY_EMAIL: sales@thekpsgroup.com
           EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
 
+      - name: Optimize assets
+        run: npm run assets:optimize
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
 
-  deploy:
+  test:
     needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Build site for testing
+        run: npm run build
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
+
+      - name: Run E2E tests
+        run: npm run test:e2e
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
+
+      - name: Run visual regression tests
+        run: npm run test:visual
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: test-results/
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshots
+          path: test-results/screenshots/
+
+  lighthouse:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site for Lighthouse
+        run: npm run build
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
+
+      - name: Run Lighthouse CI
+        run: npm run qa:lighthouse
+        env:
+          SITE_URL: https://modernledger.co
+          COMPANY_PHONE: 4695343392
+          COMPANY_EMAIL: sales@thekpsgroup.com
+          EVENTS_ENDPOINT_SECRET: ci_build_secret_not_for_production
+
+      - name: Upload Lighthouse reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+
+  deploy:
+    needs: [test, lighthouse]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     steps:

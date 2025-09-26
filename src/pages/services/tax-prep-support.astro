@@ -1,39 +1,249 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getEnv } from '../../lib/env';
+import LeadForm from '../../components/LeadForm.astro';
 
 const env = getEnv();
-const pageTitle = "Tax Preparation Support | Modern Ledger";
-const pageDescription = "Professional tax preparation support that organizes books, gathers documents, and collaborates with CPAs to keep filings accurate, timely, and stress-free.";
+const pageTitle = "CFO Advisory & Tax Preparation Support - Maximize Deductions & Minimize Stress - Modern Ledger";
+const pageDescription = "Expert CFO advisory and tax preparation support that maximizes your deductions, ensures compliance, and eliminates tax season stress. Get strategic financial guidance from experienced professionals.";
 const canonicalUrl = `${env.SITE_URL}/services/tax-prep-support`;
 ---
 
 <Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
   <div class="min-h-screen bg-white">
+    <!-- Hero Section -->
     <section class="bg-gradient-to-br from-blue-50 to-cyan-100 py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Tax Preparation <span class="text-blue-600">Support</span>
+            Maximize Deductions & <span class="text-blue-600">Eliminate Tax Stress</span>
           </h1>
           <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Expert tax preparation support to ensure your books are tax-ready and compliant.
+            Stop leaving money on the table. Our CFO advisory ensures you capture every deduction, stay audit-ready, and file with confidence. Focus on growing your business while we handle your tax strategy.
           </p>
-          <a href="/contact?addon=tax-season" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-            Get Tax-Ready
-          </a>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              Get Tax Strategy Session
+            </a>
+            <a href="/pricing" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+              View Advisory Packages
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="py-20">
+    <!-- Who It's For Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Who It's For
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Perfect for business owners who want expert financial guidance without a full-time CFO
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Growing Businesses</h3>
+            <p class="text-gray-600">Companies with $500K-$5M in revenue needing strategic financial guidance but not ready for a full-time CFO.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Tax-Conscious Owners</h3>
+            <p class="text-gray-600">Business owners who want to maximize legitimate deductions and minimize tax liabilities through strategic planning.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Pre-IPO Companies</h3>
+            <p class="text-gray-600">Companies preparing for funding rounds or exit strategies that need clean, investor-ready financials and tax optimization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Comparison Table -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            CFO Advisory Packages
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Strategic financial guidance tailored to your business stage and goals
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full bg-white rounded-lg shadow-sm border border-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Services</th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Tax Prep<br/><span class="text-xs text-gray-500">Seasonal</span></th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Quarterly Advisory<br/><span class="text-xs text-gray-500">Strategy</span></th>
+                <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Full CFO<br/><span class="text-xs text-gray-500">Part-time</span></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900 font-medium">Monthly Investment</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$1,500</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$3,500</td>
+                <td class="px-6 py-4 text-center text-sm text-gray-900">$7,500</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Tax Planning & Strategy</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Financial Reporting</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Cash Flow Management</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Budgeting & Forecasting</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Investor Reporting</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 text-sm text-gray-900">Strategic Planning</td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5A1 1 0 014.293 4.293z" clip-rule="evenodd"/></svg></td>
+                <td class="px-6 py-4 text-center"><svg class="w-5 h-5 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mid-Page CTA -->
+    <section class="py-20 bg-blue-600">
       <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Coming Soon
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Ready to Maximize Your Tax Savings?
         </h2>
-        <p class="text-lg text-gray-600">
-          This service page is currently under development. Please check back soon or contact us for more information.
+        <p class="text-xl text-blue-100 mb-8">
+          Book a strategy session to discover deductions you're missing and optimize your tax position.
         </p>
+        <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+          Book Strategy Session
+        </a>
+      </div>
+    </section>
+
+    <!-- Case Study/Testimonial -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-8 rounded-lg border border-blue-200">
+            <div class="flex items-start gap-4">
+              <img src="/avatars/jennifer.jpg" alt="Jennifer Walsh" class="w-16 h-16 rounded-full object-cover" />
+              <div class="flex-1">
+                <blockquote class="text-lg text-gray-900 mb-4 italic">
+                  "Our CFO advisory saved us $85,000 in taxes last year alone. They identified deductions our previous accountant missed and set up a tax strategy that positioned us perfectly for our Series A funding. The ROI on their services was 300% in the first year."
+                </blockquote>
+                <div class="flex items-center gap-2">
+                  <div>
+                    <div class="font-semibold text-gray-900">Jennifer Walsh</div>
+                    <div class="text-sm text-gray-600">CEO, Walsh Technologies</div>
+                  </div>
+                  <div class="ml-auto flex">
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-gray-600">
+            Common questions about CFO advisory and tax optimization
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">How much can I save with proper tax planning?</h3>
+            <p class="text-gray-600">Most businesses save 15-30% on their tax bill through strategic planning and proper deduction identification. For a $1M revenue business, this could mean $15,000-$30,000 in annual savings.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Do you prepare tax returns or just advise?</h3>
+            <p class="text-gray-600">We provide comprehensive tax preparation support, organizing all documentation and working directly with your CPA. We don't prepare returns ourselves but ensure everything is perfectly organized for your tax professional.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">What's included in the CFO advisory?</h3>
+            <p class="text-gray-600">Everything from tax strategy and financial planning to budgeting, forecasting, and investor reporting. We act as your part-time CFO, providing the strategic financial guidance you need without the full-time cost.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">How quickly can I see results?</h3>
+            <p class="text-gray-600">Most clients see immediate improvements in their tax position and cash flow management. Full strategic benefits typically show within 3-6 months as we implement systems and identify optimization opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="bg-blue-600 py-20">
+      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Stop Leaving Money on the Table
+        </h2>
+        <p class="text-xl text-blue-100 mb-8">
+          Get expert CFO guidance and maximize your tax savings. Start with a free strategy session.
+        </p>
+        <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+          Get Free Strategy Session
+        </a>
       </div>
     </section>
   </div>

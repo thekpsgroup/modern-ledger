@@ -7,6 +7,7 @@ export type Testimonial = {
   quote: string;
   source: "Google";
   date?: string;
+  avatar?: string;
 };
 
 export const TESTIMONIALS: Testimonial[] = [
@@ -17,7 +18,8 @@ export const TESTIMONIALS: Testimonial[] = [
       "Absolutely love this company! Karson has been the biggest help getting me on track for a great future in business. Flexible hours and cost to accommodate all business types and sizes! So very thankful for them.",
     source: "Google",
     city: "Royse City, TX",
-    date: "22 weeks ago"
+    date: "22 weeks ago",
+    avatar: "/avatars/jennifer.jpg"
   },
   {
     name: "Amy Nguyen",
@@ -27,7 +29,8 @@ export const TESTIMONIALS: Testimonial[] = [
       "The KPS Group was incredibly helpful! Karson took the time to understand our needs and helped modernize our tools, marketing, and accounting systems. Super knowledgeable, easy to work with, and genuinely cares about helping businesses grow. Highly recommend!",
     source: "Google",
     city: "DFW, TX",
-    date: "22 weeks ago"
+    date: "22 weeks ago",
+    avatar: "/avatars/mike.jpg"
   },
   {
     name: "Amber Smith",
@@ -35,7 +38,8 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "Karson is professional and committed to his business!",
     source: "Google",
     city: "Royse City, TX",
-    date: "30 weeks ago"
+    date: "30 weeks ago",
+    avatar: "/avatars/sarah.jpg"
   },
   {
     name: "Adam Farmer",
@@ -45,7 +49,8 @@ export const TESTIMONIALS: Testimonial[] = [
       "Top notch consulting and bookkeeping services. Penny Joy Consulting was a game changer for my small business. Highly recommend.",
     source: "Google",
     city: "Rockwall County, TX",
-    date: "30 weeks ago"
+    date: "30 weeks ago",
+    avatar: "/avatars/jennifer.jpg"
   },
   {
     name: "Brandon & Holly Gibson",
@@ -53,6 +58,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "An amazing consultant for our growing business!",
     source: "Google",
     city: "Royse City, TX",
-    date: "30 weeks ago"
+    date: "30 weeks ago",
+    avatar: "/avatars/mike.jpg"
   }
 ];
