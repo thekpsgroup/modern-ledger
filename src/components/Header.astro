@@ -3,9 +3,29 @@ import { getEnv } from '../lib/env';
 
 const navItems = [
   { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
+  { 
+    href: '/services', 
+    label: 'Services',
+    dropdown: [
+      { href: '/services/bookkeeping', label: 'Bookkeeping Services' },
+      { href: '/services/monthly-reconciliation', label: 'Monthly Reconciliation' },
+      { href: '/services/clean-books', label: 'Clean Books Service' },
+      { href: '/services/payroll-integration', label: 'Payroll Integration' },
+      { href: '/services/tax-prep-support', label: 'Tax Preparation Support' },
+    ]
+  },
+  { 
+    href: '/resources', 
+    label: 'Resources',
+    dropdown: [
+      { href: '/roi-calculator', label: 'ROI Calculator' },
+      { href: '/blog/month-end-close-checklist', label: 'Month-End Close Checklist' },
+      { href: '/blog/quickbooks-cleanup', label: 'QuickBooks Cleanup Guide' },
+      { href: '/blog/cash-vs-accrual', label: 'Cash vs Accrual Accounting' },
+      { href: '/resources', label: 'All Resources' },
+    ]
+  },
   { href: '/about', label: 'About' },
-  { href: '/resources', label: 'Resources' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -21,64 +41,98 @@ const currentPath = Astro.url.pathname;
   class="sticky top-0 z-50 border-b border-brand-navy/10 bg-white/90 transition-all duration-300 supports-[backdrop-filter]:backdrop-blur backdrop-blur"
 >
   <div class="container">
-    <div class="flex items-center justify-between h-16 gap-3 transition-all duration-300 md:h-20 md:gap-6">
+    <div class="flex items-center justify-between h-12 gap-2 transition-all duration-300 md:h-14 md:gap-4">
       <!-- Logo -->
       <a href="/" class="flex items-center space-x-2" aria-label="Modern Ledger Home">
         <img src="/modern_ledger_256x256.png" width="32" height="32" alt="Modern Ledger logo" class="rounded-md shadow-sm" />
-        <span class="font-display text-lg font-semibold text-brand-navy">Modern Ledger</span>
+        <span class="font-display text-base font-semibold text-brand-navy">Modern Ledger</span>
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="hidden items-center gap-1.5 md:flex">
         {navItems.map((item) => {
           const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          const hasDropdown = item.dropdown && item.dropdown.length > 0;
 
           return (
-            <a
-              href={item.href}
-              class:list={[
-                'inline-flex h-10 items-center rounded-button px-3 text-sm font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold',
-                isActive
-                  ? 'bg-brand-sky/80 text-brand-navy shadow-sm'
-                  : 'text-neutral-500 hover:bg-brand-sky/70 hover:text-brand-navy'
-              ]}
-              aria-label={`Navigate to ${item.label}`}
-              aria-current={isActive ? 'page' : undefined}
-            >
-              {item.label}
-            </a>
+            <div class="relative group">
+              <a
+                href={item.href}
+                class:list={[
+                  'inline-flex h-8 items-center rounded-button px-2 text-xs font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold',
+                  isActive
+                    ? 'bg-brand-sky/80 text-brand-navy shadow-sm'
+                    : 'text-neutral-500 hover:bg-brand-sky/70 hover:text-brand-navy',
+                  hasDropdown ? 'flex items-center gap-1' : ''
+                ]}
+                aria-label={`Navigate to ${item.label}`}
+                aria-current={isActive ? 'page' : undefined}
+                aria-expanded={hasDropdown ? 'false' : undefined}
+              >
+                {item.label}
+                {hasDropdown && (
+                  <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                )}
+              </a>
+              
+              {hasDropdown && (
+                <div class="absolute top-full left-0 mt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div class="bg-white rounded-lg shadow-lg border border-brand-navy/10 py-2">
+                    {item.dropdown.map((dropdownItem) => {
+                      const isDropdownActive = currentPath === dropdownItem.href || (dropdownItem.href !== '/' && currentPath.startsWith(dropdownItem.href));
+                      
+                      return (
+                        <a
+                          href={dropdownItem.href}
+                          class:list={[
+                            'block px-4 py-2 text-sm transition-colors duration-200 hover:bg-brand-sky/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold',
+                            isDropdownActive
+                              ? 'bg-brand-sky/80 text-brand-navy font-medium'
+                              : 'text-neutral-600 hover:text-brand-navy'
+                          ]}
+                          aria-label={`Navigate to ${dropdownItem.label}`}
+                        >
+                          {dropdownItem.label}
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
           );
         })}
       </nav>
 
       <!-- CTA Button -->
-      <div class="hidden items-center gap-4 md:flex">
+      <div class="hidden items-center gap-3 md:flex">
         <a
           href={phoneHref}
-          class="inline-flex h-10 items-center rounded-button px-3 text-sm font-medium text-brand-navy transition-colors duration-200 hover:bg-brand-sky/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+          class="inline-flex h-8 items-center rounded-button px-2 text-xs font-medium text-brand-navy transition-colors duration-200 hover:bg-brand-sky/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
           aria-label="Call Modern Ledger"
         >
-          <span class="mr-2 inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+          <span class="mr-1 inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
           {phoneDisplay}
         </a>
         <a
           href="/contact"
-          class="btn btn-primary px-6 text-base"
+          class="btn btn-primary px-4 text-sm"
           aria-label="Talk to a Modern Ledger expert"
         >
-          Talk to a Texas-based expert
+          Talk to expert
         </a>
       </div>
 
-      <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
         data-testid="mobile-menu-toggle"
-        class="md:hidden rounded-full p-2 text-neutral-500 transition-colors duration-200 hover:bg-brand-sky/70 hover:text-brand-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+        class="md:hidden rounded-full p-1.5 text-neutral-500 transition-colors duration-200 hover:bg-brand-sky/70 hover:text-brand-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
         aria-label="Toggle mobile menu"
         aria-expanded="false"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
@@ -92,34 +146,67 @@ const currentPath = Astro.url.pathname;
       <nav class="flex flex-col gap-1">
         {navItems.map((item) => {
           const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          const hasDropdown = item.dropdown && item.dropdown.length > 0;
 
           return (
-            <a
-              href={item.href}
-              class:list={[
-                'inline-flex h-12 items-center rounded-lg px-4 text-base font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold',
-                isActive
-                  ? 'bg-brand-sky/80 text-brand-navy shadow-sm'
-                  : 'text-neutral-500 hover:bg-brand-sky/70 hover:text-brand-navy'
-              ]}
-              aria-label={`Navigate to ${item.label}`}
-              aria-current={isActive ? 'page' : undefined}
-            >
-              {item.label}
-            </a>
+            <div>
+              <a
+                href={item.href}
+                class:list={[
+                  'inline-flex h-10 items-center rounded-lg px-3 text-sm font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold',
+                  isActive
+                    ? 'bg-brand-sky/80 text-brand-navy shadow-sm'
+                    : 'text-neutral-500 hover:bg-brand-sky/70 hover:text-brand-navy',
+                  hasDropdown ? 'w-full justify-between' : ''
+                ]}
+                aria-label={`Navigate to ${item.label}`}
+                aria-current={isActive ? 'page' : undefined}
+                data-mobile-nav-item={hasDropdown ? 'has-dropdown' : 'simple'}
+              >
+                {item.label}
+                {hasDropdown && (
+                  <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                )}
+              </a>
+              
+              {hasDropdown && (
+                <div class="ml-4 mt-1 space-y-1" data-mobile-dropdown>
+                  {item.dropdown.map((dropdownItem) => {
+                    const isDropdownActive = currentPath === dropdownItem.href || (dropdownItem.href !== '/' && currentPath.startsWith(dropdownItem.href));
+                    
+                    return (
+                      <a
+                        href={dropdownItem.href}
+                        class:list={[
+                          'block px-3 py-2 text-sm rounded-lg transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold',
+                          isDropdownActive
+                            ? 'bg-brand-sky/80 text-brand-navy font-medium'
+                            : 'text-neutral-400 hover:bg-brand-sky/70 hover:text-brand-navy'
+                        ]}
+                        aria-label={`Navigate to ${dropdownItem.label}`}
+                      >
+                        {dropdownItem.label}
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           );
         })}
-        <div class="mt-4 border-t border-brand-navy/10 pt-4">
+        <div class="mt-3 border-t border-brand-navy/10 pt-3">
           <a
             href={phoneHref}
-            class="inline-flex h-12 w-full items-center px-4 text-base font-medium text-neutral-500 transition-colors duration-200 hover:text-brand-navy"
+            class="inline-flex h-10 w-full items-center px-3 text-sm font-medium text-neutral-500 transition-colors duration-200 hover:text-brand-navy"
             aria-label="Call Modern Ledger"
           >
             {phoneDisplay}
           </a>
           <a
             href="/contact"
-            class="btn btn-primary mt-3 h-12 w-full"
+            class="btn btn-primary mt-2 h-10 w-full text-sm"
             aria-label="Book a consultation"
           >
             Book Consult
@@ -152,6 +239,27 @@ const currentPath = Astro.url.pathname;
             ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>'
             : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
         }
+      });
+
+      // Handle mobile dropdown toggles
+      const dropdownItems = mobileMenu.querySelectorAll('[data-mobile-nav-item="has-dropdown"]');
+      dropdownItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const dropdown = item.parentElement.querySelector('[data-mobile-dropdown]');
+          const icon = item.querySelector('svg');
+          
+          if (dropdown && icon) {
+            const isExpanded = dropdown.classList.contains('hidden');
+            dropdown.classList.toggle('hidden');
+            
+            // Rotate icon
+            icon.style.transform = isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
+            
+            // Update aria-expanded
+            item.setAttribute('aria-expanded', String(isExpanded));
+          }
+        });
       });
     }
 

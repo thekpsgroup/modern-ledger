@@ -232,7 +232,7 @@ test.describe('Modern Ledger E2E Tests', () => {
     }
   });
 
-  // 🔧 Copilot: Mobile layouts hide the primary nav. If the "Services" link isn't visible, open the mobile menu toggle first.
+  // Copilot: Mobile layouts hide the primary nav. If the "Services" link isn't visible, open the mobile menu toggle first.
   // 404 tests
   test('404: random path returns custom 404', async ({ page }) => {
     await page.goto('/random-nonexistent-path');
@@ -298,7 +298,7 @@ test.describe('Accessibility Tests', () => {
 
     // Warn about color contrast issues
     if (accessibilityScanResults.violations.some(v => v.id === 'color-contrast')) {
-      console.warn('⚠️  Color contrast violations found. Consider improving color ratios for better accessibility.');
+      console.warn('Color contrast violations found. Consider improving color ratios for better accessibility.');
     }
   });
 

@@ -68,7 +68,7 @@ function updateFlags(updates: Partial<ABFlags>): ABFlags {
 }
 
 function displayFlags(flags: ABFlags): void {
-  console.log('🎛️  Current A/B Flags:');
+  console.log('Current A/B Flags:');
   Object.entries(flags).forEach(([key, value]) => {
     console.log(`   ${key}: ${value}`);
   });
@@ -106,10 +106,10 @@ async function main() {
 
   try {
     const newFlags = updateFlags(updates);
-    console.log('✅ A/B flags updated successfully');
+    console.log('A/B flags updated successfully');
     displayFlags(newFlags);
   } catch (error) {
-    console.error('❌ Failed to update flags:', error instanceof Error ? error.message : String(error));
+    console.error('Failed to update flags:', error instanceof Error ? error.message : String(error));
     process.exit(1);
   }
 }

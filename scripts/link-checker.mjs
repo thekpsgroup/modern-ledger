@@ -58,7 +58,7 @@ async function walkHtmlFiles(dir) {
 function normalizeInternalHref(href) {
 	const clean = href.split('#')[0].split('?')[0];
 	if (!clean) return null;
-	if (clean.endsWith('.xml') || clean.endsWith('.json') || clean.endsWith('.pdf')) return null;
+	if (clean.endsWith('.xml') || clean.endsWith('.json') || clean.endsWith('.pdf') || clean.endsWith('.txt')) return clean;
 	if (clean.endsWith('/')) return `${clean}index.html`;
 	if (clean.endsWith('.html')) return clean;
 	return `${clean.replace(/\/$/, '')}/index.html`;
@@ -211,11 +211,11 @@ async function main() {
 	}
 
 	if (issues.length === 0) {
-		log(`✅ All links look good across ${htmlFiles.length} pages.`);
+		log(`All links look good across ${htmlFiles.length} pages.`);
 		return;
 	}
 
-	log(`❌ Found ${issues.length} issues:`);
+	log(`Found ${issues.length} issues:`);
 	for (const issue of issues) {
 		if (issue.type === 'external') {
 			console.warn(` - ${issue.message}`);

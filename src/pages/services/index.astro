@@ -1,0 +1,311 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEnv } from '../../lib/env';
+import LeadForm from '../../components/LeadForm.astro';
+
+const env = getEnv();
+const pageTitle = "Professional Bookkeeping Services - Modern Ledger";
+const pageDescription = "Complete bookkeeping solutions for Texas businesses. Monthly reconciliation, clean books, payroll integration, and tax preparation support. Get audit-ready financials without the in-house hire.";
+const canonicalUrl = `${env.SITE_URL}/services`;
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={canonicalUrl}>
+  <div class="min-h-screen bg-white">
+    <!-- Hero Section -->
+    <section class="section bg-brand-sky/10">
+      <div class="container">
+        <div class="mx-auto max-w-content-xl text-center">
+          <span class="eyebrow">Our Services</span>
+          <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Complete Bookkeeping Solutions for Texas Businesses
+          </h1>
+          <p class="text-body-lg mx-auto mb-8 max-w-content-md text-neutral-600">
+            Professional bookkeeping services that eliminate tax surprises and give you financial clarity.
+            Focus on growing your business while we handle the numbers.
+          </p>
+          <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <a href="/contact" class="btn btn-primary">
+              Schedule Free Consultation
+            </a>
+            <a href="/pricing" class="btn btn-outline">
+              View Pricing
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="section bg-white">
+      <div class="container">
+        <div class="mx-auto max-w-content-xl">
+          <div class="stack-sm text-center mb-12">
+            <h2 class="text-balance">Everything You Need for Audit-Ready Books</h2>
+            <p class="text-body-lg text-neutral-500">
+              From monthly reconciliation to tax preparation support, we handle all aspects of your bookkeeping.
+            </p>
+          </div>
+
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Monthly Bookkeeping -->
+            <div class="surface p-8 transition-transform duration-200 hover:-translate-y-1">
+              <div class="mb-6 text-4xl">Data Analytics</div>
+              <h3 class="card-title mb-4">
+                <a href="/services/bookkeeping" class="hover:text-brand-gold transition-colors">
+                  Monthly Bookkeeping
+                </a>
+              </h3>
+              <p class="text-body-sm text-neutral-600 mb-6">
+                GAAP-compliant bookkeeping that keeps your books accurate, audit-ready, and tax-compliant.
+                Monthly financial statements you can trust.
+              </p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Profit & Loss statements
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Balance sheets
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Cash flow reports
+                </li>
+              </ul>
+              <a href="/services/bookkeeping" class="text-brand-navy font-semibold hover:text-brand-gold transition-colors">
+                Learn more →
+              </a>
+            </div>
+
+            <!-- Monthly Reconciliation -->
+            <div class="surface p-8 transition-transform duration-200 hover:-translate-y-1">
+              <div class="mb-6 text-4xl">Search & Discovery</div>
+              <h3 class="card-title mb-4">
+                <a href="/services/monthly-reconciliation" class="hover:text-brand-gold transition-colors">
+                  Monthly Reconciliation
+                </a>
+              </h3>
+              <p class="text-body-sm text-neutral-600 mb-6">
+                Complete bank and credit card reconciliation with variance analysis and adjusting entries.
+                Catch errors before they become problems.
+              </p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Bank reconciliation
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Credit card matching
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Variance analysis
+                </li>
+              </ul>
+              <a href="/services/monthly-reconciliation" class="text-brand-navy font-semibold hover:text-brand-gold transition-colors">
+                Learn more →
+              </a>
+            </div>
+
+            <!-- Clean Books Service -->
+            <div class="surface p-8 transition-transform duration-200 hover:-translate-y-1">
+              <div class="mb-6 text-4xl">Cleanup & Organization</div>
+              <h3 class="card-title mb-4">
+                <a href="/services/clean-books" class="hover:text-brand-gold transition-colors">
+                  Clean Books Audit
+                </a>
+              </h3>
+              <p class="text-body-sm text-neutral-600 mb-6">
+                Comprehensive cleanup of messy books with categorization and historical data restoration.
+                Get your books audit-ready fast.
+              </p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Data cleanup
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Historical reconciliation
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Category organization
+                </li>
+              </ul>
+              <a href="/services/clean-books" class="text-brand-navy font-semibold hover:text-brand-gold transition-colors">
+                Learn more →
+              </a>
+            </div>
+
+            <!-- Payroll Integration -->
+            <div class="surface p-8 transition-transform duration-200 hover:-translate-y-1">
+              <div class="mb-6 text-4xl">Tax Planning</div>
+              <h3 class="card-title mb-4">
+                <a href="/services/payroll-integration" class="hover:text-brand-gold transition-colors">
+                  Payroll Integration
+                </a>
+              </h3>
+              <p class="text-body-sm text-neutral-600 mb-6">
+                Seamless integration with Gusto, ADP, and other payroll providers for accurate tracking.
+                Keep payroll and bookkeeping in sync.
+              </p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Payroll reconciliation
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Tax calculations
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Compliance reporting
+                </li>
+              </ul>
+              <a href="/services/payroll-integration" class="text-brand-navy font-semibold hover:text-brand-gold transition-colors">
+                Learn more →
+              </a>
+            </div>
+
+            <!-- Tax Preparation Support -->
+            <div class="surface p-8 transition-transform duration-200 hover:-translate-y-1">
+              <div class="mb-6 text-4xl">Compliance</div>
+              <h3 class="card-title mb-4">
+                <a href="/services/tax-prep-support" class="hover:text-brand-gold transition-colors">
+                  Tax Preparation Support
+                </a>
+              </h3>
+              <p class="text-body-sm text-neutral-600 mb-6">
+                Month-end close procedures optimized for tax season and CPA handoffs.
+                Be tax-ready year-round.
+              </p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Tax-ready reports
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  CPA coordination
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Year-end adjustments
+                </li>
+              </ul>
+              <a href="/services/tax-prep-support" class="text-brand-navy font-semibold hover:text-brand-gold transition-colors">
+                Learn more →
+              </a>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="surface p-8 transition-transform duration-200 hover:-translate-y-1">
+              <div class="mb-6 text-4xl">Growth Planning</div>
+              <h3 class="card-title mb-4">
+                Financial Reporting & Analysis
+              </h3>
+              <p class="text-body-sm text-neutral-600 mb-6">
+                Custom financial statements and dashboards tailored to your business needs.
+                Make data-driven decisions with confidence.
+              </p>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Custom dashboards
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  KPI tracking
+                </li>
+                <li class="flex items-center text-sm text-neutral-600">
+                  <svg class="mr-3 h-4 w-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Trend analysis
+                </li>
+              </ul>
+              <span class="text-neutral-500 text-sm">Coming soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section bg-brand-navy text-white">
+      <div class="container">
+        <div class="mx-auto max-w-content-md text-center">
+          <h2 class="text-balance mb-6">
+            Ready to Get Your Books in Order?
+          </h2>
+          <p class="text-body-lg mb-8 opacity-80">
+            Join 500+ Texas businesses who've eliminated bookkeeping stress and gained financial clarity.
+            Book a free consultation and see how we can help your specific situation.
+          </p>
+          <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <a href="/contact" class="btn btn-secondary">
+              Schedule Free Consultation
+            </a>
+            <a href="/pricing" class="btn btn-ghost border-white/20 text-white hover:border-white hover:bg-white/10">
+              View Pricing Plans
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lead Form -->
+    <section class="section bg-neutral-25">
+      <div class="container">
+        <div class="mx-auto max-w-content-md">
+          <LeadForm
+            eyebrow="Get Started"
+            heading="Tell us about your bookkeeping needs"
+            subheading="Share a few details and we'll craft a bookkeeping plan tailored to your business."
+            ctaLabel="Get my custom plan"
+            source="services-page"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout></content>
+<parameter name="filePath">c:\projects\modern ledger\src\pages\services\index.astro

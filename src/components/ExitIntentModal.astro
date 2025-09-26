@@ -4,20 +4,20 @@
 
 <div
   id="exit-intent-modal"
-  class="fixed inset-0 z-50 hidden flex items-center justify-center bg-brand-navy/60 p-4 backdrop-blur-sm"
+  class="fixed inset-0 z-50 hidden flex items-center justify-center bg-brand-navy/60 p-2 sm:p-4 md:p-6 backdrop-blur-sm"
   role="dialog"
   aria-modal="true"
   aria-labelledby="exit-modal-heading"
   aria-describedby="exit-modal-description"
 >
-  <div class="surface relative w-full max-w-md p-8">
+  <div class="surface relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-2 sm:mx-4 p-3 sm:p-4 md:p-6 lg:p-8 max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
     <!-- Close button -->
     <button
       id="close-exit-modal"
-      class="absolute right-4 top-4 text-neutral-400 transition-colors duration-200 hover:text-brand-navy"
+      class="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 z-10 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white border-2 border-neutral-200 text-neutral-600 shadow-lg transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-300 hover:text-brand-navy hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
       aria-label="Close modal"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
@@ -25,56 +25,56 @@
     <!-- Content -->
     <div class="text-center">
       <!-- Urgency Banner -->
-      <div class="mb-4 rounded-lg bg-red-50 border border-red-200 px-3 py-2">
-        <p class="text-sm font-semibold text-red-700">
-          ⚠️ Wait! You're about to miss out on $2,000+ in potential savings
+      <div class="mb-2 sm:mb-3 rounded-lg bg-red-50 border border-red-200 px-2 sm:px-3 py-1.5 sm:py-2">
+        <p class="text-xs sm:text-sm font-semibold text-red-700 leading-tight">
+          Wait! You're about to miss out on $2,000+ in potential savings
         </p>
       </div>
 
-      <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-brand-sky">
-        <svg class="h-8 w-8 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="mx-auto mb-3 sm:mb-4 flex h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-brand-sky">
+        <svg class="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
       </div>
 
-      <h3 id="exit-modal-heading" class="card-title mb-3 text-brand-navy">
+      <h3 id="exit-modal-heading" class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 text-brand-navy leading-tight px-1">
         Before You Go... Grab Your FREE Business Assessment!
       </h3>
 
-      <p id="exit-modal-description" class="text-body-sm text-neutral-500 mb-4">
+      <p id="exit-modal-description" class="text-xs sm:text-sm md:text-base text-neutral-500 mb-3 sm:mb-4 px-1 sm:px-2 leading-relaxed">
         Join 150+ Texas business owners who discovered hidden savings in their bookkeeping. Get your personalized assessment (normally $200) FREE.
       </p>
 
       <!-- Value Stack -->
-      <div class="mb-6 space-y-2 text-left">
-        <div class="flex items-center gap-3 text-sm">
-          <div class="flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-            <svg class="h-3 w-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+      <div class="mb-3 sm:mb-4 space-y-1 sm:space-y-1.5 text-left">
+        <div class="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+          <div class="flex h-3.5 w-3.5 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-blue-100 flex-shrink-0 mt-0.5">
+            <svg class="h-2 w-2 sm:h-2.5 sm:w-2.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <span class="text-neutral-700"><strong>Custom ROI calculation</strong> based on your business size</span>
+          <span class="text-neutral-700 leading-tight"><strong>Custom ROI calculation</strong> based on your business size</span>
         </div>
-        <div class="flex items-center gap-3 text-sm">
-          <div class="flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-            <svg class="h-3 w-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+        <div class="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+          <div class="flex h-3.5 w-3.5 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-blue-100 flex-shrink-0 mt-0.5">
+            <svg class="h-2 w-2 sm:h-2.5 sm:w-2.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <span class="text-neutral-700"><strong>Month-end close checklist</strong> (25+ steps, Texas-specific)</span>
+          <span class="text-neutral-700 leading-tight"><strong>Month-end close checklist</strong> (25+ steps, Texas-specific)</span>
         </div>
-        <div class="flex items-center gap-3 text-sm">
-          <div class="flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-            <svg class="h-3 w-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+        <div class="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+          <div class="flex h-3.5 w-3.5 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-blue-100 flex-shrink-0 mt-0.5">
+            <svg class="h-2 w-2 sm:h-2.5 sm:w-2.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <span class="text-neutral-700"><strong>Priority booking</strong> for free 15-min consultation</span>
+          <span class="text-neutral-700 leading-tight"><strong>Priority booking</strong> for free 15-min consultation</span>
         </div>
       </div>
 
       <!-- Lead capture form -->
-      <form id="exit-modal-form" class="mt-6 space-y-4">
+      <form id="exit-modal-form" class="mt-3 sm:mt-4 space-y-2.5 sm:space-y-3">
         <div>
           <label for="exit-email" class="sr-only">Email address</label>
           <input
@@ -82,31 +82,40 @@
             id="exit-email"
             name="email"
             placeholder="Enter your email address"
-            class="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold"
+            class="w-full rounded-lg border border-neutral-200 px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base text-brand-navy focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold placeholder:text-neutral-400"
             required
           />
         </div>
 
         <button
           type="submit"
-          class="btn btn-primary w-full justify-center text-base"
+          class="btn btn-primary w-full justify-center text-sm sm:text-base md:text-lg py-2.5 sm:py-3 font-semibold"
         >
-          🎯 Yes! Send My FREE Assessment (Value: $200)
+          Yes! Send My FREE Assessment (Value: $200)
         </button>
+
+        <button
+          type="button"
+          id="exit-modal-no-thanks"
+          class="w-full rounded-lg border border-neutral-300 bg-white px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-neutral-600 transition-colors duration-200 hover:bg-neutral-50 hover:text-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-300"
+        >
+          No thanks, I'll continue browsing
+        </button>
+
         <p
           id="exit-modal-feedback"
-          class="hidden text-center text-sm font-medium text-brand-navy"
+          class="hidden text-center text-xs sm:text-sm md:text-base font-medium text-brand-navy leading-relaxed"
           role="status"
           aria-live="polite"
         ></p>
       </form>
 
-      <div class="mt-4 space-y-2">
-        <p class="text-xs text-neutral-400">
-          ⚡ <strong>Instant delivery</strong> • 📧 <strong>No spam policy</strong> • 🔒 <strong>Secure & private</strong>
+      <div class="mt-2 sm:mt-3 space-y-1">
+        <p class="text-xs sm:text-sm text-neutral-400 leading-tight">
+          <strong>Instant delivery</strong> • <strong>No spam policy</strong> • <strong>Secure & private</strong>
         </p>
-        <p class="text-xs text-red-600 font-medium">
-          ⏰ Limited time: This assessment is FREE only until the end of the month
+        <p class="text-xs sm:text-sm text-red-600 font-medium leading-tight">
+          Limited time: This assessment is FREE only until the end of the month
         </p>
       </div>
     </div>
@@ -120,6 +129,7 @@
     const storageKey = 'ml-exit-intent-dismissed';
     const modal = document.getElementById('exit-intent-modal');
     const closeBtn = document.getElementById('close-exit-modal');
+    const noThanksBtn = document.getElementById('exit-modal-no-thanks');
     const form = document.getElementById('exit-modal-form');
     const emailInput = document.getElementById('exit-email');
     const feedback = document.getElementById('exit-modal-feedback');
@@ -193,6 +203,7 @@
     document.addEventListener('mouseout', handleMouseLeave, { passive: true });
 
     closeBtn?.addEventListener('click', hideModal);
+    noThanksBtn?.addEventListener('click', hideModal);
 
     modal.addEventListener('click', (event) => {
       if (event.target === modal) {

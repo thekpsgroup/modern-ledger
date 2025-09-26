@@ -673,7 +673,7 @@ function formatContentPlan(plan: ContentPlanEntry[]): string {
 }
 
 async function main() {
-  console.log('📝 Generating 12-month content plan...');
+  console.log('Generating 12-month content plan...');
 
   const plan = generateContentPlan();
   const content = formatContentPlan(plan);
@@ -681,8 +681,8 @@ async function main() {
   const outputPath = join(process.cwd(), 'content-plan.md');
   writeFileSync(outputPath, content);
 
-  console.log(`✅ Generated content plan with ${plan.length} posts: ${outputPath}`);
-  console.log(`📊 Plan covers: ${Object.keys(plan.reduce((acc, p) => ({ ...acc, [p.month]: true }), {})).length} months`);
+  console.log(`Generated content plan with ${plan.length} posts: ${outputPath}`);
+  console.log(`Plan covers: ${Object.keys(plan.reduce((acc, p) => ({ ...acc, [p.month]: true }), {})).length} months`);
 }
 
 // CLI execution

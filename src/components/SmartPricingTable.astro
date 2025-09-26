@@ -34,9 +34,9 @@ const {
 
 const badgeStyles = {
   popular: 'bg-blue-600 text-white',
-  savings: 'bg-green-600 text-white',
+  savings: 'bg-blue-600 text-white',
   limited: 'bg-red-600 text-white animate-pulse',
-  new: 'bg-purple-600 text-white'
+  new: 'bg-blue-600 text-white'
 };
 
 const calculateSavings = (price: number, originalPrice?: number) => {
@@ -54,7 +54,7 @@ const calculateSavings = (price: number, originalPrice?: number) => {
       {variant === 'urgency' && (
         <div class="mb-8 text-center">
           <div class="inline-flex items-center gap-2 rounded-full bg-red-100 border border-red-200 px-4 py-2 text-sm font-semibold text-red-800">
-            🔥 Limited Time: Save up to 40% - Offer expires in <span class="countdown-timer font-mono">23:45:12</span>
+            Limited Time: Save up to 40% - Offer expires in <span class="countdown-timer font-mono">23:45:12</span>
           </div>
         </div>
       )}
@@ -95,7 +95,7 @@ const calculateSavings = (price: number, originalPrice?: number) => {
                       <span class="text-lg text-neutral-400 line-through">
                         ${tier.originalPrice?.toLocaleString()}
                       </span>
-                      <div class="inline-flex items-center bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
+                      <div class="inline-flex items-center bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full">
                         Save {savings.percentage}%
                       </div>
                     </div>
@@ -109,8 +109,8 @@ const calculateSavings = (price: number, originalPrice?: number) => {
                   </div>
 
                   {showAnnualSavings && savings && (
-                    <p class="text-sm text-green-600 font-medium mt-2">
-                      💰 Save ${(savings.amount * 12).toLocaleString()}/year
+                    <p class="text-sm text-blue-600 font-medium mt-2">
+                      Save ${(savings.amount * 12).toLocaleString()}/year
                     </p>
                   )}
                 </div>
@@ -131,7 +131,7 @@ const calculateSavings = (price: number, originalPrice?: number) => {
                 <ul class="space-y-3">
                   {tier.features.map((feature) => (
                     <li class="flex items-start gap-3 text-sm">
-                      <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                       </svg>
                       <span class="text-neutral-700">{feature}</span>
@@ -160,7 +160,7 @@ const calculateSavings = (price: number, originalPrice?: number) => {
               {/* Urgency indicator */}
               {hasUrgency && (
                 <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold animate-bounce">
-                  ⏰ Limited Time
+                  Limited Time
                 </div>
               )}
             </div>
@@ -195,7 +195,7 @@ const calculateSavings = (price: number, originalPrice?: number) => {
                     {tiers.map((tier) => (
                       <td class="p-4 text-center">
                         {tier.features.includes(feature) ? (
-                          <svg class="w-5 h-5 text-green-600 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                          <svg class="w-5 h-5 text-blue-600 mx-auto" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                           </svg>
                         ) : (

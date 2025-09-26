@@ -23,7 +23,7 @@ const DIST_DIR = path.join(process.cwd(), 'dist');
 
 // Convert images to WebP and create responsive sizes
 async function optimizeImages() {
-  console.log('🔍 Finding images to optimize...');
+  console.log('Finding images to optimize...');
 
   const imageExtensions = ['*.jpg', '*.jpeg', '*.png'];
   const imageFiles = [];
@@ -33,7 +33,7 @@ async function optimizeImages() {
     imageFiles.push(...files);
   }
 
-  console.log(`📸 Found ${imageFiles.length} images to optimize`);
+  console.log(`Found ${imageFiles.length} images to optimize`);
 
   for (const imagePath of imageFiles) {
     const relativePath = path.relative(PUBLIC_DIR, imagePath);
@@ -49,7 +49,7 @@ async function optimizeImages() {
 
       // Skip hero images and logos for now (they need special handling)
       if (filename.includes('hero') || filename.includes('logo') || filename.includes('og-')) {
-        console.log(`⏭️  Skipping ${relativePath} (special handling needed)`);
+        console.log(`[SKIP] Skipping ${relativePath} (special handling needed)`);
         continue;
       }
 
@@ -69,16 +69,16 @@ async function optimizeImages() {
           .toFile(webp2x);
       }
 
-      console.log(`✅ Optimized ${relativePath}`);
+      console.log(`Optimized ${relativePath}`);
     } catch (error) {
-      console.error(`❌ Failed to optimize ${relativePath}:`, error instanceof Error ? error.message : String(error));
+      console.error(`[ERROR] Failed to optimize ${relativePath}:`, error instanceof Error ? error.message : String(error));
     }
   }
 }
 
 // Generate critical CSS for homepage
 async function generateCriticalCSS() {
-  console.log('🎨 Generating critical CSS...');
+  console.log('Generating critical CSS...');
 
   // This is a simplified version - in production you'd use a tool like critical
   // For now, we'll extract the most important styles
@@ -140,12 +140,12 @@ body {
 
   const outputPath = path.join(DIST_DIR, 'critical.css');
   await fs.promises.writeFile(outputPath, criticalCSS);
-  console.log('✅ Critical CSS generated');
+  console.log('Critical CSS generated');
 }
 
 // Update HTML files to add lazy loading and critical CSS
 async function updateHTMLFiles() {
-  console.log('📄 Updating HTML files...');
+  console.log('Updating HTML files...');
 
   const htmlFiles = await globAsync(path.join(DIST_DIR, '**', '*.html'));
 
@@ -192,21 +192,21 @@ async function updateHTMLFiles() {
     await fs.promises.writeFile(htmlFile, content);
   }
 
-  console.log('✅ HTML files updated');
+  console.log('HTML files updated');
 }
 
 // Main optimization function
 async function optimizeAssets() {
-  console.log('🚀 Starting asset optimization...');
+  console.log('Starting asset optimization...');
 
   try {
     await optimizeImages();
     await generateCriticalCSS();
     await updateHTMLFiles();
 
-    console.log('🎉 Asset optimization complete!');
+    console.log('Asset optimization complete!');
   } catch (error) {
-    console.error('❌ Asset optimization failed:', error);
+    console.error('[ERROR] Asset optimization failed:', error);
     process.exit(1);
   }
 }

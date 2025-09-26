@@ -172,7 +172,7 @@ export function initAutoTracking() {
 }
 
 async function main() {
-  console.log('📡 Generating server-side event tracking...');
+  console.log('Generating server-side event tracking...');
 
   const apiDir = join(process.cwd(), 'src', 'pages', 'api', 'events');
   mkdirSync(apiDir, { recursive: true });
@@ -186,16 +186,16 @@ async function main() {
     const endpointCode = generateEventEndpoint(provider);
     const filePath = join(apiDir, `${provider}.ts`);
     writeFileSync(filePath, endpointCode);
-    console.log(`✅ Generated ${provider} endpoint: ${filePath}`);
+    console.log(`Generated ${provider} endpoint: ${filePath}`);
   }
 
   // Generate tracking utility
   const trackUtilCode = generateTrackUtil();
   const trackPath = join(libDir, 'track.ts');
   writeFileSync(trackPath, trackUtilCode);
-  console.log(`✅ Generated tracking utility: ${trackPath}`);
+  console.log(`Generated tracking utility: ${trackPath}`);
 
-  console.log(`🎉 Server-side event tracking setup complete!`);
+  console.log(`Server-side event tracking setup complete!`);
   console.log(`   Endpoints: ${providers.length} providers`);
   console.log(`   Secret: ${env.EVENTS_ENDPOINT_SECRET}`);
 }

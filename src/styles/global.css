@@ -47,19 +47,19 @@ h6 {
 }
 
 h1 {
-  font-size: clamp(2.75rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 4vw, 2.75rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
   line-height: 1.08;
   letter-spacing: -0.02em;
 }
 
 h3 {
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   line-height: 1.1;
 }
 
@@ -412,12 +412,12 @@ strong {
 }
 
 [data-header].header-compact .container > div {
-  height: 3.5rem;
+  height: 2.5rem;
 }
 
 @media (min-width: 768px) {
   [data-header].header-compact .container > div {
-    height: 4rem;
+    height: 3rem;
   }
 }
 
@@ -896,3 +896,51 @@ strong {
     display: none;
   }
 }
+
+/* Design System Enforcement Classes */
+/* These classes enforce the established color scheme and typography rules */
+
+/* Color Scheme Enforcement */
+.text-primary { color: var(--neutral-600); } /* Main text color */
+.text-secondary { color: var(--neutral-500); } /* Secondary text */
+.text-accent { color: var(--brand-navy); } /* Brand navy for headings */
+.text-highlight { color: var(--brand-gold); } /* Gold for highlights */
+
+.bg-primary { background-color: #ffffff; } /* White backgrounds */
+.bg-secondary { background-color: var(--neutral-25); } /* Light gray backgrounds */
+.bg-accent { background-color: var(--brand-navy); } /* Navy backgrounds */
+.bg-highlight { background-color: var(--brand-gold); } /* Gold backgrounds */
+
+/* Typography Enforcement */
+.heading-h1 {
+  font-size: clamp(2.75rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--neutral-900);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.heading-h2 {
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--neutral-900);
+  margin-bottom: 1rem;
+}
+
+.heading-h3 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--neutral-900);
+  margin-bottom: 0.75rem;
+}
+
+/* Prohibited Colors - These should never be used */
+.prohibited-green { background-color: #22c55e !important; color: #fff !important; } /* Green */
+.prohibited-pink { background-color: #ec4899 !important; color: #fff !important; } /* Pink */
+.prohibited-purple { background-color: #a855f7 !important; color: #fff !important; } /* Purple */
+.prohibited-rainbow { background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080) !important; } /* Rainbow */

@@ -1,0 +1,32 @@
+---
+// Standardized Heading Component
+// Enforces consistent typography across all pages
+
+export interface Props {
+  level: 1 | 2 | 3 | 4 | 5 | 6;
+  class?: string;
+  id?: string;
+}
+
+const { level, class: className, id } = Astro.props;
+
+// Base classes for consistent typography
+const baseClasses = {
+  1: "text-3xl md:text-5xl font-bold text-gray-900 mb-6 text-center",
+  2: "text-2xl md:text-3xl font-bold text-gray-900 mb-4",
+  3: "text-xl md:text-2xl font-bold text-gray-900 mb-3",
+  4: "text-lg md:text-xl font-semibold text-gray-900 mb-3",
+  5: "text-base md:text-lg font-semibold text-gray-900 mb-2",
+  6: "text-sm md:text-base font-semibold text-gray-900 mb-2"
+};
+
+// Combine base classes with any additional classes
+const finalClass = `${baseClasses[level]} ${className || ''}`.trim();
+
+const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+---
+
+<Tag class={finalClass} id={id}>
+  <slot />
+</Tag></content>
+<parameter name="filePath">c:\projects\modern ledger\src\components\Heading.astro

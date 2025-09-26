@@ -324,7 +324,7 @@ const { title = "Get Your Free Consultation", subtitle = "Let's discuss your boo
 }
 
 async function main() {
-  console.log('📝 Generating contact form system...');
+  console.log('Generating contact form system...');
 
   const apiDir = join(process.cwd(), 'src', 'pages', 'api', 'forms');
   mkdirSync(apiDir, { recursive: true });
@@ -335,15 +335,15 @@ async function main() {
   const apiCode = generateContactFormAPI();
   const apiPath = join(apiDir, 'contact.ts');
   writeFileSync(apiPath, apiCode);
-  console.log(`✅ Generated contact form API: ${apiPath}`);
+  console.log(`Generated contact form API: ${apiPath}`);
 
   // Generate lead form component
   const componentCode = generateLeadFormComponent();
   const componentPath = join(componentsDir, 'LeadForm.astro');
   writeFileSync(componentPath, componentCode);
-  console.log(`✅ Generated lead form component: ${componentPath}`);
+  console.log(`Generated lead form component: ${componentPath}`);
 
-  console.log(`🎉 Contact form system setup complete!`);
+  console.log(`Contact form system setup complete!`);
   console.log(`   API endpoint: /api/forms/contact`);
   console.log(`   Component: LeadForm.astro`);
   console.log(`   Email destination: ${env.COMPANY_EMAIL}`);

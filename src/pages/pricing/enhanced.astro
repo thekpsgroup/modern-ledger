@@ -111,10 +111,10 @@ const abTests = [
           variant: 'urgency',
           headline: {
             primary: 'Limited Time: Save Up to 40% on All Plans',
-            urgent: '🔥 Flash Sale: 40% Off All Plans - Ends Soon!'
+            urgent: 'Flash Sale: 40% Off All Plans - Ends Soon!'
           },
           subheadline: 'Don\'t miss out! This exclusive pricing expires December 31st. Join the 200+ businesses already saving thousands with Modern Ledger.',
-          urgencyMessage: '⚡ Limited Time Offer - Only 12 spots left at this price!',
+          urgencyMessage: 'Limited Time Offer - Only 12 spots left at this price!',
           cta: {
             primary: 'Claim Your Discount Now',
             secondary: 'See All Benefits',
@@ -171,8 +171,8 @@ const pricingTiers = [
   {
     name: 'Starter',
     description: 'Perfect for small businesses getting started',
-    price: 225,
-    originalPrice: 299,
+    price: 299,
+    originalPrice: 399,
     period: 'month',
     features: [
       'Monthly bookkeeping & reconciliation',
@@ -198,10 +198,10 @@ const pricingTiers = [
     }
   },
   {
-    name: 'Professional',
+    name: 'Growth',
     description: 'Comprehensive solution for growing businesses',
-    price: 349,
-    originalPrice: 499,
+    price: 599,
+    originalPrice: 799,
     period: 'month',
     popular: true,
     features: [
@@ -227,8 +227,8 @@ const pricingTiers = [
   {
     name: 'Enterprise',
     description: 'Full-service solution for established businesses',
-    price: 585,
-    originalPrice: 899,
+    price: 1499,
+    originalPrice: 1999,
     period: 'month',
     features: [
       'Everything in Professional',
@@ -310,7 +310,7 @@ const testimonials = [
 ];
 ---
 
-<Layout title="Pricing - Modern Ledger | Plans Starting at $225/month" description="Choose the perfect bookkeeping plan for your Texas business. Transparent pricing, no hidden fees, and guaranteed ROI. Start with our free consultation today.">
+<Layout title="Pricing - Modern Ledger | Plans Starting at $299/month" description="Choose the perfect bookkeeping plan for your Texas business. Transparent pricing, no hidden fees, and guaranteed ROI. Start with our free consultation today.">
   <main>
     <!-- A/B Test Manager -->
     <ABTestManager 

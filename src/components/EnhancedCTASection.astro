@@ -38,21 +38,21 @@ const variants = {
   urgent: {
     headline: "Don't Let Another Month Slip By With Messy Books",
     subheadline: "Every day you wait costs you money in errors, missed deductions, and lost time. Take action now.",
-    urgencyBadge: "⚡ Only 3 client spots left this month",
-    primary: { text: "🚀 Get Started Today", href: "/contact", variant: "primary" as const },
+    urgencyBadge: "Only 3 client spots left this month",
+    primary: { text: "Get Started Today", href: "/contact", variant: "primary" as const },
     secondary: { text: "See Our Pricing", href: "/pricing", variant: "outline" as const }
   },
   'social-proof': {
     headline: "Join 150+ Texas Businesses Saving $3,200+ Annually",
     subheadline: "See why business owners choose Modern Ledger over hiring in-house or struggling alone.",
-    urgencyBadge: "🏆 Rated #1 Bookkeeping Service in Rockwall County",
+    urgencyBadge: "Rated #1 Bookkeeping Service in Rockwall County",
     primary: { text: "Get My Free Assessment", href: "/contact", variant: "secondary" as const },
     secondary: { text: "Read Success Stories", href: "/case-studies", variant: "ghost" as const }
   },
   'risk-reversal': {
     headline: "Try Our Bookkeeping Service Risk-FREE",
     subheadline: "30-day satisfaction guarantee. If you're not completely happy, we'll refund every penny.",
-    urgencyBadge: "💰 100% Money-Back Guarantee",
+    urgencyBadge: "100% Money-Back Guarantee",
     primary: { text: "Start Risk-Free Trial", href: "/contact?trial=true", variant: "primary" as const },
     secondary: { text: "Learn About Our Guarantee", href: "/about", variant: "outline" as const }
   }
@@ -68,68 +68,68 @@ const finalSecondary = secondaryCTA || content.secondary;
 const objectionSets = {
   default: [
     {
-      icon: '⏰',
+      icon: '',
       title: 'Tired of monthly bookkeeping headaches?',
       description: 'Let us handle the reconciliation, reporting, and cleanup while you focus on growing your business.'
     },
     {
-      icon: '💰',
+      icon: '',
       title: 'Paying too much for in-house accounting?',
       description: 'Get professional bookkeeping at a fraction of the cost of a full-time hire. No benefits, training, or turnover.'
     },
     {
-      icon: '📊',
+      icon: '',
       title: 'Books not ready for tax season?',
       description: 'Our audit-ready books and CPA handoffs ensure you\'re always prepared for tax time and business decisions.'
     }
   ],
   urgent: [
     {
-      icon: '🚨',
+      icon: '',
       title: 'Missing critical tax deductions?',
       description: 'Every month without proper bookkeeping could mean thousands in lost tax savings and penalties.'
     },
     {
-      icon: '📈',
+      icon: '',
       title: 'Can\'t make data-driven decisions?',
       description: 'Without accurate books, you\'re flying blind. Get the financial clarity you need to scale profitably.'
     },
     {
-      icon: '⚖️',
+      icon: '',
       title: 'Worried about compliance issues?',
       description: 'Stay ahead of audits, tax deadlines, and regulatory requirements with professional-grade record keeping.'
     }
   ],
   'social-proof': [
     {
-      icon: '🎯',
+      icon: '',
       title: '"Saved us 15 hours per month"',
       description: 'Sarah M., Retail Business Owner - "Now I can focus on customers instead of spreadsheets."'
     },
     {
-      icon: '💸',
+      icon: '',
       title: '"Found $8,000 in missed deductions"',
       description: 'Mike R., Manufacturing - "Modern Ledger paid for itself in the first quarter."'
     },
     {
-      icon: '📈',
+      icon: '',
       title: '"Our cash flow improved 40%"',
       description: 'Lisa K., Service Business - "Finally understand where our money goes and how to optimize it."'
     }
   ],
   'risk-reversal': [
     {
-      icon: '🛡️',
+      icon: '',
       title: '30-Day Money-Back Guarantee',
       description: 'Not satisfied? Get a full refund, no questions asked. We\'re that confident in our service.'
     },
     {
-      icon: '🔒',
+      icon: '',
       title: 'Bank-Level Security',
       description: 'Your financial data is protected with 256-bit encryption and SOC 2 compliance standards.'
     },
     {
-      icon: '📞',
+      icon: '',
       title: 'Dedicated Support Team',
       description: 'Direct access to your bookkeeping team with 24-hour response guarantee on all inquiries.'
     }
@@ -140,10 +140,10 @@ const objections = objectionSets[variant] || objectionSets.default;
 
 // Trust signals
 const trustSignals = [
-  { icon: '🔒', text: 'Bank-level security' },
-  { icon: '📊', text: 'CPA-reviewed processes' },
-  { icon: '⚡', text: '24hr response time' },
-  { icon: '🎯', text: '98% client retention' }
+  { icon: '', text: 'Bank-level security' },
+  { icon: '', text: 'CPA-reviewed processes' },
+  { icon: '', text: '24hr response time' },
+  { icon: '', text: '98% client retention' }
 ];
 ---
 

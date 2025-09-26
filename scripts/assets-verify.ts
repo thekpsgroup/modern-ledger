@@ -40,26 +40,26 @@ function verifyAssets() {
 }
 
 async function main() {
-  console.log('🔍 Verifying brand assets...');
+  console.log('Verifying brand assets...');
 
   const { missingAssets, invalidAssets } = verifyAssets();
 
   if (missingAssets.length > 0) {
-    console.error('❌ Missing required assets:');
+    console.error('[ERROR] Missing required assets:');
     missingAssets.forEach(asset => console.error(`   ${asset}`));
   }
 
   if (invalidAssets.length > 0) {
-    console.error('❌ Invalid asset index:');
+    console.error('[ERROR] Invalid asset index:');
     invalidAssets.forEach(error => console.error(`   ${error}`));
   }
 
   if (missingAssets.length === 0 && invalidAssets.length === 0) {
-    console.log('✅ All required assets verified!');
+    console.log('All required assets verified!');
     console.log(`   Found ${Object.keys(BRAND_ASSETS).length} assets in index`);
     process.exit(0);
   } else {
-    console.error('❌ Asset verification failed');
+    console.error('[ERROR] Asset verification failed');
     process.exit(1);
   }
 }

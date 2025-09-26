@@ -75,7 +75,7 @@ ${assetEntries}
 }
 
 async function main() {
-  console.log('🎨 Indexing brand assets...');
+  console.log('Indexing brand assets...');
 
   const assets = generateAssetIndex();
   const tsModule = generateTypeScriptModule(assets);
@@ -83,11 +83,11 @@ async function main() {
   const outputPath = join(process.cwd(), 'src', 'data', 'brand-assets.generated.ts');
   writeFileSync(outputPath, tsModule);
 
-  console.log(`✅ Generated asset index with ${Object.keys(assets).length} assets:`);
+  console.log(`Generated asset index with ${Object.keys(assets).length} assets:`);
   Object.entries(assets).forEach(([filename, asset]) => {
     console.log(`   ${filename} → ${asset.kind} (${asset.width}x${asset.height})`);
   });
-  console.log(`📄 Output: ${outputPath}`);
+  console.log(`Output: ${outputPath}`);
 }
 
 // CLI execution

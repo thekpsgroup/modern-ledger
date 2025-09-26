@@ -490,21 +490,21 @@ async function main() {
     // Write to JSON file
     fs.writeFileSync(outputPath, JSON.stringify(cities, null, 2));
 
-    console.log(`✅ Cities data written to ${outputPath}`);
+    console.log(`Cities data written to ${outputPath}`);
     console.log(`First 5 cities:`, cities.slice(0, 5).map(c => `${c.name} (${c.distance.toFixed(1)} miles)`));
 
   } catch (error) {
-    console.error('❌ Error fetching cities:', error.message);
+    console.error('Error fetching cities:', error.message);
 
     if (fs.existsSync(outputPath)) {
       try {
         const cached = JSON.parse(fs.readFileSync(outputPath, 'utf-8'));
-        console.warn(`⚠️  Falling back to cached dataset at ${outputPath}`);
+        console.warn(`Falling back to cached dataset at ${outputPath}`);
         console.log(`Using cached dataset with ${Array.isArray(cached) ? cached.length : 0} cities.`);
         console.log('Set SKIP_CITY_FETCH=1 to intentionally skip the Overpass request during builds.');
         return;
       } catch (cacheError) {
-        console.error('⚠️  Failed to read cached dataset:', cacheError.message);
+        console.error('Failed to read cached dataset:', cacheError.message);
       }
     }
 

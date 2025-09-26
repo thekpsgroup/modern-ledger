@@ -1,4 +1,4 @@
----
+﻿---
 import { getEnv } from '../lib/env';
 
 // Hero props
@@ -40,7 +40,7 @@ const finalCTAText = ctaText || ctaCopyTest.control;
 
 const stats = [
   { number: '51', suffix: 'hrs', label: 'Average time saved each month' },
-  { number: '5.2×', label: 'ROI inside the first 6 months' },
+  { number: '5.2', label: 'ROI inside the first 6 months' },
   { number: '24', suffix: 'hrs', label: 'Response time for new requests' },
   { number: '98%', label: 'Client retention across Texas' }
 ];
@@ -52,26 +52,14 @@ const heroLogos = [
   { name: 'Gusto Partner', logo: '/logos/gusto.svg', alt: 'Gusto payroll partner badge' },
   { name: 'Texas Society of CPAs', logo: '/logos/tscpa.svg', alt: 'Texas Society of CPAs member badge' }
 ];
-
-const heroImpact = stats.map(({ number, suffix, label }) => ({
-  value: number,
-  suffix,
-  label
-}));
-
-const heroSteps = [
-  'Diagnostic clean-up and benchmarking report delivered in week one.',
-  'Dedicated accountant syncing QuickBooks, payroll, and banking daily.',
-  'Monthly partner review tailored to Texas-based growth decisions.'
-];
 ---
 
 <style>
-  .hero-gradient-bg {
-    background: linear-gradient(135deg, rgba(0,43,84,0.04), rgba(202,176,104,0.08));
+  .hero-solid-bg {
+    background: #ffffff;
   }
-  .dotted-bg {
-    background-image: radial-gradient(circle at 1px 1px, rgba(0, 43, 84, 0.16) 1px, transparent 0);
+  .dotted-pattern {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0, 43, 84, 0.08) 1px, transparent 0);
     background-size: 28px 28px;
   }
 </style>
@@ -81,31 +69,28 @@ const heroSteps = [
   class:list={[
     backgroundImage
       ? "bg-cover bg-center"
-      : "hero-gradient-bg"
+      : "hero-solid-bg"
   ]}
-  style={backgroundImage ? `background-image: url('${backgroundImage}');` : undefined}
+  style={backgroundImage ? `background-image: url(${backgroundImage})` : undefined}
 >
   {!backgroundImage && (
-    <div class="pointer-events-none absolute inset-0 opacity-40 dotted-bg">
+    <div class="pointer-events-none absolute inset-0 opacity-30 dotted-pattern">
     </div>
   )}
 
   {backgroundImage && <div class="absolute inset-0 bg-brand-navy/60"></div>}
 
   <div class="container relative">
-    <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-center">
+    <div class="grid gap-8">
       <div class="space-y-8 text-left">
         <div
           class="inline-flex items-center gap-2 rounded-full border border-brand-navy/10 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-brand-navy"
           class:list={[{ 'bg-white/20 text-white': Boolean(backgroundImage) }]}
         >
-          Texas-based bookkeeping team • Est. 2010
+          Texas-based bookkeeping team  Est. 2010
         </div>
 
-        <h1
-          class="max-w-3xl text-balance text-4xl font-semibold leading-tight md:text-5xl"
-          class:list={[{ 'text-white': Boolean(backgroundImage), 'text-brand-navy': !backgroundImage }]}
-        >
+        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
           {title}
         </h1>
 
@@ -172,57 +157,6 @@ const heroSteps = [
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      <div class="relative">
-        <div class="grid gap-6">
-          <div class="rounded-[32px] border border-brand-navy/10 bg-white/95 p-6 shadow-soft backdrop-blur">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
-              Why finance teams switch to Modern Ledger
-            </p>
-            <div class="mt-5 grid gap-4">
-              {heroImpact.map((impact) => (
-                <div class="flex items-center justify-between gap-4 rounded-2xl border border-neutral-100 bg-neutral-50/60 px-4 py-3">
-                  <div class="text-2xl font-semibold text-brand-navy">
-                    {impact.value}
-                    {impact.suffix && <span class="ml-1 text-base font-medium">{impact.suffix}</span>}
-                  </div>
-                  <p class="m-0 text-xs text-neutral-500 text-right">{impact.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div class="rounded-3xl border border-brand-navy/10 bg-gradient-to-br from-brand-navy via-brand-navy/95 to-brand-slate/80 p-6 text-white shadow-soft">
-            <div class="flex items-start gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v9a2 2 0 01-2 2h-2M7 8H5a2 2 0 00-2 2v9a2 2 0 002 2h2m10-13V5a5 5 0 00-10 0v3m10 0H7"></path>
-                </svg>
-              </div>
-              <div>
-                <p class="m-0 text-sm font-medium leading-relaxed">
-                  “Modern Ledger cleaned 18 months of backlog and gave us investor-ready financials in six weeks.”
-                </p>
-                <p class="m-0 mt-2 text-xs text-white/70">Amber L., COO · Rockwall commercial contractor</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="rounded-3xl border border-brand-navy/10 bg-white/95 p-6 shadow-soft">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">What the first month includes</p>
-            <ul class="mt-4 space-y-3 text-sm text-neutral-600">
-              {heroSteps.map((step) => (
-                <li class="flex items-start gap-3">
-                  <span class="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-brand-gold/20 text-xs font-semibold text-brand-gold">
-                    ✓
-                  </span>
-                  <span>{step}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     </div>

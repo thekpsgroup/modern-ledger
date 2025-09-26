@@ -1,6 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import CTASection from '../components/CTASection.astro';
+import Heading from '../components/Heading.astro';
 
 export interface Props {
   title: string;
@@ -30,18 +31,7 @@ const {
 
 // Get category color
 const getCategoryColor = (cat: string) => {
-  switch (cat.toLowerCase()) {
-    case 'bookkeeping tips':
-    case 'bookkeeping':
-      return 'blue';
-    case 'tax strategies':
-    case 'tax':
-      return 'green';
-    case 'growth stories':
-      return 'purple';
-    default:
-      return 'blue';
-  }
+  return 'blue'; // All categories use blue now
 };
 
 const categoryColor = getCategoryColor(category);
@@ -77,18 +67,12 @@ const modifiedTime = new Date(modifiedDate).toISOString();
       <div class="absolute inset-0 bg-black/10"></div>
       <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-          <div class={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-6 ${
-            categoryColor === 'blue'
-              ? 'bg-blue-50 text-blue-700'
-              : categoryColor === 'green'
-              ? 'bg-green-50 text-green-700'
-              : 'bg-purple-50 text-purple-700'
-          }`}>
+          <div class={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-6 bg-blue-50 text-blue-700`}>
             {category}
           </div>
-          <h1 class="text-3xl md:text-5xl font-bold text-brand-navy mb-6 leading-tight">
+          <Heading level={1}>
             {title}
-          </h1>
+          </Heading>
           <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             {description}
           </p>
@@ -192,7 +176,7 @@ const modifiedTime = new Date(modifiedDate).toISOString();
             <p class="text-gray-600 text-sm">Step-by-step guide to cleaning up messy QuickBooks files.</p>
           </article>
           <article class="bg-white rounded-lg shadow-card border border-gray-100 p-6 hover:shadow-card-hover transition-shadow duration-300">
-            <div class="text-sm text-green-600 font-medium mb-2">Tax Strategies</div>
+            <div class="text-sm text-blue-600 font-medium mb-2">Tax Strategies</div>
             <h4 class="font-bold text-brand-navy mb-2">
               <a href="/resources/texas-sales-tax" class="hover:text-brand-gold transition-colors">
                 Texas Sales Tax Compliance

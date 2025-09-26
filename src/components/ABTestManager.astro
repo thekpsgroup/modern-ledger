@@ -107,7 +107,7 @@ const userVariants = activeTests.reduce((acc, test) => {
 
     // Debug logging
     if (debugMode) {
-      console.group('🧪 A/B Testing Debug');
+      console.group('A/B Testing Debug');
       console.log('Active Tests:', activeTests.length);
       console.log('User Identifier:', userIdentifier);
       console.log('User Variants:', userVariants);
@@ -159,7 +159,7 @@ const userVariants = activeTests.reduce((acc, test) => {
       });
 
       if (debugMode) {
-        console.log('🎯 A/B Event Tracked:', eventName, properties, testData);
+        console.log('A/B Event Tracked:', eventName, properties, testData);
       }
     };
 
@@ -191,7 +191,7 @@ const userVariants = activeTests.reduce((acc, test) => {
       });
 
       if (debugMode) {
-        console.log('🎯 Goal Tracked:', goalId, value, relevantTests.length, 'tests');
+        console.log('Goal Tracked:', goalId, value, relevantTests.length, 'tests');
       }
     };
 
@@ -357,7 +357,7 @@ const userVariants = activeTests.reduce((acc, test) => {
     setTimeout(trackCTAClicks, 1000); // Delay to ensure all components are loaded
 
     if (debugMode) {
-      console.log('🧪 A/B Testing initialized successfully');
+      console.log('A/B Testing initialized successfully');
       
       // Add debug panel
       const debugPanel = document.createElement('div');

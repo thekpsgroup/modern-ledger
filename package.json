@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && npm run assets:optimize",
+    "build": "astro build",
     "prebuild": "node scripts/fetch-cities.mjs",
     "preview": "astro preview",
     "astro": "astro",
@@ -16,12 +16,18 @@
     "seo:sitemaps": "node --import tsx scripts/seo-sitemaps.ts",
     "qa:links": "node --import tsx scripts/link-checker.mjs",
     "qa:lighthouse": "node --import tsx scripts/qa-lighthouse.ts",
+    "qa:emojis": "node scripts/emoji-check.mjs",
     "pixels:build": "node --import tsx scripts/pixels-build.ts",
     "events:ssr": "node --import tsx scripts/events-ssr.ts",
     "forms:serve": "node --import tsx scripts/forms-serve.ts",
     "ab:variants": "node --import tsx scripts/ab-variants.ts",
-    "assets:index": "node --import tsx scripts/asset-index.ts",
-    "assets:optimize": "node --import tsx scripts/assets-optimize.ts",
+    "blog:generate": "node scripts/generate-daily-blog.mjs generate",
+    "blog:test": "node scripts/generate-daily-blog.mjs test",
+    "blog:schedule": "node scripts/generate-daily-blog.mjs schedule",
+    "blog:schedule:install": "powershell -ExecutionPolicy Bypass -File scripts/schedule-blog.ps1 -Install",
+    "blog:schedule:uninstall": "powershell -ExecutionPolicy Bypass -File scripts/schedule-blog.ps1 -Uninstall",
+    "blog:schedule:status": "powershell -ExecutionPolicy Bypass -File scripts/schedule-blog.ps1 -Status",
+    "design:check": "node scripts/design-system-check.mjs",
     "deploy:vercel": "vercel --prod",
     "test": "playwright test",
     "test:headed": "playwright test --headed",
@@ -30,7 +36,8 @@
     "test:visual": "playwright test --grep 'Visual Regression'",
     "test:update-snapshots": "playwright test --update-snapshots",
     "test:e2e": "playwright test --grep 'Modern Ledger E2E'",
-    "ci": "npm run build && npm run qa:lighthouse && npm run seo:check && npm run test"
+    "ci": "npm run qa:emojis && npm run design:check && npm run build && npm run design:check && npm run qa:lighthouse && npm run seo:check && npm run test",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
@@ -64,11 +71,12 @@
     "@lhci/cli": "^0.13.0",
     "@playwright/test": "^1.55.1",
     "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
     "@types/glob": "^8.1.0",
     "@types/js-yaml": "^4.0.9",
     "@types/jsdom": "^21.1.6",
     "axe-core": "^4.10.3",
+    "glob": "^10.3.10",
+    "husky": "^9.1.7",
     "sharp": "^0.34.4",
     "ts-node": "^10.9.2"
   }

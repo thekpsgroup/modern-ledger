@@ -1,0 +1,98 @@
+# Modern Ledger AI Blog Configuration
+
+# AI Model Configuration
+AI_MODEL=openai/gpt-4.1
+AI_TEMPERATURE=0.7
+AI_MAX_TOKENS=4000
+
+# Content Configuration
+TARGET_AUDIENCE=Texas small business owners and entrepreneurs
+BUSINESS_FOCUS=bookkeeping, accounting, financial management
+CONTENT_TYPES=how-to guides,best practices,case studies,tax tips,industry insights,tool comparisons,seasonal advice,compliance updates
+
+# Scheduling Configuration
+SCHEDULE_TIME=08:00
+TIMEZONE=America/Chicago
+SCHEDULE_ENABLED=true
+
+# Output Configuration
+OUTPUT_DIR=src/pages/blog
+IMAGES_DIR=public/images/blog
+LAST_GENERATION_FILE=.last-blog-generation
+
+# Quality Assurance
+MIN_WORD_COUNT=800
+MAX_WORD_COUNT=2500
+REQUIRED_SECTIONS=introduction,main-content,conclusion
+SEO_KEYWORD_DENSITY_MIN=0.5
+SEO_KEYWORD_DENSITY_MAX=2.5
+
+# Business Context
+COMPANY_NAME=Modern Ledger
+COMPANY_LOCATION=Texas
+SERVICES=bookkeeping,accounting,tax planning,QuickBooks management,financial compliance
+TARGET_INDUSTRIES=small business,retail,professional services,construction,healthcare,e-commerce
+
+# Content Categories (JSON format for easy parsing)
+CONTENT_CATEGORIES='{
+  "bookkeeping-basics": [
+    "Setting up your first chart of accounts",
+    "Understanding double-entry bookkeeping",
+    "Monthly reconciliation checklist",
+    "Bank reconciliation best practices",
+    "Recording common business transactions",
+    "Managing petty cash properly",
+    "Inventory tracking methods",
+    "Fixed assets and depreciation"
+  ],
+  "tax-planning": [
+    "Quarterly tax planning for small businesses",
+    "Maximizing deductions for Texas businesses",
+    "Sales tax compliance in Texas",
+    "Self-employment tax strategies",
+    "Business expense categorization",
+    "Tax-efficient business structures",
+    "Year-end tax planning checklist",
+    "State tax credits for Texas businesses"
+  ],
+  "quickbooks-training": [
+    "QuickBooks Online setup for beginners",
+    "Automating recurring transactions",
+    "Managing customer invoices efficiently",
+    "Payroll setup and compliance",
+    "Financial reporting in QuickBooks",
+    "QuickBooks inventory management",
+    "Multi-user access and permissions",
+    "QuickBooks backup and security"
+  ],
+  "business-growth": [
+    "Financial planning for business expansion",
+    "Cash flow management for growing businesses",
+    "Pricing strategies and profit margins",
+    "Financial KPIs every business owner should track",
+    "Building financial reserves",
+    "Debt management strategies",
+    "Investment planning for business owners",
+    "Exit strategy planning"
+  ],
+  "compliance-legal": [
+    "Texas business licensing requirements",
+    "Employment law basics for small businesses",
+    "Data privacy and protection",
+    "Insurance requirements for Texas businesses",
+    "Contract management best practices",
+    "Record retention policies",
+    "Business continuity planning",
+    "Regulatory compliance checklists"
+  ],
+  "seasonal-topics": [
+    "Year-end tax planning strategies",
+    "Q4 business planning and budgeting",
+    "Holiday payroll considerations",
+    "Annual business planning process",
+    "Tax season preparation guide",
+    "End-of-year financial review",
+    "New year business goal setting",
+    "Annual compliance updates"
+  ]
+}'

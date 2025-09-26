@@ -1,19 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
-import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
 import ServicesGrid from '../../components/ServicesGrid.astro';
 import CTASection from '../../components/CTASection.astro';
 import FAQAccordion from '../../components/FAQAccordion.astro';
-import { TESTIMONIALS } from '../../data/testimonials';
-
-// Filter testimonials for Heath, TX and surrounding areas
-const localTestimonials = TESTIMONIALS.filter(testimonial =>
-  testimonial.city?.toLowerCase().includes('heath') ||
-  testimonial.city?.toLowerCase().includes('rockwall') ||
-  testimonial.city?.toLowerCase().includes('royse city') ||
-  testimonial.city?.toLowerCase().includes('fate')
-);
 
 const pageTitle = "Bookkeeping Services in Heath, TX | Modern Ledger";
 const pageDescription = "Professional bookkeeping services in Heath, TX. Serving small businesses near Terry Park. QuickBooks experts with 5-star Google reviews.";
@@ -33,21 +23,6 @@ const pageDescription = "Professional bookkeeping services in Heath, TX. Serving
     ctaLink="#contact"
     backgroundImage="/images/heath-tx-hero.jpg"
   />
-
-  <!-- Local Testimonials Section -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Trusted by Heath, TX Businesses
-        </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          See what local business owners in Heath, TX and surrounding areas say about our bookkeeping services.
-        </p>
-      </div>
-      <TestimonialCarousel testimonials={localTestimonials.length > 0 ? localTestimonials : TESTIMONIALS.slice(0, 3)} />
-    </div>
-  </section>
 
   <!-- Local Services Section -->
   <ServicesGrid />
@@ -73,25 +48,25 @@ const pageDescription = "Professional bookkeeping services in Heath, TX. Serving
           <h3 class="text-2xl font-semibold text-gray-900 mb-6">Service Areas</h3>
           <ul class="space-y-3 text-gray-700">
             <li class="flex items-center">
-              <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
               Heath, TX
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
               Rockwall, TX
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
               Royse City, TX
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
               Fate, TX

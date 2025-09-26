@@ -6,43 +6,38 @@ const footerLinks = {
     { href: '/services/monthly-reconciliation', label: 'Monthly Reconciliation' },
     { href: '/services/clean-books', label: 'Clean Books Service' },
     { href: '/services/payroll-integration', label: 'Payroll Integration' },
-    { href: '/services/tax-prep-support', label: 'Tax Preparation Support' },
   ],
   company: [
-    { href: '/about', label: 'About Modern Ledger' },
+    { href: '/about', label: 'About Us' },
     { href: '/case-studies', label: 'Case Studies' },
     { href: '/pricing', label: 'Pricing' },
-    { href: '/blog', label: 'Blog' },
     { href: '/careers', label: 'Careers' },
   ],
   resources: [
     { href: '/roi-calculator', label: 'ROI Calculator' },
     { href: '/blog/month-end-close-checklist', label: 'Month-End Close Checklist' },
     { href: '/blog/quickbooks-cleanup', label: 'QuickBooks Cleanup Guide' },
-    { href: '/blog/cash-vs-accrual', label: 'Cash vs Accrual Accounting' },
-    { href: '/blog/texas-sales-tax', label: 'Texas Sales Tax Guide' },
   ],
   locations: [
     { href: '/locations/royse-city-tx', label: 'Royse City, TX' },
     { href: '/locations/fate-tx', label: 'Fate, TX' },
     { href: '/locations/rockwall-tx', label: 'Rockwall, TX' },
-    { href: '/locations/caddo-mills-tx', label: 'Caddo Mills, TX' },
     { href: '/locations/greenville-tx', label: 'Greenville, TX' },
-    { href: '/locations/quinlan-tx', label: 'Quinlan, TX' },
+    { href: '/locations', label: 'All Locations' },
   ],
 };
 
-const columnLinkClass = 'inline-flex h-9 items-center rounded-button px-2 text-sm font-medium text-white/70 transition-colors duration-200 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold/60';
-const locationLinkClass = 'inline-flex h-10 items-center justify-center rounded-lg border border-white/10 px-3 text-sm font-medium text-white/80 transition-colors duration-200 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold/60';
-const legalLinkClass = 'inline-flex h-8 items-center rounded-button px-3 text-xs font-medium uppercase tracking-wide text-white/60 transition-colors duration-200 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold/60';
+const columnLinkClass = 'inline-flex h-8 items-center rounded-button px-2 text-xs font-medium text-white/70 transition-colors duration-200 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold/60';
+const locationLinkClass = 'inline-flex h-8 items-center justify-center rounded-lg border border-white/10 px-2 text-xs font-medium text-white/80 transition-colors duration-200 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold/60';
+const legalLinkClass = 'inline-flex h-6 items-center rounded-button px-2 text-xs font-medium uppercase tracking-wide text-white/60 transition-colors duration-200 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold/60';
 ---
 
 <footer class="bg-brand-navy text-white">
-  <div class="container py-14">
-    <div class="grid-12 gap-y-10">
+  <div class="container py-8">
+    <div class="grid-12 gap-y-6">
       <!-- Company Info -->
       <div class="col-span-12 lg:col-span-5">
-        <div class="mb-6 flex items-center gap-3">
+        <div class="mb-4 flex items-center gap-3">
           <img
             src="/modern_ledger_256x256.png"
             width="32"
@@ -50,13 +45,13 @@ const legalLinkClass = 'inline-flex h-8 items-center rounded-button px-3 text-xs
             alt="Modern Ledger logo"
             class="rounded-md shadow-soft"
           />
-          <span class="font-display text-xl font-semibold tracking-tight">Modern Ledger</span>
+          <span class="font-display text-lg font-semibold tracking-tight">Modern Ledger</span>
         </div>
         <p class="text-white/80">
           Professional bookkeeping services for Texas businesses. Monthly reconciliation,
           clean books, and proactive financial clarity—without the expensive in-house hire.
         </p>
-        <div class="mt-6 grid gap-4 text-sm text-white/70 sm:grid-cols-2 lg:grid-cols-1">
+        <div class="mt-4 grid gap-3 text-sm text-white/70 sm:grid-cols-2 lg:grid-cols-1">
           <div>
             <p class="text-white font-semibold">Visit</p>
             <p>Royse City, TX</p>
@@ -116,7 +111,7 @@ const legalLinkClass = 'inline-flex h-8 items-center rounded-button px-3 text-xs
     </div>
 
     <!-- Locations -->
-    <div class="mt-14 border-t border-white/10 pt-8">
+    <div class="mt-8 border-t border-white/10 pt-6">
       <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <h3 class="eyebrow text-white/70">Serving These Texas Communities</h3>
         <div class="flex flex-wrap gap-2">
@@ -130,20 +125,18 @@ const legalLinkClass = 'inline-flex h-8 items-center rounded-button px-3 text-xs
     </div>
 
     <!-- Bottom Section -->
-    <div class="mt-10 border-t border-white/10 pt-6">
+    <div class="mt-6 border-t border-white/10 pt-4">
       <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <p class="text-sm text-white/60">&copy; {new Date().getFullYear()} Modern Ledger. All rights reserved.</p>
         <div class="flex flex-wrap justify-center gap-2 md:justify-end">
         <a href="/privacy" class={legalLinkClass}>Privacy Policy</a>
         <a href="/terms" class={legalLinkClass}>Terms of Service</a>
-        <a href="/about" class={legalLinkClass}>About</a>
-        <a href="/contact" class={legalLinkClass}>Contact</a>
-        <a href="/.well-known/security.txt" class={legalLinkClass}>Security</a>
+        <a href="/security" class={legalLinkClass}>Security</a>
         <a href="/sitemap.xml" class={legalLinkClass}>Sitemap</a>
         </div>
       </div>
       <!-- Social Media Icons -->
-      <div class="mt-6 flex justify-center gap-4 md:justify-start">
+      <div class="mt-4 flex justify-center gap-4 md:justify-start">
         <a href="https://www.facebook.com/modernledger" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-brand-gold transition-colors" aria-label="Follow us on Facebook">
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>

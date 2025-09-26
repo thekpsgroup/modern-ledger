@@ -2,6 +2,6 @@ Contact: mailto:security@thekpsgroup.com
 Contact: tel:+1-469-534-3392
 Encryption: https://modernledger.co/.well-known/pgp-key.txt
 Preferred-Languages: en
-Canonical: https://modernledger.co/.well-known/security.txt
+Canonical: https://modernledger.co/security.txt
 Policy: https://modernledger.co/privacy
 Hiring: https://modernledger.co/careers

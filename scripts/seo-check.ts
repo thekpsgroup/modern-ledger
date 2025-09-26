@@ -107,7 +107,7 @@ function findHTMLFiles(dir: string): string[] {
 }
 
 async function main() {
-  console.log('🔍 Running SEO audit...');
+  console.log('Running SEO audit...');
 
   const distDir = join(process.cwd(), 'dist');
   const files = findHTMLFiles(distDir);
@@ -124,15 +124,15 @@ async function main() {
       totalIssues += report.issues.length;
 
       if (report.issues.length > 0) {
-        console.log(`❌ ${file}: ${report.issues.length} issues`);
+        console.log(`[ERROR] ${file}: ${report.issues.length} issues`);
         report.issues.forEach(issue => {
           console.log(`   ${issue.type.toUpperCase()}: ${issue.message}`);
         });
       } else {
-        console.log(`✅ ${file}: OK`);
+        console.log(`${file}: OK`);
       }
     } catch (error) {
-      console.error(`❌ Error analyzing ${file}:`, error);
+      console.error(`[ERROR] Error analyzing ${file}:`, error);
     }
   }
 
@@ -140,16 +140,16 @@ async function main() {
   const errorCount = reports.reduce((sum, r) => sum + r.issues.filter(i => i.type === 'error').length, 0);
   const warningCount = reports.reduce((sum, r) => sum + r.issues.filter(i => i.type === 'warning').length, 0);
 
-  console.log(`\n📊 SEO Audit Summary:`);
+  console.log(`\nSEO Audit Summary:`);
   console.log(`   Files checked: ${reports.length}`);
   console.log(`   Errors: ${errorCount}`);
   console.log(`   Warnings: ${warningCount}`);
 
   if (errorCount > 0) {
-    console.log(`❌ SEO audit failed with ${errorCount} errors`);
+    console.log(`[ERROR] SEO audit failed with ${errorCount} errors`);
     process.exit(1);
   } else {
-    console.log(`✅ SEO audit passed!`);
+    console.log(`SEO audit passed!`);
   }
 }
 

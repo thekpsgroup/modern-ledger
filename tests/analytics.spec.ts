@@ -304,7 +304,7 @@ test.describe('Analytics Integration Tests', () => {
     expect(ctaEvent[2].page_path).toBe('/');
   });
 
-  // 🔧 Copilot: Mobile Safari needs extra time for GA events—after clicking, wait briefly for the analytics request before asserting.
+  // Copilot: Mobile Safari needs extra time for GA events—after clicking, wait briefly for the analytics request before asserting.
   test('Phone and email links are tracked', async ({ page, browserName }) => {
     await page.goto('/contact');
     await page.waitForLoadState('networkidle');

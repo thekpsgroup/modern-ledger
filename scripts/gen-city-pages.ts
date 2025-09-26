@@ -192,7 +192,7 @@ const pageUrl = "${env.SITE_URL}/locations/${city.slug}";
 }
 
 async function main() {
-  console.log('🏙️  Generating city pages...');
+  console.log('Generating city pages...');
 
   const cities = loadCities();
   const locationsDir = join(process.cwd(), 'src', 'pages', 'locations');
@@ -205,10 +205,10 @@ async function main() {
     const pageContent = generateCityPage(city);
 
     writeFileSync(pagePath, pageContent);
-    console.log(`✅ Generated ${city.name} page: ${pagePath}`);
+    console.log(`Generated ${city.name} page: ${pagePath}`);
   }
 
-  console.log(`🎉 Generated ${cities.length} city pages successfully!`);
+  console.log(`Generated ${cities.length} city pages successfully!`);
 }
 
 // CLI execution

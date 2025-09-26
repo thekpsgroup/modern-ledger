@@ -80,7 +80,7 @@ function findPages(dir: string): string[] {
 }
 
 async function main() {
-  console.log('🗺️  Generating sitemaps...');
+  console.log('Generating sitemaps...');
 
   const publicDir = join(process.cwd(), 'public');
   const srcDir = join(process.cwd(), 'src', 'pages');
@@ -130,7 +130,7 @@ async function main() {
 
   writeFileSync(join(publicDir, 'sitemap-index.xml'), sitemapIndex);
 
-  console.log(`✅ Generated sitemaps:`);
+  console.log(`Generated sitemaps:`);
   console.log(`   Main sitemap: ${mainUrls.length} URLs`);
   console.log(`   Locations sitemap: ${locationUrls.length} URLs`);
   console.log(`   Blog sitemap: ${blogUrls.length} URLs`);

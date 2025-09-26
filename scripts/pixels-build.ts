@@ -241,7 +241,7 @@ function generatePixelScripts(): string {
 }
 
 async function main() {
-  console.log('📊 Building pixel tracking code...');
+  console.log('Building pixel tracking code...');
 
   const pixelsCode = generatePixelsCode();
   const pixelScripts = generatePixelScripts();
@@ -254,7 +254,7 @@ async function main() {
   const scriptsPath = join(process.cwd(), 'src', 'lib', 'pixel-scripts.html');
   writeFileSync(scriptsPath, pixelScripts);
 
-  console.log('✅ Generated pixel tracking code');
+  console.log('Generated pixel tracking code');
   console.log(`   Library: ${libPath}`);
   console.log(`   Scripts: ${scriptsPath}`);
 
