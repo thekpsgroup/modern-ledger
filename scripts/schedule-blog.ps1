@@ -1,4 +1,4 @@
-﻿param([switch]$Install, [s    Write-Log "Task installed successfully"itch]$Uninstall, [switch]$Test, [switch]$Status)
+﻿param([switch]$Install, [switch]$Uninstall, [switch]$Test, [switch]$Status)
 
 $TaskName = "ModernLedger-DailyBlog"
 $ScriptPath = "$PSScriptRoot\generate-daily-blog.mjs"

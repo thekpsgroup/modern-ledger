@@ -1,25 +1,21 @@
 #!/usr/bin/env node
 
-import fs from 'fs';
-import path from 'path';
-import sharp from 'sharp';
-import glob from 'glob';
+import { promises as fs } from 'fs';
+import { join, dirname, basename, extname, relative } from 'path';
+import { glob } from 'glob';
+const sharp = require('sharp');
 
-function globAsync(pattern: string): Promise<string[]> {
-  return new Promise((resolve, reject) => {
-    glob(pattern, (error, matches) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-
-      resolve(matches ?? []);
-    });
-  });
+async function globAsync(pattern: string): Promise<string[]> {
+  try {
+    return await glob(pattern);
+  } catch (error) {
+    console.error('Glob error:', error);
+    return [];
+  }
 }
 
-const PUBLIC_DIR = path.join(process.cwd(), 'public');
-const DIST_DIR = path.join(process.cwd(), 'dist');
+const PUBLIC_DIR = join(process.cwd(), 'public');
+const DIST_DIR = join(process.cwd(), 'dist');
 
 // Convert images to WebP and create responsive sizes
 async function optimizeImages() {
@@ -29,19 +25,19 @@ async function optimizeImages() {
   const imageFiles = [];
 
   for (const ext of imageExtensions) {
-    const files = await globAsync(path.join(PUBLIC_DIR, '**', ext));
+    const files = await globAsync(join(PUBLIC_DIR, '**', ext));
     imageFiles.push(...files);
   }
 
   console.log(`Found ${imageFiles.length} images to optimize`);
 
   for (const imagePath of imageFiles) {
-    const relativePath = path.relative(PUBLIC_DIR, imagePath);
-    const outputDir = path.join(DIST_DIR, path.dirname(relativePath));
-    const filename = path.basename(imagePath, path.extname(imagePath));
+    const relativePath = relative(PUBLIC_DIR, imagePath);
+    const outputDir = join(DIST_DIR, dirname(relativePath));
+    const filename = basename(imagePath, extname(imagePath));
 
     // Ensure output directory exists
-    await fs.promises.mkdir(outputDir, { recursive: true });
+    await fs.mkdir(outputDir, { recursive: true });
 
     try {
       const image = sharp(imagePath);
@@ -54,8 +50,8 @@ async function optimizeImages() {
       }
 
       // Convert to WebP with 1x and 2x sizes
-      const webp1x = path.join(outputDir, `${filename}.webp`);
-      const webp2x = path.join(outputDir, `${filename}@2x.webp`);
+      const webp1x = join(outputDir, `${filename}.webp`);
+      const webp2x = join(outputDir, `${filename}@2x.webp`);
 
       await image
         .webp({ quality: 82 })
@@ -138,8 +134,8 @@ body {
 }
 `;
 
-  const outputPath = path.join(DIST_DIR, 'critical.css');
-  await fs.promises.writeFile(outputPath, criticalCSS);
+  const outputPath = join(DIST_DIR, 'critical.css');
+  await fs.writeFile(outputPath, criticalCSS);
   console.log('Critical CSS generated');
 }
 
@@ -147,10 +143,10 @@ body {
 async function updateHTMLFiles() {
   console.log('Updating HTML files...');
 
-  const htmlFiles = await globAsync(path.join(DIST_DIR, '**', '*.html'));
+  const htmlFiles = await globAsync(join(DIST_DIR, '**', '*.html'));
 
   for (const htmlFile of htmlFiles) {
-    let content = await fs.promises.readFile(htmlFile, 'utf-8');
+    let content = await fs.readFile(htmlFile, 'utf-8');
 
     // Add critical CSS link for homepage
     if (htmlFile.includes('index.html')) {
@@ -164,7 +160,7 @@ async function updateHTMLFiles() {
     // Add lazy loading to images (skip hero images)
     content = content.replace(
       /<img([^>]*src="[^"]*(?!\.webp)[^"]*\.(jpg|jpeg|png)"[^>]*)>/g,
-      (match, attrs) => {
+      (match: string, attrs: string) => {
         // Skip if already has loading attribute
         if (attrs.includes('loading=')) return match;
 
@@ -178,7 +174,7 @@ async function updateHTMLFiles() {
     // Defer non-critical scripts
     content = content.replace(
       /<script([^>]*src="[^"]*")([^>]*)>(<\/script>)?/g,
-      (match, src, attrs) => {
+      (match: string, src: string, attrs: string) => {
         // Skip if already deferred or async
         if (attrs.includes('defer') || attrs.includes('async')) return match;
 
@@ -189,7 +185,7 @@ async function updateHTMLFiles() {
       }
     );
 
-    await fs.promises.writeFile(htmlFile, content);
+    await fs.writeFile(htmlFile, content);
   }
 
   console.log('HTML files updated');
@@ -212,7 +208,7 @@ async function optimizeAssets() {
 }
 
 // Run if called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (require.main === module) {
   optimizeAssets();
 }
 
